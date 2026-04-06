@@ -90,7 +90,7 @@ security-headers:
       echo "=== Mozilla Observatory: $SITE_HOST ==="
       curl -sf -X POST "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=$SITE_HOST" | jq '.'
     - |
-      GRADE=$(curl -sf "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=$SITE_HOST" | jq -r '.grade // "N/A"')
+      GRADE=$(curl -sf "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=$SITE_HOST" | jq -r '.grade // "N/A"' || echo "N/A")
       echo "Security grade: $GRADE"
   allow_failure: true
 
