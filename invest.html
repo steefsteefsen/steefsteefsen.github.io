@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invest — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Investment opportunities with Stefan-Olav Hüllinghorst — technology, sustainability, and social impact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--moss);
+    transition: width 0.3s ease;
+  }
+
+  nav .nav-links a:hover { color: var(--bark); }
+  nav .nav-links a:hover::after { width: 100%; }
+
+  nav .nav-links a.active { color: var(--bark); }
+  nav .nav-links a.active::after { width: 100%; }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 70%, rgba(90, 110, 74, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 75% 25%, rgba(201, 169, 110, 0.1) 0%, transparent 70%),
+      var(--cream);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1.2;
+    color: var(--bark);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s ease forwards;
+  }
+
+  .hero h1 span {
+    display: block;
+    font-style: italic;
+    font-size: 0.5em;
+    color: var(--moss);
+    margin-top: 0.4em;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1.5px;
+    background: var(--clay);
+    margin: 0 auto 1.8rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s ease forwards;
+  }
+
+  .hero p {
+    max-width: 580px;
+    font-size: 1.1rem;
+    color: var(--stone);
+    line-height: 1.85;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s ease forwards;
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+    line-height: 1.25;
+  }
+
+  section p {
+    font-size: 1.05rem;
+    color: var(--stone);
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+  }
+
+  /* ── Thesis ── */
+  #thesis { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .pillar {
+    padding: 2rem;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    background: rgba(245, 240, 232, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+
+  .pillar .pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .pillar h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .pillar p {
+    font-size: 0.9rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* ── Values ── */
+  #values { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .values-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .value-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .value-check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(90, 110, 74, 0.1);
+    color: var(--moss);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+
+  .value-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.15rem;
+  }
+
+  .value-item p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* ── Partners ── */
+  #partners { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .partner-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .partner-card {
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .partner-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--moss), var(--clay));
+  }
+
+  .partner-card .partner-type {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    margin-bottom: 0.8rem;
+  }
+
+  .partner-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .partner-card p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+    text-align: center;
+  }
+
+  #cta h2 { margin-left: auto; margin-right: auto; }
+  #cta p { margin-left: auto; margin-right: auto; }
+  #cta .section-label { justify-content: center; }
+  #cta .section-label::before { display: none; }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.2rem;
+    background: var(--bark);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  .cta-button:hover {
+    background: var(--moss);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(90, 110, 74, 0.25);
+  }
+
+  .cta-secondary {
+    display: block;
+    margin-top: 1.2rem;
+    font-size: 0.82rem;
+    color: var(--stone);
+  }
+
+  .cta-secondary a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+    transition: border-color 0.3s;
+  }
+
+  .cta-secondary a:hover { border-color: var(--moss); }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    nav .nav-links { gap: 1rem; }
+    nav .nav-links a { font-size: 0.72rem; }
+    section { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="logo">S.O. Hüllinghorst</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#cta" class="active">Invest</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <h1>
+    Invest With Purpose
+    <span>Technology &middot; Sustainability &middot; Social Impact</span>
+  </h1>
+  <div class="hero-line"></div>
+  <p>I'm building ventures at the intersection of technology, sustainability, and social good. I'm looking for aligned partners who believe that profit and purpose are not mutually exclusive.</p>
+</header>
+
+<!-- Investment Thesis -->
+<section id="thesis">
+  <div class="reveal">
+    <div class="section-label">Investment Thesis</div>
+    <h2>What I'm Building</h2>
+    <p>My work spans three pillars — each reinforcing the others. Technology enables sustainable solutions. Sustainability creates lasting value. Social impact ensures that value reaches the people who need it most.</p>
+  </div>
+
+  <div class="pillars reveal">
+    <div class="pillar">
+      <span class="pillar-icon">&#128187;</span>
+      <h3>Technology</h3>
+      <p>Software products and AI-powered tools that solve real problems — built with open-source principles and privacy by design.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">&#127793;</span>
+      <h3>Sustainability</h3>
+      <p>Green ventures and circular economy initiatives designed for long-term ecological and economic health.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">&#129309;</span>
+      <h3>Social Impact</h3>
+      <p>Projects that strengthen communities and expand access — because growth should lift everyone, not just shareholders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Values for Investors -->
+<section id="values">
+  <div class="reveal">
+    <div class="section-label">Principles</div>
+    <h2>What Investors Can Expect</h2>
+  </div>
+
+  <div class="values-list reveal">
+    <div class="value-item">
+      <div class="value-check">&#10003;</div>
+      <div>
+        <h3>Radical Transparency</h3>
+        <p>Open books, honest communication, no surprises. You'll always know where things stand.</p>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-check">&#10003;</div>
+      <div>
+        <h3>Ethical Foundation</h3>
+        <p>Every decision filtered through a clear ethical framework. No shortcuts, no greenwashing.</p>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-check">&#10003;</div>
+      <div>
+        <h3>Long-Term Thinking</h3>
+        <p>Building for decades, not exit cycles. Patient capital finds its best returns here.</p>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-check">&#10003;</div>
+      <div>
+        <h3>Open Source First</h3>
+        <p>Wherever possible, building in the open — contributing back to the ecosystem that enables us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners I'm Looking For -->
+<section id="partners">
+  <div class="reveal">
+    <div class="section-label">Seeking Alignment</div>
+    <h2>Partners I'm Looking For</h2>
+    <p>I'm actively seeking partners who share these values and want to build something meaningful together.</p>
+  </div>
+
+  <div class="partner-cards reveal">
+    <div class="partner-card">
+      <div class="partner-type">Corporate Fund</div>
+      <h3>Anthropic Fund</h3>
+      <p>As a Claude Code subscriber and builder, I believe in Anthropic's mission of safe, beneficial AI. I'm seeking support from Anthropic's ecosystem to bring AI-powered projects to life — built responsibly, with real-world impact.</p>
+    </div>
+    <div class="partner-card">
+      <div class="partner-type">Ethical Investors</div>
+      <h3>German &amp; European Impact Investors</h3>
+      <p>Value-aligned investors from the DACH region and beyond who prioritize ESG criteria, sustainable returns, and social responsibility. Family offices, impact funds, and angel investors welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="reveal">
+    <div class="section-label">Get Started</div>
+    <h2>Let's Grow Together</h2>
+    <p>If my vision resonates with yours, I'd love to start a conversation. No pitch decks required — just an honest exchange about what we can build together.</p>
+
+    <a href="mailto:your@email.com" class="cta-button">
+      Start a Conversation &#8594;
+    </a>
+
+    <div class="cta-secondary">
+      Or go back to <a href="index.html">my homepage</a> to learn more about me.
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot; Built with care
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

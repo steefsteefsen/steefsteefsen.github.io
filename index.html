@@ -471,6 +471,124 @@
     fill: currentColor;
   }
 
+  /* ── Built With & Support ── */
+  #built-with, #support { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .tool-card {
+    padding: 1.8rem;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    background: rgba(245, 240, 232, 0.4);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+
+  .tool-card .tool-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .tool-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.3rem;
+  }
+
+  .tool-card p {
+    font-size: 0.82rem;
+    color: var(--stone);
+    margin-bottom: 0.8rem;
+  }
+
+  .tool-link {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+    text-decoration: none;
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--moss);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .tool-link:hover {
+    background: var(--moss);
+    color: var(--cream);
+  }
+
+  .support-card {
+    max-width: 600px;
+    margin: 2.5rem auto 0;
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: var(--sand);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .support-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--moss), var(--clay));
+  }
+
+  .support-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .support-card p {
+    font-size: 0.95rem;
+    color: var(--stone);
+    margin: 0 auto 1.5rem;
+    max-width: 480px;
+  }
+
+  .support-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--moss);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+
+  .support-link:hover {
+    background: var(--bark);
+    transform: translateY(-2px);
+  }
+
   /* ── Footer ── */
   footer {
     text-align: center;
@@ -478,95 +596,6 @@
     font-size: 0.78rem;
     color: var(--stone);
     border-top: 1px solid rgba(201, 169, 110, 0.12);
-  }
-
-  /* ── Booking form ── */
-  .booking-notice {
-    margin-top: 2.5rem;
-  }
-
-  .booking-soon {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--moss);
-    background: rgba(90, 110, 74, 0.08);
-    border: 1px solid rgba(90, 110, 74, 0.2);
-    border-radius: 50px;
-    padding: 0.5rem 1.2rem;
-    margin-bottom: 2rem;
-  }
-
-  .booking-form {
-    margin-top: 0;
-    max-width: 620px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.2rem;
-  }
-
-  .form-group label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--stone);
-    margin-bottom: 0.5rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--bark);
-    background: var(--sand);
-    border: 1px solid rgba(201, 169, 110, 0.3);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    outline: none;
-    transition: border-color 0.3s;
-    resize: vertical;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: var(--moss);
-  }
-
-  .book-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--stone);
-    color: var(--cream);
-    font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 50px;
-    cursor: not-allowed;
-    opacity: 0.6;
-    margin-top: 0.5rem;
-  }
-
-  @media (max-width: 700px) {
-    .form-row { grid-template-columns: 1fr; }
   }
 
   /* ── Animations ── */
@@ -612,6 +641,8 @@
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#journey">Journey</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="invest.html" target="_blank">Invest</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -677,18 +708,18 @@
   <div class="project-list">
     <div class="project-item reveal">
       <div class="project-tag">Current Focus</div>
-      <h3>Incubator</h3>
-      <p>A home for people with genuine ideas and the right attitude — patient, principled, and oriented toward something that lasts. We work with founders who understand that sustainable growth is not a constraint but a foundation.</p>
+      <h3>Project Title One</h3>
+      <p>Describe your project here — what it does, why it matters, and what inspires you about it. Replace this placeholder with your own content.</p>
     </div>
     <div class="project-item reveal">
       <div class="project-tag">In Development</div>
-      <h3>diedorismachtdasgift.io</h3>
-      <p>A platform offering low-threshold support for people struggling with gambling, alcohol, nicotine, and other substances used in ways that harm themselves or the people around them. Currently looking for beta testers — I am one myself.</p>
+      <h3>Project Title Two</h3>
+      <p>Another project or venture. Share the story, the challenge, and where it's headed. Make it personal.</p>
     </div>
     <div class="project-item reveal">
       <div class="project-tag">Vision</div>
-      <h3>careergraph.io &amp; beyond</h3>
-      <p>Several platforms where I look for the right CEOs and CTOs — people who can handle directness and grow with it. careergraph.io waits for the right co-founder: someone I can do this journey with. mbthree.io belongs to someone else and her family; I hope to earn a place in that story. And somewhere in between, I want to be a DJ in an aware context — ideally at Tipping Point.</p>
+      <h3>Future Initiative</h3>
+      <p>Something you're planning or dreaming about. Give visitors a glimpse of where you're going.</p>
     </div>
   </div>
 </section>
@@ -703,20 +734,78 @@
 
   <div class="timeline reveal">
     <div class="timeline-item">
-      <div class="timeline-year">TU Berlin</div>
-      <h3>Master of Science</h3>
-      <p>I studied mostly among men, having grown up with three older sisters. The contrast was formative. What stayed was something more valuable than the degree: the ability to think scientifically, trust evidence, and question assumptions — including my own.</p>
+      <div class="timeline-year">Year</div>
+      <h3>A Milestone</h3>
+      <p>Describe a key moment in your personal or professional journey. Replace with your own story.</p>
     </div>
     <div class="timeline-item">
-      <div class="timeline-year">Three Years</div>
-      <h3>Insolvency</h3>
-      <p>Three years without money. It is not a chapter I am ashamed of — it is one I learned more from than almost anything else. Scarcity teaches you what actually matters and what you were just carrying out of habit.</p>
+      <div class="timeline-year">Year</div>
+      <h3>Another Chapter</h3>
+      <p>What happened next? Each step built on the last. Share the evolution.</p>
     </div>
     <div class="timeline-item">
-      <div class="timeline-year">Mondiali</div>
-      <h3>Die Zwote &amp; the Mondiali Antirazzisti</h3>
-      <p>My team won the Mondiali Antirazzisti in my absence. I am genuinely proud of every person who made that happen. I am also still thinking critically about the role alcohol played in the money we raised for charity — some contradictions deserve to stay open.</p>
+      <div class="timeline-year">Today</div>
+      <h3>The Present</h3>
+      <p>Where you are now — what you're focused on, what drives you daily.</p>
     </div>
+  </div>
+</section>
+
+<!-- Built With -->
+<section id="built-with">
+  <div class="reveal">
+    <div class="section-label">Built With</div>
+    <h2>Tools I Trust</h2>
+    <p>This page was built entirely with free and open-source software — plus one AI assistant. Consider supporting these projects.</p>
+  </div>
+
+  <div class="tools-grid reveal">
+    <div class="tool-card">
+      <span class="tool-icon">&#129302;</span>
+      <h3>Claude Code</h3>
+      <p>AI coding assistant by Anthropic</p>
+      <a href="https://claude.ai" target="_blank" class="tool-link">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">&#128293;</span>
+      <h3>Firefox</h3>
+      <p>The independent, privacy-first browser</p>
+      <a href="https://foundation.mozilla.org/donate/" target="_blank" class="tool-link">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">&#9993;</span>
+      <h3>Thunderbird</h3>
+      <p>Open-source email, free forever</p>
+      <a href="https://www.thunderbird.net/en-US/donate/" target="_blank" class="tool-link">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">&#127811;</span>
+      <h3>Linux Mint</h3>
+      <p>Elegant, community-driven operating system</p>
+      <a href="https://linuxmint.com/donors.php" target="_blank" class="tool-link">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">&#128736;</span>
+      <h3>PyCharm</h3>
+      <p>Professional IDE by JetBrains</p>
+      <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="tool-link">Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- I Support -->
+<section id="support">
+  <div class="reveal">
+    <div class="section-label">I Support</div>
+    <h2>Causes That Matter</h2>
+  </div>
+
+  <div class="support-card reveal">
+    <h3>Mein Grundeinkommen</h3>
+    <p>A Berlin-based non-profit that crowdfunds and raffles unconditional basic incomes. Over 1,500 basic incomes have been paid out since 2014 — funded entirely by donations.</p>
+    <a href="https://www.mein-grundeinkommen.de" target="_blank" class="support-link">
+      Learn more &amp; donate &#8594;
+    </a>
   </div>
 </section>
 
@@ -728,53 +817,19 @@
     <p>Whether you're an investor, a collaborator, or simply curious — I'd love to hear from you.</p>
 
     <div class="contact-links">
-      <a href="mailto:stefan@huellinghorst.info" class="contact-link">
+      <a href="mailto:your@email.com" class="contact-link">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         Email
       </a>
-      <a href="https://www.linkedin.com/in/stefan-huellinghorst/" class="contact-link" target="_blank">
+      <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
         LinkedIn
       </a>
-      <a href="https://github.com/steefsteefsen" class="contact-link" target="_blank">
+      <a href="https://github.com/yourprofile" class="contact-link" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
         GitHub
       </a>
     </div>
-
-    <div class="booking-notice reveal">
-      <p class="booking-soon">Appointment booking will be available at the official domain — coming soon.</p>
-    </div>
-
-    <form class="booking-form reveal" id="booking-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="book-name">Name</label>
-          <input type="text" id="book-name" name="name" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label for="book-email">Email</label>
-          <input type="email" id="book-email" name="email" placeholder="your@email.com" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="book-date">Preferred date</label>
-          <input type="date" id="book-date" name="date" required>
-        </div>
-        <div class="form-group">
-          <label for="book-time">Preferred time</label>
-          <input type="time" id="book-time" name="time" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="book-topic">What would you like to talk about?</label>
-        <textarea id="book-topic" name="topic" rows="4" placeholder="Tell me a little about what's on your mind…"></textarea>
-      </div>
-      <button type="submit" class="book-btn" disabled>
-        Booking available at the official domain
-      </button>
-    </form>
   </div>
 </section>
 
