@@ -8,5 +8,8 @@ Thumbs.db
 *.swp
 *.swo
 
+# Secrets
+.env
+
 # Misc
 *.log
