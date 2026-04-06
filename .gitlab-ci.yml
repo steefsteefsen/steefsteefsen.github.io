@@ -184,9 +184,6 @@ mirror-to-github:
     - git config --global user.name "GitLab CI"
     - git checkout -b github-mirror
     - git rm -r --cached tests/ logs/ --ignore-unmatch -q
-    - echo "tests/" >> .gitignore
-    - echo "logs/" >> .gitignore
-    - git add .gitignore
     - git commit -m "CI strip test files for GitHub mirror" --allow-empty
     - git remote add github https://github.com/steefsteefsen/steefsteefsen.github.io.git
     - git config credential.helper store
