@@ -6,6 +6,7 @@
 stages:
   - validate
   - security
+  - mirror
 
 variables:
   SITE_URL: "https://steefsteefsen.github.io"
@@ -145,3 +146,18 @@ w3c-validate:
           | jq '[.messages[] | select(.type=="error") | {line:.lastLine, message:.message}]' || true
       done
   allow_failure: true
+
+# ── Mirror to GitHub (after pipeline passes) ───
+mirror-to-github:
+  stage: mirror
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - apk add --no-cache git
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+    - git remote add github https://steefsteefsen:${GITHUB_TOKEN}@github.com/steefsteefsen/steefsteefsen.github.io.git
+    - git push github HEAD:main --force
+  allow_failure: false
