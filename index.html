@@ -480,6 +480,95 @@
     border-top: 1px solid rgba(201, 169, 110, 0.12);
   }
 
+  /* ── Booking form ── */
+  .booking-notice {
+    margin-top: 2.5rem;
+  }
+
+  .booking-soon {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    background: rgba(90, 110, 74, 0.08);
+    border: 1px solid rgba(90, 110, 74, 0.2);
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .booking-form {
+    margin-top: 0;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--sand);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--moss);
+  }
+
+  .book-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--stone);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    cursor: not-allowed;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
   /* ── Animations ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -652,6 +741,40 @@
         GitHub
       </a>
     </div>
+
+    <div class="booking-notice reveal">
+      <p class="booking-soon">Appointment booking will be available at the official domain — coming soon.</p>
+    </div>
+
+    <form class="booking-form reveal" id="booking-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="book-name">Name</label>
+          <input type="text" id="book-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="book-email">Email</label>
+          <input type="email" id="book-email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="book-date">Preferred date</label>
+          <input type="date" id="book-date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="book-time">Preferred time</label>
+          <input type="time" id="book-time" name="time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="book-topic">What would you like to talk about?</label>
+        <textarea id="book-topic" name="topic" rows="4" placeholder="Tell me a little about what's on your mind…"></textarea>
+      </div>
+      <button type="submit" class="book-btn" disabled>
+        Booking available at the official domain
+      </button>
+    </form>
   </div>
 </section>
 
