@@ -182,11 +182,17 @@ mirror-to-github:
     - apk add --no-cache git
     - git config --global user.email "ci@gitlab.com"
     - git config --global user.name "GitLab CI"
-    - git checkout -b github-mirror
-    - git rm -r --cached tests/ logs/ --ignore-unmatch -q
-    - git commit -m "CI strip test files for GitHub mirror" --allow-empty
+    # Export a clean tree without tests/ and logs/ into a temp dir
+    - mkdir /tmp/mirror
+    - git archive HEAD | tar -x -C /tmp/mirror
+    - rm -rf /tmp/mirror/tests /tmp/mirror/logs
+    # Init a fresh repo and push it to GitHub
+    - cd /tmp/mirror
+    - git init
+    - git add .
+    - git commit -m "Mirror from GitLab (${CI_COMMIT_SHORT_SHA})"
     - git remote add github https://github.com/steefsteefsen/steefsteefsen.github.io.git
     - git config credential.helper store
     - echo "https://steefsteefsen:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
-    - git push github github-mirror:main --force
+    - git push github HEAD:main --force
   allow_failure: false
