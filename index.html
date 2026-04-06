@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Cultivation, philosophy, and vision — the personal page of Stefan-Olav Hüllinghorst.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain overlay ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+    transition: transform 0.4s ease;
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--moss);
+    transition: width 0.3s ease;
+  }
+
+  nav .nav-links a:hover { color: var(--bark); }
+  nav .nav-links a:hover::after { width: 100%; }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(90, 110, 74, 0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201, 169, 110, 0.09) 0%, transparent 70%),
+      var(--cream);
+  }
+
+  .hero-leaf {
+    position: absolute;
+    opacity: 0.045;
+    font-size: 18rem;
+    color: var(--moss);
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-leaf.left { top: 10%; left: -3rem; transform: rotate(-25deg); }
+  .hero-leaf.right { bottom: 5%; right: -2rem; transform: rotate(140deg); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.15;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s ease forwards;
+  }
+
+  .hero h1 span {
+    display: block;
+    font-style: italic;
+    font-size: 0.55em;
+    color: var(--moss);
+    margin-top: 0.3em;
+    font-weight: 400;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1.5px;
+    background: var(--clay);
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s ease forwards;
+  }
+
+  .hero p {
+    max-width: 540px;
+    font-size: 1.1rem;
+    color: var(--stone);
+    line-height: 1.85;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s ease forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s ease forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+  }
+
+  .scroll-hint .arrow {
+    width: 1px;
+    height: 32px;
+    background: var(--clay);
+    position: relative;
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: 7rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--bark);
+    margin-bottom: 2rem;
+    line-height: 1.25;
+  }
+
+  section p {
+    font-size: 1.05rem;
+    color: var(--stone);
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+  }
+
+  /* ── Philosophy ── */
+  #philosophy {
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+  }
+
+  .quote-block {
+    margin: 3rem 0;
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    border-left: 3px solid var(--clay);
+    background: linear-gradient(135deg, rgba(201, 169, 110, 0.06), transparent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-style: italic;
+    color: var(--bark);
+    line-height: 1.55;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-style: normal;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    background: rgba(245, 240, 232, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+
+  .value-card .icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .value-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .value-card p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* ── Projects ── */
+  #projects { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .project-item {
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .project-item:hover { transform: translateY(-3px); }
+
+  .project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--moss), var(--clay));
+    border-radius: 4px 0 0 4px;
+  }
+
+  .project-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    background: rgba(90, 110, 74, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-item p {
+    font-size: 0.95rem;
+    color: var(--stone);
+    max-width: 600px;
+    margin-bottom: 0;
+  }
+
+  /* ── Journey ── */
+  #journey { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .timeline {
+    margin-top: 3rem;
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--clay), rgba(201, 169, 110, 0.1));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--clay);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
+  }
+
+  .timeline-year {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--moss);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* ── Contact ── */
+  #contact {
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+    text-align: center;
+  }
+
+  #contact h2 { margin-left: auto; margin-right: auto; }
+  #contact p { margin-left: auto; margin-right: auto; }
+  #contact .section-label { justify-content: center; }
+  #contact .section-label::before { display: none; }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.8rem;
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--bark);
+    font-size: 0.88rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .contact-link:hover {
+    background: var(--bark);
+    color: var(--cream);
+    border-color: var(--bark);
+    transform: translateY(-2px);
+  }
+
+  .contact-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    nav .nav-links { gap: 1rem; }
+    nav .nav-links a { font-size: 0.72rem; }
+    section { padding: 4.5rem 1.5rem; }
+    .quote-block { padding: 1.5rem 1.5rem 1.5rem 2rem; }
+    .quote-block blockquote { font-size: 1.25rem; }
+    .contact-links { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="logo">S.O. Hüllinghorst</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-leaf left">&#127807;</div>
+  <div class="hero-leaf right">&#127807;</div>
+  <h1>
+    Stefan-Olav Hüllinghorst
+    <span>Cultivation &middot; Vision &middot; Growth</span>
+  </h1>
+  <div class="hero-line"></div>
+  <p>Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- Philosophy -->
+<section id="philosophy">
+  <div class="reveal">
+    <div class="section-label">Philosophy</div>
+    <h2>What I Believe</h2>
+    <p>I believe the best things grow slowly. Whether cultivating a garden, an idea, or a business — sustainable growth requires patience, deep roots, and an honest relationship with the soil you work in.</p>
+
+    <div class="quote-block">
+      <blockquote>"He who plants a tree plants a hope."</blockquote>
+      <cite>— Lucy Larcom</cite>
+    </div>
+
+    <p>My approach is shaped by the conviction that lasting value comes from understanding systems deeply, nurturing what matters, and building with integrity.</p>
+  </div>
+
+  <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="icon">&#127793;</span>
+      <h3>Cultivation</h3>
+      <p>Treating every venture as a living system — feed it well, give it light, and have the patience to let it grow.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129704;</span>
+      <h3>Sustainability</h3>
+      <p>Building for decades, not quarters. Decisions rooted in long-term health over short-term extraction.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#127758;</span>
+      <h3>Connection</h3>
+      <p>Everything is interconnected. The strongest systems are built through trust, transparency, and mutual benefit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">Projects</div>
+    <h2>What I'm Growing</h2>
+    <p>A selection of initiatives and ventures that reflect my values and vision.</p>
+  </div>
+
+  <div class="project-list">
+    <div class="project-item reveal">
+      <div class="project-tag">Current Focus</div>
+      <h3>Project Title One</h3>
+      <p>Describe your project here — what it does, why it matters, and what inspires you about it. Replace this placeholder with your own content.</p>
+    </div>
+    <div class="project-item reveal">
+      <div class="project-tag">In Development</div>
+      <h3>Project Title Two</h3>
+      <p>Another project or venture. Share the story, the challenge, and where it's headed. Make it personal.</p>
+    </div>
+    <div class="project-item reveal">
+      <div class="project-tag">Vision</div>
+      <h3>Future Initiative</h3>
+      <p>Something you're planning or dreaming about. Give visitors a glimpse of where you're going.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Journey -->
+<section id="journey">
+  <div class="reveal">
+    <div class="section-label">Journey</div>
+    <h2>Where I've Been</h2>
+    <p>The path that shaped my thinking and brought me here.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-year">Year</div>
+      <h3>A Milestone</h3>
+      <p>Describe a key moment in your personal or professional journey. Replace with your own story.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Year</div>
+      <h3>Another Chapter</h3>
+      <p>What happened next? Each step built on the last. Share the evolution.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Today</div>
+      <h3>The Present</h3>
+      <p>Where you are now — what you're focused on, what drives you daily.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Connect</div>
+    <h2>Let's Talk</h2>
+    <p>Whether you're an investor, a collaborator, or simply curious — I'd love to hear from you.</p>
+
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email
+      </a>
+      <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/yourprofile" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot; Built with care
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
