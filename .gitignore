@@ -20,3 +20,5 @@ tests/node_modules/
 
 # Misc
 *.log
+tests/
+logs/
