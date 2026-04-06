@@ -7,7 +7,7 @@
 
 I've spent the last months doing something uncomfortable: asking people to sit with me and map their career honestly.
 
-8 people. An AI team lead. A Zeiss cybersecurity expert. A Ukrainian refugee developer. An employment lawyer in Köln. An Italian art history PhD. A social pedagogue. A career starter at 21.
+8 people. An AI team lead. A cybersecurity expert. A developer in career transition. An employment lawyer. An art history PhD. A social pedagogue. A career starter at 21.
 
 All of them went through a guided biographical career interview — powered by Claude — and came out with three concrete directions based on a data-driven Ikigai framework: what they love, what they're good at, what the world needs, what pays.
 
@@ -36,7 +36,7 @@ stefan@huellinghorst.info
 
 Die letzten Monate habe ich etwas Unbequemes getan: Menschen gebeten, mit mir zusammen ihren Berufsweg ehrlich zu kartieren.
 
-8 Personen. Ein AI Team Lead. Ein Cybersecurity-Experte von Zeiss. Ein ukrainischer Entwickler, der neu in Deutschland ist. Eine Arbeitsrechtlerin aus Köln. Eine italienische Kunstgeschichts-Doktorandin. Eine Sozialpädagogin. Jemand mit 21 Jahren am Anfang seiner Karriere.
+8 Personen. Ein AI Team Lead. Eine Cybersecurity-Expertin. Ein Entwickler im beruflichen Wandel. Eine Arbeitsrechtlerin. Eine Kunstgeschichts-Doktorin. Eine Sozialpädagogin. Jemand mit 21 Jahren am Anfang seiner Karriere.
 
 Alle haben ein geführtes biographisches Karrieregespräch durchlaufen — mit Claude — und am Ende drei konkrete Richtungen erhalten, basierend auf einem datengetriebenen Ikigai-Framework: Was liebe ich? Was kann ich gut? Was braucht die Welt? Was zahlt sich aus?
 
@@ -65,7 +65,7 @@ stefan@huellinghorst.info
 
 Negli ultimi mesi ho fatto qualcosa di scomodo: ho chiesto alle persone di sedersi con me e mappare onestamente il proprio percorso professionale.
 
-8 persone. Un team lead AI. Un esperto di cybersecurity di Zeiss. Uno sviluppatore rifugiato ucraino. Un'avvocata del lavoro di Colonia. Una dottoranda in storia dell'arte italiana. Una pedagogista sociale. Un ragazzo di 21 anni all'inizio della sua carriera.
+8 persone. Un team lead AI. Un esperto di cybersecurity. Uno sviluppatore in transizione professionale. Un'avvocata del lavoro. Una dottoranda in storia dell'arte. Una pedagogista sociale. Un ragazzo di 21 anni all'inizio della sua carriera.
 
 Tutti hanno affrontato un colloquio biografico guidato — con Claude — e ne sono usciti con tre direzioni concrete, basate su un framework Ikigai fondato sui dati: cosa amo, cosa so fare, di cosa ha bisogno il mondo, cosa paga.
 
