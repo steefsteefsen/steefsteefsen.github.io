@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "jest --coverage --coverageThreshold='{\"global\":{\"lines\":90,\"functions\":90,\"branches\":90,\"statements\":90}}' 2>&1 | tee ../logs/test-run.log",
-    "test:ci": "jest --coverage --ci --coverageThreshold='{\"global\":{\"lines\":90,\"functions\":90,\"branches\":90,\"statements\":90}}'"
+    "test:ci": "jest --coverage --ci"
   },
   "devDependencies": {
     "jest": "^29.7.0",

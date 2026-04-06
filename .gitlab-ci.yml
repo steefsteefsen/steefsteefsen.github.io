@@ -188,6 +188,8 @@ mirror-to-github:
     - echo "logs/" >> .gitignore
     - git add .gitignore
     - git commit -m "CI strip test files for GitHub mirror" --allow-empty
-    - git remote add github https://steefsteefsen:${GITHUB_TOKEN}@github.com/steefsteefsen/steefsteefsen.github.io.git
+    - git remote add github https://github.com/steefsteefsen/steefsteefsen.github.io.git
+    - git config credential.helper store
+    - echo "https://steefsteefsen:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
     - git push github github-mirror:main --force
   allow_failure: false
