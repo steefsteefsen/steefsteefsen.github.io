@@ -708,6 +708,95 @@
     transform: translateY(0);
   }
 
+  /* ── Language switcher ── */
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-current {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--stone);
+    cursor: pointer;
+    background: none;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .lang-current:hover {
+    color: var(--bark);
+    border-color: var(--clay);
+  }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--cream);
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px var(--shadow);
+    padding: 0.5rem;
+    z-index: 200;
+    min-width: 160px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+
+  .lang-switcher.open .lang-dropdown { display: flex; }
+
+  .lang-option {
+    font-size: 0.82rem;
+    color: var(--stone);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .lang-option:hover { background: var(--sand); color: var(--bark); }
+  .lang-option.active { color: var(--moss); font-weight: 500; }
+
+  /* ── AI translation notice ── */
+  #ai-translation-notice {
+    display: none;
+    background: rgba(201, 169, 110, 0.12);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--stone);
+    padding: 0.6rem 1.2rem;
+    margin: 0 auto;
+    max-width: 900px;
+    margin-top: 5rem;
+  }
+
+  /* ── RTL support ── */
+  [dir="rtl"] .section-label::before { display: none; }
+  [dir="rtl"] .section-label::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+  [dir="rtl"] .timeline { padding-left: 0; padding-right: 2.5rem; }
+  [dir="rtl"] .timeline::before { left: auto; right: 0; }
+  [dir="rtl"] .timeline-item::before { left: auto; right: -2.5rem; }
+  [dir="rtl"] .project-item::before { left: auto; right: 0; border-radius: 0 4px 4px 0; }
+  [dir="rtl"] .booking-form { text-align: right; }
+
   /* ── Mobile ── */
   @media (max-width: 700px) {
     nav { padding: 1rem 1.5rem; }
@@ -717,6 +806,7 @@
     .quote-block { padding: 1.5rem 1.5rem 1.5rem 2rem; }
     .quote-block blockquote { font-size: 1.25rem; }
     .contact-links { flex-direction: column; align-items: center; }
+    .lang-dropdown { right: auto; left: 0; }
   }
 </style>
 </head>
@@ -726,15 +816,40 @@
 <nav>
   <a href="#" class="logo">S.O. Hüllinghorst</a>
   <ul class="nav-links">
-    <li><a href="#philosophy">Philosophy</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#built-with">Built With</a></li>
-    <li><a href="invest.html" target="_blank">Invest</a></li>
-    <li><a href="#idols">Idols</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
+    <li><a href="#built-with" data-i18n="nav_built_with">Built With</a></li>
+    <li><a href="invest.html" target="_blank" data-i18n="nav_invest">Invest</a></li>
+    <li><a href="#idols" data-i18n="nav_idols">Idols</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
+  <div class="lang-switcher" id="lang-switcher">
+    <button type="button" class="lang-current" id="lang-current-btn">EN</button>
+    <div class="lang-dropdown" id="lang-dropdown">
+      <button type="button" class="lang-option" data-lang="de">Deutsch</button>
+      <button type="button" class="lang-option" data-lang="en">English</button>
+      <button type="button" class="lang-option" data-lang="it">Italiano</button>
+      <button type="button" class="lang-option" data-lang="fr">Français</button>
+      <button type="button" class="lang-option" data-lang="es">Español</button>
+      <button type="button" class="lang-option" data-lang="pt">Português</button>
+      <button type="button" class="lang-option" data-lang="da">Dansk</button>
+      <button type="button" class="lang-option" data-lang="uk">Українська</button>
+      <button type="button" class="lang-option" data-lang="ru">Русский</button>
+      <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+      <button type="button" class="lang-option" data-lang="he">עברית</button>
+      <button type="button" class="lang-option" data-lang="ar">العربية</button>
+      <button type="button" class="lang-option" data-lang="fa">فارسی</button>
+      <button type="button" class="lang-option" data-lang="zh">中文</button>
+      <button type="button" class="lang-option" data-lang="ja">日本語</button>
+      <button type="button" class="lang-option" data-lang="ko">한국어</button>
+    </div>
+  </div>
 </nav>
+
+<div id="ai-translation-notice">
+  ⚠ This translation was generated by AI and has not yet been reviewed by a native speaker. If you can help review it, please reach out: stefan@huellinghorst.info
+</div>
 
 <!-- Hero -->
 <header class="hero">
@@ -742,12 +857,12 @@
   <div class="hero-leaf right">&#127807;</div>
   <h1>
     Stefan-Olav Hüllinghorst
-    <span>Cultivation &middot; Vision &middot; Growth</span>
+    <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth</span>
   </h1>
   <div class="hero-line"></div>
-  <p>Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
+  <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
   <div class="scroll-hint">
-    <span>Explore</span>
+    <span data-i18n="hero_scroll">Explore</span>
     <div class="arrow"></div>
   </div>
 </header>
@@ -755,33 +870,33 @@
 <!-- Philosophy -->
 <section id="philosophy">
   <div class="reveal">
-    <div class="section-label">Philosophy</div>
-    <h2>What I Believe</h2>
-    <p>I believe the best things grow slowly. Whether cultivating a garden, an idea, or a business — sustainable growth requires patience, deep roots, and an honest relationship with the soil you work in.</p>
+    <div class="section-label" data-i18n="philosophy_label">Philosophy</div>
+    <h2 data-i18n="philosophy_h2">What I Believe</h2>
+    <p data-i18n="philosophy_p1">I believe the best things grow slowly. Whether cultivating a garden, an idea, or a business — sustainable growth requires patience, deep roots, and an honest relationship with the soil you work in.</p>
 
     <div class="quote-block">
-      <blockquote>"He who plants a tree plants a hope."</blockquote>
-      <cite>— Lucy Larcom</cite>
+      <blockquote data-i18n="philosophy_quote">"He who plants a tree plants a hope."</blockquote>
+      <cite data-i18n="philosophy_cite">— Lucy Larcom</cite>
     </div>
 
-    <p>My approach is shaped by the conviction that lasting value comes from understanding systems deeply, nurturing what matters, and building with integrity.</p>
+    <p data-i18n="philosophy_p2">My approach is shaped by the conviction that lasting value comes from understanding systems deeply, nurturing what matters, and building with integrity.</p>
   </div>
 
   <div class="values-grid reveal">
     <div class="value-card">
       <span class="icon">&#127793;</span>
-      <h3>Cultivation</h3>
-      <p>Treating every venture as a living system — feed it well, give it light, and have the patience to let it grow.</p>
+      <h3 data-i18n="val_cultivation">Cultivation</h3>
+      <p data-i18n="val_cultivation_p">Treating every venture as a living system — feed it well, give it light, and have the patience to let it grow.</p>
     </div>
     <div class="value-card">
       <span class="icon">&#129704;</span>
-      <h3>Sustainability</h3>
-      <p>Building for decades, not quarters. Decisions rooted in long-term health over short-term extraction.</p>
+      <h3 data-i18n="val_sustainability">Sustainability</h3>
+      <p data-i18n="val_sustainability_p">Building for decades, not quarters. Decisions rooted in long-term health over short-term extraction.</p>
     </div>
     <div class="value-card">
       <span class="icon">&#127758;</span>
-      <h3>Connection</h3>
-      <p>Everything is interconnected. The strongest systems are built through trust, transparency, and mutual benefit.</p>
+      <h3 data-i18n="val_connection">Connection</h3>
+      <p data-i18n="val_connection_p">Everything is interconnected. The strongest systems are built through trust, transparency, and mutual benefit.</p>
     </div>
   </div>
 </section>
@@ -789,9 +904,9 @@
 <!-- Projects -->
 <section id="projects">
   <div class="reveal">
-    <div class="section-label">Projects</div>
-    <h2>What I'm Growing</h2>
-    <p>A selection of initiatives and ventures that reflect my values and vision.</p>
+    <div class="section-label" data-i18n="projects_label">Projects</div>
+    <h2 data-i18n="projects_h2">What I'm Growing</h2>
+    <p data-i18n="projects_p">A selection of initiatives and ventures that reflect my values and vision.</p>
   </div>
 
   <div class="project-list">
@@ -817,9 +932,9 @@
 <!-- Journey -->
 <section id="journey">
   <div class="reveal">
-    <div class="section-label">Journey</div>
-    <h2>Where I've Been</h2>
-    <p>The path that shaped my thinking and brought me here.</p>
+    <div class="section-label" data-i18n="journey_label">Journey</div>
+    <h2 data-i18n="journey_h2">Where I've Been</h2>
+    <p data-i18n="journey_p">The path that shaped my thinking and brought me here.</p>
   </div>
 
   <div class="timeline reveal">
@@ -844,9 +959,9 @@
 <!-- Built With -->
 <section id="built-with">
   <div class="reveal">
-    <div class="section-label">Built With</div>
-    <h2>Tools I Trust</h2>
-    <p>This page was built entirely with free and open-source software — plus one AI assistant. Consider supporting these projects.</p>
+    <div class="section-label" data-i18n="built_label">Built With</div>
+    <h2 data-i18n="built_h2">Tools I Trust</h2>
+    <p data-i18n="built_p">This page was built entirely with free and open-source software — plus one AI assistant. Consider supporting these projects.</p>
   </div>
 
   <div class="tools-grid reveal">
@@ -898,8 +1013,8 @@
 <!-- I Support -->
 <section id="support">
   <div class="reveal">
-    <div class="section-label">I Support</div>
-    <h2>Causes That Matter</h2>
+    <div class="section-label" data-i18n="support_label">I Support</div>
+    <h2 data-i18n="support_h2">Causes That Matter</h2>
   </div>
 
   <div class="support-card reveal">
@@ -954,9 +1069,9 @@
 <!-- Idols -->
 <section id="idols">
   <div class="reveal">
-    <div class="section-label">Idols</div>
-    <h2>People Who Shaped My Thinking</h2>
-    <p>Not role models to copy — but minds that opened something.</p>
+    <div class="section-label" data-i18n="idols_label">Idols</div>
+    <h2 data-i18n="idols_h2">People Who Shaped My Thinking</h2>
+    <p data-i18n="idols_p">Not role models to copy — but minds that opened something.</p>
   </div>
 
   <div class="values-grid reveal">
@@ -1011,9 +1126,9 @@
 <!-- Contact -->
 <section id="contact">
   <div class="reveal">
-    <div class="section-label">Connect</div>
-    <h2>Let's Talk</h2>
-    <p>Whether you're an investor, a collaborator, or simply curious — I'd love to hear from you.</p>
+    <div class="section-label" data-i18n="contact_label">Connect</div>
+    <h2 data-i18n="contact_h2">Let's Talk</h2>
+    <p data-i18n="contact_p">Whether you're an investor, a collaborator, or simply curious — I'd love to hear from you.</p>
 
     <div class="contact-links">
       <a href="mailto:stefan@huellinghorst.info" class="contact-link">
@@ -1031,35 +1146,35 @@
     </div>
 
     <div class="booking-notice reveal">
-      <p class="booking-soon">Appointment booking will be available at the official domain — coming soon.</p>
+      <p class="booking-soon" data-i18n="booking_soon">Appointment booking will be available at the official domain — coming soon.</p>
     </div>
 
     <form class="booking-form reveal" id="booking-form">
       <div class="form-row">
         <div class="form-group">
-          <label for="book-name">Name</label>
+          <label for="book-name" data-i18n="book_name">Name</label>
           <input type="text" id="book-name" name="name" placeholder="Your name" required>
         </div>
         <div class="form-group">
-          <label for="book-email">Email</label>
+          <label for="book-email" data-i18n="book_email">Email</label>
           <input type="email" id="book-email" name="email" placeholder="your@email.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="book-date">Preferred date</label>
+          <label for="book-date" data-i18n="book_date">Preferred date</label>
           <input type="date" id="book-date" name="date" required>
         </div>
         <div class="form-group">
-          <label for="book-time">Preferred time</label>
+          <label for="book-time" data-i18n="book_time">Preferred time</label>
           <input type="time" id="book-time" name="time" required>
         </div>
       </div>
       <div class="form-group">
-        <label for="book-topic">What would you like to talk about?</label>
+        <label for="book-topic" data-i18n="book_topic">What would you like to talk about?</label>
         <textarea id="book-topic" name="topic" rows="4" placeholder="Tell me a little about what's on your mind…"></textarea>
       </div>
-      <button type="submit" class="book-btn" disabled>
+      <button type="submit" class="book-btn" data-i18n="book_btn" disabled>
         Booking available at the official domain
       </button>
     </form>
@@ -1072,6 +1187,7 @@
   &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
@@ -1083,6 +1199,31 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Language switcher toggle
+  const switcher = document.getElementById('lang-switcher');
+  const currentBtn = document.getElementById('lang-current-btn');
+  const LANG_NAMES = {
+    de:'Deutsch', en:'English', it:'Italiano', fr:'Français',
+    es:'Español', pt:'Português', da:'Dansk', uk:'Українська',
+    ru:'Русский', tr:'Türkçe', he:'עברית', ar:'العربية',
+    fa:'فارسی', zh:'中文', ja:'日本語', ko:'한국어'
+  };
+
+  currentBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    switcher.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => switcher.classList.remove('open'));
+
+  document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.getAttribute('data-lang');
+      currentBtn.textContent = code.toUpperCase();
+      switcher.classList.remove('open');
+    });
+  });
 </script>
 
 </body>
