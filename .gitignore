@@ -11,5 +11,12 @@ Thumbs.db
 # Secrets
 .env
 
+# Test logs and coverage (local only)
+logs/*.log
+logs/coverage/
+
+# Test dependencies (local only)
+tests/node_modules/
+
 # Misc
 *.log

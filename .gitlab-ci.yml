@@ -5,6 +5,7 @@
 
 stages:
   - validate
+  - test
   - security
   - mirror
 
@@ -147,6 +148,29 @@ w3c-validate:
       done
   allow_failure: true
 
+# ── Jest Unit Tests (GitLab only) ──────────────
+jest-unit:
+  stage: test
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - cd tests
+    - npm ci
+    - npm run test:ci
+  coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
+  artifacts:
+    when: always
+    paths:
+      - logs/coverage/
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: logs/coverage/cobertura-coverage.xml
+  allow_failure: false
+
 # ── Mirror to GitHub (after pipeline passes) ───
 mirror-to-github:
   stage: mirror
@@ -158,6 +182,13 @@ mirror-to-github:
     - apk add --no-cache git
     - git config --global user.email "ci@gitlab.com"
     - git config --global user.name "GitLab CI"
+    # Create a clean branch without tests/ and logs/ for GitHub
+    - git checkout -b github-mirror
+    - git rm -r --cached tests/ logs/ --ignore-unmatch -q
+    - echo "tests/" >> .gitignore
+    - echo "logs/" >> .gitignore
+    - git add .gitignore
+    - git commit -m "CI: strip test files for GitHub mirror" --allow-empty
     - git remote add github https://steefsteefsen:${GITHUB_TOKEN}@github.com/steefsteefsen/steefsteefsen.github.io.git
-    - git push github HEAD:main --force
+    - git push github github-mirror:main --force
   allow_failure: false
