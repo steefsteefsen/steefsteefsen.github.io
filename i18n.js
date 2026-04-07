@@ -83,6 +83,7 @@ const translations = {
     tool_pycharm_p: 'Professionelle IDE von JetBrains',
     tool_vlc_p: 'Freier, quelloffener Media-Player, der alles abspielt. Keine Codecs, kein Unsinn — funktioniert einfach.',
     tool_gitlab_p: 'Open-Source-DevOps-Plattform — CI/CD, Issue-Tracking und Code-Review an einem Ort. Das Rückgrat der Pipeline dieses Projekts.',
+    tool_bitwarden_p: 'Open-Source-Passwortmanager — sicher, auditiert und selbst hostbar. Die einzig vernünftige Antwort auf Passwort-Wiederverwendung.',
     tool_visit: 'Besuchen',
     tool_donate: 'Spenden',
     // Support
@@ -195,6 +196,7 @@ const translations = {
     tool_pycharm_p: 'Professional IDE by JetBrains',
     tool_vlc_p: 'Free, open-source media player that plays everything. No codecs, no nonsense — just works.',
     tool_gitlab_p: "Open-source DevOps platform — CI/CD, issue tracking, and code review in one place. The backbone of this project's pipeline.",
+    tool_bitwarden_p: 'Open-source password manager — secure, audited, and self-hostable. The only sensible answer to password reuse.',
     tool_visit: 'Visit',
     tool_donate: 'Donate',
     // Support
