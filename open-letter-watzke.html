@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Letter to Achim Watzke — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="An open letter to BVB CEO Achim Watzke on Rheinmetall, the Südtribüne, and what it would take to come back.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 10rem 2rem 6rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+
+  .meta {
+    font-size: 0.82rem;
+    color: var(--stone);
+    letter-spacing: 0.06em;
+    margin-bottom: 3rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--stone);
+    margin-bottom: 1.4rem;
+    max-width: 620px;
+  }
+
+  .salutation {
+    font-size: 1.1rem;
+    color: var(--bark);
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1.5px;
+    background: var(--clay);
+    margin: 2.5rem 0;
+  }
+
+  .offer {
+    background: var(--sand);
+    border-left: 3px solid var(--clay);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .offer p {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    color: var(--bark);
+  }
+
+  .offer p:last-child { margin-bottom: 0; }
+
+  .offer .highlight {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--bark);
+    font-weight: 600;
+  }
+
+  .signature {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--bark);
+    line-height: 2;
+  }
+
+  .signature a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+  }
+
+  .public-note {
+    margin-top: 3rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--sand);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90,110,74,0.3); transition: border-color 0.3s; }
+  a:hover { border-color: var(--moss); }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    main { padding: 8rem 1.5rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">S.O. H&uuml;llinghorst</a>
+</nav>
+
+<main>
+  <div class="section-label">Open Letter</div>
+  <h1>To Achim Watzke</h1>
+  <p class="meta">Stefan-Olav H&uuml;llinghorst &mdash; Berlin, April 2026</p>
+
+  <p class="salutation">Achim,</p>
+
+  <p>I was a BVB fan. S&uuml;dtrib&uuml;ne. The real kind &mdash; not the shirt-on-matchday kind.</p>
+
+  <p>Then the club invested in Rheinmetall. A weapons manufacturer. A company that profits from war.</p>
+
+  <p>After that, BVB became just another club.</p>
+
+  <p>I don't write this with anger. I write it with the clarity of someone who knows exactly when something ended and why.</p>
+
+  <div class="divider"></div>
+
+  <p>Here is my offer.</p>
+
+  <div class="offer">
+    <p>Fund my incubator &mdash; a home for founders with the right attitude. Patient, principled, building for something that lasts. Not unicorn-chasers. People who understand that sustainable growth is a foundation, not a constraint.</p>
+    <p>Cancel the Rheinmetall partnership.</p>
+    <p class="highlight">I come back to the S&uuml;dtrib&uuml;ne.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <p>That's it. No lawyers. No press release. Just a fan telling you what it would take.</p>
+
+  <p>The S&uuml;dtrib&uuml;ne is one of the greatest things German football ever produced &mdash; 25,000 people standing, singing, believing in something together. It deserves a club that believes in something too.</p>
+
+  <p>You still have time to be that club.</p>
+
+  <div class="signature">
+    Stefan-Olav H&uuml;llinghorst<br>
+    Berlin, April 2026<br>
+    <a href="mailto:stefan@huellinghorst.info">stefan@huellinghorst.info</a><br>
+    <a href="index.html">steefsteefsen.github.io</a>
+  </div>
+
+  <div class="public-note">
+    This letter is published openly. It is not a private pitch. It is a public statement.
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav H&uuml;llinghorst &middot; Built with care
+  &middot; <a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a>
+  &middot; <a href="open-letter.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Elon Musk</a>
+  &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
+</footer>
+
+</body>
+</html>
