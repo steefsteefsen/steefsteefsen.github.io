@@ -19,6 +19,10 @@ Thank you.
 
 ---
 
+*Status: ready to post — feinschliff ausstehend*
+
+---
+
 ## Deutsch
 
 Meine persönliche Homepage ist jetzt in 16 Sprachen verfügbar.

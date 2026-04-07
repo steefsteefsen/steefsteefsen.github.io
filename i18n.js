@@ -107,6 +107,13 @@ const translations = {
     idol_snowden_p: 'Hat alles aufgegeben, um die Wahrheit zu sagen. Was auch immer man von den Konsequenzen hält — der Akt, Gewissen über Bequemlichkeit zu stellen, ist etwas, das ich zutiefst respektiere.',
     idol_wales_p: 'Hat Wikipedia gegründet — freies Wissen für jeden Menschen auf diesem Planeten. Einer der leise radikalsten Akte in der Geschichte des Internets.',
     idol_dalai_p: 'Mitgefühl als Praxis, nicht als Gefühl. Die Idee, dass innerer Frieden und äußere Verantwortung kein Widerspruch sind — dass man gleichzeitig geerdet und engagiert sein kann.',
+    // Artists & Local
+    artists_h3: 'Künstler, die ich unterstütze',
+    artist_placeholder_h3: 'Warte auf Konsent',
+    artist_placeholder_p: 'Es gibt Künstler, an deren Arbeit ich glaube und die ich hier nennen möchte — ich warte auf ihre Zustimmung, bevor ich das tue.',
+    local_h3: 'Lokale Geschäfte, die ich unterstütze',
+    local_placeholder_h3: 'Warte auf Konsent',
+    local_placeholder_p: 'Es gibt lokale Geschäfte, die ich hier erwähnen möchte — Menschen, die gute Arbeit in ihrer Nachbarschaft leisten. Ich warte auf ihre Zustimmung.',
   },
 
   // ── English (AI-generated — to be reviewed) ──────────────
@@ -210,6 +217,13 @@ const translations = {
     idol_snowden_p: 'Gave up everything to tell the truth. Whatever you think of the consequences, the act of choosing conscience over comfort is something I respect deeply.',
     idol_wales_p: 'Founded Wikipedia — free knowledge for every human being on the planet. One of the most quietly radical acts in the history of the internet.',
     idol_dalai_p: 'Compassion as a practice, not a feeling. The idea that inner peace and outer responsibility are not in conflict — that you can be both grounded and engaged.',
+    // Artists & Local
+    artists_h3: 'Artists I Support',
+    artist_placeholder_h3: 'Waiting for consent',
+    artist_placeholder_p: 'There are artists whose work I believe in and want to name here — I\'m waiting for their go-ahead before doing so.',
+    local_h3: 'Local Businesses I Support',
+    local_placeholder_h3: 'Waiting for consent',
+    local_placeholder_p: 'There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.',
   },
 
   // ── Italian (AI-generated — to be reviewed) ──────────────
