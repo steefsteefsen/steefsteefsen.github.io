@@ -98,6 +98,7 @@ const translations = {
     support_visit: 'Besuchen →',
     support_donate: 'Spenden →',
     // Idols
+    idol_subotic_p: 'Als Kind vor einem Krieg geflohen. Bundesligameister geworden. Dann 4 Millionen Euro des eigenen Geldes gespendet, um 450.000 Menschen in Ostafrika sauberes Wasser zu bringen — während seiner aktiven Karriere, nicht danach. Null Verwaltungskosten aus Spenden. Er verbindet eigene Fluchterfahrung mit strukturellem Handeln. Das ist selten. — Ich war BVB-Fan, bis der Verein in Rheinmetall investiert hat. Danach war er ein Verein wie jeder andere.',
     idol_torvalds_p: 'Hat Linux aus Starrköpfigkeit und Präzision aufgebaut. Beweis, dass offene, geduldige, unspektakuläre Arbeit die Welt mehr verändert als jede Präsentation.',
     idol_megaloh_p: 'Deutscher Hip-Hop mit Tiefe, Handwerk und Integrität. Er arbeitet. Keine Abkürzungen, kein Ausverkauf. Die Musik verdient ihren Platz.',
     idol_mira_p: 'Für das, was sie nachts in einem Raum aufbaut. Bewusst, präzise, präsent. Die Art von Künstlerin, die weiß, dass Kontext alles ist.',
@@ -208,6 +209,7 @@ const translations = {
     support_visit: 'Visit →',
     support_donate: 'Donate →',
     // Idols
+    idol_subotic_p: 'Fled a war as a child. Became a Bundesliga champion. Then donated 4 million euros of his own money to bring clean water to 450,000 people in East Africa — during his playing career, not after. Zero administrative overhead. He connects lived experience of displacement to structural action. That is rare. — I was a BVB fan until the club invested in Rheinmetall. After that it became just another club.',
     idol_torvalds_p: 'Built Linux out of stubbornness and precision. Proof that open, patient, unglamorous work changes the world more than any pitch deck.',
     idol_megaloh_p: 'German hip-hop with depth, craft, and integrity. He works. No shortcuts, no sellout. The music earns its place.',
     idol_mira_p: 'For what she builds in a room at night. Aware, precise, present. The kind of artist who knows that context is everything.',
