@@ -71,7 +71,7 @@ const translations = {
     journey1_p: 'Ich studierte überwiegend unter Männern, obwohl ich mit drei älteren Schwestern aufgewachsen bin. Der Kontrast war prägend. Was blieb, war wertvoller als der Abschluss: die Fähigkeit, wissenschaftlich zu denken, Beweisen zu vertrauen und Annahmen zu hinterfragen — einschließlich meiner eigenen.',
     journey2_year: 'Drei Jahre',
     journey2_h3: 'Insolvenz',
-    journey2_p: 'Drei Jahre ohne Geld. Es ist kein Kapitel, für das ich mich schäme — sondern eines, aus dem ich mehr gelernt habe als aus fast allem anderen. Knappheit lehrt einen, was wirklich zählt und was man nur aus Gewohnheit mit sich trug.',
+    journey2_p: 'Drei Jahre ohne Geld. Kein Kapitel, das ich bereue — sondern eines, aus dem ich mehr gelernt habe als aus fast allem anderen. Knappheit lehrt einen, was wirklich zählt und was man nur aus Gewohnheit mit sich trug.',
     journey3_year: 'Mondiali',
     journey3_h3: 'Die Zwote & die Mondiali Antirazzisti',
     journey3_p: 'Mein Team hat die Mondiali Antirazzisti in meiner Abwesenheit gewonnen. Ich bin aufrichtig stolz auf jeden, der das möglich gemacht hat. Ich denke auch noch kritisch über die Rolle nach, die Alkohol beim Geld spielte, das wir für wohltätige Zwecke gesammelt haben — manche Widersprüche verdienen es, offen zu bleiben.',
