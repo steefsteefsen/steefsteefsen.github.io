@@ -109,8 +109,8 @@ const translations = {
     idol_dalai_p: 'Mitgefühl als Praxis, nicht als Gefühl. Die Idee, dass innerer Frieden und äußere Verantwortung kein Widerspruch sind — dass man gleichzeitig geerdet und engagiert sein kann.',
     // Artists & Local
     artists_h3: 'Künstler, die ich unterstütze',
-    artist_placeholder_h3: 'Warte auf Konsent',
-    artist_placeholder_p: 'Es gibt Künstler, an deren Arbeit ich glaube und die ich hier nennen möchte — ich warte auf ihre Zustimmung, bevor ich das tue.',
+    artist_greyscale_p: 'DJ und Produzentin aus Bielefeld — treibender, hypnotischer Techno mit düsterem Rand und einem Hauch Rebellion. Klassischer Musikhintergrund, elektronisches Herz. Releases auf Nulectric.',
+    support_listen: 'Anhören →',
     local_h3: 'Lokale Geschäfte, die ich unterstütze',
     local_placeholder_h3: 'Warte auf Konsent',
     local_placeholder_p: 'Es gibt lokale Geschäfte, die ich hier erwähnen möchte — Menschen, die gute Arbeit in ihrer Nachbarschaft leisten. Ich warte auf ihre Zustimmung.',
@@ -219,8 +219,8 @@ const translations = {
     idol_dalai_p: 'Compassion as a practice, not a feeling. The idea that inner peace and outer responsibility are not in conflict — that you can be both grounded and engaged.',
     // Artists & Local
     artists_h3: 'Artists I Support',
-    artist_placeholder_h3: 'Waiting for consent',
-    artist_placeholder_p: 'There are artists whose work I believe in and want to name here — I\'m waiting for their go-ahead before doing so.',
+    artist_greyscale_p: 'Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. Releases on Nulectric.',
+    support_listen: 'Listen →',
     local_h3: 'Local Businesses I Support',
     local_placeholder_h3: 'Waiting for consent',
     local_placeholder_p: 'There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.',
