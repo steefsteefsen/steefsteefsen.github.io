@@ -110,7 +110,7 @@ const translations = {
     idol_dalai_p: 'Mitgefühl als Praxis, nicht als Gefühl. Die Idee, dass innerer Frieden und äußere Verantwortung kein Widerspruch sind — dass man gleichzeitig geerdet und engagiert sein kann.',
     // Artists & Local
     artists_h3: 'Künstler, die ich unterstütze',
-    artist_greyscale_p: 'DJ und Produzentin aus Bielefeld — treibender, hypnotischer Techno mit düsterem Rand und einem Hauch Rebellion. Klassischer Musikhintergrund, elektronisches Herz. Releases auf Nulectric.',
+    artist_greyscale_p: 'DJ und Produzentin aus Bielefeld — treibender, hypnotischer Techno mit düsterem Rand und einem Hauch Rebellion. Klassischer Musikhintergrund, elektronisches Herz.',
     support_listen: 'Anhören →',
     local_h3: 'Lokale Geschäfte, die ich unterstütze',
     local_placeholder_h3: 'Warte auf Konsent',
@@ -221,7 +221,7 @@ const translations = {
     idol_dalai_p: 'Compassion as a practice, not a feeling. The idea that inner peace and outer responsibility are not in conflict — that you can be both grounded and engaged.',
     // Artists & Local
     artists_h3: 'Artists I Support',
-    artist_greyscale_p: 'Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. Releases on Nulectric.',
+    artist_greyscale_p: 'Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart.',
     support_listen: 'Listen →',
     local_h3: 'Local Businesses I Support',
     local_placeholder_h3: 'Waiting for consent',
