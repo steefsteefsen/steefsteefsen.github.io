@@ -3,7 +3,7 @@
 **Project Owner:** Stefan Hüllinghorst, Berlin (from Bielefeld)
 **Contact:** stefan@huellinghorst.info | +49 172 749 1769
 **LinkedIn:** linkedin.com/in/stefan-huellinghorst
-**Last Updated:** 2026-04-06
+**Last Updated:** 2026-04-07
 
 ---
 
@@ -34,6 +34,13 @@ Existing tools (LinkedIn, StepStone, career coaches) address job search, not tra
 - **Concept papers:** German PDF for academic partners (Bielefeld), English PDF for investor outreach (Deedy Das, Menlo Ventures).
 - **Outreach emails:** Written and scheduled. German for Bielefeld professors, English for Anthology Fund.
 - **Website:** Landing page (index.html) + interactive pitch deck (deck.html) built, ready to deploy.
+
+### 📅 2026-04-07
+
+- i18n: alle Karten-Inhalte (Projects, Journey, Built With, Support, Idols) für alle 16 Sprachen übersetzt und mit `data-i18n`-Attributen versehen
+- i18n: deutsche Übersetzungen korrigiert (Grammatik, Tonalität, Fremdwörter)
+- i18n: `?lang=`-URL-Parameter eingeführt — Sprache jetzt über URL teilbar (z.B. `?lang=de`)
+- **Kontext:** Stefan ist seit 01.04.2026 bei der Siemens AG angestellt und wird dort bleiben. Die Projekte (careergraph.io, diedorismachtdasgift.io, Homepage) laufen als Side Projects weiter.
 
 ### 🔄 In Progress
 
