@@ -1643,9 +1643,11 @@ function applyLanguage(code) {
 }
 
 function initLanguageSwitcher() {
+  const urlParam = new URLSearchParams(window.location.search).get('lang');
   const saved = localStorage.getItem('lang');
   const browser = navigator.language.split('-')[0];
-  const initial = (saved && translations[saved]) ? saved
+  const initial = (urlParam && translations[urlParam]) ? urlParam
+    : (saved && translations[saved]) ? saved
     : (translations[browser] ? browser : 'en');
   applyLanguage(initial);
 }
@@ -1653,6 +1655,12 @@ function initLanguageSwitcher() {
 document.addEventListener('DOMContentLoaded', () => {
   initLanguageSwitcher();
   document.querySelectorAll('.lang-option').forEach(btn => {
-    btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      const url = new URL(window.location);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
+      applyLanguage(lang);
+    });
   });
 });
