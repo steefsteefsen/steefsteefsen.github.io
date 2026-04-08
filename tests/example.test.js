@@ -54,7 +54,7 @@ const HTML_KEYS = [
   'built_h2', 'built_label', 'built_p',
   'contact_h2', 'contact_label', 'contact_p',
   'hero_scroll', 'hero_tagline', 'hero_text',
-  'idol_dalai_p', 'idol_einstein_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p',
+  'idol_boys36_p', 'idol_dalai_p', 'idol_einstein_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p',
   'idols_h2', 'idols_label', 'idol_snowden_p', 'idol_sokrates_p', 'idols_p',
   'idol_ssio_p', 'idol_subotic_p', 'idol_torvalds_p', 'idol_wales_p',
   'journey1_h3', 'journey1_p', 'journey1_year',
