@@ -21,12 +21,12 @@ const { translations, LANG_NAMES, applyLanguage, initLanguageSwitcher } = requir
 // Regenerate with:
 //   grep -o 'data-i18n="[^"]*"' index.html | sed 's/data-i18n="//;s/"//' | sort -u
 const HTML_KEYS = [
-  'artist_greyscale_p', 'artists_h3',
+  'artist_greyscale_p', 'artist_sandra_p', 'artists_h3',
   'book_btn', 'book_date', 'book_email', 'booking_soon', 'book_name', 'book_time', 'book_topic',
   'built_h2', 'built_label', 'built_p',
   'contact_h2', 'contact_label', 'contact_p',
   'hero_scroll', 'hero_tagline', 'hero_text',
-  'idol_boys36_p', 'idol_dalai_p', 'idol_einstein_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p',
+  'idol_boys36_p', 'idol_dalai_p', 'idol_einstein_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p', 'idol_salgado_p',
   'idols_h2', 'idols_label', 'idol_snowden_p', 'idol_sokrates_p', 'idols_p',
   'idol_ssio_p', 'idol_subotic_p', 'idol_torvalds_p', 'idol_wales_p',
   'journey1_h3', 'journey1_p', 'journey1_year',
