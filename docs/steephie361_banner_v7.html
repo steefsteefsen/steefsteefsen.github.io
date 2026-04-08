@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>steefsteefsen & greyscale.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@300;400;700;800&family=Syne+Mono&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .banner {
+    width: 900px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    background: #141220;
+  }
+
+  /* Organic morphing blobs */
+  .blob {
+    position: absolute;
+    border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+    mix-blend-mode: screen;
+    filter: blur(50px);
+    animation: morph var(--dur, 14s) ease-in-out infinite alternate;
+    opacity: var(--op, 0.5);
+  }
+  @keyframes morph {
+    0%   { border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; transform: translate(0,0) rotate(0deg) scale(1); }
+    33%  { border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%; transform: translate(var(--tx1,20px), var(--ty1,15px)) rotate(8deg) scale(1.05); }
+    66%  { border-radius: 60% 40% 50% 50% / 55% 45% 60% 40%; transform: translate(var(--tx2,-15px), var(--ty2,25px)) rotate(-5deg) scale(0.97); }
+    100% { border-radius: 45% 55% 60% 40% / 50% 60% 40% 50%; transform: translate(var(--tx3,10px), var(--ty3,-20px)) rotate(12deg) scale(1.08); }
+  }
+
+  .b1 { width:420px;height:380px;top:-100px;left:-80px;  background:#6b8f71;--dur:17s;--op:0.35;--tx1:30px;--ty1:20px;--tx2:-10px;--ty2:40px;--tx3:20px;--ty3:-15px; }
+  .b2 { width:360px;height:320px;top:-60px;right:-50px;  background:#c4847a;--dur:20s;--op:0.3; --tx1:-40px;--ty1:30px;--tx2:-20px;--ty2:10px;--tx3:-30px;--ty3:20px; }
+  .b3 { width:320px;height:300px;bottom:-80px;left:160px;background:#c8963c;--dur:14s;--op:0.28;--tx1:20px;--ty1:-25px;--tx2:-30px;--ty2:-10px;--tx3:40px;--ty3:-30px; }
+  .b4 { width:280px;height:260px;bottom:-60px;left:-30px; background:#3d7a7a;--dur:22s;--op:0.3; --tx1:40px;--ty1:-20px;--tx2:20px;--ty2:-40px;--tx3:50px;--ty3:-10px; }
+  .b5 { width:300px;height:260px;top:10px;left:300px;    background:#8a7ab5;--dur:18s;--op:0.28;--tx1:-20px;--ty1:30px;--tx2:30px;--ty2:20px;--tx3:-10px;--ty3:40px; }
+  .b6 { width:240px;height:220px;bottom:-30px;right:60px; background:#b5663c;--dur:16s;--op:0.25;--tx1:-30px;--ty1:-20px;--tx2:-50px;--ty2:-10px;--tx3:-20px;--ty3:-35px; }
+
+  /* Dark base overlay */
+  .dark-wash {
+    position: absolute; inset: 0; z-index: 2;
+    background: rgba(14,12,22,0.58);
+  }
+
+  /* Film grain canvas */
+  canvas {
+    position: absolute; inset: 0; z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Vignette */
+  .vignette {
+    position: absolute; inset: 0; z-index: 4;
+    background: radial-gradient(ellipse 95% 90% at 50% 50%, transparent 30%, rgba(8,6,16,0.7) 100%);
+  }
+
+  /* Thin horizontal divider lines */
+  .rule-top {
+    position: absolute; top: 38px; left: 42px; right: 42px;
+    height: 1px; z-index: 5;
+    background: linear-gradient(90deg, transparent, rgba(245,230,210,0.12) 20%, rgba(245,230,210,0.12) 80%, transparent);
+  }
+  .rule-bottom {
+    position: absolute; bottom: 40px; left: 42px; right: 42px;
+    height: 1px; z-index: 5;
+    background: linear-gradient(90deg, transparent, rgba(245,230,210,0.12) 20%, rgba(245,230,210,0.12) 80%, transparent);
+  }
+
+  /* ── Content ── */
+  .content {
+    position: absolute; inset: 0; z-index: 10;
+    padding: 18px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+  }
+  .eyebrow {
+    font-family: 'Syne Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 5px;
+    color: rgba(245,230,210,0.38);
+    text-transform: uppercase;
+  }
+  .top-right {
+    font-family: 'Syne Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 4px;
+    color: rgba(245,230,210,0.22);
+    text-transform: uppercase;
+  }
+
+  /* The two names */
+  .names-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    position: relative;
+  }
+
+  .dj-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 18;
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -2px;
+    color: #f0e4d0;
+  }
+
+  .name-steef {
+    font-size: 68px;
+    text-shadow:
+      -1px 0 rgba(107,143,113,0.6),
+       1px 0 rgba(61,122,122,0.6),
+       0 0 60px rgba(107,143,113,0.25);
+  }
+
+  .amp {
+    font-family: 'Syne', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    color: rgba(245,230,210,0.25);
+    margin: 0 16px;
+    letter-spacing: 0;
+    align-self: center;
+    padding-bottom: 6px;
+  }
+
+  /* greyscale. — italic, slightly smaller, dusty rose tint */
+  .name-grey {
+    font-size: 68px;
+    font-style: italic;
+    letter-spacing: -3px;
+    text-transform: lowercase;
+    text-shadow:
+      -1px 0 rgba(196,132,122,0.6),
+       1px 0 rgba(138,122,181,0.6),
+       0 0 60px rgba(196,132,122,0.25);
+    color: #eaddd0;
+  }
+
+  /* The dot in greyscale. — accent color */
+  .dot-accent {
+    color: #c4847a;
+    text-shadow: 0 0 20px rgba(196,132,122,0.8);
+  }
+
+  /* Slogan + tags row */
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 6px 0;
+  }
+
+  .slogan-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .slogan {
+    font-family: 'Syne', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: rgba(245,230,210,0.38);
+    white-space: nowrap;
+  }
+  .slogan-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(245,230,210,0.14), transparent);
+  }
+
+  .tags-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'Syne Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border: 1px solid;
+    color: rgba(245,230,210,0.65);
+  }
+  .t1 { border-color: rgba(107,143,113,0.55); background: rgba(107,143,113,0.1); }
+  .t2 { border-color: rgba(196,132,122,0.55); background: rgba(196,132,122,0.1); }
+  .t3 { border-color: rgba(200,150, 60,0.55); background: rgba(200,150, 60,0.1); }
+  .t4 { border-color: rgba( 61,122,122,0.55); background: rgba( 61,122,122,0.1); }
+  .t5 { border-color: rgba(138,122,181,0.55); background: rgba(138,122,181,0.1); }
+
+  .label-credit {
+    font-family: 'Syne Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: rgba(245,230,210,0.18);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+
+  <div class="b1 blob"></div>
+  <div class="b2 blob"></div>
+  <div class="b3 blob"></div>
+  <div class="b4 blob"></div>
+  <div class="b5 blob"></div>
+  <div class="b6 blob"></div>
+
+  <div class="dark-wash"></div>
+  <canvas id="grain" width="900" height="300"></canvas>
+  <div class="vignette"></div>
+  <div class="rule-top"></div>
+  <div class="rule-bottom"></div>
+
+  <div class="content">
+
+    <div class="top-row">
+      <div class="eyebrow">Berlin · Bielefeld · Kreuzberg</div>
+      <div class="top-right">Pioneer CDJ · SO36</div>
+    </div>
+
+    <div class="names-row">
+      <div class="dj-name name-steef">steefsteefsen</div>
+      <div class="amp">&</div>
+      <div class="dj-name name-grey">greyscale<span class="dot-accent">.</span></div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="slogan-row">
+        <div class="slogan">einfach machen</div>
+        <div class="slogan-line"></div>
+      </div>
+      <div class="tags-row">
+        <div class="tags">
+          <div class="tag t1">Pluralismus</div>
+          <div class="tag t2">Downtempo</div>
+          <div class="tag t3">Techno</div>
+          <div class="tag t4">Kreuzberg</div>
+          <div class="tag t5">90–128 bpm</div>
+        </div>
+        <div class="label-credit">Tipping Point · 2025</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('grain');
+  const ctx = canvas.getContext('2d');
+  function drawGrain() {
+    const d = ctx.createImageData(900, 300);
+    for (let i = 0; i < d.data.length; i += 4) {
+      const v = Math.random() * 255;
+      d.data[i] = d.data[i+1] = d.data[i+2] = v;
+      d.data[i+3] = Math.random() * 22 + 3;
+    }
+    ctx.putImageData(d, 0, 0);
+  }
+  function loop() { drawGrain(); setTimeout(loop, 80); }
+  loop();
+</script>
+</body>
+</html>
