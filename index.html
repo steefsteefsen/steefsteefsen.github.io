@@ -567,6 +567,11 @@
     background: linear-gradient(to right, var(--moss), var(--clay));
   }
 
+  /* Category color accents */
+  .support-card--cause::before  { background: linear-gradient(to right, var(--moss), var(--moss-light)); }
+  .support-card--artist::before { background: linear-gradient(to right, var(--clay), #e8b87a); }
+  .support-card--local::before  { background: linear-gradient(to right, var(--stone), var(--bark)); }
+
   .support-card h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.6rem;
@@ -885,7 +890,7 @@
   <div class="hero-leaf right">&#127807;</div>
   <h1>
     Stefan-Olav Hüllinghorst
-    <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth</span>
+    <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
   </h1>
   <div class="hero-line"></div>
   <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
@@ -930,6 +935,11 @@
       <span class="icon">&#127758;</span>
       <h3 data-i18n="val_connection">Connection</h3>
       <p data-i18n="val_connection_p">Everything is interconnected. The strongest systems are built through trust, transparency, and mutual benefit.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129309;</span>
+      <h3 data-i18n="val_inclusion">Inclusion</h3>
+      <p data-i18n="val_inclusion_p">The table should be bigger. Good ideas come from everywhere — not just from the usual rooms. Building systems that make space for people who are usually left out.</p>
     </div>
   </div>
 </section>
@@ -1063,7 +1073,7 @@
     <h2 data-i18n="support_h2">Causes That Matter</h2>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>Mein Grundeinkommen</h3>
     <p data-i18n="support_mge_p">A Berlin-based non-profit that crowdfunds and raffles unconditional basic incomes. Over 1,500 basic incomes have been paid out since 2014 — funded entirely by donations.</p>
     <a href="https://www.mein-grundeinkommen.de" target="_blank" class="support-link" data-i18n="support_mge_link">
@@ -1071,7 +1081,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>GLS Bank</h3>
     <p data-i18n="support_gls_p">Germany's first social and ecological bank — financing projects that matter: renewable energy, organic farming, education, and social initiatives. Banking as a conscious act.</p>
     <a href="https://www.gls.de" target="_blank" class="support-link" data-i18n="support_learn_more">
@@ -1079,7 +1089,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>Landstreicher Booking</h3>
     <p data-i18n="support_landstreicher_p">An independent booking agency rooted in underground and alternative music culture. Supporting artists and spaces that keep the scene alive on its own terms.</p>
     <a href="https://landstreicher-konzerte.de" target="_blank" class="support-link" data-i18n="support_visit">
@@ -1087,7 +1097,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>Chaos Computer Club</h3>
     <p data-i18n="support_ccc_p">Europe's largest hacker association — advocating for digital rights, privacy, freedom of information, and the responsible use of technology since 1981. A compass for anyone building in the digital world.</p>
     <a href="https://www.ccc.de" target="_blank" class="support-link" data-i18n="support_visit">
@@ -1095,7 +1105,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>Codeberg</h3>
     <p data-i18n="support_codeberg_p">A non-profit, community-driven home for free and open-source software — no surveillance, no ads, no corporate agenda. An alternative worth supporting.</p>
     <a href="https://codeberg.org/Codeberg/Community/issues/1" target="_blank" class="support-link" data-i18n="support_donate">
@@ -1103,7 +1113,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>LAION</h3>
     <p data-i18n="support_laion_p">A German non-profit building large-scale open datasets for AI research — including LAION-5B, the dataset behind Stable Diffusion and much of the open AI ecosystem. Founded by a Hamburg schoolteacher. 100% volunteer-driven. Without LAION, open-source AI training data would exist only behind corporate walls.</p>
     <a href="https://laion.ai" target="_blank" class="support-link" data-i18n="support_learn_more">
@@ -1111,7 +1121,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3>Viva con Agua</h3>
     <p data-i18n="support_vca_p">A Hamburg-based non-profit that brings clean drinking water to people worldwide — founded by former St. Pauli player Benjamin Adrion. Art, music, and sport as tools for social change. Water as a human right, not a commodity.</p>
     <a href="https://www.vivaconagua.org" target="_blank" class="support-link" data-i18n="support_visit">
@@ -1119,7 +1129,7 @@
     </a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--cause reveal">
     <h3 data-i18n="support_ddmg_h3">Support diedorismachtdasgift.io</h3>
     <p data-i18n="support_ddmg_p">A free, anonymous platform for people struggling with addiction — funded by people who believe accessible help should have no price tag. GoFundMe campaign link coming soon.</p>
     <a href="#projects" class="support-link" data-i18n="support_learn_more">
@@ -1131,20 +1141,20 @@
     <h3 class="support-subsection-title" data-i18n="artists_h3">Artists I Support</h3>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--artist reveal">
     <h3>Greyscale</h3>
     <p data-i18n="artist_greyscale_p">Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. We make music together.</p>
     <a href="https://soundcloud.com/greyscale" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
     <a href="docs/steephie361_banner_v7.html" target="_blank" class="support-link" data-i18n="support_visit">steefsteefsen &amp; greyscale. &#8594;</a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--artist reveal">
     <h3>Sandra Frotscher</h3>
     <p data-i18n="artist_sandra_p">Berlin-based visual artist and photographer. She works with the body, with presence, with what gets left unsaid. Sharp observation, quiet intensity — the kind of work that stays.</p>
     <a href="https://www.sandrafrotscher.com" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--artist reveal">
     <h3 data-i18n="local_placeholder_h3">Waiting for consent</h3>
     <p data-i18n="artist_placeholder_p">There are artists I want to mention here — waiting for their go-ahead.</p>
   </div>
@@ -1153,12 +1163,12 @@
     <h3 class="support-subsection-title" data-i18n="local_h3">Local Businesses I Support</h3>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--local reveal">
     <h3>Kaffeerösterei Kiezbohne</h3>
     <p data-i18n="local_kiezbohne_p">Hand-roasted specialty coffee in Spandau. Nonnendammallee 91. Small-batch, craft, neighbourhood — the kind of place that takes coffee seriously without taking itself too seriously.</p>
   </div>
 
-  <div class="support-card reveal">
+  <div class="support-card support-card--local reveal">
     <h3 data-i18n="local_placeholder_h3">Waiting for consent</h3>
     <p data-i18n="local_placeholder_p">There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.</p>
   </div>
@@ -1252,6 +1262,9 @@
       <span class="icon">&#127925;</span>
       <h3>Wu-Tang Clan</h3>
       <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+        <iframe src="https://www.youtube.com/embed/40a5UNO5T44" title="Wu-Tang Clan — Reunited" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;"></iframe>
+      </div>
     </div>
     <div class="value-card reveal">
       <span class="icon">&#127916;</span>
@@ -1262,6 +1275,16 @@
       <span class="icon">&#127911;</span>
       <h3>Fatih Akın</h3>
       <p data-i18n="idol_akin_p">Hamburg. Turkish-German. Between worlds and belonging fully to both. *Gegen die Wand* hit something real — rage, love, identity, the mess of it all. He makes films from where he actually stands, not from where it's comfortable to stand.</p>
+    </div>
+    <div class="value-card reveal">
+      <span class="icon">&#127908;</span>
+      <h3>Leonard Cohen</h3>
+      <p data-i18n="idol_cohen_p">Poet, novelist, songwriter. He wrote about love, loss, faith, and failure with a precision that made clichés impossible. *Hallelujah* took years to write and decades to be understood. He released his final album three weeks before he died. Some people work until the end — not out of compulsion, but because the work is the point.</p>
+    </div>
+    <div class="value-card reveal">
+      <span class="icon">&#129504;</span>
+      <h3>Vera F. Birkenbihl</h3>
+      <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
     </div>
   </div>
 </section>

@@ -26,7 +26,7 @@ const HTML_KEYS = [
   'built_h2', 'built_label', 'built_p',
   'contact_h2', 'contact_label', 'contact_p',
   'hero_scroll', 'hero_tagline', 'hero_text',
-  'idol_abramovic_p', 'idol_akin_p', 'idol_boys36_p', 'idol_chappelle_p', 'idol_dalai_p', 'idol_einstein_p', 'idol_jarmusch_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p', 'idol_salgado_p', 'idol_wutang_p',
+  'idol_abramovic_p', 'idol_akin_p', 'idol_birkenbiehl_p', 'idol_boys36_p', 'idol_chappelle_p', 'idol_cohen_p', 'idol_dalai_p', 'idol_einstein_p', 'idol_jarmusch_p', 'idol_megaloh_p', 'idol_mira_p', 'idol_platon_p', 'idol_salgado_p', 'idol_wutang_p',
   'idols_h2', 'idols_label', 'idol_snowden_p', 'idol_sokrates_p', 'idols_p',
   'idol_ssio_p', 'idol_subotic_p', 'idol_torvalds_p', 'idol_wales_p',
   'journey1_h3', 'journey1_p', 'journey1_year',
@@ -51,6 +51,7 @@ const HTML_KEYS = [
   'tool_ollama_p', 'tool_pycharm_p', 'tool_thunderbird_p', 'tool_visit', 'tool_vlc_p',
   'val_connection', 'val_connection_p',
   'val_cultivation', 'val_cultivation_p',
+  'val_inclusion', 'val_inclusion_p',
   'val_sustainability', 'val_sustainability_p',
 ];
 
