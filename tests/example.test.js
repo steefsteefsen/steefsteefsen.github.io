@@ -43,7 +43,7 @@ const HTML_KEYS = [
   'retrogott_cite', 'retrogott_quote',
   'support_ccc_p', 'support_codeberg_p',
   'support_ddmg_h3', 'support_ddmg_p', 'support_donate',
-  'support_gls_p', 'support_h2', 'support_label', 'support_laion_p',
+  'support_gls_p', 'support_h2', 'support_ivory_p', 'support_label', 'support_laion_p',
   'support_landstreicher_p', 'support_learn_more', 'support_listen',
   'support_mge_link', 'support_mge_p', 'support_vca_p', 'support_visit',
   'tool_bitwarden_p', 'tool_claudecode_p', 'tool_donate',
