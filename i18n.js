@@ -1991,15 +1991,22 @@ function initLanguageSwitcher() {
   applyLanguage(initial);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initLanguageSwitcher();
-  document.querySelectorAll('.lang-option').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang');
-      const url = new URL(window.location);
-      url.searchParams.set('lang', lang);
-      window.history.replaceState({}, '', url);
-      applyLanguage(lang);
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initLanguageSwitcher();
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        const url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url);
+        applyLanguage(lang);
+      });
     });
   });
-});
+}
+
+// Node.js / Jest export
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { translations, LANG_NAMES, applyLanguage, initLanguageSwitcher };
+}

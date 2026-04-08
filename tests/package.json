@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "jest --coverage",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci --coverage"
   },
   "devDependencies": {
     "jest": "^29.0.0",
@@ -12,7 +12,21 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "coverageDirectory": "../logs/coverage",
-    "coverageReporters": ["text", "cobertura"]
+    "rootDir": "..",
+    "testMatch": ["<rootDir>/tests/**/*.test.js"],
+    "coverageProvider": "v8",
+    "collectCoverageFrom": [
+      "<rootDir>/i18n.js"
+    ],
+    "coverageDirectory": "logs/coverage",
+    "coverageReporters": ["text", "cobertura"],
+    "coverageThreshold": {
+      "global": {
+        "statements": 90,
+        "branches": 90,
+        "functions": 90,
+        "lines": 90
+      }
+    }
   }
 }

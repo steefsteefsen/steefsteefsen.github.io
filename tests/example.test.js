@@ -14,36 +14,8 @@
  *       for values longer than 30 chars — flags forgotten translations)
  */
 
-const fs = require('fs');
-const path = require('path');
-const vm = require('vm');
-
-// ── Load i18n.js into a sandboxed context ────────────────────────────────────
-// i18n.js attaches DOM listeners at the bottom — stub the minimum DOM surface
-// so the module-level code doesn't throw in Node.
-const i18nSrc = fs.readFileSync(path.join(__dirname, '..', 'i18n.js'), 'utf8');
-
-const noop = () => {};
-const fakeEl = { querySelectorAll: () => [], addEventListener: noop, textContent: '', classList: { add: noop, remove: noop }, setAttribute: noop };
-const sandbox = {
-  document: {
-    addEventListener: noop,
-    querySelector: () => fakeEl,
-    querySelectorAll: () => [],
-    documentElement: { lang: '', setAttribute: noop, style: {} },
-  },
-  window: { history: { replaceState: noop }, location: { search: '' } },
-  localStorage: { getItem: () => null, setItem: noop },
-  navigator: { language: 'en' },
-  console,
-};
-// Wrap the script so const declarations land on the sandbox object
-const wrapped = `(function() { ${i18nSrc}\n sandbox_translations = translations;\n sandbox_lang_names = LANG_NAMES; })();`;
-vm.createContext(sandbox);
-vm.runInContext(wrapped, sandbox);
-
-const translations = sandbox.sandbox_translations;
-const LANG_NAMES = sandbox.sandbox_lang_names;
+// i18n.js guards DOM access with typeof checks and exports via module.exports in Node
+const { translations, LANG_NAMES, applyLanguage, initLanguageSwitcher } = require('../i18n.js');
 
 // ── Keys used in index.html (extracted at test-write time, kept in sync here) ─
 // Regenerate with:
