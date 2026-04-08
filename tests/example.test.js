@@ -33,7 +33,7 @@ const HTML_KEYS = [
   'journey2_h3', 'journey2_p', 'journey2_year',
   'journey3_h3', 'journey3_p', 'journey3_year',
   'journey_h2', 'journey_label', 'journey_p',
-  'local_h3', 'local_placeholder_h3', 'local_placeholder_p',
+  'local_h3', 'local_kiezbohne_p', 'local_placeholder_h3', 'local_placeholder_p',
   'nav_built_with', 'nav_contact', 'nav_idols', 'nav_invest', 'nav_journey',
   'nav_philosophy', 'nav_projects',
   'philosophy_cite', 'philosophy_h2', 'philosophy_label',

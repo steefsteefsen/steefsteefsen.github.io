@@ -124,6 +124,7 @@ const translations = {
     support_listen: 'Anhören →',
     local_h3: 'Lokale Geschäfte, die ich unterstütze',
     local_placeholder_h3: 'Warte auf Konsent',
+    local_kiezbohne_p: 'Handgerösteter Spezialitätenkaffee in Spandau. Nonnendammallee 91. Klein, handwerklich, kiez-nah — die Art von Laden, der Kaffee ernst nimmt, ohne sich selbst zu wichtig zu nehmen.',
     local_placeholder_p: 'Es gibt lokale Geschäfte, die ich hier erwähnen möchte — Menschen, die gute Arbeit in ihrer Nachbarschaft leisten. Ich warte auf ihre Zustimmung.',
   },
 
@@ -245,6 +246,7 @@ const translations = {
     support_listen: 'Listen →',
     local_h3: 'Local Businesses I Support',
     local_placeholder_h3: 'Waiting for consent',
+    local_kiezbohne_p: 'Hand-roasted specialty coffee in Spandau. Nonnendammallee 91. Small-batch, craft, neighbourhood — the kind of place that takes coffee seriously without taking itself too seriously.',
     local_placeholder_p: 'There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.',
   },
 
@@ -360,6 +362,7 @@ const translations = {
     support_listen: 'Ascolta →',
     local_h3: 'Attività locali che supporto',
     local_placeholder_h3: 'In attesa del consenso',
+    local_kiezbohne_p: 'Caffè di specialità tostato a mano a Spandau. Nonnendammallee 91. Piccolo, artigianale, di quartiere — il tipo di posto che prende il caffè sul serio senza prendersi troppo sul serio.',
     local_placeholder_p: 'Ci sono attività locali che voglio menzionare qui — persone che fanno un buon lavoro nel loro quartiere. In attesa del loro via libera.',
   },
 
@@ -475,6 +478,7 @@ const translations = {
     support_listen: 'Écouter →',
     local_h3: 'Commerces locaux que je soutiens',
     local_placeholder_h3: 'En attente du consentement',
+    local_kiezbohne_p: 'Café de spécialité torréfié à la main à Spandau. Nonnendammallee 91. Petite production, artisanal, ancré dans le quartier — le genre d\'endroit qui prend le café au sérieux sans se prendre trop au sérieux.',
     local_placeholder_p: 'Il y a des commerces locaux que je veux mentionner ici — des gens qui font du bon travail dans leur quartier. En attente de leur accord.',
   },
 
@@ -590,6 +594,7 @@ const translations = {
     support_listen: 'Escuchar →',
     local_h3: 'Negocios locales que apoyo',
     local_placeholder_h3: 'Esperando consentimiento',
+    local_kiezbohne_p: 'Café de especialidad tostado a mano en Spandau. Nonnendammallee 91. Pequeño lote, artesanal, de barrio — el tipo de lugar que se toma el café en serio sin tomarse demasiado en serio a sí mismo.',
     local_placeholder_p: 'Hay negocios locales que quiero mencionar aquí — personas que hacen buen trabajo en su barrio. Esperando su aprobación.',
   },
 
@@ -705,6 +710,7 @@ const translations = {
     support_listen: 'Ouvir →',
     local_h3: 'Negócios locais que apoio',
     local_placeholder_h3: 'À espera de consentimento',
+    local_kiezbohne_p: 'Café de especialidade torrado à mão em Spandau. Nonnendammallee 91. Pequena produção, artesanal, de bairro — o tipo de lugar que leva o café a sério sem se levar demasiado a sério.',
     local_placeholder_p: 'Há negócios locais que quero mencionar aqui — pessoas que fazem bom trabalho na sua vizinhança. À espera da aprovação deles.',
   },
 
@@ -820,6 +826,7 @@ const translations = {
     support_listen: 'Lyt →',
     local_h3: 'Lokale virksomheder jeg støtter',
     local_placeholder_h3: 'Afventer samtykke',
+    local_kiezbohne_p: 'Håndristet specialkaffe i Spandau. Nonnendammallee 91. Småproduktion, håndværk, nabolag — den slags sted der tager kaffe seriøst uden at tage sig selv for seriøst.',
     local_placeholder_p: 'Der er lokale virksomheder, jeg vil nævne her — mennesker der gør godt arbejde i deres nabolag. Afventer deres godkendelse.',
   },
 
@@ -935,6 +942,7 @@ const translations = {
     support_listen: 'Слухати →',
     local_h3: 'Місцеві підприємства, які я підтримую',
     local_placeholder_h3: 'Очікую на згоду',
+    local_kiezbohne_p: 'Кава спеціальної обсмажки в Шпандау. Nonnendammallee 91. Маленькими партіями, з ремеслом, по-сусідськи — місце, яке серйозно ставиться до кави, не беручи себе надто серйозно.',
     local_placeholder_p: 'Є місцеві підприємства, які я хочу тут згадати — люди, які добре працюють у своєму районі. Очікую на їхню згоду.',
   },
 
@@ -1050,6 +1058,7 @@ const translations = {
     support_listen: 'Слушать →',
     local_h3: 'Местные предприятия, которые я поддерживаю',
     local_placeholder_h3: 'Жду согласия',
+    local_kiezbohne_p: 'Кофе специальной обжарки в Шпандау. Nonnendammallee 91. Маленькие партии, ремесло, по-соседски — место, которое серьёзно относится к кофе, не принимая себя слишком серьёзно.',
     local_placeholder_p: 'Есть местные предприятия, которые я хочу упомянуть здесь — люди, которые хорошо работают в своём районе. Жду их согласия.',
   },
 
@@ -1165,6 +1174,7 @@ const translations = {
     support_listen: 'Dinle →',
     local_h3: 'Desteklediğim yerel işletmeler',
     local_placeholder_h3: 'Onay bekleniyor',
+    local_kiezbohne_p: 'Spandau\'da el yapımı özel kahve. Nonnendammallee 91. Küçük parti, zanaatkâr, mahalle ruhu — kahveyi ciddiye alan ama kendini fazla ciddiye almayan türden bir yer.',
     local_placeholder_p: 'Burada bahsetmek istediğim yerel işletmeler var — mahallesinde iyi iş çıkaran insanlar. Onlardan onay bekliyorum.',
   },
 
@@ -1280,6 +1290,7 @@ const translations = {
     support_listen: 'האזן →',
     local_h3: 'עסקים מקומיים שאני תומך בהם',
     local_placeholder_h3: 'ממתין להסכמה',
+    local_kiezbohne_p: 'קפה מיוחד קלוי ביד בשפאנדאו. Nonnendammallee 91. כמויות קטנות, אומנות, שכונתי — המקום שלוקח קפה ברצינות בלי לקחת את עצמו ברצינות מדי.',
     local_placeholder_p: 'יש עסקים מקומיים שאני רוצה להזכיר כאן — אנשים שעושים עבודה טובה בשכונתם. ממתין לאישור שלהם.',
   },
 
@@ -1395,6 +1406,7 @@ const translations = {
     support_listen: 'استمع →',
     local_h3: 'أعمال محلية أدعمها',
     local_placeholder_h3: 'بانتظار الموافقة',
+    local_kiezbohne_p: 'قهوة متخصصة محمّصة يدويًا في شباندو. Nonnendammallee 91. دُفعات صغيرة، حِرفية، حيّية — النوع من الأماكن التي تأخذ القهوة بجدية دون أن تأخذ نفسها بجدية مفرطة.',
     local_placeholder_p: 'هناك أعمال محلية أريد ذكرها هنا — أشخاص يقومون بعمل جيد في حيّهم. أنتظر موافقتهم.',
   },
 
@@ -1510,6 +1522,7 @@ const translations = {
     support_listen: 'گوش دادن →',
     local_h3: 'کسب‌وکارهای محلی که حمایت می‌کنم',
     local_placeholder_h3: 'در انتظار رضایت',
+    local_kiezbohne_p: 'قهوه تخصصی برشته‌شده با دست در اشپاندائو. Nonnendammallee 91. کم‌تیراژ، دست‌ساز، محله‌ای — جایی که قهوه را جدی می‌گیرد بدون اینکه خودش را خیلی جدی بگیرد.',
     local_placeholder_p: 'کسب‌وکارهای محلی هستند که می‌خواهم اینجا از آن‌ها یاد کنم — مردمانی که در محله خود کار خوبی انجام می‌دهند. در انتظار موافقت آن‌ها هستم.',
   },
 
@@ -1625,6 +1638,7 @@ const translations = {
     support_listen: '收听 →',
     local_h3: '我支持的本地商家',
     local_placeholder_h3: '等待同意',
+    local_kiezbohne_p: '斯潘道手工烘焙精品咖啡。Nonnendammallee 91。小批量、手工、街坊气息——认真对待咖啡、却不过分认真对待自己的那种地方。',
     local_placeholder_p: '有一些本地商家我想在这里提及——在自己社区认真工作的人们。等待他们的同意。',
   },
 
@@ -1740,6 +1754,7 @@ const translations = {
     support_listen: '聴く →',
     local_h3: '支援している地元ビジネス',
     local_placeholder_h3: '同意待ち',
+    local_kiezbohne_p: 'シュパンダウの手焙煎スペシャルティコーヒー。Nonnendammallee 91。少量生産、クラフト、地域密着——コーヒーを真剣に扱いながら、自分自身は真剣になりすぎない場所。',
     local_placeholder_p: 'ここで紹介したい地元ビジネスがある——自分の地域で良い仕事をしている人たち。彼らの承認を待っている。',
   },
 
@@ -1855,6 +1870,7 @@ const translations = {
     support_listen: '듣기 →',
     local_h3: '내가 지원하는 지역 비즈니스',
     local_placeholder_h3: '동의 대기 중',
+    local_kiezbohne_p: '슈판다우의 수제 스페셜티 커피. Nonnendammallee 91. 소량 생산, 장인, 동네 밀착 — 커피를 진지하게 대하되 자신을 너무 진지하게 대하지 않는 그런 곳.',
     local_placeholder_p: '여기서 소개하고 싶은 지역 비즈니스가 있습니다 — 자신의 동네에서 좋은 일을 하는 사람들. 그들의 동의를 기다리고 있습니다.',
   },
 
@@ -1957,6 +1973,7 @@ const translations = {
     support_listen: 'Guhdarî bike →',
     local_h3: 'Karsaziyên herêmî yên ku piştgirî dikim',
     local_placeholder_h3: 'Li hêviya razîbûnê',
+    local_kiezbohne_p: 'Qehweya taybetî ya bi destê pijandî li Spandau. Nonnendammallee 91. Biçûk, hunermend, taxî — celebê cîhê ku qehweyê cidî digire bêyî ku xwe pir cidî bigire.',
     local_placeholder_p: 'Karsaziyên herêmî hene ku ez dixwazim li vir behsa wan bikim — mirovên ku di taxa xwe de xebata baş dikin. Li hêviya razîbûna wan im.',
     idol_subotic_p: 'Ji şerekî wekî zarok reviya. Şampiyonê Bundesligayê bû. Paşê 4 mîlyon euro ji pereyê xwe da da ku 450.000 kesan li Afrîkaya Rojhilat ava paqij bibînin — di dema kariyera xwe de, ne paşê. Sifir lêçûnên rêveberiyê. Ew têkiliya tecrûbeya koçberiya xwe bi çalakiya avakêşan ve girê dide. — Ez heta klûb veberhêna Rheinmetall kir, alîgirê BVB bûm. Piştî wê ew klûbek wekî her klûbek din bû.',
     idol_torvalds_p: 'Linux ji serkeşî û rastbûnê ava kir. Delîl ku xebata vekirî, bi sebir û bê xweşikbûn cîhanê zêdetir ji her pêşkêşkirinê diguhure.',
