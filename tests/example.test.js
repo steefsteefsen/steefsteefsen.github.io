@@ -48,7 +48,7 @@ const HTML_KEYS = [
   'support_mge_link', 'support_mge_p', 'support_vca_p', 'support_visit',
   'tool_bitwarden_p', 'tool_claudecode_p', 'tool_donate',
   'tool_firefox_p', 'tool_gitlab_p', 'tool_linuxmint_p',
-  'tool_ollama_p', 'tool_pycharm_p', 'tool_thunderbird_p', 'tool_visit', 'tool_vlc_p',
+  'tool_ollama_p', 'tool_pycharm_p', 'tool_python_p', 'tool_thunderbird_p', 'tool_visit', 'tool_vlc_p',
   'val_connection', 'val_connection_p',
   'val_cultivation', 'val_cultivation_p',
   'val_inclusion', 'val_inclusion_p',
