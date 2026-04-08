@@ -8,6 +8,7 @@ stages:
   - test
   - security
   - mirror
+  - deploy-verify
 
 variables:
   SITE_URL: "https://steefsteefsen.github.io"
@@ -169,6 +170,38 @@ jest-unit:
       coverage_report:
         coverage_format: cobertura
         path: logs/coverage/cobertura-coverage.xml
+  allow_failure: false
+
+# ── CD: smoke-test live GitHub Pages deployment ───
+smoke-test-live:
+  stage: deploy-verify
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - apk add --no-cache curl
+    - |
+      echo "=== Smoke-testing live site: $SITE_URL ==="
+      for page in "" "/invest.html" "/impressum.html" "/open-letter.html" "/open-letter-watzke.html"; do
+        url="$SITE_URL$page"
+        status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$url")
+        if [ "$status" = "200" ]; then
+          echo "OK $url -> $status"
+        else
+          echo "FAIL $url -> $status (expected 200)"
+          exit 1
+        fi
+      done
+    - |
+      echo "=== Verifying i18n.js is reachable ==="
+      status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$SITE_URL/i18n.js")
+      if [ "$status" = "200" ]; then
+        echo "OK i18n.js -> $status"
+      else
+        echo "FAIL i18n.js -> $status"
+        exit 1
+      fi
   allow_failure: false
 
 # ── Mirror to GitHub (after pipeline passes) ───
