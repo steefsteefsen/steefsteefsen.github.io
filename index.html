@@ -149,6 +149,76 @@
     font-weight: 400;
   }
 
+  .hero-nicknames {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1.25rem auto 1.5rem;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 1s 0.55s ease forwards;
+  }
+
+  .nickname-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nickname-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.85rem;
+    border: 1.5px solid var(--clay);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--clay);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nickname-pill:hover,
+  .nickname-pill.open {
+    background: var(--clay);
+    color: var(--cream);
+  }
+
+  .nickname-pill svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .nickname-pill.open svg {
+    transform: rotate(180deg);
+  }
+
+  .nickname-detail {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .nickname-detail p {
+    margin: 0.5rem 0 0.25rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    color: var(--stone);
+    line-height: 1.7;
+    background: rgba(201,169,110,0.07);
+    border-left: 2px solid var(--clay);
+    border-radius: 0 4px 4px 0;
+    text-align: left;
+    max-width: 340px;
+  }
+
   .hero-line {
     width: 60px;
     height: 1.5px;
@@ -979,6 +1049,53 @@
     Stefan-Olav Hüllinghorst
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
   </h1>
+  <div class="hero-nicknames">
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steef" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steef'">
+        Steef
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Abgeleitet von Stefan — angelehnt an Steve Stiffler aus <em>American Pie</em>. Im Jahrgang '85 gab es so viele Stefans, dass Spitznamen Pflicht wurden.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steefie" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steefie'">
+        Steefie
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Vergabe steht noch aus — der Name kam von zwei Freundinnen aus früheren Zeiten, deren Einverständnis noch fehlt.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Karibik" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Karibik'">
+        Karibik
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Vergeben von Torben, meinem Mitspieler bei der zweiten Mannschaft, nachdem ich drei Monate lang in Pula, Kroatien gearbeitet hatte. Zurück kam ich mit Sonne im Gesicht und dem Feeling eines endlosen Sommers — seitdem: Karibik.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Iceman" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Iceman'">
+        Iceman
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Entstanden im Siggi in Bielefeld und in Clubs — wenn ich auf der Tanzfläche voll in der Musik war, aber keine Interaktion mit Frauen gesucht habe. Eiskalte Konzentration, null Ablenkung.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Weihemstepham" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Weihemstepham'">
+        Weihemstepham
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Aus der Zeit in Mettmann, geprägt durch persischen Einfluss im Freundeskreis. Der Name klingt wie eine Mischung aus Weihenstephan und Stefan — und passte irgendwie. Das Motto dazu: <em>„Details"</em> — gesagt, wenn jemand zu viel redet und die Essenz fehlt.</p>
+      </div>
+    </div>
+  </div>
   <div class="hero-line"></div>
   <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
   <div class="scroll-hint">
