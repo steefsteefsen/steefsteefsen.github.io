@@ -94,7 +94,7 @@ describe('#idols section content', () => {
   const EXPECTED_IDOLS = [
     'Linus Torvalds', 'Megaloh', 'SSIO', 'Neven Subotic',
     'Albert Einstein', 'Sokrates', 'Platon', 'Edward Snowden',
-    'Jimmy Wales', 'Dalai Lama', 'Leonard Cohen', 'Paula Herber',
+    'Jimmy Wales', 'Dalai Lama', 'Leonard Cohen', 'Paula Herber', 'Nina Simone',
   ];
 
   test.each(EXPECTED_IDOLS)('card for "%s" is present', (name) => {
