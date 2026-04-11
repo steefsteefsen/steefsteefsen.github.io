@@ -132,6 +132,7 @@ const translations = {
     idol_akin_p: 'Hamburg. Türkisch-Deutsch. Zwischen zwei Welten und beiden vollständig zugehörig. *Gegen die Wand* hat etwas Echtes getroffen — Wut, Liebe, Identität, das ganze Durcheinander. Er dreht Filme von dort, wo er wirklich steht, nicht von wo es bequem wäre zu stehen.',
     idol_cohen_p: 'Poet, Romancier, Songwriter. Er schrieb über Liebe, Verlust, Glauben und Scheitern mit einer Präzision, die Klischees unmöglich machte. *Hallelujah* brauchte Jahre zum Schreiben und Jahrzehnte, um verstanden zu werden. Sein letztes Album erschien drei Wochen vor seinem Tod. Manche Menschen arbeiten bis zum Ende — nicht aus Zwang, sondern weil die Arbeit der Sinn ist.',
     idol_birkenbiehl_p: 'Deutsche Autorin, Rednerin und Lernexpertin. Sie verbrachte ihr Leben damit, die Idee zu demontieren, dass Intelligenz festgelegt ist — und argumentierte, dass das Gehirn ein Muskel ist, keine Rangfolge. Sie machte komplexe Ideen zugänglich, ohne sie zu vereinfachen. Das ist schwieriger als es aussieht, und seltener als es sein sollte.',
+    idol_herber_p: 'Meine Professorin an der TU Berlin, heute an der Universität Münster. Formale Verifikation, eingebettete Systeme, Strenge als Methode. Sie hat mir gezeigt, wie es aussieht, wenn jemand etwas baut, das wirklich hält — in Software und im Denken.',
     // Artists & Local
     artists_h3: 'Künstler, die ich unterstütze',
     artist_greyscale_p: 'DJ und Produzentin aus Bielefeld — treibender, hypnotischer Techno mit düsterem Rand und einem Hauch Rebellion. Klassischer Musikhintergrund, elektronisches Herz. Wir machen gemeinsam Musik.',
@@ -270,6 +271,7 @@ const translations = {
     idol_akin_p: 'Hamburg. Turkish-German. Between worlds and belonging fully to both. *Gegen die Wand* hit something real — rage, love, identity, the mess of it all. He makes films from where he actually stands, not from where it\'s comfortable to stand.',
     idol_cohen_p: 'Poet, novelist, songwriter. He wrote about love, loss, faith, and failure with a precision that made clichés impossible. *Hallelujah* took years to write and decades to be understood. He released his final album three weeks before he died. Some people work until the end — not out of compulsion, but because the work is the point.',
     idol_birkenbiehl_p: 'German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.',
+    idol_herber_p: 'My professor at TU Berlin, now at the University of Münster. Formal verification, embedded systems, rigour as a method. She showed me what it looks like when someone builds something that actually holds — in software and in thought.',
     // Artists & Local
     artists_h3: 'Artists I Support',
     artist_greyscale_p: 'Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. We make music together.',

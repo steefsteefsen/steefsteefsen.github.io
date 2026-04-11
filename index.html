@@ -1529,6 +1529,18 @@
       </div>
     </div>
     <div class="value-card reveal" x-data="{open:false}">
+      <span class="icon">&#128300;</span>
+      <h3>Prof. Dr. Paula Herber</h3>
+      <p data-i18n="idol_herber_p">My professor at TU Berlin, now at the University of Münster. Formal verification, embedded systems, rigour as a method. She showed me what it looks like when someone builds something that actually holds — in software and in thought.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Quality assurance for intelligent embedded systems — making sure that what we build actually works."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Paula Herber, <a href="https://www.uni-muenster.de/EmbSys/team/herber/index.shtml" target="_blank" style="color:var(--clay);">Universität Münster</a></cite></blockquote>
+      </div>
+    </div>
+    <div class="value-card reveal" x-data="{open:false}">
       <span class="icon">&#129504;</span>
       <h3>Vera F. Birkenbihl</h3>
       <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
