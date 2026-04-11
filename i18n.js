@@ -91,6 +91,9 @@ const translations = {
     tool_bitwarden_p: 'Open-Source-Passwortmanager — sicher, auditiert und selbst hostbar. Die einzig vernünftige Antwort auf Passwort-Wiederverwendung.',
     tool_ollama_p: 'Große Sprachmodelle lokal ausführen — privat, offline, ohne API-Schlüssel. Der sauberste Weg, KI zu nutzen, ohne seine Daten preiszugeben.',
     tool_python_p: 'Die Sprache, die nicht im Weg steht. Klar, lesbar und mächtig genug für alles — von schnellen Skripten bis zu Produktionssystemen. Frei, quelloffen, von der Gemeinschaft getragen.',
+    tool_duckdns_p: 'Kostenloser dynamischer DNS-Dienst — gibt dem Heimserver einen stabilen Hostnamen, auch bei wechselnder IP-Adresse. Keine Registrierung nötig, nur ein OAuth-Login.',
+    tool_ubuntuserver_p: 'Die Standardwahl unter Linux für selbst gehostete Dienste — LTS-Versionen mit Langzeit-Support, starke Community und ein riesiges Paket-Ökosystem. Für immer kostenlos.',
+    tool_raspberrypi_p: 'Ein kreditkartengroßer Einplatinen-Computer, der Home-Server, Media-Center oder lokale KI-Stacks betreibt — zum Preis eines Buchs.',
     tool_visit: 'Besuchen',
     tool_donate: 'Spenden',
     // Support
@@ -226,6 +229,9 @@ const translations = {
     tool_bitwarden_p: 'Open-source password manager — secure, audited, and self-hostable. The only sensible answer to password reuse.',
     tool_ollama_p: 'Run large language models locally — private, offline, no API keys. The cleanest way to use AI without giving your data away.',
     tool_python_p: 'The language that gets out of your way. Clear, readable, and powerful enough for everything from quick scripts to production systems. Free, open-source, community-driven.',
+    tool_duckdns_p: 'Free dynamic DNS service — gives your home server a stable hostname even with a changing IP address. No account required beyond an OAuth login.',
+    tool_ubuntuserver_p: 'The go-to Linux distribution for self-hosted services — long-term support releases, strong community, and a massive package ecosystem. Free forever.',
+    tool_raspberrypi_p: 'A credit-card-sized single-board computer powerful enough to run a home server, media centre, or local AI stack — at roughly the price of a book.',
     tool_visit: 'Visit',
     tool_donate: 'Donate',
     // Support
