@@ -21,7 +21,7 @@ const { translations, LANG_NAMES, applyLanguage, initLanguageSwitcher } = requir
 // Regenerate with:
 //   grep -o 'data-i18n="[^"]*"' index.html | sed 's/data-i18n="//;s/"//' | sort -u
 const HTML_KEYS = [
-  'artist_greyscale_p', 'artist_placeholder_p', 'artist_sandra_p', 'artists_h3',
+  'artist_consent_pending', 'artist_greyscale_p', 'artist_placeholder_p', 'artist_sandra_p', 'artists_h3',
   'book_btn', 'book_date', 'book_email', 'booking_soon', 'book_name', 'book_time', 'book_topic',
   'built_h2', 'built_label', 'built_p',
   'contact_h2', 'contact_label', 'contact_p',
@@ -159,6 +159,7 @@ describe('translation quality — untranslated English copy-paste detection', ()
   // Keys intentionally kept as English fallbacks pending translation.
   // Remove a key from this list once it has been translated into all languages.
   const PENDING_TRANSLATION = new Set([
+    'artist_consent_pending',
     'idol_herber_p',
     'idol_simone_p',
     'tool_duckdns_p',
