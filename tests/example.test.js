@@ -48,7 +48,7 @@ const HTML_KEYS = [
   'support_mge_link', 'support_mge_p', 'support_vca_p', 'support_visit',
   'tool_bitwarden_p', 'tool_claudecode_p', 'tool_donate',
   'tool_duckdns_p', 'tool_firefox_p', 'tool_gitlab_p', 'tool_linuxmint_p',
-  'tool_ollama_p', 'tool_pycharm_p', 'tool_python_p', 'tool_raspberrypi_p',
+  'tool_nextcloud_p', 'tool_ollama_p', 'tool_pycharm_p', 'tool_python_p', 'tool_raspberrypi_p',
   'tool_thunderbird_p', 'tool_ubuntuserver_p', 'tool_visit', 'tool_vlc_p',
   'val_connection', 'val_connection_p',
   'val_cultivation', 'val_cultivation_p',
@@ -163,6 +163,7 @@ describe('translation quality — untranslated English copy-paste detection', ()
     'idol_herber_p',
     'idol_simone_p',
     'tool_duckdns_p',
+    'tool_nextcloud_p',
     'tool_ubuntuserver_p',
     'tool_raspberrypi_p',
   ]);
