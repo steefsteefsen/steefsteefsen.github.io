@@ -104,7 +104,35 @@ describe('#idols section content', () => {
   });
 });
 
-// ── 9. Alpine CDN scripts present in raw HTML ─────────────────────────────────
+// ── 9. Idol grid mobile safety ───────────────────────────────────────────────
+// grid-auto-rows:1fr collapses cards to zero height on mobile (1-column layout)
+
+describe('#idols grid mobile safety', () => {
+  test('#idols .values-grid does not use grid-auto-rows:1fr in CSS', () => {
+    // Extract inline <style> blocks from raw HTML and check for the broken rule
+    const styleBlocks = html.match(/<style[^>]*>([\s\S]*?)<\/style>/gi) || [];
+    const css = styleBlocks.map(b => b.replace(/<\/?style[^>]*>/gi, '')).join('\n');
+
+    // Find the #idols .values-grid block and check it doesn't contain grid-auto-rows:1fr
+    const idolsGridRule = css.match(/#idols\s+\.values-grid\s*\{([^}]*)\}/);
+    if (idolsGridRule) {
+      expect(idolsGridRule[1]).not.toMatch(/grid-auto-rows\s*:\s*1fr/);
+    }
+    // Also check globally — this rule is unsafe in any single-column context
+    expect(css).not.toMatch(/#idols[^}]*grid-auto-rows\s*:\s*1fr/);
+  });
+
+  test('every .value-card in #idols has no inline height:0 or max-height:0', () => {
+    const section = document.querySelector('#idols');
+    const broken = Array.from(section.querySelectorAll('.value-card')).filter(card => {
+      const style = card.getAttribute('style') || '';
+      return /height\s*:\s*0/i.test(style) || /max-height\s*:\s*0/i.test(style);
+    });
+    expect(broken.length).toBe(0);
+  });
+});
+
+// ── 10. Alpine CDN scripts present in raw HTML ────────────────────────────────
 // (checked against raw HTML since scripts were stripped for DOM parsing)
 
 describe('required scripts', () => {
@@ -117,7 +145,7 @@ describe('required scripts', () => {
   });
 });
 
-// ── 10. Built-with section ────────────────────────────────────────────────────
+// ── 11. Built-with section ────────────────────────────────────────────────────
 
 describe('#built-with section content', () => {
   let section;
