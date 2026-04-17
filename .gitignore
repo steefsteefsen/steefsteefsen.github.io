@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets
+.env
+
+# Test logs and coverage (local only)
+logs/*.log
+logs/coverage/
+
+# Test dependencies (local only)
+tests/node_modules/
+
+# Misc
+*.log
+logs/
+
+# Session docs
+#docs/

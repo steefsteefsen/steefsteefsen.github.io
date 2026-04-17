@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Cultivation, philosophy, and vision — the personal page of Stefan-Olav Hüllinghorst.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain overlay ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+    transition: transform 0.4s ease;
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--moss);
+    transition: width 0.3s ease;
+  }
+
+  nav .nav-links a:hover { color: var(--bark); }
+  nav .nav-links a:hover::after { width: 100%; }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(90, 110, 74, 0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201, 169, 110, 0.09) 0%, transparent 70%),
+      var(--cream);
+  }
+
+  .hero-leaf {
+    position: absolute;
+    opacity: 0.045;
+    font-size: 18rem;
+    color: var(--moss);
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-leaf.left { top: 10%; left: -3rem; transform: rotate(-25deg); }
+  .hero-leaf.right { bottom: 5%; right: -2rem; transform: rotate(140deg); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.15;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s ease forwards;
+  }
+
+  .hero h1 span {
+    display: block;
+    font-style: italic;
+    font-size: 0.55em;
+    color: var(--moss);
+    margin-top: 0.3em;
+    font-weight: 400;
+  }
+
+  .hero-nicknames {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1.25rem auto 1.5rem;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 1s 0.55s ease forwards;
+  }
+
+  .nickname-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nickname-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.85rem;
+    border: 1.5px solid var(--clay);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--clay);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nickname-pill:hover,
+  .nickname-pill.open {
+    background: var(--clay);
+    color: var(--cream);
+  }
+
+  .nickname-pill svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .nickname-pill.open svg {
+    transform: rotate(180deg);
+  }
+
+  .nickname-detail {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .nickname-detail p {
+    margin: 0.5rem 0 0.25rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    color: var(--stone);
+    line-height: 1.7;
+    background: rgba(201,169,110,0.07);
+    border-left: 2px solid var(--clay);
+    border-radius: 0 4px 4px 0;
+    text-align: left;
+    max-width: 340px;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1.5px;
+    background: var(--clay);
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s ease forwards;
+  }
+
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--stone);
+    margin: 0 auto 1.75rem;
+    max-width: 480px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1s 0.65s ease forwards;
+  }
+
+  .hero-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--clay);
+    margin-top: 0.4rem;
+  }
+
+  .hero p {
+    max-width: 540px;
+    font-size: 1.1rem;
+    color: var(--stone);
+    line-height: 1.85;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s ease forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s ease forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+  }
+
+  .scroll-hint .arrow {
+    width: 1px;
+    height: 32px;
+    background: var(--clay);
+    position: relative;
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: 7rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--bark);
+    margin-bottom: 2rem;
+    line-height: 1.25;
+  }
+
+  section p {
+    font-size: 1.05rem;
+    color: var(--stone);
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+  }
+
+  /* ── Philosophy ── */
+  #philosophy {
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+  }
+
+  .quote-block {
+    margin: 3rem 0;
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    border-left: 3px solid var(--clay);
+    background: linear-gradient(135deg, rgba(201, 169, 110, 0.06), transparent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-style: italic;
+    color: var(--bark);
+    line-height: 1.55;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-style: normal;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    background: rgba(245, 240, 232, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+
+  .value-card .icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .value-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .value-card p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* Idol cards — collapsible extra content */
+  #idols .values-grid {
+    align-items: start;
+  }
+
+  .card-collapsed {
+    overflow: hidden;
+  }
+
+  .card-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clay);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+  }
+
+  .card-more-btn:hover {
+    color: var(--bark);
+  }
+
+  .card-more-btn svg {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .card-more-btn.open svg {
+    transform: rotate(180deg);
+  }
+
+  /* ── Projects ── */
+  #projects { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .project-item {
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .project-item:hover { transform: translateY(-3px); }
+
+  .project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--moss), var(--clay));
+    border-radius: 4px 0 0 4px;
+  }
+
+  .project-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    background: rgba(90, 110, 74, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-item p {
+    font-size: 0.95rem;
+    color: var(--stone);
+    max-width: 600px;
+    margin-bottom: 0;
+  }
+
+  /* ── Journey ── */
+  #journey { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .timeline {
+    margin-top: 3rem;
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--clay), rgba(201, 169, 110, 0.1));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--clay);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
+  }
+
+  .timeline-year {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--moss);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  .journey-intro {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--bark);
+    line-height: 1.85;
+    max-width: 680px;
+    font-style: italic;
+  }
+
+  /* ── Idols ── */
+  #idols { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  /* ── Contact ── */
+  #contact {
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+    text-align: center;
+  }
+
+  #contact h2 { margin-left: auto; margin-right: auto; }
+  #contact p { margin-left: auto; margin-right: auto; }
+  #contact .section-label { justify-content: center; }
+  #contact .section-label::before { display: none; }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.8rem;
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--bark);
+    font-size: 0.88rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .contact-link:hover {
+    background: var(--bark);
+    color: var(--cream);
+    border-color: var(--bark);
+    transform: translateY(-2px);
+  }
+
+  .contact-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* ── Built With & Support ── */
+  #built-with, #support { border-top: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .tool-card {
+    padding: 1.8rem;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    background: rgba(245, 240, 232, 0.4);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+
+  .tool-card .tool-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .tool-card .tool-icon img {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: contain;
+    display: block;
+  }
+
+  .tool-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.3rem;
+  }
+
+  .tool-card p {
+    font-size: 0.82rem;
+    color: var(--stone);
+    margin-bottom: 0.8rem;
+  }
+
+  .tool-link {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+    text-decoration: none;
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--moss);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .tool-link:hover {
+    background: var(--moss);
+    color: var(--cream);
+  }
+
+  .support-card {
+    max-width: 600px;
+    margin: 2.5rem auto 0;
+    padding: 2.5rem;
+    border-radius: 12px;
+    background: var(--sand);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .support-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--moss), var(--clay));
+  }
+
+  /* Category color accents */
+  .support-card--cause::before  { background: linear-gradient(to right, var(--moss), var(--moss-light)); }
+  .support-card--artist::before { background: linear-gradient(to right, var(--clay), #e8b87a); }
+  .support-card--local::before  { background: linear-gradient(to right, var(--stone), var(--bark)); }
+
+  .support-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .support-card p {
+    font-size: 0.95rem;
+    color: var(--stone);
+    margin: 0 auto 1.5rem;
+    max-width: 480px;
+  }
+
+  .support-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--moss);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+
+  .support-link:hover {
+    background: var(--bark);
+    transform: translateY(-2px);
+  }
+
+  .support-subsection {
+    max-width: 600px;
+    margin: 3.5rem auto 0;
+    text-align: center;
+  }
+
+  .support-subsection-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--stone);
+    letter-spacing: 0.06em;
+    text-transform: none;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+    padding-bottom: 0.6rem;
+  }
+
+  /* ── Footnotes ── */
+  .footnotes {
+    max-width: 680px;
+    margin: 5rem auto 0;
+    padding: 2rem 2rem 0;
+    border-top: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  .footnotes-title {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+    margin-bottom: 1.2rem;
+  }
+
+  .footnotes ol {
+    padding-left: 1.4rem;
+    margin: 0;
+  }
+
+  .footnotes li {
+    font-size: 0.78rem;
+    color: var(--stone);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .footnotes a {
+    color: var(--moss);
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+  }
+
+  sup.fn {
+    font-size: 0.65em;
+    vertical-align: super;
+    color: var(--moss);
+    font-weight: 500;
+    margin-left: 1px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+  }
+
+  /* ── Booking form ── */
+  .booking-notice {
+    margin-top: 2.5rem;
+  }
+
+  .booking-soon {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    background: rgba(90, 110, 74, 0.08);
+    border: 1px solid rgba(90, 110, 74, 0.2);
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .booking-form {
+    margin-top: 0;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--sand);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--moss);
+  }
+
+  .book-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--stone);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    cursor: not-allowed;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Language switcher ── */
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-current {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--stone);
+    cursor: pointer;
+    background: none;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .lang-current:hover {
+    color: var(--bark);
+    border-color: var(--clay);
+  }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--cream);
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px var(--shadow);
+    padding: 0.5rem;
+    z-index: 200;
+    min-width: 160px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+
+  .lang-switcher.open .lang-dropdown { display: flex; }
+
+  .lang-option {
+    font-size: 0.82rem;
+    color: var(--stone);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .lang-option:hover { background: var(--sand); color: var(--bark); }
+  .lang-option.active { color: var(--moss); font-weight: 500; }
+
+  /* ── AI translation notice ── */
+  #ai-translation-notice {
+    display: none;
+    background: rgba(201, 169, 110, 0.12);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--stone);
+    padding: 0.6rem 1.2rem;
+    margin: 0 auto;
+    max-width: 900px;
+    margin-top: 5rem;
+  }
+
+  /* ── RTL support ── */
+  [dir="rtl"] .section-label::before { display: none; }
+  [dir="rtl"] .section-label::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+  [dir="rtl"] .timeline { padding-left: 0; padding-right: 2.5rem; }
+  [dir="rtl"] .timeline::before { left: auto; right: 0; }
+  [dir="rtl"] .timeline-item::before { left: auto; right: -2.5rem; }
+  [dir="rtl"] .project-item::before { left: auto; right: 0; border-radius: 0 4px 4px 0; }
+  [dir="rtl"] .booking-form { text-align: right; }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    nav .nav-links { gap: 1rem; }
+    nav .nav-links a { font-size: 0.72rem; }
+    section { padding: 4.5rem 1.5rem; }
+    .quote-block { padding: 1.5rem 1.5rem 1.5rem 2rem; }
+    .quote-block blockquote { font-size: 1.25rem; }
+    .contact-links { flex-direction: column; align-items: center; }
+    .lang-dropdown { right: auto; left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="logo">S.O. Hüllinghorst</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
+    <li><a href="#built-with" data-i18n="nav_built_with">Built With</a></li>
+    <li><a href="invest.html" target="_blank" data-i18n="nav_invest">Invest</a></li>
+    <li><a href="#idols" data-i18n="nav_idols">Idols</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-switcher" id="lang-switcher">
+    <button type="button" class="lang-current" id="lang-current-btn">EN</button>
+    <div class="lang-dropdown" id="lang-dropdown">
+      <button type="button" class="lang-option" data-lang="de">Deutsch</button>
+      <button type="button" class="lang-option" data-lang="en">English</button>
+      <button type="button" class="lang-option" data-lang="it">Italiano</button>
+      <button type="button" class="lang-option" data-lang="fr">Français</button>
+      <button type="button" class="lang-option" data-lang="es">Español</button>
+      <button type="button" class="lang-option" data-lang="pt">Português</button>
+      <button type="button" class="lang-option" data-lang="da">Dansk</button>
+      <button type="button" class="lang-option" data-lang="uk">Українська</button>
+      <button type="button" class="lang-option" data-lang="ru">Русский</button>
+      <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+      <button type="button" class="lang-option" data-lang="he">עברית</button>
+      <button type="button" class="lang-option" data-lang="ar">العربية</button>
+      <button type="button" class="lang-option" data-lang="fa">فارسی</button>
+      <button type="button" class="lang-option" data-lang="zh">中文</button>
+      <button type="button" class="lang-option" data-lang="ja">日本語</button>
+      <button type="button" class="lang-option" data-lang="ko">한국어</button>
+      <button type="button" class="lang-option" data-lang="ku">Kurdî</button>
+    </div>
+  </div>
+</nav>
+
+<div id="ai-translation-notice">
+  ⚠ This translation was generated by AI and has not yet been reviewed by a native speaker. If you can help review it, please reach out: stefan@huellinghorst.info
+</div>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-leaf left">&#127807;</div>
+  <div class="hero-leaf right">&#127807;</div>
+  <h1>
+    Stefan-Olav Hüllinghorst
+    <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
+  </h1>
+  <div class="hero-nicknames">
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steef" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steef'">
+        Steef
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Abgeleitet von Stefan — angelehnt an Steve Stiffler aus <em>American Pie</em>. Im Jahrgang '85 gab es so viele Stefans, dass Spitznamen Pflicht wurden.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steefie" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steefie'">
+        Steefie
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Vergabe steht noch aus — der Name kam von zwei Freundinnen aus früheren Zeiten, deren Einverständnis noch fehlt.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Karibik" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Karibik'">
+        Karibik
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Vergeben von Torben, meinem Mitspieler bei <em>Die Zwote</em><sup class="fn">16</sup> — einer Institution aus Enger-Steinbeck bei Bielefeld — nachdem ich drei Monate lang in Pula, Kroatien gearbeitet hatte. Zurück kam ich mit Sonne im Gesicht und dem Feeling eines endlosen Sommers — seitdem: Karibik.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Iceman" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Iceman'">
+        Iceman
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Entstanden im Siggi in Bielefeld und in Clubs — wenn ich auf der Tanzfläche voll in der Musik war, aber keine Interaktion mit Frauen gesucht habe. Eiskalte Konzentration, null Ablenkung.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Weihemstepham" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Weihemstepham'">
+        Weihemstepham
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Aus der Zeit in Mettmann, geprägt durch persischen Einfluss im Freundeskreis. Der Name klingt wie eine Mischung aus Weihenstephan und Stefan — und passte irgendwie. Das Motto dazu: <em>„Details"</em> — gesagt, wenn jemand zu viel redet und die Essenz fehlt.</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-line"></div>
+  <blockquote class="hero-quote">
+    Am Hintern wird die Ente fett.
+    <cite>— Sabine &amp; Rolf Hüllinghorst</cite>
+  </blockquote>
+  <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
+  <div class="scroll-hint">
+    <span data-i18n="hero_scroll">Explore</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- Philosophy -->
+<section id="philosophy">
+  <div class="reveal">
+    <div class="section-label" data-i18n="philosophy_label">Philosophy</div>
+    <h2 data-i18n="philosophy_h2">What I Believe</h2>
+    <p data-i18n="philosophy_p1">I believe the best things grow slowly. Whether cultivating a garden, an idea, or a business — sustainable growth requires patience, deep roots, and an honest relationship with the soil you work in.</p>
+
+    <div class="quote-block">
+      <blockquote data-i18n="philosophy_quote">"He who plants a tree plants a hope."</blockquote>
+      <cite data-i18n="philosophy_cite">— Lucy Larcom</cite>
+    </div>
+
+    <p data-i18n="philosophy_p2">My approach is shaped by the conviction that lasting value comes from understanding systems deeply, nurturing what matters, and building with integrity.</p>
+
+    <div class="quote-block">
+      <blockquote data-i18n="retrogott_quote">„Geld löst Verhaltensveränderungen aus und auf einmal gehen dich beschützende Männer um dein Haus."</blockquote>
+      <cite data-i18n="retrogott_cite">— Retrogott</cite>
+    </div>
+  </div>
+
+  <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="icon">&#127793;</span>
+      <h3 data-i18n="val_cultivation">Cultivation</h3>
+      <p data-i18n="val_cultivation_p">Treating every venture as a living system — feed it well, give it light, and have the patience to let it grow.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129704;</span>
+      <h3 data-i18n="val_sustainability">Sustainability</h3>
+      <p data-i18n="val_sustainability_p">Building for decades, not quarters. Decisions rooted in long-term health over short-term extraction.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#127758;</span>
+      <h3 data-i18n="val_connection">Connection</h3>
+      <p data-i18n="val_connection_p">Everything is interconnected. The strongest systems are built through trust, transparency, and mutual benefit.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129309;</span>
+      <h3 data-i18n="val_inclusion">Inclusion</h3>
+      <p data-i18n="val_inclusion_p">The table should be bigger. Good ideas come from everywhere — not just from the usual rooms. Building systems that make space for people who are usually left out.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label" data-i18n="projects_label">Projects</div>
+    <h2 data-i18n="projects_h2">What I'm Growing</h2>
+    <p data-i18n="projects_p">A selection of initiatives and ventures that reflect my values and vision.</p>
+  </div>
+
+  <div class="project-list">
+    <div class="project-item reveal">
+      <div class="project-tag" data-i18n="proj1_tag">Current Focus</div>
+      <h3>selbstIstDerMensch.io</h3>
+      <p data-i18n="proj1_p">A home for people with genuine ideas and the right attitude — patient, principled, and oriented toward something that lasts. We work with founders who understand that sustainable growth is not a constraint but a foundation.</p>
+    </div>
+    <div class="project-item reveal">
+      <div class="project-tag" data-i18n="proj2_tag">In Development</div>
+      <h3>diedorismachtdasgift.io</h3>
+      <p data-i18n="proj2_p">A platform offering low-threshold support for people struggling with gambling, alcohol, nicotine, and other substances used in ways that harm themselves or the people around them. Currently looking for beta testers — I am one myself.</p>
+      <p style="margin-top:0.8rem;font-size:0.88rem;" data-i18n-html="proj2_legal">The platform will be structured as a <strong>gGmbH or gUG</strong> — a German nonprofit entity. A funding campaign is in preparation to cover the formation costs (~€12,000), advised by <a href="https://www.winheller.com" target="_blank" style="color:var(--moss);text-decoration:none;border-bottom:1px solid rgba(90,110,74,0.3);">WINHELLER Rechtsanwaltsgesellschaft mbH</a>, Frankfurt am Main, who have proposed to support the company formation, data protection framework, and ongoing compliance. One of the intended funding sources is the <strong>Lotto-Stiftung Berlin</strong>.</p>
+    </div>
+    <div class="project-item reveal">
+      <div class="project-tag" data-i18n="proj3_tag">Vision</div>
+      <h3>careergraph.io &amp; beyond</h3>
+      <p data-i18n="proj3_p">Several platforms where I look for the right CEOs and CTOs — people who can handle directness and grow with it. careergraph.io waits for the right co-founder: someone I can do this journey with. mbthree.io belongs to someone else and her family; I hope to earn a place in that story. And somewhere in between, I want to be a DJ in an aware context — ideally at Tipping Point.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Journey -->
+<section id="journey">
+  <div class="reveal">
+    <div class="section-label" data-i18n="journey_label">Journey</div>
+    <h2 data-i18n="journey_h2">Where I've Been</h2>
+    <p data-i18n="journey_p">The path that shaped my thinking and brought me here.</p>
+    <p class="journey-intro" data-i18n="journey_intro">Der Name Hüllinghorst kommt von einem Hof. Horst hat unter dem Meier auf dem Hof von Hülling gearbeitet — das ist, wo ich herkomme. Ich habe Häuser restauriert, im Garten gearbeitet, Menschen mit Behinderung gepflegt. Als Chefkoch in Kroatien, Italien und Frankreich. In einer Spedition, in einem Lager. Ich weiß, wie die Welt aussieht. Ich bin ein Macher — das hab ich mit Megaloh gemeinsam.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-year" data-i18n="journey1_year">TU Berlin</div>
+      <h3 data-i18n="journey1_h3">Master of Science</h3>
+      <p data-i18n="journey1_p">I studied mostly among men, having grown up with three older sisters. The contrast was formative. What stayed was something more valuable than the degree: the ability to think scientifically, trust evidence, and question assumptions — including my own.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year" data-i18n="journey2_year">Three Years</div>
+      <h3 data-i18n="journey2_h3">Insolvency</h3>
+      <p data-i18n="journey2_p">Three years without money. It is not a chapter I am ashamed of — it is one I learned more from than almost anything else. Scarcity teaches you what actually matters and what you were just carrying out of habit.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year" data-i18n="journey3_year">Mondiali</div>
+      <h3 data-i18n="journey3_h3">Die Zwote &amp; the Mondiali Antirazzisti</h3>
+      <p data-i18n="journey3_p">My team won the Mondiali Antirazzisti in my absence. I am genuinely proud of every person who made that happen. I am also still thinking critically about the role alcohol played in the money we raised for charity — some contradictions deserve to stay open.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Built With -->
+<section id="built-with">
+  <div class="reveal">
+    <div class="section-label" data-i18n="built_label">Built With</div>
+    <h2 data-i18n="built_h2">Tools I Trust</h2>
+    <p data-i18n="built_p">This page was built entirely with free and open-source software — plus one AI assistant. Consider supporting these projects.</p>
+  </div>
+
+  <div class="tools-grid reveal">
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/claude.svg" alt="Claude Code"></span>
+      <h3>Claude Code</h3>
+      <p data-i18n="tool_claudecode_p">AI coding assistant by Anthropic</p>
+      <a href="https://claude.ai" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/firefox.svg" alt="Firefox"></span>
+      <h3>Firefox</h3>
+      <p data-i18n="tool_firefox_p">The independent, privacy-first browser</p>
+      <a href="https://foundation.mozilla.org/donate/" target="_blank" class="tool-link" data-i18n="tool_donate">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/thunderbird.svg" alt="Thunderbird"></span>
+      <h3>Thunderbird</h3>
+      <p data-i18n="tool_thunderbird_p">Open-source email, free forever</p>
+      <a href="https://www.thunderbird.net/en-US/donate/" target="_blank" class="tool-link" data-i18n="tool_donate">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/linuxmint.svg" alt="Linux Mint"></span>
+      <h3>Linux Mint</h3>
+      <p data-i18n="tool_linuxmint_p">Elegant, community-driven operating system</p>
+      <a href="https://linuxmint.com/donors.php" target="_blank" class="tool-link" data-i18n="tool_donate">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/pycharm.svg" alt="PyCharm"></span>
+      <h3>PyCharm</h3>
+      <p data-i18n="tool_pycharm_p">Professional IDE by JetBrains</p>
+      <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/vlc.png" alt="VLC Media Player"></span>
+      <h3>VLC Media Player</h3>
+      <p data-i18n="tool_vlc_p">Free, open-source media player that plays everything. No codecs, no nonsense — just works.</p>
+      <a href="https://www.videolan.org/contribute.html" target="_blank" class="tool-link" data-i18n="tool_donate">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/gitlab.svg" alt="GitLab"></span>
+      <h3>GitLab</h3>
+      <p data-i18n="tool_gitlab_p">Open-source DevOps platform — CI/CD, issue tracking, and code review in one place. The backbone of this project's pipeline.</p>
+      <a href="https://gitlab.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/bitwarden.svg" alt="Bitwarden"></span>
+      <h3>Bitwarden</h3>
+      <p data-i18n="tool_bitwarden_p">Open-source password manager — secure, audited, and self-hostable. The only sensible answer to password reuse.</p>
+      <a href="https://bitwarden.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/ollama.svg" alt="Ollama"></span>
+      <h3>Ollama</h3>
+      <p data-i18n="tool_ollama_p">Run large language models locally — private, offline, no API keys. The cleanest way to use AI without giving your data away.</p>
+      <a href="https://ollama.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/python.svg" alt="Python"></span>
+      <h3>Python</h3>
+      <p data-i18n="tool_python_p">The language that gets out of your way. Clear, readable, and powerful enough for everything from quick scripts to production systems. Free, open-source, community-driven.</p>
+      <a href="https://www.python.org" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/duckdns.png" alt="DuckDNS"></span>
+      <h3>DuckDNS</h3>
+      <p data-i18n="tool_duckdns_p">Free dynamic DNS service — gives your home server a stable hostname even with a changing IP address. No account required beyond an OAuth login.<sup class="fn">12</sup></p>
+      <a href="https://www.duckdns.org" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/ubuntu.svg" alt="Ubuntu Server"></span>
+      <h3>Ubuntu Server</h3>
+      <p data-i18n="tool_ubuntuserver_p">The go-to Linux distribution for self-hosted services — long-term support releases, strong community, and a massive package ecosystem. Free forever.<sup class="fn">13</sup></p>
+      <a href="https://ubuntu.com/server" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/raspberrypi.svg" alt="Raspberry Pi"></span>
+      <h3>Raspberry Pi</h3>
+      <p data-i18n="tool_raspberrypi_p">A credit-card-sized single-board computer powerful enough to run a home server, media centre, or local AI stack — at roughly the price of a book.<sup class="fn">14</sup></p>
+      <a href="https://www.raspberrypi.org" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/nextcloud.svg" alt="Nextcloud"></span>
+      <h3>Nextcloud</h3>
+      <p data-i18n="tool_nextcloud_p">Self-hosted cloud platform — files, calendar, contacts, Kanban (Deck), and more. Full control over your data, no third-party access. The backbone of my personal productivity stack.</p>
+      <a href="https://nextcloud.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">&#127928;</span>
+      <h3>Mixxx</h3>
+      <p data-i18n="tool_mixx_p">Free, open-source DJ software for live mixing — BPM detection, key sync, hardware controller support, and four-deck mixing. No subscription, no company behind it — just DJs building for DJs.</p>
+      <a href="https://mixxx.org" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- I Support -->
+<section id="support">
+  <div class="reveal">
+    <div class="section-label" data-i18n="support_label">I Support</div>
+    <h2 data-i18n="support_h2">Causes That Matter</h2>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Mein Grundeinkommen</h3>
+    <p data-i18n="support_mge_p">A Berlin-based non-profit that crowdfunds and raffles unconditional basic incomes. Over 1,500 basic incomes have been paid out since 2014 — funded entirely by donations.<sup class="fn">6</sup></p>
+    <a href="https://www.mein-grundeinkommen.de" target="_blank" class="support-link" data-i18n="support_mge_link">
+      Learn more &amp; donate &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>GLS Bank</h3>
+    <p data-i18n="support_gls_p">Germany's first social and ecological bank — financing projects that matter: renewable energy, organic farming, education, and social initiatives. Banking as a conscious act.</p>
+    <a href="https://www.gls.de" target="_blank" class="support-link" data-i18n="support_learn_more">
+      Learn more &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Landstreicher Booking</h3>
+    <p data-i18n="support_landstreicher_p">An independent booking agency rooted in underground and alternative music culture. Supporting artists and spaces that keep the scene alive on its own terms.</p>
+    <a href="https://landstreicher-konzerte.de" target="_blank" class="support-link" data-i18n="support_visit">
+      Visit &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Chaos Computer Club</h3>
+    <p data-i18n="support_ccc_p">Europe's largest hacker association — advocating for digital rights, privacy, freedom of information, and the responsible use of technology since 1981.<sup class="fn">7</sup> A compass for anyone building in the digital world.</p>
+    <a href="https://www.ccc.de" target="_blank" class="support-link" data-i18n="support_visit">
+      Visit &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Codeberg</h3>
+    <p data-i18n="support_codeberg_p">A non-profit, community-driven home for free and open-source software — no surveillance, no ads, no corporate agenda. An alternative worth supporting.</p>
+    <a href="https://codeberg.org/Codeberg/Community/issues/1" target="_blank" class="support-link" data-i18n="support_donate">
+      Donate &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>LAION</h3>
+    <p data-i18n="support_laion_p">A German non-profit building large-scale open datasets for AI research — including LAION-5B, the dataset behind Stable Diffusion and much of the open AI ecosystem.<sup class="fn">8</sup> Founded by a Hamburg schoolteacher. 100% volunteer-driven. Without LAION, open-source AI training data would exist only behind corporate walls.</p>
+    <a href="https://laion.ai" target="_blank" class="support-link" data-i18n="support_learn_more">
+      Learn more &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Viva con Agua</h3>
+    <p data-i18n="support_vca_p">A Hamburg-based non-profit that brings clean drinking water to people worldwide — founded by former St. Pauli player Benjamin Adrion.<sup class="fn">9</sup> Art, music, and sport as tools for social change. Water as a human right, not a commodity.</p>
+    <a href="https://www.vivaconagua.org" target="_blank" class="support-link" data-i18n="support_visit">
+      Visit &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Ivory Therapy</h3>
+    <p data-i18n="support_ivory_p">A mental health platform on a mission to make therapy fast, accessible, and genuinely affordable — matching people with the right psychologist, not just any available slot. Mental health care should not be a privilege.</p>
+    <a href="https://ivory-therapy.com" target="_blank" class="support-link" data-i18n="support_visit">
+      Visit &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3 data-i18n="support_ddmg_h3">Support diedorismachtdasgift.io</h3>
+    <p data-i18n="support_ddmg_p">A free, anonymous platform for people struggling with addiction — funded by people who believe accessible help should have no price tag. GoFundMe campaign link coming soon.</p>
+    <a href="#projects" class="support-link" data-i18n="support_learn_more">
+      Learn more &#8594;
+    </a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Werrepiraten e.V.</h3>
+    <p>A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves.<sup class="fn">17</sup> Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.</p>
+    <a href="https://werrepiraten.org/" target="_blank" class="support-link">Visit &#8594;</a>
+    <a href="https://www.instagram.com/werrepiraten/" target="_blank" class="support-link">Instagram &#8594;</a>
+  </div>
+
+  <div class="support-subsection reveal">
+    <h3 class="support-subsection-title" data-i18n="artists_h3">Artists I Support</h3>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>Greyscale</h3>
+    <p data-i18n="artist_greyscale_p">Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. We make music together.</p>
+    <a href="https://soundcloud.com/greyscale" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
+    <a href="https://www.instagram.com/greyscale_blfld" target="_blank" class="support-link">Instagram &#8594;</a>
+    <a href="docs/steephie361_banner_v7.html" target="_blank" class="support-link" data-i18n="support_visit">steefsteefsen &amp; greyscale. &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>Sandra Frotscher</h3>
+    <p data-i18n="artist_sandra_p">Berlin-based visual artist and photographer. She works with the body, with presence, with what gets left unsaid. Sharp observation, quiet intensity — the kind of work that stays.</p>
+    <a href="https://www.sandrafrotscher.com" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>REYNEKE</h3>
+    <p>Berlin-based producer and live act — genrefluid electronic music with bounce, bass, and depth. Raised on classical guitar and reggae, rooted in the underground. Slower, darker, and more alive than most things on the dancefloor.</p>
+    <a href="https://soundcloud.com/reyneke" target="_blank" class="support-link">Listen &#8594;</a>
+    <a href="https://www.instagram.com/reynekemusic/" target="_blank" class="support-link">Instagram &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>S. Bass</h3>
+    <img src="docs/photo_2026-04-13_23-52-50.jpg" alt="S. Bass" style="width:100%;border-radius:6px;margin:0.6rem 0 0.8rem;display:block;">
+    <p><em data-i18n="artist_consent_pending">Waiting for consent.</em></p>
+  </div>
+
+  <div class="support-subsection reveal">
+    <h3 class="support-subsection-title" data-i18n="local_h3">Local Businesses I Support</h3>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Kaffeerösterei Kiezbohne</h3>
+    <p data-i18n="local_kiezbohne_p">Hand-roasted specialty coffee in Spandau. Nonnendammallee 91. Small-batch, craft, neighbourhood — the kind of place that takes coffee seriously without taking itself too seriously.</p>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Casa Certo</h3>
+    <p>Italian restaurant in Zürich's Strassburgstrasse 5 — seasonal cuisine, 100+ wines, and the warmth of a proper Italian kitchen transplanted to the city. Run by my man Nikos Voutsas and Severin Hössli. Your mini-holiday in the middle of Zürich.</p>
+    <a href="https://casa-certo.ch/" target="_blank" class="support-link">Visit &#8594;</a>
+    <a href="https://soundcloud.com/nikosvoutsas" target="_blank" class="support-link">Nikos on SoundCloud &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Restlos e.V.</h3>
+    <p>Food rescue collective in Bielefeld-Schildesche, founded by my man Furkan Karadag and Mustafa Budumlu.<sup class="fn">16</sup> Every day they save over 600 kg of food from the bin — bruised fruit, dented tins, approaching best-before dates — and sell it at their Rettermarkt on Johannisstraße 35 for whatever you can give. Saturday mornings they fire up a food truck outside: smoothies, Thai curry, coconut rice. All rescued. Non-profit, neighbourhood-rooted, no waste.</p>
+    <a href="https://restlos-ev.de/" target="_blank" class="support-link">Visit &#8594;</a>
+    <a href="https://www.instagram.com/restlos_bielefeld/" target="_blank" class="support-link">Instagram &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3 data-i18n="local_placeholder_h3">Waiting for consent</h3>
+    <p data-i18n="local_placeholder_p">There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.</p>
+  </div>
+</section>
+
+<!-- Idols -->
+<section id="idols">
+  <div class="reveal">
+    <div class="section-label" data-i18n="idols_label">Idols</div>
+    <h2 data-i18n="idols_h2">People Who Shaped My Thinking</h2>
+    <p data-i18n="idols_p">Not role models to copy — but minds that opened something.</p>
+  </div>
+
+  <div class="values-grid reveal">
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128039;</span>
+      <h3>Linus Torvalds</h3>
+      <p data-i18n="idol_torvalds_p">Built Linux out of stubbornness and precision. Proof that open, patient, unglamorous work changes the world more than any pitch deck.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Talk is cheap. Show me the code."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Linus Torvalds</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/o8NPllzkFhE?controls=0" title="Linus Torvalds — The Mind Behind Linux | TED" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#9994;</span>
+      <h3>Die Jungs vom 36</h3>
+      <p data-i18n="idol_boys36_p">After the Wall fell, Kreuzberg 36 was flooded with neo-nazis moving in from the East. The boys from SO36 didn't wait for the state. They cleared the streets themselves — systematically, block by block. Kreuzberg stayed Kreuzberg. Thank you.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — z.B. SO36-Doku, Kreuzberg-Archiv -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);display:flex;align-items:center;justify-content:center;">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Megaloh — der Malocher</h3>
+      <p data-i18n="idol_megaloh_p">German hip-hop with depth, craft, and integrity. He works. No shortcuts, no sellout. The music earns its place.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Deutscher Rap ist kein HipHop! Sondern unreflektierte kulturelle Aneignung!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Megaloh</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/p18jDhMZqIc?controls=0" title="Megaloh — Muss los (Offizielles Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>Mira — Berlin DJ</h3>
+      <p data-i18n="idol_mira_p">For what she builds in a room at night. Aware, precise, present. The kind of artist who knows that context is everything.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Set, Boiler Room o.ä. -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>SSIO — Ssiawosch Sadat</h3>
+      <p data-i18n="idol_ssio_p">Afghan-German rapper from Bonn, raised in Tannenbusch. One of the most uncompromising voices in German hip-hop — raw, self-contained, no brand deals. He builds a world out of words, completely on his own terms.<sup class="fn">11</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Du hast dich voll verändert, alle sagen das!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— SSIO</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/MJEgsRgP_Xk?controls=0" title="SSIO — Dein Leben ist gef***t (Official Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128167;</span>
+      <h3>Neven Subotic</h3>
+      <p data-i18n="idol_subotic_p">Fled a war as a child. Became a Bundesliga champion. Then donated 4 million euros of his own money to bring clean water to 450,000 people in East Africa — during his playing career, not after.<sup class="fn">1</sup> Zero administrative overhead. He connects lived experience of displacement to structural action. That is rare. — I was a BVB fan until the club invested in Rheinmetall. After that it became just another club.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I define myself more by my contribution to society. I want to make a difference — that's more important to me than any championship."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Neven Subotic</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Interview well:fair Stiftung -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#10024;</span>
+      <h3>Albert Einstein</h3>
+      <p data-i18n="idol_einstein_p">Curiosity as a life philosophy. He questioned what everyone accepted and trusted the process of thinking over the comfort of certainty.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Peace cannot be kept by force; it can only be achieved by understanding."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Albert Einstein</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Archivaufnahme, Doku -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128218;</span>
+      <h3>Sokrates</h3>
+      <p data-i18n="idol_sokrates_p">Knew that knowing nothing is the beginning of wisdom. Never wrote a word — his questions did all the work.<sup class="fn">2</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich weiß, dass ich nichts weiß."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sokrates (Platons Apologie)</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/HprauM9y_dA?controls=0" title="Genius of the Ancient World — Socrates (BBC Documentary)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127981;</span>
+      <h3>Platon</h3>
+      <p data-i18n="idol_platon_p">Took the questions of his teacher and built a system of thought that still holds weight 2,400 years later. Ideas outlast everything.<sup class="fn">3</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wonder is the feeling of a philosopher, and philosophy begins in wonder."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Plato</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Philosophie-Doku -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128065;</span>
+      <h3>Edward Snowden</h3>
+      <p data-i18n="idol_snowden_p">Gave up everything to tell the truth. Whatever you think of the consequences, the act of choosing conscience over comfort is something I respect deeply.<sup class="fn">4</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Saying you don't care about privacy because you have nothing to hide is no different from saying you don't care about free speech because you have nothing to say."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Edward Snowden, Permanent Record</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — TED Talk "Here's how we take back the internet" (ted.com/talks/edward_snowden_here_s_how_we_take_back_the_internet) -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127758;</span>
+      <h3>Jimmy Wales</h3>
+      <p data-i18n="idol_wales_p">Founded Wikipedia — free knowledge for every human being on the planet. One of the most quietly radical acts in the history of the internet.<sup class="fn">5</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Imagine a world in which every single person on the planet is given free access to the sum of all human knowledge. That's what we're doing."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Jimmy Wales</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — TED Talk "The birth of Wikipedia" -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#9774;</span>
+      <h3>Dalai Lama</h3>
+      <p data-i18n="idol_dalai_p">Compassion as a practice, not a feeling. The idea that inner peace and outer responsibility are not in conflict — that you can be both grounded and engaged.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"My religion is very simple. My religion is kindness."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Dalai Lama XIV</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Rede, TED o.ä. -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128247;</span>
+      <h3>Sebastião Salgado</h3>
+      <p data-i18n="idol_salgado_p">He photographs what the world would rather look away from — salt workers, gold miners, refugees — with a beauty that makes ignorance impossible. *The Salt of the Earth* is the most honest document of our time I have seen. And then he spent decades replanting the Atlantic Forest. He doesn't just witness. He acts.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I'm a storyteller."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sebastião Salgado</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — "The Salt of the Earth" Trailer (Wim Wenders, 2014) -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127752;</span>
+      <h3>Marina Abramović</h3>
+      <p data-i18n="idol_abramovic_p">She uses her own body as the material — pain, endurance, presence, trust. The work doesn't ask you to think about art. It asks you to feel what it means to be alive in a room with another person. That kind of courage in front of an audience is something I deeply respect.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"When you perform it is a knife and your blood. When you act it is a fake knife and ketchup."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Marina Abramović</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/M4so_Z9a_u0?controls=0" title="Marina Abramović — An Art Made of Trust, Vulnerability and Connection | TED" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Dave Chappelle</h3>
+      <p data-i18n="idol_chappelle_p">Walked away from $50 million at the height of his fame because something felt wrong.<sup class="fn">10</sup> Came back years later — sharper, freer, on his own terms. The truth first. The money second. That order matters.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"The hardest thing to do is to be true to yourself, especially when everybody is watching."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Dave Chappelle</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/2z3wUD3AZg4?si=d_7AbMs_TjB9gZJx&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon" style="display:block;margin-bottom:0.5rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" style="width:64px;height:64px;" role="img" aria-hidden="true">
+          <!-- Outer W shape / sword logo approximation -->
+          <polygon points="60,6 74,22 108,18 94,46 108,74 82,68 60,114 38,68 12,74 26,46 12,18 46,22" fill="#f5c518"/>
+          <polygon points="60,22 70,34 94,31 84,52 94,72 74,67 60,98 46,67 26,72 36,52 26,31 50,34" fill="#1a1a1a"/>
+          <text x="60" y="68" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-weight="900" font-size="30" fill="#f5c518" letter-spacing="-1">W</text>
+        </svg>
+      </span>
+      <h3>Wu-Tang Clan</h3>
+      <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"The tongue is like a sword — and we have the best lyrics."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— RZA</cite></blockquote><button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Cash rules everything around me. C.R.E.A.M. Get the money."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Wu-Tang Clan, C.R.E.A.M. (1993)</cite></blockquote>
+        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wu-Tang is for the children."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Ol' Dirty Bastard</cite></blockquote>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/40a5UNO5T44?si=xWBle1ZvUnK3mQGN&amp;controls=0" title="Wu-Tang Clan — Reunited" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127916;</span>
+      <h3>Jim Jarmusch</h3>
+      <p data-i18n="idol_jarmusch_p">Slow cinema that refuses to explain itself. Characters at the margins, deadpan silences, no moral conclusions drawn for you. He trusts the audience. That trust is a form of respect that most filmmakers can't afford — or don't bother with.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Nothing is original. Steal from anywhere that resonates with inspiration or fuels your imagination. Authenticity is invaluable; originality is non-existent."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Jim Jarmusch</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Interview, Filmausschnitt (Paterson, Coffee and Cigarettes o.ä.) -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127911;</span>
+      <h3>Fatih Akın</h3>
+      <p data-i18n="idol_akin_p">Hamburg. Turkish-German. Between worlds and belonging fully to both. *Gegen die Wand* hit something real — rage, love, identity, the mess of it all. He makes films from where he actually stands, not from where it's comfortable to stand.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I used to think that a film can change the world, just like rock 'n' roll has changed the world."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Fatih Akın</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Interview, Gegen die Wand Trailer o.ä. -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Leonard Cohen</h3>
+      <p data-i18n="idol_cohen_p">Poet, novelist, songwriter. He wrote about love, loss, faith, and failure with a precision that made clichés impossible. *Hallelujah* took years to write and decades to be understood. He released his final album three weeks before he died. Some people work until the end — not out of compulsion, but because the work is the point.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"There is a crack in everything — that's how the light gets in."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Leonard Cohen</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/bfqJcSPnlbU?si=_QE_g4MrX3sNj4MB&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128300;</span>
+      <h3>Prof. Dr. Paula Herber</h3>
+      <p data-i18n="idol_herber_p">My professor at TU Berlin, now at the University of Münster. Formal verification, embedded systems, rigour as a method. She showed me what it looks like when someone builds something that actually holds — in software and in thought.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Quality assurance for intelligent embedded systems — making sure that what we build actually works."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Paula Herber, <a href="https://www.uni-muenster.de/EmbSys/team/herber/index.shtml" target="_blank" style="color:var(--clay);">Universität Münster</a></cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Vorlesung, Konferenzvortrag Uni Münster -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#129504;</span>
+      <h3>Vera F. Birkenbihl</h3>
+      <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wer aufhört zu lernen, ist alt. Egal ob mit zwanzig oder achtzig."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Vera F. Birkenbihl</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Original-Seminar (birkenbihl.tv) oder Archiv-Upload -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127929;</span>
+      <h3>Nina Simone</h3>
+      <p data-i18n="idol_simone_p">Pianist, singer, civil rights activist. She didn't separate the music from the politics — they were the same thing. Art as testimony. Sound as resistance.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"An artist's duty, as far as I'm concerned, is to reflect the times."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Nina Simone</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/LJ25-U3jNWM?controls=0" title="Nina Simone — Mississippi Goddam" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Sido — Paul Würdig</h3>
+      <p>Berlin-Hellersdorf. Maske, Block, Klarheit. Einer der ehrlichsten Stimmen aus dem deutschen Rap — bevor Rap cool war. Er hat nie so getan als ob. Relax.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich bin nicht weggelaufen, ich bin einfach hier geblieben."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sido, Relax (2006)</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich komm aus'm Block und bin auch noch stolz drauf / Ich schreib mein' Namen groß, steh dazu und halt ihn hoch."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sido, Mein Block (2004)</cite></blockquote>
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:1rem;">
+          <a href="https://open.spotify.com/track/4m2APCSV3nzWoHrAPod0ZT" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">&#9654; Relax auf Spotify anhören</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label" data-i18n="contact_label">Connect</div>
+    <h2 data-i18n="contact_h2">Let's Talk</h2>
+    <p data-i18n="contact_p">Whether you're an investor, a collaborator, or simply curious — I'd love to hear from you.</p>
+
+    <div class="contact-links">
+      <a href="mailto:stefan@huellinghorst.info" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/stefan-huellinghorst/" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/steefsteefsen" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <div class="booking-notice reveal">
+      <p class="booking-soon" data-i18n="booking_soon">Appointment booking will be available at the official domain — coming soon.</p>
+    </div>
+
+    <form class="booking-form reveal" id="booking-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="book-name" data-i18n="book_name">Name</label>
+          <input type="text" id="book-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="book-email" data-i18n="book_email">Email</label>
+          <input type="email" id="book-email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="book-date" data-i18n="book_date">Preferred date</label>
+          <input type="date" id="book-date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="book-time" data-i18n="book_time">Preferred time</label>
+          <input type="time" id="book-time" name="time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="book-topic" data-i18n="book_topic">What would you like to talk about?</label>
+        <textarea id="book-topic" name="topic" rows="4" placeholder="Tell me a little about what's on your mind…"></textarea>
+      </div>
+      <button type="submit" class="book-btn" data-i18n="book_btn" disabled>
+        Booking available at the official domain
+      </button>
+    </form>
+  </div>
+</section>
+
+<section class="footnotes">
+  <div class="footnotes-title">Notes &amp; Sources</div>
+  <ol>
+    <li>Neven Subotic Stiftung official reporting: <a href="https://www.neven-subotic-stiftung.de" target="_blank">neven-subotic-stiftung.de</a>. The foundation reports zero administrative cost from donor funds; all overhead is covered separately.</li>
+    <li>Socrates left no writings. All accounts of his life and thought come from Plato, Xenophon, and Aristophanes. See Plato's <em>Apology</em>, <em>Phaedo</em>, and <em>Symposium</em>.</li>
+    <li>Plato, c. 428–348 BCE. His dialogues remain core texts in Western philosophy, ethics, political theory, and epistemology — read continuously for over 2,400 years.</li>
+    <li>Edward Snowden disclosed NSA mass surveillance programs in June 2013. He has lived in Russia on asylum since that year. Source: Glenn Greenwald, <em>No Place to Hide</em> (2014); <em>The Guardian</em> reporting.</li>
+    <li>Wikipedia was co-founded by Jimmy Wales and Larry Sanger in January 2001. As of 2024 it is the world's largest free reference work, available in over 300 languages.</li>
+    <li>Mein Grundeinkommen e.V. reports payout figures on their website. The 1,500+ figure reflects cumulative raffles since 2014; check <a href="https://www.mein-grundeinkommen.de" target="_blank">mein-grundeinkommen.de</a> for current numbers.</li>
+    <li>The Chaos Computer Club was founded in Hamburg on 12 September 1981. Membership and chapter count are self-reported; the CCC is widely recognized as Europe's largest hacker association.</li>
+    <li>LAION-5B (Large-scale Artificial Intelligence Open Network) was used as a primary training dataset for Stable Diffusion 1.x. See Rombach et al., <em>High-Resolution Image Synthesis with Latent Diffusion Models</em>, CVPR 2022. LAION was founded by Christoph Schuhmann, a Hamburg schoolteacher.</li>
+    <li>Benjamin Adrion played for FC St. Pauli 2005–2009 and co-founded Viva con Agua de Sankt Pauli e.V. in 2006. Source: <a href="https://www.vivaconagua.org" target="_blank">vivaconagua.org</a>.</li>
+    <li>Dave Chappelle's departure from <em>Chappelle's Show</em> in 2005 and the reported $50 million Comedy Central deal have been widely covered. Chappelle confirmed the figure in multiple interviews, including with <em>Inside the Actors Studio</em> (2006).</li>
+    <li>SSIO (Ssiawosch Sadat), born 28 January 1989 in Bonn; family fled Afghanistan in 1986. Grew up in Bonn-Tannenbusch. Signed to Xatar's Alles oder Nix Records. Debut album <em>BB.U.M.SS.N.</em> (2013) reached #6 in Germany; <em>0,9</em> (2016) debuted at #1. Source: <a href="https://de.wikipedia.org/wiki/SSIO" target="_blank">Wikipedia — SSIO</a>.</li>
+    <li>DuckDNS is a free dynamic DNS service run by volunteers. It maps a subdomain (*.duckdns.org) to any IP address and updates automatically via a simple API call — widely used for home-server access. See <a href="https://www.duckdns.org" target="_blank">duckdns.org</a>.</li>
+    <li>Ubuntu Server LTS releases are supported by Canonical for five years with security patches. The 24.04 LTS release (April 2024) is the current long-term support version. Source: <a href="https://ubuntu.com/server" target="_blank">ubuntu.com/server</a>.</li>
+    <li>The Raspberry Pi 5 (launched October 2023) starts at $60 for the 4 GB model. The Raspberry Pi Foundation is a UK registered charity whose mission is to put computing education within reach of everyone. Source: <a href="https://www.raspberrypi.org" target="_blank">raspberrypi.org</a>.</li>
+    <li>Restlos e.V. was founded in 2019 by Furkan Karadag and Mustafa Budumlu, both Bielefeld natives who studied Pedagogy and Sociology at the University of Bielefeld. They opened their first Rettermarkt in Bielefeld-Schildesche in January 2020, rescuing food that cannot be sold through regular retail — bruised produce, damaged packaging, approaching best-before dates — and making it available at a self-determined price. Proceeds fund social projects. Website: <a href="https://restlos-ev.de/" target="_blank">restlos-ev.de</a>. Instagram: <a href="https://www.instagram.com/restlos_bielefeld/" target="_blank">@restlos_bielefeld</a>.</li>
+    <li>Werrepiraten e.V. was founded under its current name in 2014, growing out of a boat-sports programme established roughly 30 years earlier by teacher Bernhard Bunte at the Eickhofschule in Hiddenhausen-Schweicheln. The club works primarily with socially disadvantaged children and young adults. Their PEER project — "Wildwasser nachhaltig nutzen" — trains former Eickhofschule students as peer guides and mentors. In 2024 the project won the NRW state prize of the "Sterne des Sports" competition (organised by DOSB and the Volks- und Raiffeisenbanken); at the national final in Berlin on 20 January 2025 they were awarded the Großer Stern des Sports in Silver and 7,500 € by Federal President Frank-Walter Steinmeier. Website: <a href="https://werrepiraten.org/" target="_blank">werrepiraten.org</a>. Instagram: <a href="https://www.instagram.com/werrepiraten/" target="_blank">@werrepiraten</a>. Sources: <a href="https://hoch5.com/blog/view/werrepiraten-entern-berlin" target="_blank">HOCH5</a>; <a href="https://www.presseportal.de/pm/115684/5901507" target="_blank">Presseportal</a>.</li>
+    <li><em>Die Zwote</em> is a legendary grassroots football institution based in Enger-Steinbeck (Kreis Herford, NRW) near Bielefeld — rooted in community values, fair-play culture, and a strong collective identity. From 2003 onwards, Die Zwote organized <em>Kicken für Afrika</em>, an annual 32-team football tournament at the Brillweg sports ground in Enger-Steinbeck, combining football with live music. Over its twelve-year run the event raised tens of thousands of euros — at least 18,000 € in a single year — channelled to the Thuthuka project in Bulawayo, Zimbabwe: a street children's centre supporting 40 young people with schooling and vocational training in furniture-making, car repair, and agriculture, run by Scripture Union Zimbabwe in partnership with terre des hommes. The event ended around 2015 when the original venue was developed into residential housing. Source: <a href="https://www.nw.de/lokal/kreis_herford/enger/20514953_Kicken-fuer-Afrika-faellt-dieses-Jahr-aus.html" target="_blank">Neue Westfälische</a>; <a href="https://www.tdh.de/mitmachen/aktiv-sein/testimonials-wir-machen-mit/meldungen/kicken-fuer-afrika-spendet-18000-euro/" target="_blank">terre des hommes</a>.</li>
+  </ol>
+</section>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot; Built with care
+  &middot; <a href="invest.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Investors</a>
+  &middot; <a href="open-letter.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Elon Musk</a>
+  &middot; <a href="open-letter-watzke.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: BVB</a>
+  &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
+</footer>
+
+<script src="i18n.js"></script>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Language switcher toggle
+  const switcher = document.getElementById('lang-switcher');
+  const currentBtn = document.getElementById('lang-current-btn');
+
+  currentBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    switcher.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => switcher.classList.remove('open'));
+
+  document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.getAttribute('data-lang');
+      currentBtn.textContent = code.toUpperCase();
+      switcher.classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>

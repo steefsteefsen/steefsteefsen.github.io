@@ -1,0 +1,231 @@
+# ──────────────────────────────────────────────
+# GitLab CI/CD — steefsteefsen.github.io
+# Triggers: every push to main + daily cron
+# ──────────────────────────────────────────────
+
+stages:
+  - validate
+  - test
+  - security
+  - mirror
+  - deploy-verify
+
+variables:
+  SITE_URL: "https://steefsteefsen.github.io"
+  SITE_HOST: "steefsteefsen.github.io"
+
+# ── HTML Validation ────────────────────────────
+html-validate:
+  stage: validate
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - npm install -g html-validate
+    - html-validate index.html invest.html impressum.html
+  allow_failure: false
+
+# ── CSS Lint ───────────────────────────────────
+css-lint:
+  stage: validate
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - npm install -g stylelint stylelint-config-standard
+    - |
+      echo '{"extends":["stylelint-config-standard"],"rules":{"no-descending-specificity":null}}' > .stylelintrc.json
+    - |
+      for f in index.html invest.html impressum.html; do
+        # Extract inline <style> blocks and lint them
+        node -e "
+          const fs = require('fs');
+          const html = fs.readFileSync('$f','utf8');
+          const matches = html.match(/<style[^>]*>([\s\S]*?)<\/style>/gi) || [];
+          const css = matches.map(m => m.replace(/<\/?style[^>]*>/gi,'')).join('\n');
+          fs.writeFileSync('/tmp/extracted.css', css);
+        "
+        npx stylelint /tmp/extracted.css --config .stylelintrc.json || true
+      done
+  allow_failure: true
+
+# ── Accessibility ──────────────────────────────
+accessibility:
+  stage: validate
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - npm install -g @axe-core/cli puppeteer
+    - |
+      # Run axe against the live site
+      axe "$SITE_URL" --exit || true
+      axe "$SITE_URL/invest.html" --exit || true
+  allow_failure: true
+
+# ── Link Check ─────────────────────────────────
+link-check:
+  stage: validate
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - npm install -g broken-link-checker
+    - blc "$SITE_URL" --recursive --exclude linkedin.com || true
+  allow_failure: true
+
+# ── Mozilla Observatory (HTTP security headers) ─
+security-headers:
+  stage: security
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - apk add --no-cache curl jq
+    - |
+      echo "=== Mozilla Observatory: $SITE_HOST ==="
+      curl -sf -X POST "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=$SITE_HOST" | jq '.'
+    - |
+      GRADE=$(curl -sf "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=$SITE_HOST" | jq -r '.grade // "N/A"' || echo "N/A")
+      echo "Security grade: $GRADE"
+  allow_failure: true
+
+# ── Shodan CVEDB: check CDN/infra CVEs ─────────
+cve-check:
+  stage: security
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - apk add --no-cache curl jq
+    - |
+      echo "=== Shodan CVEDB: checking nginx CVEs ==="
+      curl -sf "https://cvedb.shodan.io/search/nginx" | jq '[.cves[0:5] | .[] | {id:.cve_id, cvss:.cvss_v3, summary:.summary}]' || true
+    - |
+      echo "=== Shodan InternetDB: checking GitHub Pages IP ==="
+      IP=$(curl -sf "https://dns.google/resolve?name=$SITE_HOST&type=A" | jq -r '.Answer[0].data // empty')
+      if [ -n "$IP" ]; then
+        echo "Resolved IP: $IP"
+        curl -sf "https://internetdb.shodan.io/$IP" | jq '{ip:.ip,ports:.ports,vulns:.vulns}' || true
+      fi
+  allow_failure: true
+
+# ── NVD: daily CVE digest (top 5 new CVEs) ─────
+daily-cve-digest:
+  stage: security
+  image: alpine:latest
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - apk add --no-cache curl jq
+    - |
+      echo "=== NVD Daily CVE Digest (last 24h) ==="
+      YESTERDAY=$(date -u -d '1 day ago' '+%Y-%m-%dT%H:%M:%S.000' 2>/dev/null || date -u -v-1d '+%Y-%m-%dT%H:%M:%S.000')
+      NOW=$(date -u '+%Y-%m-%dT%H:%M:%S.000')
+      curl -sf "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=${YESTERDAY}&pubEndDate=${NOW}&resultsPerPage=5" \
+        | jq '[.vulnerabilities[].cve | {id:.id, description:(.descriptions[]|select(.lang=="en").value), cvss:(.metrics.cvssMetricV31[0].cvssData.baseScore // "N/A")}]' || true
+  allow_failure: true
+
+# ── W3C HTML Validator ─────────────────────────
+w3c-validate:
+  stage: validate
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - apk add --no-cache curl jq
+    - |
+      for page in "" "/invest.html" "/impressum.html"; do
+        echo "=== W3C Validator: $SITE_URL$page ==="
+        curl -sf "https://validator.w3.org/nu/?doc=$SITE_URL$page&out=json" \
+          | jq '[.messages[] | select(.type=="error") | {line:.lastLine, message:.message}]' || true
+      done
+  allow_failure: true
+
+# ── Jest Unit Tests (GitLab only) ──────────────
+jest-unit:
+  stage: test
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - cd tests
+    - npm ci
+    - npm run test:ci
+  coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
+  artifacts:
+    when: always
+    paths:
+      - logs/coverage/
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: logs/coverage/cobertura-coverage.xml
+  allow_failure: false
+
+# ── CD: smoke-test live GitHub Pages deployment ───
+smoke-test-live:
+  stage: deploy-verify
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - apk add --no-cache curl
+    - |
+      echo "=== Smoke-testing live site: $SITE_URL ==="
+      for page in "" "/invest.html" "/impressum.html" "/open-letter.html" "/open-letter-watzke.html"; do
+        url="$SITE_URL$page"
+        status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$url")
+        if [ "$status" = "200" ]; then
+          echo "OK $url -> $status"
+        else
+          echo "FAIL $url -> $status (expected 200)"
+          exit 1
+        fi
+      done
+    - |
+      echo "=== Verifying i18n.js is reachable ==="
+      status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$SITE_URL/i18n.js")
+      if [ "$status" = "200" ]; then
+        echo "OK i18n.js -> $status"
+      else
+        echo "FAIL i18n.js -> $status"
+        exit 1
+      fi
+  allow_failure: false
+
+# ── Mirror to GitHub (after pipeline passes) ───
+mirror-to-github:
+  stage: mirror
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - apk add --no-cache git
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+    # Export a clean tree without tests/ and logs/ into a temp dir
+    - mkdir /tmp/mirror
+    - git archive HEAD | tar -x -C /tmp/mirror
+    - rm -rf /tmp/mirror/tests /tmp/mirror/logs
+    # Init a fresh repo and push it to GitHub
+    - cd /tmp/mirror
+    - git init
+    - git add .
+    - git commit -m "Mirror from GitLab (${CI_COMMIT_SHORT_SHA})"
+    - git remote add github https://github.com/steefsteefsen/steefsteefsen.github.io.git
+    - git config credential.helper store
+    - echo "https://steefsteefsen:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
+    - git push github HEAD:main --force
+  allow_failure: false
