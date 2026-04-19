@@ -75,8 +75,9 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 | 13 | Ubuntu Server |
 | 14 | Raspberry Pi |
 | 15 | Restlos e.V. |
-| 16 | Die Zwote |
-| 17 | Werrepiraten e.V. |
+| 16 | Werrepiraten e.V. |
+| 17 | Die Zwote |
+| 18 | Rec & Play |
 
 ## Code quality & consistency checks
 
