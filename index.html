@@ -1856,6 +1856,29 @@
         </p>
       </div>
     </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Skinny Shef — der Friedensfürst</h3>
+      <p>Bielefeld. Bad Taste, dann Pimpulsiv mit Timi Hendrix, dann Mitgründer von Trailerpark — und dann raus. Als das Label kommerzieller wurde, hat Siggi aufgehört. Nicht laut, nicht dramatisch. Er ist einfach gegangen. Mediendesigner, echter Mensch. Ich nenne ihn den Friedensfürst.</p>
+      <p style="margin-top:0.6rem;font-size:0.85rem;">
+        <a href="https://de.linkedin.com/in/marcel-siekmann-4b336058" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">LinkedIn &#8594;</a>
+        <a href="https://www.instagram.com/marcel_siekmann/" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Instagram &#8594;</a>
+        <a href="https://www.marcelsiekmann.de/" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Portfolio &#8594;</a>
+        <a href="https://soundcloud.com/skinny-shef" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
+      </p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Nehm alle."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Skinny Shef</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <!-- TODO: Video-ID eintragen — Pimpulsiv Track, z.B. "Nehm Alle" -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
