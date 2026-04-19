@@ -1100,6 +1100,15 @@
         <p>Aus der Zeit in Mettmann, geprägt durch persischen Einfluss im Freundeskreis. Der Name klingt wie eine Mischung aus Weihenstephan und Stefan — und passte irgendwie. Das Motto dazu: <em>„Details"</em> — gesagt, wenn jemand zu viel redet und die Essenz fehlt.</p>
       </div>
     </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Landstreicher" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Landstreicher'">
+        Landstreicher
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p>Vergeben von Boris &amp; Uwe — meinen Mentoren — während meiner Insolvenz. Ich reiste mit dem Deutschlandticket durch Deutschland, auf der Suche nach einem Job bei einem Unternehmen, das es verdient, für das man arbeitet. Ein Landstreicher nicht aus Antriebslosigkeit, sondern aus Anstand.</p>
+      </div>
+    </div>
   </div>
   <div class="hero-line"></div>
   <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
