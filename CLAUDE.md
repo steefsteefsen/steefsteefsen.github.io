@@ -87,6 +87,42 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 | 19 | Özil documentary (Amazon Prime, 2022) |
 | 20 | Rec & Play |
 
+## Writing your own tests
+
+Tests live in `tests/` and run with `cd tests && npx jest`. Three files exist:
+- `dom-structure.test.js` — structural DOM checks (sections, cards, Alpine wiring)
+- `i18n-functions.test.js` — i18n key coverage and language block integrity
+- `example.test.js` — minimal smoke test / template
+
+**To add a consistency test** (e.g. "every idol card has a blockquote"):
+
+1. Open the relevant file — `dom-structure.test.js` for HTML structure, `i18n-functions.test.js` for key checks.
+2. Add a `test('description', () => { ... })` block. The DOM is already loaded in `beforeAll` — just use `document.querySelectorAll(...)`.
+3. For i18n checks, `i18n.js` is already `require()`d — iterate over language blocks with `Object.keys(translations)`.
+4. Run `npx jest` from `tests/` to verify.
+
+**Minimal DOM test example:**
+```js
+test('every idol card has an h3', () => {
+  document.querySelectorAll('#idols .value-card').forEach(card => {
+    expect(card.querySelector('h3')?.textContent.trim()).toBeTruthy();
+  });
+});
+```
+
+**Minimal i18n consistency test example:**
+```js
+test('all data-i18n keys exist in every language block', () => {
+  const keys = [...html.matchAll(/data-i18n="([^"]+)"/g)].map(m => m[1]);
+  const langs = Object.keys(translations);
+  keys.forEach(key => {
+    langs.forEach(lang => {
+      expect(translations[lang]).toHaveProperty(key);
+    });
+  });
+});
+```
+
 ## Code quality & consistency checks
 
 ### Daily automated check
