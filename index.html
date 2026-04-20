@@ -121,13 +121,19 @@
   .hero-leaf {
     position: absolute;
     opacity: 0.045;
-    font-size: 18rem;
     color: var(--moss);
     user-select: none;
     pointer-events: none;
   }
-  .hero-leaf.left { top: 10%; left: -3rem; transform: rotate(-25deg); }
-  .hero-leaf.right { bottom: 5%; right: -2rem; transform: rotate(140deg); }
+  .hero-leaf.left { font-size: 18rem; top: 10%; left: -3rem; transform: rotate(-25deg); }
+  .hero-leaf.right {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22rem;
+    font-weight: 700;
+    line-height: 1;
+    bottom: 0%; right: -1rem;
+    letter-spacing: -0.05em;
+  }
 
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
@@ -1048,8 +1054,8 @@
 
 <!-- Hero -->
 <header class="hero">
-  <div class="hero-leaf left">&#127807;</div>
-  <div class="hero-leaf right">&#127807;</div>
+  <div class="hero-leaf left">&#128011;</div>
+  <div class="hero-leaf right">23</div>
   <h1>
     Stefan-Olav Hüllinghorst
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
