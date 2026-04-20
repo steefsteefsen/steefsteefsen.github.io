@@ -41,7 +41,10 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
    - DE: write a proper German translation.
    - All others: use the EN text as fallback unless a native translation is available.
 3. Use `replace_all: true` to insert the new key after `tool_nextcloud_p` in all non-DE blocks in one edit.
-4. Place the icon in `icons/` (SVG preferred, PNG fallback). If no icon is available, use an appropriate emoji in a `<span class="tool-icon">`.
+4. **Always fetch the official artwork** for the tool and place it in `icons/` (SVG preferred, PNG fallback).
+   - Try in order: project's own GitHub/CDN → Wikipedia Commons → official website favicon/logo.
+   - Use `<span class="tool-icon"><img src="icons/<name>.svg" alt="<Name>"></span>` in the card.
+   - Only fall back to an emoji if no artwork can be found after trying all three sources.
 
 ### Adding a new support card (I Support / Local Businesses / Artists)
 1. Insert `<div class="support-card support-card--<cause|artist|local> reveal">` before the placeholder card.
