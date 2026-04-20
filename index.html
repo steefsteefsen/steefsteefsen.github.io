@@ -1560,6 +1560,22 @@
       </div>
     </div>
     <div class="value-card" x-data="{open:false}">
+      <span class="icon"><img src="icons/wutang.png" alt="Wu-Tang Clan" style="width:2.8rem;height:auto;display:block;"></span>
+      <h3>Wu-Tang Clan</h3>
+      <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wu-Tang is for the children."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Ol' Dirty Bastard</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/PBwAxmrE194?controls=0" title="Wu-Tang Clan — C.R.E.A.M." allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127925;</span>
       <h3>SSIO — Ssiawosch Sadat</h3>
       <p data-i18n="idol_ssio_p">Afghan-German rapper from Bonn, raised in Tannenbusch. One of the most uncompromising voices in German hip-hop — raw, self-contained, no brand deals. He builds a world out of words, completely on his own terms.<sup class="fn">11</sup></p>
