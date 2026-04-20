@@ -57,6 +57,9 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 - All user-facing strings that appear in multiple languages must have a `data-i18n="key"` attribute pointing to an entry in `i18n.js`.
 - Hardcoded content (personal names, addresses, URLs) does not need i18n keys.
 
+### Section size cap
+- No section (values, idols, support, tools, etc.) may contain more than **23 items**. If a new addition would exceed 23, flag it to the user before proceeding.
+
 ### Footnote numbering (current state)
 | # | Subject |
 |---|---------|
