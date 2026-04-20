@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICE 541, vom kleinen B ins große B — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="90 € Ticket. 11,50 € Kaffee und Brötchen. Dazu kostenlos: im Bordrestaurant mit schlechtester Laune angebölkt werden. Service heißt SERVICE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .back-link {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav .back-link:hover { color: var(--bark); }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 9rem 2rem 6rem;
+  }
+
+  .post-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--moss);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .post-meta::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+    flex-shrink: 0;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.2;
+    color: var(--bark);
+    margin-bottom: 2.5rem;
+  }
+
+  .post-body {
+    font-size: 1.05rem;
+    color: var(--stone);
+    line-height: 1.9;
+  }
+
+  .post-body p { margin-bottom: 1.5rem; }
+
+  .post-body blockquote {
+    border-left: 2px solid var(--clay);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--earth);
+    line-height: 1.6;
+  }
+
+  .post-nav {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+  }
+
+  .post-nav a {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .post-nav a:hover { color: var(--bark); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.15);
+    margin-top: 4rem;
+  }
+
+  footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,123,107,0.3);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <a href="/blog/" class="back-link">← Blog</a>
+</nav>
+
+<main>
+  <p class="post-meta">20. April 2026</p>
+  <h1>ICE 541, vom kleinen B ins große B</h1>
+
+  <div class="post-body">
+    <p>
+      90 € Ticket. 11,50 € Kaffee und Brötchen. Dazu kostenlos: im Bordrestaurant
+      mit schlechtester Laune angebölkt werden. Niemand persönlich gemeint —
+      das ist Symptom, nicht Ursache.
+    </p>
+
+    <p>
+      Muss ich, SteefSteefsen, erst eine Lehre in Japan machen und danach die DB kaufen,
+      damit das läuft?
+    </p>
+
+    <p>
+      Paula Herber hat mir an der Uni beigebracht, wie man State Machines sauber baut.
+      Seitdem habe ich, wenn ich die Bahn anschaue, nur noch Fragezeichen.
+    </p>
+
+    <p>
+      Nach dem Desaster des Volkswagen-Konzerns — inklusive Vertragsbruch mitten in
+      Corona — fahre ich eh fast nur noch Flix. Aber wenn der Schedule wirklich dense
+      ist, brauche ich die Bahn. Und dann gilt ein ganz einfacher Grundsatz:
+    </p>
+
+    <blockquote>
+      Service heißt SERVICE.
+    </blockquote>
+
+    <p>
+      Liebe Deutsche Bahn, liebe deutsche Industrie: Ruht euch nicht auf euren
+      angeborenen Vorteilen aus. Andere Länder arbeiten — während wir jammern,
+      pünktlich zu bleiben.
+    </p>
+  </div>
+
+  <div class="post-nav">
+    <a href="/blog/">← Alle Einträge</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
