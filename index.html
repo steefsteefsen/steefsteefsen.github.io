@@ -344,7 +344,7 @@
 
   .values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
     gap: 2rem;
     margin-top: 3rem;
   }
@@ -387,6 +387,33 @@
   /* Idol cards — collapsible extra content */
   #idols .values-grid {
     align-items: start;
+  }
+
+  .idols-subsection {
+    margin-top: 3.5rem;
+  }
+
+  .idols-subsection-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--stone);
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .idols-subsection-genre {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    color: var(--clay);
+    text-transform: uppercase;
+    margin-left: 0.8rem;
+    opacity: 0.85;
   }
 
   .card-collapsed {
@@ -1497,6 +1524,10 @@
     <p data-i18n="idols_p">Not role models to copy — but minds that opened something.</p>
   </div>
 
+  <!-- ── Tech & Science ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_tech">Tech &amp; Science</h3>
+  </div>
   <div class="values-grid reveal">
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#128039;</span>
@@ -1515,101 +1546,6 @@
       </div>
     </div>
     <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#9994;</span>
-      <h3>Die Jungs vom 36</h3>
-      <p data-i18n="idol_boys36_p">After the Wall fell, Kreuzberg 36 was flooded with neo-nazis moving in from the East. The boys from SO36 didn't wait for the state. They cleared the streets themselves — systematically, block by block. Kreuzberg stayed Kreuzberg. Thank you.</p>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — z.B. SO36-Doku, Kreuzberg-Archiv -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);display:flex;align-items:center;justify-content:center;">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#127908;</span>
-      <h3>Megaloh — der Malocher</h3>
-      <p data-i18n="idol_megaloh_p">German hip-hop with depth, craft, and integrity. He works. No shortcuts, no sellout. The music earns its place.</p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Deutscher Rap ist kein HipHop! Sondern unreflektierte kulturelle Aneignung!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Megaloh</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/p18jDhMZqIc?controls=0" title="Megaloh — Muss los (Offizielles Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#127925;</span>
-      <h3>Mira — Berlin DJ</h3>
-      <p data-i18n="idol_mira_p">For what she builds in a room at night. Aware, precise, present. The kind of artist who knows that context is everything.</p>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Set, Boiler Room o.ä. -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon"><img src="icons/wutang.png" alt="Wu-Tang Clan" style="width:2.8rem;height:auto;display:block;"></span>
-      <h3>Wu-Tang Clan</h3>
-      <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wu-Tang is for the children."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Ol' Dirty Bastard</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/PBwAxmrE194?controls=0" title="Wu-Tang Clan — C.R.E.A.M." allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#127925;</span>
-      <h3>SSIO — Ssiawosch Sadat</h3>
-      <p data-i18n="idol_ssio_p">Afghan-German rapper from Bonn, raised in Tannenbusch. One of the most uncompromising voices in German hip-hop — raw, self-contained, no brand deals. He builds a world out of words, completely on his own terms.<sup class="fn">11</sup></p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Du hast dich voll verändert, alle sagen das!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— SSIO</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/MJEgsRgP_Xk?controls=0" title="SSIO — Dein Leben ist gef***t (Official Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#128167;</span>
-      <h3>Neven Subotic</h3>
-      <p data-i18n="idol_subotic_p">Fled a war as a child. Became a Bundesliga champion. Then donated 4 million euros of his own money to bring clean water to 450,000 people in East Africa — during his playing career, not after.<sup class="fn">1</sup> Zero administrative overhead. He connects lived experience of displacement to structural action. That is rare. — I was a BVB fan until the club invested in Rheinmetall. After that it became just another club.</p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I define myself more by my contribution to society. I want to make a difference — that's more important to me than any championship."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Neven Subotic</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Interview well:fair Stiftung -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
       <span class="icon">&#10024;</span>
       <h3>Albert Einstein</h3>
       <p data-i18n="idol_einstein_p">Curiosity as a life philosophy. He questioned what everyone accepted and trusted the process of thinking over the comfort of certainty.</p>
@@ -1620,12 +1556,65 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Archivaufnahme, Doku -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
       </div>
     </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128065;</span>
+      <h3>Edward Snowden</h3>
+      <p data-i18n="idol_snowden_p">Gave up everything to tell the truth. Whatever you think of the consequences, the act of choosing conscience over comfort is something I respect deeply.<sup class="fn">4</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Saying you don't care about privacy because you have nothing to hide is no different from saying you don't care about free speech because you have nothing to say."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Edward Snowden, Permanent Record</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127758;</span>
+      <h3>Jimmy Wales</h3>
+      <p data-i18n="idol_wales_p">Founded Wikipedia — free knowledge for every human being on the planet. One of the most quietly radical acts in the history of the internet.<sup class="fn">5</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Imagine a world in which every single person on the planet is given free access to the sum of all human knowledge. That's what we're doing."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Jimmy Wales</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128300;</span>
+      <h3>Prof. Dr. Paula Herber</h3>
+      <p data-i18n="idol_herber_p">My professor at TU Berlin, now at the University of Münster. Formal verification, embedded systems, rigour as a method. She showed me what it looks like when someone builds something that actually holds — in software and in thought.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Quality assurance for intelligent embedded systems — making sure that what we build actually works."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Paula Herber, <a href="https://www.uni-muenster.de/EmbSys/team/herber/index.shtml" target="_blank" style="color:var(--clay);">Universität Münster</a></cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Philosophy & Thought ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_philosophy">Philosophy &amp; Thought</h3>
+  </div>
+  <div class="values-grid reveal">
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#128218;</span>
       <h3>Sokrates</h3>
@@ -1653,41 +1642,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Philosophie-Doku -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#128065;</span>
-      <h3>Edward Snowden</h3>
-      <p data-i18n="idol_snowden_p">Gave up everything to tell the truth. Whatever you think of the consequences, the act of choosing conscience over comfort is something I respect deeply.<sup class="fn">4</sup></p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Saying you don't care about privacy because you have nothing to hide is no different from saying you don't care about free speech because you have nothing to say."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Edward Snowden, Permanent Record</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — TED Talk "Here's how we take back the internet" (ted.com/talks/edward_snowden_here_s_how_we_take_back_the_internet) -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#127758;</span>
-      <h3>Jimmy Wales</h3>
-      <p data-i18n="idol_wales_p">Founded Wikipedia — free knowledge for every human being on the planet. One of the most quietly radical acts in the history of the internet.<sup class="fn">5</sup></p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Imagine a world in which every single person on the planet is given free access to the sum of all human knowledge. That's what we're doing."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Jimmy Wales</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — TED Talk "The birth of Wikipedia" -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
@@ -1704,12 +1658,34 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Rede, TED o.ä. -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
       </div>
     </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#129504;</span>
+      <h3>Vera F. Birkenbihl</h3>
+      <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wer aufhört zu lernen, ist alt. Egal ob mit zwanzig oder achtzig."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Vera F. Birkenbihl</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Film & Art ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_film">Film &amp; Art</h3>
+  </div>
+  <div class="values-grid reveal">
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#128247;</span>
       <h3>Sebastião Salgado</h3>
@@ -1721,7 +1697,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — "The Salt of the Earth" Trailer (Wim Wenders, 2014) -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
@@ -1759,30 +1734,6 @@
       </div>
     </div>
     <div class="value-card" x-data="{open:false}">
-      <span class="icon" style="display:block;margin-bottom:0.5rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" style="width:64px;height:64px;" role="img" aria-hidden="true">
-          <!-- Outer W shape / sword logo approximation -->
-          <polygon points="60,6 74,22 108,18 94,46 108,74 82,68 60,114 38,68 12,74 26,46 12,18 46,22" fill="#f5c518"/>
-          <polygon points="60,22 70,34 94,31 84,52 94,72 74,67 60,98 46,67 26,72 36,52 26,31 50,34" fill="#1a1a1a"/>
-          <text x="60" y="68" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-weight="900" font-size="30" fill="#f5c518" letter-spacing="-1">W</text>
-        </svg>
-      </span>
-      <h3>Wu-Tang Clan</h3>
-      <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
-
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"The tongue is like a sword — and we have the best lyrics."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— RZA</cite></blockquote><button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Cash rules everything around me. C.R.E.A.M. Get the money."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Wu-Tang Clan, C.R.E.A.M. (1993)</cite></blockquote>
-        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wu-Tang is for the children."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Ol' Dirty Bastard</cite></blockquote>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/40a5UNO5T44?si=xWBle1ZvUnK3mQGN&amp;controls=0" title="Wu-Tang Clan — Reunited" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127916;</span>
       <h3>Jim Jarmusch</h3>
       <p data-i18n="idol_jarmusch_p">Slow cinema that refuses to explain itself. Characters at the margins, deadpan silences, no moral conclusions drawn for you. He trusts the audience. That trust is a form of respect that most filmmakers can't afford — or don't bother with.</p>
@@ -1792,7 +1743,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Interview, Filmausschnitt (Paterson, Coffee and Cigarettes o.ä.) -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
@@ -1809,72 +1759,127 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Interview, Gegen die Wand Trailer o.ä. -->
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127914;</span>
+      <h3>Trey Parker &amp; Matt Stone</h3>
+      <p data-i18n="idol_southpark_p">Zwei Typen aus Colorado, die seit 1997 jeden Mächtigen verarscht haben — Kirchen, Regierungen, Konzerne, Celebrities — und dabei nie aufgehört haben, witzig zu sein. South Park ist das schärfste Gesellschaftssatire-Instrument des 20. und 21. Jahrhunderts. Und sie machen es immer noch selbst.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"We want to make the show that we want to make — and if people like it, great."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Trey Parker</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/ZXQM1YaFaSY?controls=0" title="Trey Parker &amp; Matt Stone — Making South Park" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Music ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_music">Music <span class="idols-subsection-genre">Rap &amp; Hip-Hop · Soul · Singer-Songwriter</span></h3>
+  </div>
+  <div class="values-grid reveal">
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon"><img src="icons/wutang.png" alt="Wu-Tang Clan" style="width:2.8rem;height:auto;display:block;"></span>
+      <h3>Wu-Tang Clan</h3>
+      <p data-i18n="idol_wutang_p">Nine individuals — RZA, GZA, and the rest — who built something no one had built before, fell apart, and then came back together. Protect Ya Neck. C.R.E.A.M. Forever. A collective that proved that brotherhood, craft, and independence can survive time. Reunited — because some things are worth coming back to.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wu-Tang is for the children."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Ol' Dirty Bastard</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/PBwAxmrE194?controls=0" title="Wu-Tang Clan — C.R.E.A.M." allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>Mobb Deep</h3>
+      <p data-i18n="idol_mobbdeep_p">Prodigy and Havoc from Queensbridge. The Infamous. They made music that sounded like the city at 3am — cold, precise, no exits. Shook Ones Pt. II is not just a song, it's a test. Either you pass it or you don't.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"There's a war going on outside, no man is safe from."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Mobb Deep, Survival of the Fittest (1995)</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/CIhCMkZFGsE?controls=0" title="Mobb Deep — Shook Ones Pt. II" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>The Notorious B.I.G.</h3>
+      <p data-i18n="idol_biggie_p">Christopher Wallace from Bed-Stuy. The most gifted MC to ever do it — flow, imagery, storytelling, delivery. Ready to Die is a document of a life too short. He made the struggle sound cinematic without ever lying about it.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I don't wanna live no more, sometimes I hear death knockin' at my front door."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— The Notorious B.I.G., Ready to Die (1994)</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/wKbU2MlRBNU?controls=0" title="The Notorious B.I.G. — Juicy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>2Pac — Tupac Shakur</h3>
+      <p data-i18n="idol_tupac_p">Poet, activist, contradiction, icon. He wrote from pain with the velocity of someone who knew time was short. Dear Mama. Changes. Keep Ya Head Up. He made hip-hop a place where tenderness wasn't weakness.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I'm not saying I'm gonna change the world, but I guarantee that I will spark the brain that will change the world."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— 2Pac</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/Mb1ZvUDvLDY?controls=0" title="2Pac — Dear Mama" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>SSIO — Ssiawosch Sadat</h3>
+      <p data-i18n="idol_ssio_p">Afghan-German rapper from Bonn, raised in Tannenbusch. One of the most uncompromising voices in German hip-hop — raw, self-contained, no brand deals. He builds a world out of words, completely on his own terms.<sup class="fn">11</sup></p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Du hast dich voll verändert, alle sagen das!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— SSIO</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/MJEgsRgP_Xk?controls=0" title="SSIO — Dein Leben ist gef***t (Official Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
       </div>
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127908;</span>
-      <h3>Leonard Cohen</h3>
-      <p data-i18n="idol_cohen_p">Poet, novelist, songwriter. He wrote about love, loss, faith, and failure with a precision that made clichés impossible. *Hallelujah* took years to write and decades to be understood. He released his final album three weeks before he died. Some people work until the end — not out of compulsion, but because the work is the point.</p>
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"There is a crack in everything — that's how the light gets in."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Leonard Cohen</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/bfqJcSPnlbU?si=_QE_g4MrX3sNj4MB&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#128300;</span>
-      <h3>Prof. Dr. Paula Herber</h3>
-      <p data-i18n="idol_herber_p">My professor at TU Berlin, now at the University of Münster. Formal verification, embedded systems, rigour as a method. She showed me what it looks like when someone builds something that actually holds — in software and in thought.</p>
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Quality assurance for intelligent embedded systems — making sure that what we build actually works."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Paula Herber, <a href="https://www.uni-muenster.de/EmbSys/team/herber/index.shtml" target="_blank" style="color:var(--clay);">Universität Münster</a></cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Vorlesung, Konferenzvortrag Uni Münster -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#129504;</span>
-      <h3>Vera F. Birkenbihl</h3>
-      <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
+      <h3>Megaloh — der Malocher</h3>
+      <p data-i18n="idol_megaloh_p">German hip-hop with depth, craft, and integrity. He works. No shortcuts, no sellout. The music earns its place.</p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wer aufhört zu lernen, ist alt. Egal ob mit zwanzig oder achtzig."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Vera F. Birkenbihl</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Original-Seminar (birkenbihl.tv) oder Archiv-Upload -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
-          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#127929;</span>
-      <h3>Nina Simone</h3>
-      <p data-i18n="idol_simone_p">Pianist, singer, civil rights activist. She didn't separate the music from the politics — they were the same thing. Art as testimony. Sound as resistance.</p>
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"An artist's duty, as far as I'm concerned, is to reflect the times."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Nina Simone</cite></blockquote>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Deutscher Rap ist kein HipHop! Sondern unreflektierte kulturelle Aneignung!"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Megaloh</cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/LJ25-U3jNWM?controls=0" title="Nina Simone — Mississippi Goddam" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/p18jDhMZqIc?controls=0" title="Megaloh — Muss los (Offizielles Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
       </div>
     </div>
@@ -1912,7 +1917,119 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open">
-        <!-- TODO: Video-ID eintragen — Pimpulsiv Track, z.B. "Nehm Alle" -->
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127929;</span>
+      <h3>Nina Simone</h3>
+      <p data-i18n="idol_simone_p">Pianist, singer, civil rights activist. She didn't separate the music from the politics — they were the same thing. Art as testimony. Sound as resistance.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"An artist's duty, as far as I'm concerned, is to reflect the times."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Nina Simone</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/LJ25-U3jNWM?controls=0" title="Nina Simone — Mississippi Goddam" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Leonard Cohen</h3>
+      <p data-i18n="idol_cohen_p">Poet, novelist, songwriter. He wrote about love, loss, faith, and failure with a precision that made clichés impossible. *Hallelujah* took years to write and decades to be understood. He released his final album three weeks before he died. Some people work until the end — not out of compulsion, but because the work is the point.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"There is a crack in everything — that's how the light gets in."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Leonard Cohen</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/bfqJcSPnlbU?si=_QE_g4MrX3sNj4MB&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>Mira — Berlin DJ</h3>
+      <p data-i18n="idol_mira_p">For what she builds in a room at night. Aware, precise, present. The kind of artist who knows that context is everything.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>K.I.Z</h3>
+      <p data-i18n="idol_kiz_p">Berlin hip-hop trio since 2000 — Tarek, Nico, Maxim. Sharp political satire, dark humour, uncompromising lyrics. They say what everyone thinks but no one wants to hear. Hurra die Welt geht unter. Schule der Gewalt. Frieden sei mit euch. The Batman of the left.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wir sind der Batman der linken Szene. Wir begehen das notwendige Böse und nehmen in Kauf, schlecht dazustehen."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— K.I.Z, Tagesspiegel (2022)</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/XTPGpBBwt1w?controls=0" title="K.I.Z — Hurra die Welt geht unter ft. Henning May" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── People & Action ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_people">People &amp; Action</h3>
+  </div>
+  <div class="values-grid reveal">
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128167;</span>
+      <h3>Neven Subotic</h3>
+      <p data-i18n="idol_subotic_p">Fled a war as a child. Became a Bundesliga champion. Then donated 4 million euros of his own money to bring clean water to 450,000 people in East Africa — during his playing career, not after.<sup class="fn">1</sup> Zero administrative overhead. He connects lived experience of displacement to structural action. That is rare. — I was a BVB fan until the club invested in Rheinmetall. After that it became just another club.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"I define myself more by my contribution to society. I want to make a difference — that's more important to me than any championship."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Neven Subotic</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#9878;&#65039;</span>
+      <h3>Gregor Gysi</h3>
+      <p data-i18n="idol_gysi_p">German lawyer and longtime face of Die Linke — the sharpest rhetorician in the Bundestag for three decades. He doesn't pretend capitalism is neutral, and he says so with wit sharp enough to make the right laugh at their own expense. Principled, precise, and still fighting at 76.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Der Kapitalismus kann vieles — aber er hat große Schwierigkeiten mit Gerechtigkeit und Nachhaltigkeit."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Gregor Gysi</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/ZA3sNM1vPIg?controls=0" title="Gregor Gysi — Rede des Jahres, Bundestag 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#9994;</span>
+      <h3>Die Jungs vom 36</h3>
+      <p data-i18n="idol_boys36_p">After the Wall fell, Kreuzberg 36 was flooded with neo-nazis moving in from the East. The boys from SO36 didn't wait for the state. They cleared the streets themselves — systematically, block by block. Kreuzberg stayed Kreuzberg. Thank you.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
@@ -1921,6 +2038,7 @@
   </div>
 </section>
 
+<!-- Contact -->
 <!-- Contact -->
 <section id="contact">
   <div class="reveal">

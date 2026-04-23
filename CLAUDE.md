@@ -5,6 +5,7 @@ Personal homepage for Stefan-Olav Hüllinghorst, hosted on GitHub Pages at [stee
 
 ## Tech stack
 Plain HTML/CSS/JS — no build tools, no frameworks, no dependencies beyond Google Fonts.
+Vue.js is used for the CareerGraph project (separate repo), not for this homepage.
 
 ## Aesthetic
 Earthy/natural: warm creams, clay, moss greens, bark browns. Serif headings (Cormorant Garamond), sans-serif body (Jost). Grain overlay, smooth scroll reveals, minimal animations.
@@ -60,8 +61,6 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 - All user-facing strings that appear in multiple languages must have a `data-i18n="key"` attribute pointing to an entry in `i18n.js`.
 - Hardcoded content (personal names, addresses, URLs) does not need i18n keys.
 
-### Section size cap
-- No section (values, idols, support, tools, etc.) may contain more than **23 items**. If a new addition would exceed 23, flag it to the user before proceeding.
 
 ### Footnote numbering (current state)
 | # | Subject |
@@ -122,6 +121,28 @@ test('all data-i18n keys exist in every language block', () => {
   });
 });
 ```
+
+## Post-deploy responsiveness test
+
+After each deployment, manually verify the UI at three breakpoints using browser DevTools (or a real device):
+
+| Breakpoint | Width | What to check |
+|---|---|---|
+| Mobile | 375px (iPhone SE) | Cards stack to single column, no horizontal scroll, idol cards fully readable, nav links don't overflow |
+| Tablet | 768px (iPad) | 2-column grid, images not clipped, blockquotes don't overflow |
+| Desktop | 1280px | 3+ column grid, no layout shift, section max-width respected |
+
+**Automated check (axe-cli):**
+```bash
+npx axe http://localhost:8080 --exit
+```
+
+**Quick local server:**
+```bash
+cd /home/steef/stefan-site && python3 -m http.server 8080
+```
+
+The key responsive rule for `.values-grid` is `minmax(min(240px, 100%), 1fr)` — the `min()` prevents cards from overflowing their container on narrow viewports.
 
 ## Code quality & consistency checks
 

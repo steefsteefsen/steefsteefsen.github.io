@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mixxx - Page Not found</title>
+    <meta name="google-site-verification" content="e7xeN8MhmdNedrrTVu7RRKXNl_8UBjg418brYV3XIPE" />
+    <meta name="description" content="Download the most advanced FREE DJ software available, featuring iTunes integration, MIDI controller support, internet broadcasting, and integrated music library.">
+    <meta name="keywords" content="dj, dj software, free dj software, mixxx, dj mix, mp3 dj, mix mp3, download, crossfader, digital dj, beatmix, beatmixing, mp3, open source, mixing, mixer"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link href="https://plus.google.com/102441931224839455484" rel="publisher">
+    <link href="https://mixxx.org/feed.xml" type="application/atom+xml" rel="alternate" title="Mixxx Atom Feed" />
+
+    <!-- Open Graph Protocol metadata (e.g. for Facebook, https://ogp.me/) -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://mixxx.org/error.html"/>
+    <meta property="og:image" content="https://mixxx.org/theme/images/splash-1080x717.png"/>
+    <meta property="og:image:width" content="1080"/>
+    <meta property="og:image:height" content="717"/>
+
+    <!-- Optional OGP metadata -->
+    <meta property="og:description" content=""/>
+    <meta property="og:site_name" content="Mixxx DJ Software"/>
+    <meta property="article:publisher" content="https://www.facebook.com/pages/Mixxx-DJ-Software/21723485212"/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="https://mixxx.org/theme/images/favicon.ico">
+
+    <link rel="stylesheet" href="https://mixxx.org/theme/css/raleway.css">
+    <link rel="stylesheet" href="https://mixxx.org/theme/css/normalize.css">
+    <link rel="stylesheet" href="https://mixxx.org/theme/css/barebones.css">
+    <link rel="stylesheet" href="https://mixxx.org/theme/css/custom.css">
+
+    <script src="https://mixxx.org/theme/js/video.js"></script>
+
+    <!-- Preload fonts to avoid flash of unstyled text (FOUT) -->
+    <link rel="preload" href="https://mixxx.org/theme/fonts/raleway-v14-latin-ext_latin-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://mixxx.org/theme/fonts/raleway-v14-latin-ext_latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://mixxx.org/theme/fonts/raleway-v14-latin-ext_latin-600.woff2" as="font" type="font/woff2" crossorigin>
+
+<script src="https://mixxx.org/theme/js/error.js"></script>
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+
+    <div id="main-container">
+
+<div class="navbar-spacer"></div>
+<nav id="navbar" class="navbar">
+  <div class="container navbar-main">
+    <span class="navbar-item navbar-logo">
+      <a class="navbar-link" href="https://mixxx.org/">
+        <img src="https://mixxx.org/theme/images/mixxx-logo.svg" alt="Mixxx">
+      </a>
+    </span>
+    <input class="navbar-hamburger-button" type="checkbox" id="navbar-hamburger-button" />
+    <label class="navbar-hamburger-icon" for="navbar-hamburger-button"><span class="navicon"></span></label>
+    <ul class="navbar-list navbar-hamburger-content">
+      <li class="navbar-item ">
+        <a class="navbar-link" href="/news">News</a>
+      </li>
+      <li class="navbar-item has-dropdown">
+        <a class="navbar-link" href="/discover">Discover</a>
+        <ul class="navbar-list navbar-dropdown">
+          <li class="navbar-item">
+            <a class="navbar-link" href="/features">Features</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="/screenshots">Screenshots</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="/press">Press</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="/contact">Contact&nbsp;&&nbsp;Team</a>
+          </li>
+        </ul>
+      </li>
+      <li class="navbar-item has-dropdown">
+        <a class="navbar-link" href="/support">Support&nbsp;&&nbsp;Community</a>
+        <ul class="navbar-list navbar-dropdown">
+          <li class="navbar-item">
+            <a class="navbar-link" href="/manual/latest">Manual</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="https://mixxx.discourse.group/">Forums</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="https://github.com/mixxxdj/mixxx/issues/">Bug&nbsp;Tracker</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="https://github.com/mixxxdj/mixxx/wiki">Wiki</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="/get-involved">Get&nbsp;Involved</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="/ev">Mixxx&nbsp;e.V.</a>
+          </li>
+        </ul>
+      </li>
+      <li class="navbar-item navbar-download-button">
+        <span class="navbar-link">
+          <a class="button button-primary" href="https://mixxx.org/download">Download</a>
+        </span>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="docs-section container">
+  <h1>We're sorry!</h1>
+  <p>The page <strong id="error-path"></strong> couldn't be found.</p>
+</div>
+
+<div id="footer" class="footer docs-section">
+  <div class="box-center">
+    <div class="grid-container thirds">
+      <div>
+        <h2 class="docs-header">Pages</h2>
+        <ul>
+          <li><a href="https://mixxx.org/index">Overview</a></li>
+          <li><a href="https://mixxx.org/features">Features</a></li>
+          <li><a href="https://mixxx.org/press">Press</a></li>
+          <li><a href="https://mixxx.org/support">Support</a></li>
+          <li><a href="https://mixxx.org/get-involved">Get Involved</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="docs-header">Community</h2>
+        <ul>
+          <li><a href="https://mixxx.discourse.group/">Forums</a></li>
+          <li>
+            <a class="mastodon social_icon" href="https://floss.social/@mixxx" target="_blank">
+              <img src="https://mixxx.org/theme/images/social_icons/mastodon.svg" alt="Mastodon">
+              <span>Mastodon</span>
+            </a>
+          </li>
+          <li>
+            <a class="facebook social_icon" href="https://www.facebook.com/mixxxdj/" target="_blank">
+              <img src="https://mixxx.org/theme/images/social_icons/facebook.svg" alt="Facebook">
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a class="zulip social_icon" href="https://mixxx.zulipchat.com" target="_blank">
+              <img src="https://mixxx.org/theme/images/social_icons/zulip.svg" alt="Zulip">
+              <span>Zulip</span>
+            </a>
+          </li>
+          <li>
+            <a class="github social_icon" href="https://github.com/mixxxdj/mixxx" target="_blank">
+              <img src="https://mixxx.org/theme/images/social_icons/github.svg" alt="GitHub">
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="docs-header">About</h2>
+        <ul>
+          <li><a href="https://mixxx.org/news">News</a> (<a href="https://mixxx.org/news/archives">Archives</a>, <a href="https://mixxx.org/feed.xml">Feed</a>)</li>
+          <li><a href="https://mixxx.org/contact">Contact</a></li>
+          <li><a href="https://mixxx.org/imprint">Imprint/Impressum</a></li>
+          <li><a href="https://mixxx.org/privacy-policy">Privacy Policy</a></li>
+          <li><a href="https://github.com/mixxxdj/mixxx/wiki">Wiki</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    &copy; 2001-2024 Mixxx Development Team<br>
+    Logo by Paul Bloch<br>
+    <a href="https://www.netlify.com/" target="_blank">This site is powered by Netlify.</a>
+  </div>
+</div>    </div>
+  </body>
+</html>
