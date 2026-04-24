@@ -237,6 +237,110 @@ smoke-test-live:
       done
   allow_failure: false
 
+# ── CD: headless mobile render test (burger menu) ─────────
+mobile-render-test:
+  stage: deploy-verify
+  image: node:20-bullseye-slim
+  needs: [smoke-test-live]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - apt-get update && apt-get install -y --no-install-recommends chromium ca-certificates fonts-liberation libnss3 libatk-bridge2.0-0 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 libpango-1.0-0 libcairo2
+    - npm install --no-save puppeteer-core@23
+    - |
+      cat > /tmp/mobile-render.js <<'EOF'
+      const puppeteer = require('puppeteer-core');
+      const SITE = process.env.SITE_URL || 'https://steefsteefsen.github.io';
+      const VIEWPORTS = [
+        { name: 'iphone-se', width: 375, height: 667 },
+        { name: 'pixel-5',   width: 393, height: 851 },
+      ];
+
+      (async () => {
+        const browser = await puppeteer.launch({
+          executablePath: '/usr/bin/chromium',
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          headless: 'new',
+        });
+        let failures = 0;
+
+        for (const vp of VIEWPORTS) {
+          const page = await browser.newPage();
+          await page.setViewport({ width: vp.width, height: vp.height, isMobile: true, hasTouch: true });
+          await page.goto(SITE, { waitUntil: 'networkidle2', timeout: 30000 });
+
+          const report = await page.evaluate(() => {
+            const burger = document.getElementById('burger');
+            const nav = document.getElementById('main-nav');
+            const navLinks = document.getElementById('main-nav-links');
+            if (!burger) return { ok: false, reason: 'burger element missing' };
+            const cs = getComputedStyle(burger);
+            if (cs.display === 'none') return { ok: false, reason: 'burger CSS display:none on mobile' };
+            if (cs.visibility === 'hidden') return { ok: false, reason: 'burger visibility:hidden' };
+            const rect = burger.getBoundingClientRect();
+            if (rect.width < 1 || rect.height < 1) return { ok: false, reason: 'burger has zero size' };
+
+            const vw = window.innerWidth;
+            if (rect.right > vw + 1) return { ok: false, reason: `burger overflows viewport: right=${rect.right} vw=${vw}` };
+            if (rect.right < vw * 0.7) return { ok: false, reason: `burger not on the right side: right=${rect.right} vw=${vw}` };
+
+            // Nothing must overlap the burger's center point
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const topEl = document.elementFromPoint(cx, cy);
+            if (topEl && topEl !== burger && !burger.contains(topEl)) {
+              return { ok: false, reason: `burger is covered by <${topEl.tagName} class="${topEl.className}">` };
+            }
+
+            return {
+              ok: true,
+              rect: { x: rect.left, y: rect.top, w: rect.width, h: rect.height, right: rect.right },
+              vw,
+            };
+          });
+
+          if (!report.ok) {
+            console.error(`FAIL [${vp.name} ${vp.width}x${vp.height}] ${report.reason}`);
+            failures++;
+          } else {
+            console.log(`OK   [${vp.name} ${vp.width}x${vp.height}] burger at right=${report.rect.right.toFixed(0)} of ${report.vw}`);
+          }
+
+          // Tap the burger and confirm the menu opens
+          try {
+            await page.evaluate(() => document.getElementById('burger').click());
+            await page.waitForFunction(
+              () => document.getElementById('main-nav').classList.contains('open'),
+              { timeout: 2000 }
+            );
+            const linksVisible = await page.evaluate(() => {
+              const links = document.querySelectorAll('#main-nav-links a');
+              if (!links.length) return false;
+              const r = links[0].getBoundingClientRect();
+              return r.width > 0 && r.height > 0;
+            });
+            if (!linksVisible) {
+              console.error(`FAIL [${vp.name}] tapping burger did not make nav links visible`);
+              failures++;
+            } else {
+              console.log(`OK   [${vp.name}] burger tap opens the menu`);
+            }
+          } catch (e) {
+            console.error(`FAIL [${vp.name}] burger tap failed: ${e.message}`);
+            failures++;
+          }
+
+          await page.close();
+        }
+
+        await browser.close();
+        process.exit(failures === 0 ? 0 : 1);
+      })().catch((e) => { console.error('ERROR', e); process.exit(2); });
+      EOF
+    - SITE_URL="$SITE_URL" node /tmp/mobile-render.js
+  allow_failure: false
+
 # ── Mirror to GitHub (after pipeline passes) ───
 mirror-to-github:
   stage: mirror

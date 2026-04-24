@@ -8,18 +8,24 @@
   },
   "devDependencies": {
     "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.0.0"
+    "jest-environment-jsdom": "^29.0.0",
+    "puppeteer-core": "^23.11.1"
   },
   "jest": {
     "testEnvironment": "jsdom",
     "rootDir": "..",
-    "testMatch": ["<rootDir>/tests/**/*.test.js"],
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.js"
+    ],
     "coverageProvider": "v8",
     "collectCoverageFrom": [
       "<rootDir>/i18n.js"
     ],
     "coverageDirectory": "logs/coverage",
-    "coverageReporters": ["text", "cobertura"],
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ],
     "coverageThreshold": {
       "global": {
         "statements": 90,

@@ -1050,10 +1050,20 @@
 
   /* ── Mobile ── */
   @media (max-width: 700px) {
-    nav { padding: 1rem 1.5rem; }
+    /* Logo on the left, burger pinned to the right, nothing in between. */
+    nav {
+      padding: 1rem 1.5rem;
+      justify-content: flex-start;
+    }
+    nav .logo { margin-right: auto; }
 
-    .burger { display: block; }
+    .burger {
+      display: block;
+      order: 10;           /* force to the right of every sibling */
+      margin-left: auto;
+    }
 
+    /* Full-screen overlay menu */
     nav .nav-links {
       position: fixed;
       inset: 0;
@@ -1072,12 +1082,17 @@
     nav.open .nav-links { transform: translateY(0); }
     nav .nav-links a { font-size: 1rem; letter-spacing: 0.14em; }
 
-    /* Language switcher sits in the overlay too */
+    /* Language switcher only visible inside the open overlay, as a row below the links. */
     nav .lang-switcher {
+      display: none;
+    }
+    nav.open .lang-switcher {
+      display: block;
       position: fixed;
-      top: 1rem;
-      right: 4rem;
-      z-index: 110;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 106;
     }
 
     section { padding: 4.5rem 1.5rem; }

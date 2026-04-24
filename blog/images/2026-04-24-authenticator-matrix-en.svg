@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 640" role="img" aria-label="Die drei Wächter der 2FA: Ente Auth, Bitwarden und der KeePassXC-Gatekeeper" class="guardians-svg">
-<title>Die drei Wachter der 2FA 2026</title>
-<desc>Cartoon mit Ente (Ente Auth), Warden (Bitwarden) und Gatekeeper (KeePassXC), der die abgelehnten Apps Authy, LastPass, Raivo OTP und Tofu abweist.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 640" role="img" aria-label="The three guardians of 2FA: Ente Auth, Bitwarden, and the KeePassXC gatekeeper" class="guardians-svg">
+<title>The Three Guardians of 2FA 2026</title>
+<desc>Cartoon with a duck (Ente Auth), a Warden (Bitwarden), and a gatekeeper (KeePassXC) turning away the rejected apps Authy, LastPass, Raivo OTP, and Tofu.</desc>
 <rect x="0" y="0" width="680" height="640" fill="#faf7f0"/>
 <style>
 .t_title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 22px; font-weight: 500; fill: #1a1a1a; }
@@ -12,13 +12,13 @@
 .t_tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 500; fill: #5a5a5a; }
 .t_qk { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 500; fill: #6b5b2e; font-style: italic; }
 </style>
-<text x="340" y="38" class="t_title" text-anchor="middle">Die drei Wächter der 2FA</text>
-<text x="340" y="60" class="t_sub" text-anchor="middle">Ein Entchen, ein Warden, ein Gatekeeper — April 2026</text>
+<text x="340" y="38" class="t_title" text-anchor="middle">The Three Guardians of 2FA</text>
+<text x="340" y="60" class="t_sub" text-anchor="middle">A little duck, a Warden, a gatekeeper — April 2026</text>
 
 <g id="speech-bubble">
   <path d="M 330 108 Q 330 96 344 96 L 620 96 Q 634 96 634 108 L 634 160 Q 634 172 620 172 L 430 172 L 440 196 L 412 172 L 344 172 Q 330 172 330 160 Z" fill="#fffbf0" stroke="#8b6f1a" stroke-width="1.5"/>
   <text x="482" y="128" class="t_spch" text-anchor="middle">„You shall not pass!"</text>
-  <text x="482" y="152" class="t_tiny" text-anchor="middle" style="fill: #6b5b2e;">— an Authy, LastPass, Raivo OTP, Tofu</text>
+  <text x="482" y="152" class="t_tiny" text-anchor="middle" style="fill: #6b5b2e;">— to Authy, LastPass, Raivo OTP, Tofu</text>
 </g>
 
 <line x1="40" y1="420" x2="640" y2="420" stroke="#c0c0c0" stroke-width="0.5" stroke-dasharray="2,3"/>
@@ -114,9 +114,9 @@
 
 <text x="150" y="448" class="t_lbl" text-anchor="middle">Ente Auth</text>
 <text x="150" y="464" class="t_tiny" text-anchor="middle">Quack-proof · Cure53 × 2</text>
-<text x="340" y="448" class="t_lbl" text-anchor="middle">Der Warden</text>
-<text x="340" y="464" class="t_tiny" text-anchor="middle">Sync-Toggle AUS · Pflicht</text>
-<text x="530" y="448" class="t_lbl" text-anchor="middle">Der Gatekeeper</text>
+<text x="340" y="448" class="t_lbl" text-anchor="middle">The Warden</text>
+<text x="340" y="464" class="t_tiny" text-anchor="middle">Sync toggle OFF · mandatory</text>
+<text x="530" y="448" class="t_lbl" text-anchor="middle">The Gatekeeper</text>
 <text x="530" y="464" class="t_tiny" text-anchor="middle">KeePassXC · self-hosted</text>
 
 <g id="rejected-cards" transform="translate(40, 484)">
