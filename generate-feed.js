@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 // Run: node generate-feed.js
-// Reads blog/posts.json and writes feed.xml (RSS 2.0)
+// Reads blog/posts.json and writes feed.xml (RSS 2.0, DE items) and feed-en.xml (EN items).
 
 const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://steefsteefsen.github.io';
-const TITLE = 'Stefan-Olav Hüllinghorst — Blog';
-const DESCRIPTION = 'Gedanken aus dem täglichen Leben.';
 const AUTHOR = 'Stefan-Olav Hüllinghorst';
 
 const postsPath = path.join(__dirname, 'blog', 'posts.json');
@@ -27,31 +25,43 @@ function toRFC822(dateStr) {
   return new Date(dateStr).toUTCString();
 }
 
-const items = sorted.map(p => `
+function buildFeed(lang, title, description, outFile) {
+  const items = sorted
+    .filter(p => p.translations && p.translations[lang])
+    .map(p => {
+      const t = p.translations[lang];
+      return `
   <item>
-    <title>${escape(p.title)}</title>
-    <link>${SITE_URL}/blog/posts/${escape(p.slug)}.html</link>
-    <guid isPermaLink="true">${SITE_URL}/blog/posts/${escape(p.slug)}.html</guid>
+    <title>${escape(t.title)}</title>
+    <link>${SITE_URL}/blog/posts/${escape(t.slug)}.html</link>
+    <guid isPermaLink="true">${SITE_URL}/blog/posts/${escape(t.slug)}.html</guid>
     <pubDate>${toRFC822(p.date)}</pubDate>
-    <description>${escape(p.teaser)}</description>
+    <description>${escape(t.teaser)}</description>
     <author>${escape(AUTHOR)}</author>
-  </item>`).join('');
+  </item>`;
+    })
+    .join('');
 
-const lastBuildDate = sorted.length ? toRFC822(sorted[0].date) : new Date().toUTCString();
+  const lastBuildDate = sorted.length ? toRFC822(sorted[0].date) : new Date().toUTCString();
+  const feedUrl = lang === 'de' ? `${SITE_URL}/feed.xml` : `${SITE_URL}/feed-${lang}.xml`;
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escape(TITLE)}</title>
+    <title>${escape(title)}</title>
     <link>${SITE_URL}/blog/</link>
-    <description>${escape(DESCRIPTION)}</description>
-    <language>de</language>
+    <description>${escape(description)}</description>
+    <language>${lang}</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml"/>
 ${items}
   </channel>
 </rss>`;
 
-const outPath = path.join(__dirname, 'feed.xml');
-fs.writeFileSync(outPath, xml, 'utf8');
-console.log(`feed.xml geschrieben — ${sorted.length} Einträge.`);
+  fs.writeFileSync(path.join(__dirname, outFile), xml, 'utf8');
+  const count = sorted.filter(p => p.translations && p.translations[lang]).length;
+  console.log(`${outFile} geschrieben — ${count} Einträge (${lang}).`);
+}
+
+buildFeed('de', 'Stefan-Olav Hüllinghorst — Blog', 'Gedanken aus dem täglichen Leben.', 'feed.xml');
+buildFeed('en', 'Stefan-Olav Hüllinghorst — Blog', 'Thoughts from everyday life.', 'feed-en.xml');

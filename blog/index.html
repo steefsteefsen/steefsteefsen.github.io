@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Stefan-Olav Hüllinghorst</title>
 <meta name="description" content="Gedanken aus dem täglichen Leben von Stefan-Olav Hüllinghorst.">
-<link rel="alternate" type="application/rss+xml" title="Stefan-Olav Hüllinghorst — Blog" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Stefan-Olav Hüllinghorst — Blog (DE)" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Stefan-Olav Hüllinghorst — Blog (EN)" href="/feed-en.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -118,6 +119,14 @@
     max-width: 480px;
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
   .rss-link {
     display: inline-flex;
     align-items: center;
@@ -130,13 +139,55 @@
     border: 1px solid rgba(201,169,110,0.4);
     padding: 0.35rem 0.75rem;
     border-radius: 3px;
-    margin-bottom: 3rem;
     transition: background 0.2s, color 0.2s;
   }
 
   .rss-link:hover {
     background: var(--clay);
     color: var(--cream);
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .lang-toggle button {
+    background: transparent;
+    border: none;
+    padding: 0.35rem 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .lang-toggle button:hover {
+    color: var(--bark);
+  }
+
+  .lang-toggle button.active {
+    background: var(--clay);
+    color: var(--cream);
+  }
+
+  .post-lang-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--stone);
+    border: 1px solid rgba(140, 123, 107, 0.3);
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
   }
 
   #posts-list { list-style: none; }
@@ -210,14 +261,20 @@
 </nav>
 
 <main>
-  <p class="page-label">Blog</p>
-  <h1>Aus dem täglichen Leben</h1>
-  <p class="page-intro">Gedanken, Beobachtungen, Momente. Keine Agenda — nur ehrliche Aufzeichnungen.</p>
+  <p class="page-label" id="page-label">Blog</p>
+  <h1 id="page-title">Aus dem täglichen Leben</h1>
+  <p class="page-intro" id="page-intro">Gedanken, Beobachtungen, Momente. Keine Agenda — nur ehrliche Aufzeichnungen.</p>
 
-  <a class="rss-link" href="/feed.xml">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="19" r="2"/><path d="M4 4a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4zm0 6a10 10 0 0 1 10 10h-3A7 7 0 0 0 4 13v-3z"/></svg>
-    RSS abonnieren
-  </a>
+  <div class="header-actions">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <button type="button" data-lang="de" class="active">DE</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <a class="rss-link" id="rss-link" href="/feed.xml">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="19" r="2"/><path d="M4 4a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4zm0 6a10 10 0 0 1 10 10h-3A7 7 0 0 0 4 13v-3z"/></svg>
+      <span id="rss-label">RSS abonnieren</span>
+    </a>
+  </div>
 
   <ul id="posts-list">
     <li class="empty-state">Einträge werden geladen…</li>
@@ -230,37 +287,117 @@
 </footer>
 
 <script>
-  async function loadPosts() {
+  const UI = {
+    de: {
+      label: 'Blog',
+      title: 'Aus dem täglichen Leben',
+      intro: 'Gedanken, Beobachtungen, Momente. Keine Agenda — nur ehrliche Aufzeichnungen.',
+      rss: 'RSS abonnieren',
+      rssHref: '/feed.xml',
+      empty: 'Noch keine Einträge.',
+      error: 'Einträge konnten nicht geladen werden.',
+      htmlLang: 'de',
+      locale: 'de-DE',
+      onlyLangTag: 'nur auf Deutsch',
+    },
+    en: {
+      label: 'Blog',
+      title: 'From everyday life',
+      intro: 'Thoughts, observations, moments. No agenda — just honest notes.',
+      rss: 'Subscribe via RSS',
+      rssHref: '/feed-en.xml',
+      empty: 'No posts yet.',
+      error: 'Posts could not be loaded.',
+      htmlLang: 'en',
+      locale: 'en-US',
+      onlyLangTag: 'German only',
+    },
+  };
+
+  function getInitialLang() {
+    const url = new URL(window.location.href);
+    const q = url.searchParams.get('lang');
+    if (q === 'de' || q === 'en') return q;
+    const stored = localStorage.getItem('blog_lang');
+    if (stored === 'de' || stored === 'en') return stored;
+    const nav = (navigator.language || 'de').toLowerCase();
+    return nav.startsWith('en') ? 'en' : 'de';
+  }
+
+  function applyChrome(lang) {
+    const t = UI[lang];
+    document.documentElement.setAttribute('lang', t.htmlLang);
+    document.getElementById('page-label').textContent = t.label;
+    document.getElementById('page-title').textContent = t.title;
+    document.getElementById('page-intro').textContent = t.intro;
+    document.getElementById('rss-label').textContent = t.rss;
+    document.getElementById('rss-link').setAttribute('href', t.rssHref);
+    document.querySelectorAll('.lang-toggle button').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  }
+
+  function renderPosts(posts, lang) {
+    const list = document.getElementById('posts-list');
+    const t = UI[lang];
+
+    if (!posts.length) {
+      list.innerHTML = `<li class="empty-state">${t.empty}</li>`;
+      return;
+    }
+
+    list.innerHTML = posts
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map(p => {
+        const tr = p.translations || {};
+        const primary = tr[lang];
+        const fallback = tr.de;
+        const entry = primary || fallback;
+        if (!entry) return '';
+
+        const d = new Date(p.date);
+        const dateStr = d.toLocaleDateString(t.locale, { day: 'numeric', month: 'long', year: 'numeric' });
+        const fallbackTag = !primary && fallback ? `<span class="post-lang-tag">${t.onlyLangTag}</span>` : '';
+
+        return `
+          <li>
+            <p class="post-date">${dateStr}</p>
+            <h2 class="post-title"><a href="/blog/posts/${entry.slug}.html">${entry.title}</a>${fallbackTag}</h2>
+            <p class="post-teaser">${entry.teaser}</p>
+          </li>`;
+      })
+      .join('');
+  }
+
+  async function loadPosts(lang) {
     const list = document.getElementById('posts-list');
     try {
       const res = await fetch('/blog/posts.json');
       const posts = await res.json();
-
-      if (!posts.length) {
-        list.innerHTML = '<li class="empty-state">Noch keine Einträge.</li>';
-        return;
-      }
-
-      list.innerHTML = posts
-        .slice()
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .map(p => {
-          const d = new Date(p.date);
-          const dateStr = d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
-          return `
-            <li>
-              <p class="post-date">${dateStr}</p>
-              <h2 class="post-title"><a href="/blog/posts/${p.slug}.html">${p.title}</a></h2>
-              <p class="post-teaser">${p.teaser}</p>
-            </li>`;
-        })
-        .join('');
+      renderPosts(posts, lang);
     } catch {
-      list.innerHTML = '<li class="empty-state">Einträge konnten nicht geladen werden.</li>';
+      list.innerHTML = `<li class="empty-state">${UI[lang].error}</li>`;
     }
   }
 
-  loadPosts();
+  function setLang(lang, updateUrl = true) {
+    localStorage.setItem('blog_lang', lang);
+    applyChrome(lang);
+    loadPosts(lang);
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
+    }
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+  });
+
+  const initialLang = getInitialLang();
+  setLang(initialLang, false);
 </script>
 
 </body>

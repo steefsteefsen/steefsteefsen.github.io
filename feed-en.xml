@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stefan-Olav Hüllinghorst — Blog</title>
+    <link>https://steefsteefsen.github.io/blog/</link>
+    <description>Thoughts from everyday life.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
+
+  <item>
+    <title>The Three Guardians of 2FA</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix-en.html</guid>
+    <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
+    <description>After the Authy meltdown and the ongoing LastPass fallout: 22 authenticator apps compared. Three survive, five get kicked out.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
+  <item>
+    <title>ICE 541, from little-b to big-B</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-20-ice-541-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-20-ice-541-en.html</guid>
+    <pubDate>Mon, 20 Apr 2026 00:00:00 GMT</pubDate>
+    <description>€90 ticket. €11.50 coffee and a roll. Free of charge: getting barked at in the dining car by someone in the worst possible mood. Service means SERVICE.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
+  </channel>
+</rss>

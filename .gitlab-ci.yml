@@ -184,12 +184,12 @@ smoke-test-live:
     - |
       # Wait for the GitHub mirror push to propagate to Pages.
       # The mirror-to-github job runs before this stage, but Pages takes
-      # 30-120s to rebuild. Poll the blog posts.json for the newest slug
+      # 30-120s to rebuild. Poll the blog posts.json for the newest DE slug
       # from local HEAD, up to ~3 minutes.
-      NEWEST_SLUG=$(jq -r '. | sort_by(.date) | reverse | .[0].slug' blog/posts.json)
+      NEWEST_SLUG=$(jq -r '. | sort_by(.date) | reverse | .[0].translations.de.slug' blog/posts.json)
       echo "Waiting for live deploy to include newest slug: $NEWEST_SLUG"
       for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
-        LIVE=$(curl -sf --max-time 15 "$SITE_URL/blog/posts.json" | jq -r '. | sort_by(.date) | reverse | .[0].slug' 2>/dev/null || echo "")
+        LIVE=$(curl -sf --max-time 15 "$SITE_URL/blog/posts.json" | jq -r '. | sort_by(.date) | reverse | .[0].translations.de.slug' 2>/dev/null || echo "")
         if [ "$LIVE" = "$NEWEST_SLUG" ]; then
           echo "Deploy visible (attempt $i/12): newest slug = $LIVE"
           break
@@ -203,7 +203,7 @@ smoke-test-live:
       fi
     - |
       echo "=== Smoke-testing live site: $SITE_URL ==="
-      for page in "" "/invest.html" "/impressum.html" "/open-letter.html" "/open-letter-watzke.html" "/blog/" "/feed.xml"; do
+      for page in "" "/invest.html" "/impressum.html" "/open-letter.html" "/open-letter-watzke.html" "/blog/" "/feed.xml" "/feed-en.xml"; do
         url="$SITE_URL$page"
         status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$url")
         if [ "$status" = "200" ]; then
@@ -223,8 +223,8 @@ smoke-test-live:
         exit 1
       fi
     - |
-      echo "=== Verifying every blog post in posts.json is reachable ==="
-      SLUGS=$(jq -r '.[].slug' blog/posts.json)
+      echo "=== Verifying every blog post translation in posts.json is reachable ==="
+      SLUGS=$(jq -r '[.[].translations | to_entries[] | .value.slug] | .[]' blog/posts.json)
       for slug in $SLUGS; do
         url="$SITE_URL/blog/posts/$slug.html"
         status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$url")

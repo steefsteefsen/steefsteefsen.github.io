@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Die drei Wächter der 2FA — Stefan-Olav Hüllinghorst</title>
-<meta name="description" content="Nach dem Authy-Desastre und dem LastPass-Fallout: 22 Authenticator-Apps verglichen. Drei bleiben übrig, fünf fliegen raus.">
+<title>The Three Guardians of 2FA — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="After the Authy meltdown and the ongoing LastPass fallout: 22 authenticator apps compared. Three survive, five get kicked out.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -244,109 +244,107 @@
   <a href="/" class="logo">S.O. Hüllinghorst</a>
   <div class="nav-right">
     <div class="lang-toggle" role="group" aria-label="Sprache / Language">
-      <a href="/blog/posts/2026-04-24-authenticator-matrix.html" class="active">DE</a>
-      <a href="/blog/posts/2026-04-24-authenticator-matrix-en.html">EN</a>
+      <a href="/blog/posts/2026-04-24-authenticator-matrix.html">DE</a>
+      <a href="/blog/posts/2026-04-24-authenticator-matrix-en.html" class="active">EN</a>
     </div>
-    <a href="/blog/" class="back-link">← Blog</a>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
   </div>
 </nav>
 
 <main>
-  <p class="post-meta">24. April 2026</p>
-  <h1>Die drei Wächter der 2FA</h1>
+  <p class="post-meta">April 24, 2026</p>
+  <h1>The Three Guardians of 2FA</h1>
 
   <figure class="post-hero">
-    <img src="/blog/images/2026-04-24-authenticator-matrix.svg" alt="Drei Figuren — ein Entchen (Ente Auth), ein Warden (Bitwarden) und ein Gatekeeper (KeePassXC) — weisen die Apps Authy, LastPass, Raivo OTP, FreeOTP+ und Tofu ab.">
+    <img src="/blog/images/2026-04-24-authenticator-matrix.svg" alt="Three characters — a duck (Ente Auth), a Warden (Bitwarden) and a Gatekeeper (KeePassXC) — turning away Authy, LastPass, Raivo OTP, FreeOTP+ and Tofu.">
   </figure>
 
   <div class="post-body">
     <p>
-      Im August 2024 hat Twilio den Authy-Desktop abgeschaltet. Einen Monat davor
-      lagen 33 Millionen Authy-Telefonnummern bei ShinyHunters auf dem Tisch.
-      Und LastPass kassiert bis heute die Strafzettel aus dem 2022er-Breach —
-      zuletzt 1,2 Mio £ vom britischen ICO, dazu eine 24,5-Mio-$-Sammelklage.
+      In August 2024, Twilio killed the Authy desktop apps. One month earlier,
+      33 million Authy phone numbers had landed on ShinyHunters' table. And
+      LastPass is still collecting fines from the 2022 breach — most recently
+      £1.2 M from the UK ICO, plus a $24.5 M class action.
     </p>
 
     <p>
-      <em>Korrektur (24. April 2026): Ich hatte FreeOTP+ als „stale" eingestuft —
-      das ist falsch. Release 3.2 ist am 24. März 2026 erschienen, die letzten
-      Commits sind vom 12. April 2026. FreeOTP+ ist aktiv gepflegt; es bleibt
-      Android-only mit eingeschränkterem Import als Aegis, aber es ist nicht tot.
-      Danke für den Hinweis.</em>
+      <em>Correction (April 24, 2026): I had listed FreeOTP+ as "stale" — that's
+      wrong. Release 3.2 shipped on March 24, 2026 and the latest commits are
+      from April 12, 2026. FreeOTP+ is actively maintained; it remains
+      Android-only and with narrower import support than Aegis, but it's
+      not dead. Thanks for the catch.</em>
     </p>
 
     <p>
-      Also: Frühjahrsputz im 2FA-Regal. Ich habe <strong>22 Authenticator-Apps</strong>
-      verglichen — nach Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor
-      dem Nutzer, in genau dieser Reihenfolge. Übrig bleiben drei, die ich ruhigen
-      Gewissens empfehle.
+      Time for a spring-clean of the 2FA shelf. I compared
+      <strong>22 authenticator apps</strong> — ranked by reliability, security,
+      privacy, and respect for the user, in that order. Three survive.
     </p>
 
-    <h2>Die drei Wächter</h2>
+    <h2>The three guardians</h2>
 
     <p>
-      <strong>Ente Auth</strong> — Open Source, Ende-zu-Ende verschlüsselt,
-      native Clients auf Linux, Windows, macOS, Android, iOS und im Browser.
-      Zweimal von Cure53 auditiert (2023 und im Oktober 2025, CERN-gefördert).
-      Aktuell die Standard-Empfehlung von Privacy Guides. Keine Werbung, kein
-      Zwangsaccount, voller Import/Export.
-    </p>
-
-    <p>
-      <strong>Bitwarden Authenticator</strong> — GPL-3, nur mobil. Die perfekte
-      Ergänzung zu meinem selbst gehosteten Vaultwarden auf dem Pi 5, wenn man
-      den Toggle <em>„Authenticator-Sync"</em> konsequent <strong>ausschaltet</strong>.
-      Dann bleiben Passwort und zweiter Faktor auf verschiedenen Geräten — und
-      2FA heißt wieder 2FA.
+      <strong>Ente Auth</strong> — open source, end-to-end encrypted, with
+      native clients on Linux, Windows, macOS, Android, iOS and in the browser.
+      Audited twice by Cure53 (2023 and October 2025, CERN-funded). Currently
+      Privacy Guides' default recommendation. No ads, no forced account, full
+      import/export.
     </p>
 
     <p>
-      <strong>KeePassXC + KeePassDX</strong> — für die Puristen. Eine zweite
-      <code>.kdbx</code>-Datei, nur für TOTP, mit eigenem Masterpasswort, via
-      Nextcloud/WebDAV auf dem Pi synchronisiert. Null Abo, null Vendor, volle
-      Kontrolle. KeePassXC empfiehlt das selbst in den FAQ. Auf iOS dazu
-      KeePassium (Cure53-auditiert Okt 2024).
+      <strong>Bitwarden Authenticator</strong> — GPL-3, mobile only. The
+      perfect companion to my self-hosted Vaultwarden on the Pi 5, as long
+      as you keep the <em>"Authenticator sync"</em> toggle strictly
+      <strong>off</strong>. Then your password and your second factor live on
+      different devices — and 2FA means 2FA again.
+    </p>
+
+    <p>
+      <strong>KeePassXC + KeePassDX</strong> — for the purists. A second
+      <code>.kdbx</code> file, TOTP only, with its own master password, synced
+      via Nextcloud/WebDAV on the Pi. Zero subscription, zero vendor, full
+      control. KeePassXC recommends this setup in its own FAQ. On iOS, pair
+      with KeePassium (Cure53-audited Oct 2024).
     </p>
 
     <blockquote>
-      Kein Authenticator ohne Open Source, echten Export und einen klaren Weg
-      aus der Hersteller-Cloud heraus.
+      No authenticator without open source, a real export, and a clear path
+      out of the vendor's cloud.
     </blockquote>
 
-    <h2>Vier, die rausfliegen</h2>
+    <h2>Four that get kicked out</h2>
 
     <ul>
-      <li><strong>Authy</strong> — Desktop tot, 33 Mio Nummern geleakt, kein echter Export.</li>
-      <li><strong>LastPass Authenticator</strong> — der Vertrauensschaden hält an.</li>
-      <li><strong>Raivo OTP</strong> — 2023 an Mobime verkauft, nur per Tweet angekündigt. Privacy Guides hat es entlistet.</li>
-      <li><strong>Tofu</strong> — kein App-Lock, kein Bulk-Import, seit 2021 kaum noch Leben.</li>
+      <li><strong>Authy</strong> — desktop dead, 33 M numbers leaked, no real export.</li>
+      <li><strong>LastPass Authenticator</strong> — the trust damage keeps compounding.</li>
+      <li><strong>Raivo OTP</strong> — sold to Mobime in 2023, announced only by tweet. Privacy Guides de-listed it.</li>
+      <li><strong>Tofu</strong> — no app lock, no bulk import, barely alive since 2021.</li>
     </ul>
 
-    <h2>Für hochwertige Accounts</h2>
+    <h2>For high-value accounts</h2>
 
     <p>
-      Für die Krone — E-Mail-Root, Bitwarden selbst, Banking — gehört das Seed
-      auf Hardware, nicht in eine App. Zwei <strong>YubiKey 5.7+</strong> (oder
-      Nitrokey 3) beim Einrichten gleichzeitig enrollen. Der Yubico-Authenticator
-      hat saubere Linux-Pakete; die Secrets verlassen den Chip nie.
+      For the crown jewels — email root, Bitwarden itself, banking — the seed
+      belongs on hardware, not in an app. Enroll two <strong>YubiKey 5.7+</strong>
+      (or Nitrokey 3) simultaneously at setup. The Yubico Authenticator has
+      clean Linux packages; the secrets never leave the chip.
     </p>
 
     <p>
-      Und ein Grundsatz, den ich mir selbst ins Buch geschrieben habe: Das
-      TOTP-Seed <em>für</em> Bitwarden gehört niemals <em>in</em> Bitwarden.
-      Genauso wenig wie der Recovery-Key der Nextcloud auf dem Gerät, das
-      gerade die Nextcloud ist.
+      And one rule I've written into my own playbook: the TOTP seed
+      <em>for</em> Bitwarden never goes <em>into</em> Bitwarden. Same way the
+      Nextcloud recovery key doesn't live on the device that is the Nextcloud.
     </p>
 
     <p>
-      Der <a href="/blog/files/2026-04-24-empfehlungsmatrix.html">komplette
-      22-App-Vergleich</a> liegt als eigene Seite bei — mit Matrix, Deep Dives
-      und Quellen.
+      The <a href="/blog/files/2026-04-24-empfehlungsmatrix.html">full 22-app
+      comparison</a> is on its own page (in German) — with the matrix, deep
+      dives and sources.
     </p>
   </div>
 
   <div class="post-nav">
-    <a href="/blog/">← Alle Einträge</a>
+    <a href="/blog/?lang=en">← All posts</a>
   </div>
 </main>
 
