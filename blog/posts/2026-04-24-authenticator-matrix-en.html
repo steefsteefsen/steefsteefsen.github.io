@@ -206,6 +206,46 @@
     border-color: var(--bark);
   }
 
+  .post-body sup.fn {
+    font-size: 0.7em;
+    color: var(--clay);
+    margin-left: 2px;
+    vertical-align: super;
+  }
+  .post-body sup.fn a {
+    color: var(--clay);
+    border-bottom: none;
+    font-weight: 500;
+  }
+  .post-body sup.fn a:hover { color: var(--bark); }
+
+  .footnotes {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.25);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .footnotes h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 1rem;
+  }
+  .footnotes ol {
+    padding-left: 1.5rem;
+    color: var(--stone);
+  }
+  .footnotes li { margin-bottom: 0.6rem; }
+  .footnotes a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90,110,74,0.25);
+    word-break: break-all;
+  }
+  .footnotes a:hover { color: var(--bark); }
+
   .post-nav {
     margin-top: 4rem;
     padding-top: 2rem;
@@ -261,18 +301,20 @@
 
   <div class="post-body">
     <p>
-      In August 2024, Twilio killed the Authy desktop apps. One month earlier,
-      33 million Authy phone numbers had landed on ShinyHunters' table. And
-      LastPass is still collecting fines from the 2022 breach — most recently
-      £1.2 M from the UK ICO, plus a $24.5 M class action.
+      On March 19, 2024, Twilio shut down the Authy desktop apps<sup class="fn">1</sup>.
+      Three months later, 33 million Authy phone numbers landed on ShinyHunters'
+      table<sup class="fn">2</sup>. And LastPass is still collecting fines from
+      the 2022 breach — most recently £1,228,283 from the UK ICO in November
+      2025<sup class="fn">3</sup>, plus a $24.45 M class-action settlement
+      (initial approval 2025)<sup class="fn">4</sup>.
     </p>
 
     <p>
       <em>Correction (April 24, 2026): I had listed FreeOTP+ as "stale" — that's
       wrong. Release 3.2 shipped on March 24, 2026 and the latest commits are
-      from April 12, 2026. FreeOTP+ is actively maintained; it remains
-      Android-only and with narrower import support than Aegis, but it's
-      not dead. Thanks for the catch.</em>
+      from April 12, 2026<sup class="fn">5</sup>. FreeOTP+ is actively maintained;
+      it remains Android-only and with narrower import support than Aegis, but
+      it's not dead. Thanks for the catch.</em>
     </p>
 
     <p>
@@ -284,27 +326,30 @@
     <h2>The three guardians</h2>
 
     <p>
-      <strong>Ente Auth</strong> — open source, end-to-end encrypted, with
-      native clients on Linux, Windows, macOS, Android, iOS and in the browser.
-      Audited twice by Cure53 (2023 and October 2025, CERN-funded). Currently
-      Privacy Guides' default recommendation. No ads, no forced account, full
-      import/export.
+      <strong>Ente Auth</strong> — open source (AGPLv3), end-to-end encrypted,
+      with native clients on Linux, Windows, macOS, Android, iOS and in the
+      browser<sup class="fn">6</sup>. Audited twice by Cure53: Feb/Mar
+      2023<sup class="fn">7</sup> and October 2025, CERN-funded<sup class="fn">8</sup>.
+      Listed prominently on the Privacy Guides MFA page<sup class="fn">9</sup>.
+      No ads, no forced account, full import/export.
     </p>
 
     <p>
-      <strong>Bitwarden Authenticator</strong> — GPL-3, mobile only. The
-      perfect companion to my self-hosted Vaultwarden on the Pi 5, as long
-      as you keep the <em>"Authenticator sync"</em> toggle strictly
-      <strong>off</strong>. Then your password and your second factor live on
-      different devices — and 2FA means 2FA again.
+      <strong>Bitwarden Authenticator</strong> — GPL-3, mobile only (iOS +
+      Android)<sup class="fn">10</sup>. The perfect companion to my self-hosted
+      Vaultwarden on the Pi 5, as long as you keep the <em>"Allow authenticator
+      syncing"</em> toggle<sup class="fn">11</sup> strictly <strong>off</strong>.
+      Then your password and your second factor live on different devices —
+      and 2FA means 2FA again.
     </p>
 
     <p>
       <strong>KeePassXC + KeePassDX</strong> — for the purists. A second
       <code>.kdbx</code> file, TOTP only, with its own master password, synced
       via Nextcloud/WebDAV on the Pi. Zero subscription, zero vendor, full
-      control. KeePassXC recommends this setup in its own FAQ. On iOS, pair
-      with KeePassium (Cure53-audited Oct 2024).
+      control. Current stable: 2.7.11, released November 23, 2025<sup class="fn">12</sup>.
+      KeePassXC recommends the separate-DB setup in its own FAQ<sup class="fn">13</sup>.
+      On iOS, pair with KeePassium (Cure53-audited October 2024)<sup class="fn">14</sup>.
     </p>
 
     <blockquote>
@@ -317,8 +362,8 @@
     <ul>
       <li><strong>Authy</strong> — desktop dead, 33 M numbers leaked, no real export.</li>
       <li><strong>LastPass Authenticator</strong> — the trust damage keeps compounding.</li>
-      <li><strong>Raivo OTP</strong> — sold to Mobime in 2023, announced only by tweet. Privacy Guides de-listed it.</li>
-      <li><strong>Tofu</strong> — no app lock, no bulk import, barely alive since 2021.</li>
+      <li><strong>Raivo OTP</strong> — sold to Mobime in July 2023, announced via Twitter/X<sup class="fn">15</sup>; Privacy Guides removed it in v3.14 on July 27, 2023<sup class="fn">16</sup>.</li>
+      <li><strong>Tofu (iOS)</strong> — last App Store release v1.11 in October 2021; app-lock issue open since 2019<sup class="fn">17</sup>. A few security commits on GitHub in December 2023 and June 2024, but not meaningfully alive.</li>
     </ul>
 
     <h2>For high-value accounts</h2>
@@ -326,8 +371,19 @@
     <p>
       For the crown jewels — email root, Bitwarden itself, banking — the seed
       belongs on hardware, not in an app. Enroll two <strong>YubiKey 5.7+</strong>
-      (or Nitrokey 3) simultaneously at setup. The Yubico Authenticator has
+      (or <strong>Nitrokey 3</strong>, open-source firmware on Rust/Trussed)<sup class="fn">18</sup>
+      simultaneously at setup. Firmware 5.7 raised OATH credential slots to
+      64 (up from 32)<sup class="fn">19</sup>. The Yubico Authenticator has
       clean Linux packages; the secrets never leave the chip.
+    </p>
+
+    <p>
+      An important note on the <strong>EUCLEAK</strong> side-channel
+      (NinjaLab, September 3, 2024)<sup class="fn">20</sup>: the attack targets
+      Infineon's SLE78 crypto library and affects YubiKeys with firmware before
+      5.7. 5.7 switched newly produced units to Yubico's own crypto library —
+      <em>existing older keys cannot be retrofitted in firmware</em>, because
+      the flaw sits in silicon<sup class="fn">21</sup>.
     </p>
 
     <p>
@@ -341,6 +397,33 @@
       comparison</a> is on its own page (in German) — with the matrix, deep
       dives and sources.
     </p>
+
+    <section class="footnotes">
+      <h2>Sources</h2>
+      <ol>
+        <li>Twilio Authy Desktop end-of-life — <a href="https://help.twilio.com/articles/22771146070299-User-guide-End-of-Life-EOL-for-Twilio-Authy-Desktop-app">help.twilio.com</a> (shutdown date: March 19, 2024).</li>
+        <li>Twilio confirms 33 M Authy phone-number leak — TechCrunch, July 3, 2024: <a href="https://techcrunch.com/2024/07/03/twilio-says-hackers-identified-cell-phone-numbers-of-two-factor-app-authy-users/">techcrunch.com</a>.</li>
+        <li>UK ICO penalty against LastPass UK Ltd (November 20, 2025, £1,228,283) — <a href="https://ico.org.uk/action-weve-taken/enforcement/2025/11/lastpass-uk-ltd/">ico.org.uk</a>; penalty notice (PDF): <a href="https://ico.org.uk/media2/xfbl1uaa/lastpass-uk-ltd-penalty-notice.pdf">ico.org.uk/media2/xfbl1uaa/lastpass-uk-ltd-penalty-notice.pdf</a>.</li>
+        <li>LastPass $24.45 M class-action settlement (initial approval 2025) — Bloomberg Law: <a href="https://news.bloomberglaw.com/privacy-and-data-security/lastpass-gets-initial-nod-for-24-5-million-data-breach-deal">news.bloomberglaw.com</a>.</li>
+        <li>FreeOTP+ releases — <a href="https://github.com/helloworld1/FreeOTPPlus/releases">github.com/helloworld1/FreeOTPPlus/releases</a> (RELEASE-3.2 on March 24, 2026; latest commit on master April 12, 2026).</li>
+        <li>Ente Auth — <a href="https://github.com/ente-io/ente">github.com/ente-io/ente</a> and <a href="https://ente.com/auth/">ente.com/auth</a>.</li>
+        <li>Cure53 + Symbolic Software audit 2023 — <a href="https://ente.io/cryptography-audit/ente-audit-report.pdf">ente.io/cryptography-audit/ente-audit-report.pdf</a>.</li>
+        <li>Cure53 audit October 2025, CERN-funded — report: <a href="https://ente.com/reports/Cure53-Audit-Report-Oct-2025.pdf">ente.com/reports/Cure53-Audit-Report-Oct-2025.pdf</a>; announcement: <a href="https://ente.io/blog/cern-audit/">ente.io/blog/cern-audit</a>.</li>
+        <li>Privacy Guides — Multi-Factor Authentication: <a href="https://www.privacyguides.org/en/multi-factor-authentication/">privacyguides.org/en/multi-factor-authentication</a>.</li>
+        <li>Bitwarden Authenticator (mobile) — <a href="https://bitwarden.com/products/authenticator/">bitwarden.com/products/authenticator</a>; source in <a href="https://github.com/bitwarden/android">bitwarden/android</a> and <a href="https://github.com/bitwarden/ios">bitwarden/ios</a>.</li>
+        <li>"Allow authenticator syncing" toggle — <a href="https://bitwarden.com/help/totp-sync/">bitwarden.com/help/totp-sync</a>.</li>
+        <li>KeePassXC 2.7.11 release (November 23, 2025) — <a href="https://keepassxc.org/blog/2025-11-23-2.7.11-released/">keepassxc.org/blog/2025-11-23-2.7.11-released</a>.</li>
+        <li>KeePassXC documentation/FAQ on separate TOTP DB setup — <a href="https://keepassxc.org/docs/">keepassxc.org/docs</a>.</li>
+        <li>KeePassium Cure53 audit October 2024 — <a href="https://keepassium.com/audit/2024-10-Cure53.pdf">keepassium.com/audit/2024-10-Cure53.pdf</a>; announcement: <a href="https://keepassium.com/blog/2024/11/independent-security-audit-complete/">keepassium.com/blog/2024/11/independent-security-audit-complete</a>.</li>
+        <li>Raivo OTP acquisition by Mobime (July 2023) — gHacks, December 19, 2023: <a href="https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/">ghacks.net</a>.</li>
+        <li>Privacy Guides de-listing in v3.14 (July 27, 2023) — <a href="https://discuss.privacyguides.net/t/remove-raivo-otp-ios-mfa/13305">discuss.privacyguides.net/t/remove-raivo-otp-ios-mfa/13305</a>.</li>
+        <li>Tofu app-lock issue #27 (open since 2019) — <a href="https://github.com/iKenndac/Tofu/issues/27">github.com/iKenndac/Tofu/issues/27</a>; repo: <a href="https://github.com/iKenndac/Tofu">github.com/iKenndac/Tofu</a>.</li>
+        <li>Nitrokey 3 — <a href="https://www.nitrokey.com/products/nitrokey-3">nitrokey.com/products/nitrokey-3</a>; open-source firmware (Trussed, Rust): <a href="https://github.com/Nitrokey">github.com/Nitrokey</a>.</li>
+        <li>YubiKey 5.7 firmware specifics (64 OATH slots) — <a href="https://docs.yubico.com/hardware/yubikey/yk-tech-manual/5.7-firmware-specifics.html">docs.yubico.com</a>.</li>
+        <li>EUCLEAK — NinjaLab, September 3, 2024: <a href="https://ninjalab.io/eucleak/">ninjalab.io/eucleak</a>; paper (PDF): <a href="https://ninjalab.io/wp-content/uploads/2024/09/20240903_eucleak.pdf">ninjalab.io/wp-content/uploads/2024/09/20240903_eucleak.pdf</a>.</li>
+        <li>Yubico Security Advisory YSA-2024-03 (firmware 5.7, shipped May 6, 2024, uses Yubico's own crypto library; older keys cannot be retrofitted) — <a href="https://www.yubico.com/support/security-advisories/ysa-2024-03/">yubico.com/support/security-advisories/ysa-2024-03</a>.</li>
+      </ol>
+    </section>
   </div>
 
   <div class="post-nav">
