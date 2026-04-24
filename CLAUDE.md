@@ -52,6 +52,26 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 2. If the card references external facts, add a `<sup class="fn">N</sup>` inline and a `<li>` entry in the `<section class="footnotes">` at the bottom.
 3. Footnotes are numbered sequentially — update any displaced numbers in both the `<sup>` tags and the `<ol>`.
 
+### Adding a new blog post
+Blog posts support DE + EN. Each post is two HTML files (one per language) plus one entry in `blog/posts.json`.
+
+1. Write the DE post at `blog/posts/<slug>.html` and the EN post at `blog/posts/<slug>-en.html`.
+2. Each file includes a language toggle in the nav linking to its sibling. The "← Blog" link in the EN post goes to `/blog/?lang=en`.
+3. Any assets (SVG, images) go in `blog/images/`.
+4. Append an entry to `blog/posts.json` with this shape — newest first:
+   ```json
+   {
+     "slug": "<slug>",
+     "date": "YYYY-MM-DD",
+     "translations": {
+       "de": {"slug": "<slug>", "title": "...", "teaser": "..."},
+       "en": {"slug": "<slug>-en", "title": "...", "teaser": "..."}
+     }
+   }
+   ```
+5. Regenerate feeds: `node generate-feed.js` (writes `feed.xml` and `feed-en.xml`).
+6. If the post makes factual claims about software status (releases, audits, maintenance), verify each against the project's GitHub releases/commits before publishing.
+
 ### Adding a new idol card
 - Place `<div class="value-card" x-data="{open:false}">` inside `#idols .values-grid`.
 - Include: icon, h3, short paragraph, optional blockquote, `card-more-btn` button, `x-collapse x-show="open"` div with video embed or placeholder.
