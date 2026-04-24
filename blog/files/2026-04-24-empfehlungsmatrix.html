@@ -176,6 +176,37 @@
   .pro { color: var(--moss); }
   .con { color: var(--bad); }
 
+  sup.fn {
+    font-size: 0.72em;
+    color: var(--clay);
+    margin-left: 2px;
+    vertical-align: super;
+  }
+  sup.fn a {
+    color: var(--clay);
+    border-bottom: none;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  sup.fn a:hover { color: var(--bark); }
+
+  .footnotes {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.25);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .footnotes ol {
+    padding-left: 1.5rem;
+    color: var(--stone);
+  }
+  .footnotes li { margin-bottom: 0.5rem; }
+  .footnotes a {
+    color: var(--moss);
+    word-break: break-all;
+  }
+
   .matrix-wrap {
     overflow-x: auto;
     border: 1px solid rgba(201, 169, 110, 0.3);
@@ -809,50 +840,50 @@
 
   <details open>
     <summary>Ente Auth <span class="pill ok">pick</span></summary>
-    <p>AGPL-Flutter-Codebase von Ente (ente.io). Krypto: libsodium — XChaCha20-Poly1305 für Daten, Argon2id für Key Derivation. Server mit Zero-Knowledge-Architektur. Desktop-Builds als AppImage und Flatpak mit Feature-Parität zu Mobile. Cure53 + Symbolic Software haben 2023 die Krypto auditiert; Cure53 re-auditierten im Oktober 2025 den Server (ENT-02, CERN-gefördert), fanden 15 Issues, davon 12 während des Engagements gefixt. Import aus Google Authenticator (QR-Migration), 2FAS, Aegis, Raivo, Authy (limitiert), Bitwarden, LastPass, Microsoft Authenticator (manuell), andOTP und Plain-/verschlüsseltem JSON. Account unterstützt WebAuthn/FIDO2-Passkeys als zweiten Faktor auf dem Ente-Account selbst.</p>
+    <p>AGPL-Flutter-Codebase von Ente (ente.io). Krypto: libsodium — XChaCha20-Poly1305 für Daten, Argon2id für Key Derivation<sup class="fn"><a href="#fn1">1</a></sup>. Server mit Zero-Knowledge-Architektur. Desktop-Builds als AppImage und Flatpak mit Feature-Parität zu Mobile. Cure53 + Symbolic Software haben 2023 die Krypto auditiert<sup class="fn"><a href="#fn2">2</a></sup>; Cure53 re-auditierten im Oktober 2025 den Server (ENT-02, CERN-gefördert), fanden 15 Issues, davon 12 während des Engagements gefixt<sup class="fn"><a href="#fn3">3</a></sup>. Import aus Google Authenticator (QR-Migration), 2FAS, Aegis, Raivo, Authy (limitiert), Bitwarden, LastPass, Microsoft Authenticator (manuell), andOTP und Plain-/verschlüsseltem JSON. Account unterstützt WebAuthn/FIDO2-Passkeys als zweiten Faktor auf dem Ente-Account selbst.</p>
     <p><strong class="pro">Pro:</strong> einzige auditierte, E2EE-, wirklich plattformübergreifende Option (inkl. Linux). Frei für Authenticator-Nutzung ohne Paywall. Auch offline. Aktive Privacy-Guides-Empfehlung.</p>
     <p><strong class="con">Con:</strong> Desktop-UI ist Flutter und leicht weniger poliert als native. Account-Sync auf Entes Cloud (Self-Hosting des Servers möglich, aber komplexer als Vaultwarden).</p>
   </details>
 
   <details>
     <summary>Bitwarden Authenticator (Standalone mobil) <span class="pill ok">pick</span></summary>
-    <p>Am 1. Mai 2024 gelauncht. Ursprünglich in separaten <code>bitwarden/authenticator-*</code>-Repos; am 6. März 2025 archiviert und in die mobilen Haupt-Codebases gemerged. Lokales AES-256 mit Schlüssel in iOS-Keychain / Android-Keystore. Mobile 2025.6.0 (Juli 2025) brachte optionale bi-direktionale Sync mit dem Bitwarden-Password-Manager-Vault — funktioniert mit der offiziellen Cloud und manchmal mit Vaultwarden (GitHub-Diskussion vaultwarden/server#6090 berichtet inkonsistentes Verhalten je nach Feature-Flags). Sync-Toggle ausgeschaltet lassen, um echte Zwei-Faktor-Trennung zu erhalten.</p>
+    <p>Am 1. Mai 2024 gelauncht<sup class="fn"><a href="#fn4">4</a></sup>. Ursprünglich in separaten <code>bitwarden/authenticator-*</code>-Repos; am 6. März 2025 archiviert und in die mobilen Haupt-Codebases gemerged<sup class="fn"><a href="#fn5">5</a></sup>. Lokales AES-256 mit Schlüssel in iOS-Keychain / Android-Keystore. Mobile 2025.6.0 (Juli 2025) brachte optionale Sync mit dem Bitwarden-Password-Manager-Vault — Password Manager → Authenticator läuft automatisch, Authenticator → Vault ist ein manueller Kopier-Schritt, also <em>nicht</em> echte Bidirektionalität<sup class="fn"><a href="#fn6">6</a></sup>. Funktioniert mit der offiziellen Cloud und teilweise mit Vaultwarden (Diskussion <code>vaultwarden/server#6090</code> berichtet inkonsistentes Verhalten je nach Feature-Flags)<sup class="fn"><a href="#fn7">7</a></sup>. Sync-Toggle ausgeschaltet lassen, um echte Zwei-Faktor-Trennung zu erhalten.</p>
     <p><strong class="pro">Pro:</strong> kein Desktop-Client hilft tatsächlich, echte 2FA-Disziplin zu erzwingen. Kostenlos, kein Account nötig, keine Telemetrie. Imports aus Google Authenticator, Aegis, 2FAS, LastPass, Bitwarden.</p>
     <p><strong class="con">Con:</strong> nur mobil. Keine eigenständige Cross-Device-Sync. Backup = manueller verschlüsselter Export.</p>
   </details>
 
   <details>
     <summary>KeePassXC + KeePassDX + KeePassium / Strongbox <span class="pill ok">pick</span></summary>
-    <p>KeePassXC 2.7.11 (24. Nov 2025) ist Stable. KDBX 3.1/4 mit AES-256, Twofish oder ChaCha20, Argon2id-KDF. Passkey-Support kam in 2.7.7 (März 2024) via Browser-Extension; 2.7.10 brachte Bitwarden- und Proton-Pass-Importer inkl. Passkeys. Ein formales externes Audit (Zaur Molotnikov, Jan 2023) — älter als Bitwardens rollierende Audits. KeePassDX auf Android unterstützt alles, was KeePassXC auf Dateiebene tut. KeePassium (iOS) hatte im Oktober 2024 ein Cure53-Pentest und unterstützt WebDAV, SFTP und Nextcloud nativ — perfekter Match zu meinem Pi&nbsp;5.</p>
-    <p>Die KeePassXC-FAQ selbst sagt: <em>„Um den Sicherheitsgewinn zu maximieren... TOTP-Secrets in einer separaten Datenbank mit anderem Passwort speichern."</em> Genau das ist mein Setup.</p>
+    <p>KeePassXC 2.7.11 (23. Nov 2025) ist Stable<sup class="fn"><a href="#fn8">8</a></sup>. KDBX 3.1/4 mit AES-256, Twofish oder ChaCha20, Argon2id-KDF. Passkey-Support kam in 2.7.7 (10. März 2024) via Browser-Extension<sup class="fn"><a href="#fn9">9</a></sup>; 2.7.10 (März 2025) brachte einen Bitwarden-Importer (inkl. Passkeys) und einen Proton-Pass-Importer (ohne Passkeys, nur unverschlüsseltes JSON)<sup class="fn"><a href="#fn10">10</a></sup>. Ein formales externes Audit (Zaur Molotnikov, gegen 2.7.4) wurde am 15. April 2023 publiziert — älter als Bitwardens rollierende Audits<sup class="fn"><a href="#fn11">11</a></sup>. KeePassDX auf Android unterstützt alles, was KeePassXC auf Dateiebene tut. KeePassium (iOS) hatte im Oktober 2024 ein Cure53-Pentest und unterstützt WebDAV, SFTP und Nextcloud nativ<sup class="fn"><a href="#fn12">12</a></sup> — perfekter Match zu meinem Pi&nbsp;5.</p>
+    <p>Die KeePassXC-FAQ selbst sagt: <em>„Um den Sicherheitsgewinn zu maximieren... TOTP-Secrets in einer separaten Datenbank mit anderem Passwort speichern."</em><sup class="fn"><a href="#fn13">13</a></sup> Genau das ist mein Setup.</p>
     <p><strong class="pro">Pro:</strong> voll self-hostbar. Null Abo. Offline-fähig. Passkey-Import aus Bitwarden.</p>
     <p><strong class="con">Con:</strong> Datei-Sync-Konflikte (Syncthing hilft, wenn WebDAV nervt). Passkey-Nutzung weiterhin an die Browser-Extension gebunden — keine FIDO2-USB-Emulation, kein Hybrid-Transport (QR/BLE) Stand April 2026.</p>
   </details>
 
   <details>
     <summary>Proton Authenticator <span class="pill ok">pick</span></summary>
-    <p>Am 31. Juli 2025 gelauncht. GPL-3 über Kotlin (Android), Swift (iOS) und Rust+TS (Desktop) unter <code>protonpass/</code> auf GitHub. Drei Modi: local-only, iCloud-Sync, oder Gratis-Proton-Account mit E2EE-Sync. Kein Account nötig. Linux-Install als signiertes .deb/.rpm. Import aus Google Authenticator, Authy, Aegis, 2FAS, Bitwarden, LastPass und — wichtig — Export von Seeds in Plain oder verschlüsselt. TidBITS (August 2025) hat einen Mac-Auto-Delete-Bug beim Import gemeldet, später gepatcht; vor Massenmigration Release Notes prüfen.</p>
+    <p>Am 31. Juli 2025 gelauncht<sup class="fn"><a href="#fn14">14</a></sup>. GPL-3 über Kotlin (Android), Swift (iOS) und Rust+TS (Desktop) unter <code>protonpass/</code> auf GitHub<sup class="fn"><a href="#fn15">15</a></sup>. Drei Modi: local-only, iCloud-Sync, oder Gratis-Proton-Account mit E2EE-Sync. Kein Account nötig. Linux-Install als signiertes .deb/.rpm. Import aus Google Authenticator, Authy, Aegis, 2FAS, Bitwarden, LastPass und — wichtig — Export von Seeds in Plain oder verschlüsselt. TidBITS (7. August 2025) hat einen Mac-Auto-Delete-Bug beim Import gemeldet, später gepatcht<sup class="fn"><a href="#fn16">16</a></sup>; vor Massenmigration Release Notes prüfen.</p>
     <p><strong class="pro">Pro:</strong> bester nativer Linux+mobile-E2EE-Standalone-Authenticator-Launch 2025. Schweizer Jurisdiktion. Voller Export. Keine Werbung. Kein Zwangsaccount.</p>
     <p><strong class="con">Con:</strong> jung; nicht self-hostbar (Authenticator-Sync läuft über Protons Cloud).</p>
   </details>
 
   <details>
     <summary>2FAS</summary>
-    <p>GPL-3 auf Mobile und Browser-Extension. Kein nativer Linux-Desktop-Client — die Browser-Extension ist ein Relay und braucht die Mobile-App zum Beantworten von TOTP-Requests. Verschlüsseltes Cloud-Backup auf Google Drive (Android) oder iCloud (iOS); keine native Cross-Desktop-Sync. Kein Account nötig. Kein veröffentlichtes externes Audit. Imports Google Authenticator QR, Aegis, Raivo, andOTP, LastPass, Plain. Ein separates Produkt namens „2FAS Pass" ist ein Passwort-Manager und nicht mit dem Authenticator zu verwechseln.</p>
+    <p>GPL-3 auf Mobile und Browser-Extension. Kein nativer Linux-Desktop-Client — die Browser-Extension ist ein Relay und braucht die Mobile-App zum Beantworten von TOTP-Requests. Verschlüsseltes Cloud-Backup auf Google Drive (Android) oder iCloud (iOS); keine native Cross-Desktop-Sync. Kein Account nötig. Kein veröffentlichtes externes Audit. Imports Google Authenticator QR, Aegis, Raivo, andOTP, LastPass, Plain. Ein separates Produkt namens „2FAS Pass" ist ein Passwort-Manager und nicht mit dem Authenticator zu verwechseln<sup class="fn"><a href="#fn17">17</a></sup>.</p>
     <p><strong class="pro">Pro:</strong> saubere UX; Browser-Extension ist auf Shared Desktops wirklich nützlich; keine Tracker.</p>
     <p><strong class="con">Con:</strong> kein echter Linux-Desktop. Keine Cross-Desktop-Sync.</p>
   </details>
 
   <details>
     <summary>Aegis (Android)</summary>
-    <p>GPL-3, v3.4.2 (25. Feb 2026). AES-256-GCM + scrypt (N=2^15). Android-Keystore-gestützter biometrischer Credential. Screen-Capture-Prevention. Auto-Backup in beliebiges Verzeichnis — kombiniert mit DAVx5 oder dem Nextcloud-Android-Client landet das Backup in der Nextcloud auf dem Pi&nbsp;5. Tiefster Import-Support im Android-Ökosystem (andOTP, FreeOTP+, 2FAS, Google-Auth-Migration, Microsoft Authenticator, Stratum, Authy-root-only, WinAuth, Steam). Keine Netz-Berechtigung für Kernfunktion.</p>
+    <p>GPL-3, v3.4.2 (25. Feb 2026)<sup class="fn"><a href="#fn18">18</a></sup>. AES-256-GCM + scrypt (N=2^15, r=8, p=1), dokumentiert in <code>docs/vault.md</code><sup class="fn"><a href="#fn19">19</a></sup>. Android-Keystore-gestützter biometrischer Credential. Screen-Capture-Prevention. Auto-Backup in beliebiges Verzeichnis — kombiniert mit DAVx5 oder dem Nextcloud-Android-Client landet das Backup in der Nextcloud auf dem Pi&nbsp;5. Tiefster Import-Support im Android-Ökosystem (andOTP, FreeOTP+, 2FAS, Google-Auth-Migration, Microsoft Authenticator, Stratum, Authy-root-only, WinAuth, Steam). Keine Netz-Berechtigung für Kernfunktion.</p>
     <p><strong class="pro">Pro:</strong> maximale Privatsphäre. Gut dokumentierte Krypto (<code>docs/vault.md</code>). Wirklich offline.</p>
     <p><strong class="con">Con:</strong> nur Android. Keine Cross-Device-Sync (by design). Handy verlieren ohne Backup = Schmerz.</p>
   </details>
 
   <details>
     <summary>Stratum (vormals Authenticator Pro)</summary>
-    <p>Rebranded im September 2024, nachdem der Entwickler die neue Google-Play-Policy mit öffentlicher Privatadresse verweigerte. GPL-3, SQLCipher-verschlüsselte Backups. <strong>Explizites WebDAV-Backup via DAVx5</strong> — der sauberste Match für Nextcloud-Self-Hosting auf Android. Wear-OS-Sync nutzt non-FOSS-Deps; der F-Droid-Build hat sie daher nicht. Kein externes Audit publiziert.</p>
+    <p>Rebranded 2024 aufgrund einer Google-Play-Policy-Kollision (die genauen Umstände sind in den primären Projekt-Quellen nicht explizit dokumentiert, Package-ID ist heute <code>com.stratumauth.app</code>)<sup class="fn"><a href="#fn20">20</a></sup>. GPL-3, SQLCipher-verschlüsselte Backups. <strong>Explizites WebDAV-Backup via DAVx5</strong> — der sauberste Match für Nextcloud-Self-Hosting auf Android<sup class="fn"><a href="#fn20">20</a></sup>. Wear-OS-Sync nutzt non-FOSS-Deps; der F-Droid-Build hat sie daher nicht. Kein externes Audit publiziert.</p>
   </details>
 
   <details>
@@ -867,17 +898,17 @@
 
   <details>
     <summary>Yubico Authenticator + YubiKey 5.7+</summary>
-    <p>Apache-2-Companion-App auf jedem großen OS inkl. Linux. TOTP-Secrets leben auf dem YubiKey; Firmware 5.7+ unterstützt 64 OATH-Credentials (ältere: 32). YubiKey-Firmware ist nicht feldaktualisierbar — Käufer müssen 5.7 verifizieren. Der EUCLEAK-Side-Channel (Sept 2024) zielte auf Infineon-Secure-Elements auf Pre-5.7-YubiKeys; in 5.7 gefixt. Jeder TOTP-Read braucht Touch oder NFC. Immer zwei Schlüssel gleichzeitig beim TOTP-Setup enrollen — Secrets sind nicht exportierbar.</p>
+    <p>Apache-2-Companion-App auf jedem großen OS inkl. Linux. TOTP-Secrets leben auf dem YubiKey; Firmware 5.7+ unterstützt 64 OATH-Credentials (ältere: 32)<sup class="fn"><a href="#fn21">21</a></sup>. YubiKey-Firmware ist <strong>nicht feldaktualisierbar</strong><sup class="fn"><a href="#fn22">22</a></sup> — Käufer müssen 5.7 verifizieren. Firmware 5.7 wurde am 6. Mai 2024 angekündigt<sup class="fn"><a href="#fn23">23</a></sup>. Der EUCLEAK-Side-Channel (NinjaLab, 3. September 2024)<sup class="fn"><a href="#fn24">24</a></sup> zielte auf Infineons SLE78-Krypto-Bibliothek und betrifft YubiKeys mit Firmware vor 5.7. <strong>5.7 ist kein Patch für bestehende Hardware</strong> — der Bug sitzt im Silizium. 5.7 wechselt bei neu produzierten Einheiten auf Yubicos eigene Krypto-Bibliothek<sup class="fn"><a href="#fn25">25</a></sup>. Jeder TOTP-Read braucht Touch oder NFC. Immer zwei Schlüssel gleichzeitig beim TOTP-Setup enrollen — Secrets sind nicht exportierbar.</p>
   </details>
 
   <details>
     <summary>Bitwarden Built-in TOTP (im Passwort-Vault)</summary>
-    <p>Free-Nutzer können TOTP-Seeds speichern; das Generieren des 6-stelligen Codes braucht Premium ($10/J) oder einen Families/Teams/Enterprise-Plan. Läuft auf jedem Bitwarden-Client inkl. Linux-Desktop, Browser-Extension und CLI. Zero-Knowledge-E2EE-Sync — mit Vaultwarden auf dem Pi 5 voll self-hosted. Bitwarden hat 2024 Passkey-Storage und 2026 Windows-11-Passkey-Login hinzugefügt. Jährliche Cure53-Audits. Die <strong>einzige relevante Sorge</strong> ist die Single-Vault-Kritik: wer den Vault kompromittiert, hat beide Faktoren. Den Bitwarden-Account selbst mit einem <em>separaten</em> Faktor schützen — ein YubiKey oder ein TOTP-Seed außerhalb von Bitwarden.</p>
+    <p>Free-Nutzer können TOTP-Seeds speichern; das Generieren des 6-stelligen Codes braucht Premium ($10/J) oder einen Families/Teams/Enterprise-Plan<sup class="fn"><a href="#fn26">26</a></sup>. Läuft auf jedem Bitwarden-Client inkl. Linux-Desktop, Browser-Extension und CLI. Zero-Knowledge-E2EE-Sync — mit Vaultwarden auf dem Pi 5 voll self-hosted. Bitwarden hat 2024 Passkey-Storage und am 4. März 2026 Windows-11-Passkey-Login (Entra-ID-Devices) hinzugefügt<sup class="fn"><a href="#fn27">27</a></sup>. Jährliche Cure53-Audits. Die <strong>einzige relevante Sorge</strong> ist die Single-Vault-Kritik: wer den Vault kompromittiert, hat beide Faktoren. Den Bitwarden-Account selbst mit einem <em>separaten</em> Faktor schützen — ein YubiKey oder ein TOTP-Seed außerhalb von Bitwarden.</p>
   </details>
 
   <details>
     <summary>1Password Built-in TOTP</summary>
-    <p>Poliert, aber Closed-Source, Paid-only und Cloud-only seit dem Ende lokaler Vaults. Best-in-Class-Passkey-Implementierung (Nick Steele sitzt im FIDO-Alliance-Board; unterstützt das Credential Exchange Format). Aber: kein Linux-Passkey-Unlock, kein Self-Host, kein Free Tier, Closed-Source — drei Disqualifikationen für dieses Nutzerprofil.</p>
+    <p>Poliert, aber Closed-Source, Paid-only und Cloud-only seit dem Ende lokaler Vaults. Best-in-Class-Passkey-Implementierung — Nick Steele ist Co-Chair einer FIDO-Alliance-Working-Group, und 1Password ist einer der treibenden Autoren des Credential-Exchange-Format (CXF/CXP)<sup class="fn"><a href="#fn28">28</a></sup>. Aber: kein Linux-Passkey-Unlock, kein Self-Host, kein Free Tier, Closed-Source — drei Disqualifikationen für dieses Nutzerprofil.</p>
   </details>
 
   <details>
@@ -887,12 +918,12 @@
 
   <details>
     <summary>Microsoft Authenticator</summary>
-    <p>Die Passwort-Manager-Funktion wurde Juni–August 2025 in drei Stufen abgekündigt; Nutzer wurden zu Microsoft Edge migriert. Der MFA-Teil — TOTP, Push, Passkeys — bleibt. Entra ID rollt im März 2026 synchronisierte Passkeys auf GA aus (MC1221452). Kein Linux-Desktop. Closed-Source.</p>
+    <p>Die Passwort-Manager-Funktion wurde Juni–August 2025 in drei Stufen abgekündigt (keine neuen Passwörter ab Juni, Autofill aus ab Juli, Passwörter weg ab August)<sup class="fn"><a href="#fn29">29</a></sup>; Nutzer wurden zu Microsoft Edge migriert. Der MFA-Teil — TOTP, Push, Passkeys — bleibt. Entra ID rollt im März 2026 synchronisierte Passkeys auf GA aus (Message Center MC1221452)<sup class="fn"><a href="#fn30">30</a></sup>. Kein Linux-Desktop. Closed-Source.</p>
   </details>
 
   <details>
     <summary>Google Authenticator</summary>
-    <p>Cloud-Sync kam am 24. April 2023 — Mysk-Researcher haben öffentlich bestätigt, dass die Sync nicht Ende-zu-Ende verschlüsselt war. Google versprach E2EE „in Zukunft", aber Stand April 2026 gibt es keine autoritative öffentliche Bestätigung ausgerollter E2EE. iOS-App-Store-Privacy-Labels beschreiben umfangreiche identitätsverknüpfte Datenerhebung. Kein Desktop. Closed-Source. QR-basierter Export ist die eine echte Stärke.</p>
+    <p>Cloud-Sync kam im April 2023 — Mysk-Researcher haben öffentlich demonstriert, dass der Sync-Traffic nicht Ende-zu-Ende verschlüsselt war<sup class="fn"><a href="#fn31">31</a></sup>. Google versprach E2EE „in Zukunft"<sup class="fn"><a href="#fn32">32</a></sup>, aber Stand April 2026 gibt es keine autoritative öffentliche Bestätigung ausgerollter E2EE. iOS-App-Store-Privacy-Labels beschreiben umfangreiche identitätsverknüpfte Datenerhebung. Kein Desktop. Closed-Source. QR-basierter Export ist die eine echte Stärke.</p>
   </details>
 
   <details>
@@ -902,34 +933,34 @@
 
   <details>
     <summary>Authy (mobil) <span class="pill bad">avoid</span></summary>
-    <p>Desktop-Apps für Windows, macOS und Linux erreichten End-of-Life am 19. März 2024 und wurden Mitte August 2024 zwangsabgemeldet — Nutzer ohne Mobile-Sync verloren Tokens. Ende Juni 2024 postete ShinyHunters ein Dataset mit 33.420.546 Authy-Telefonnummern, erbeutet über einen unauthentifizierten API-Endpunkt (Twilio bestätigte am 1. Juli 2024). Authys fehlende echte Export-Funktion machte Migration brutal. Mobile-App funktioniert 2026 noch, wird aber von Privacy Guides und den meisten Security-Outlets nicht mehr empfohlen.</p>
+    <p>Desktop-Apps für Windows, macOS und Linux erreichten End-of-Life am 19. März 2024<sup class="fn"><a href="#fn33">33</a></sup> — Nutzer ohne Mobile-Sync verloren Tokens. Ende Juni 2024 postete ShinyHunters auf BreachForums ein Dataset mit exakt 33.420.546 Authy-Telefonnummern, erbeutet über einen unauthentifizierten API-Endpunkt<sup class="fn"><a href="#fn34">34</a></sup>; Twilio bestätigte den Leak am 3. Juli 2024<sup class="fn"><a href="#fn35">35</a></sup>. Authys fehlende echte Export-Funktion machte Migration brutal. Mobile-App funktioniert 2026 noch, wird aber von Privacy Guides und den meisten Security-Outlets nicht mehr empfohlen.</p>
   </details>
 
   <details>
     <summary>LastPass Authenticator <span class="pill bad">avoid</span></summary>
-    <p>Mutterfirma kämpft weiter mit dem Fallout des 2022er-LastPass-Breach: Das UK ICO verhängte im November 2025 1,2 Mio £ Strafe gegen LastPass UK Ltd; eine 24,5-Mio-$-Sammelklage landete 2025 für Kunden, deren Vaults zugänglich waren. Die Authenticator-App selbst hatte jahrelang minimale Feature-Entwicklung. Kein frischer Start auf diesem Stack.</p>
+    <p>Mutterfirma kämpft weiter mit dem Fallout des 2022er-LastPass-Breach: Das UK ICO verhängte am 20. November 2025 £1.228.283 Strafe gegen LastPass UK Ltd<sup class="fn"><a href="#fn36">36</a></sup>; ein $24,45-Mio-Vergleich einer Sammelklage erhielt 2025 Initial Approval<sup class="fn"><a href="#fn37">37</a></sup>. Die Authenticator-App selbst hatte jahrelang minimale Feature-Entwicklung. Kein frischer Start auf diesem Stack.</p>
   </details>
 
   <details>
     <summary>Raivo OTP <span class="pill bad">avoid (Vertrauen)</span></summary>
-    <p>Im Juli 2023 an Mobime verkauft, nur per Tweet angekündigt. Privacy Guides hat es delistet. Unter dem neuen Besitzer wurden Spenden-Prompt-UX hinzugefügt und Master-Key-Recovery-Regressionen zugegeben. Code ist noch öffentlich, aber Vertrauen ist erodiert — bestehende Nutzer sollten Exports zu Ente Auth oder KeePassium migrieren.</p>
+    <p>Im Juli 2023 an Mobime verkauft, via Twitter/X angekündigt<sup class="fn"><a href="#fn38">38</a></sup>. Privacy Guides hat es in v3.14 am 27. Juli 2023 delistet<sup class="fn"><a href="#fn39">39</a></sup>. Unter dem neuen Besitzer wurden Spenden-Prompt-Frequenz-Probleme und Master-Key-Recovery-Regressionen eingeräumt<sup class="fn"><a href="#fn40">40</a></sup>. Code ist noch öffentlich, aber Vertrauen ist erodiert — bestehende Nutzer sollten Exports zu Ente Auth oder KeePassium migrieren.</p>
   </details>
 
   <details>
     <summary>FreeOTP+ <span class="pill ok">aktiv</span></summary>
-    <p>Apache-2, Android-only. Release <strong>3.2 am 24. März 2026</strong> (Material-V3-Refresh, strengere Auth, Kategorie-Edit/Filter); letzte Commits auf master vom 12. April 2026 — also klar aktiv gepflegt, entgegen einer früheren Fassung dieser Seite. Importierst JSON, exportiert JSON. Keine eigenständige Cloud-Sync (JSON-Datei lässt sich aber via Nextcloud/DAVx5 selbst weglegen). Keine Werbung, kein Account, kein externes Audit publiziert. Schmalerer Import als Aegis und kein Screen-Capture-Schutz, daher in der Android-Rangfolge hinter Aegis — aber eine legitime puristische Wahl für wer es klein mag. FreeOTP (das Red-Hat-Parent) bekommt weiterhin langsame Updates (Android v2.0.6, Feb 2025) und ist von FreeOTP+ zu unterscheiden.</p>
+    <p>Apache-2, Android-only. Release <strong>3.2 am 24. März 2026</strong> (Material-V3-Refresh, strengere Auth, Kategorie-Edit/Filter); letzte Commits auf master vom 12. April 2026 — also klar aktiv gepflegt, entgegen einer früheren Fassung dieser Seite<sup class="fn"><a href="#fn41">41</a></sup>. Importiert JSON, exportiert JSON. Keine eigenständige Cloud-Sync (JSON-Datei lässt sich aber via Nextcloud/DAVx5 selbst weglegen). Keine Werbung, kein Account, kein externes Audit publiziert. Schmalerer Import als Aegis und kein Screen-Capture-Schutz, daher in der Android-Rangfolge hinter Aegis — aber eine legitime puristische Wahl für wer es klein mag. FreeOTP (das Red-Hat-Parent) bekommt weiterhin langsame Updates (Android v2.0.6, Feb 2025) und ist von FreeOTP+ zu unterscheiden.</p>
   </details>
 
   <details>
     <summary>Tofu (iOS) <span class="pill bad">stale</span></summary>
-    <p>ISC-Lizenz, iOS-only. Kein App-Level-Biometric/Passcode-Lock (Issue offen seit 2019). Kein Bulk-Import. Letzter sinnvoller App-Store-Release 2021; Commits bis Mitte 2024, dann Stille. Für iOS-Nutzer mit Sync-Wunsch von Ente Auth abgelöst.</p>
+    <p>ISC-Lizenz, iOS-only. Kein App-Level-Biometric/Passcode-Lock (Issue #27 offen seit 2019)<sup class="fn"><a href="#fn42">42</a></sup>. Kein Bulk-Import. Letzter sinnvoller App-Store-Release v1.11 vom Oktober 2021; GitHub-Aktivität mit Security-Commits bis Juni 2024, dann ruhig<sup class="fn"><a href="#fn43">43</a></sup>. Für iOS-Nutzer mit Sync-Wunsch von Ente Auth abgelöst.</p>
   </details>
 
 </section>
 
 <section>
   <h2>Der Authy-Desktop-Fallout in einem Absatz</h2>
-  <p>Twilio kündigte End-of-Life für Authy Desktop im Januar 2024 an, zog das Datum auf den <strong>19. März 2024</strong> vor, und bis <strong>Mitte August 2024</strong> wurden alle verbleibenden Windows-, macOS- und Linux-Nutzer zwangsabgemeldet. Einen Monat davor wurde ein unauthentifizierter API-Endpunkt ausgenutzt, um <strong>33.420.546</strong> Authy-Telefonnummern zu enumerieren — von ShinyHunters auf BreachForums publiziert und von Twilio am <strong>1. Juli 2024</strong> bestätigt. Nutzer ohne Cloud-Sync verloren Tokens; die mit Sync mussten trotzdem jeden Dienst zurücksetzen, weil Authy keinen echten Export hat. Der Migrationsverkehr landete vor allem bei <strong>Ente Auth</strong> (dessen April-2024-Desktop-Launch perfekt getaktet war), <strong>2FAS</strong>, <strong>Aegis</strong> und dem neu gelaunchten <strong>Bitwarden Authenticator</strong>. Die Lehre, die hinter den 2026er-Empfehlungen oben steht: <em>Nie einem Authenticator ohne Open Source, echten Export und klaren Weg aus der Hersteller-Cloud vertrauen.</em></p>
+  <p>Twilio zog das End-of-Life für Authy Desktop auf den <strong>19. März 2024</strong> vor<sup class="fn"><a href="#fn33">33</a></sup>. Rund drei Monate später wurde ein unauthentifizierter API-Endpunkt ausgenutzt, um <strong>33.420.546</strong> Authy-Telefonnummern zu enumerieren — von ShinyHunters auf BreachForums publiziert<sup class="fn"><a href="#fn34">34</a></sup> und von Twilio am <strong>3. Juli 2024</strong> bestätigt<sup class="fn"><a href="#fn35">35</a></sup>. Authy hat keinen echten Export, also mussten Betroffene jeden Dienst zurücksetzen. Der Migrationsverkehr landete vor allem bei <strong>Ente Auth</strong> (dessen April-2024-Desktop-Launch perfekt getaktet war)<sup class="fn"><a href="#fn44">44</a></sup>, <strong>2FAS</strong>, <strong>Aegis</strong> und dem neu gelaunchten <strong>Bitwarden Authenticator</strong>. Die Lehre, die hinter den 2026er-Empfehlungen oben steht: <em>Nie einem Authenticator ohne Open Source, echten Export und klaren Weg aus der Hersteller-Cloud vertrauen.</em></p>
 </section>
 
 <section>
@@ -948,8 +979,58 @@
   <p>Der Authy-Kollaps 2024 und der anhaltende LastPass-Fallout haben den Markt klargestellt: 2026 lohnen sich nur Authenticator-Apps, die <strong>Open Source, auditiert, exportierbar und entweder dateibasiert oder echt E2EE</strong> sind. Ente Auth ist der Konsens-Default; Proton Authenticator ist ein starker neuerer Konkurrent; die KeePassXC-Familie ist die puristische self-hosted Antwort; und Bitwarden Authenticator ist die reibungsärmste Wahl für bestehende Bitwarden-Nutzer — solange TOTP-Sync aus bleibt, um echte Zwei-Faktor-Trennung zu erhalten. Die Closed-Source-Platzhirsche — Google, Microsoft, Duo, Authy, LastPass — sind entweder kein Linux, kein E2EE, kein Export oder tragen ungelösten Vertrauensballast, und keiner davon sollte erste Wahl sein.</p>
 </section>
 
+<section class="footnotes">
+  <h2>Quellen &amp; Fußnoten</h2>
+  <ol>
+    <li id="fn1">Ente-Krypto-Stack (libsodium, XChaCha20-Poly1305, Argon2id) — <a href="https://github.com/ente-io/ente_crypto_dart">github.com/ente-io/ente_crypto_dart</a>; Ente Security/Privacy FAQ: <a href="https://ente.com/help/photos/faq/security-and-privacy">ente.com/help/photos/faq/security-and-privacy</a>.</li>
+    <li id="fn2">Cure53 + Symbolic-Software-Audit 2023 — <a href="https://ente.io/cryptography-audit/ente-audit-report.pdf">ente.io/cryptography-audit/ente-audit-report.pdf</a>.</li>
+    <li id="fn3">Cure53-Server-Audit Oktober 2025, CERN-gefördert, ENT-02 — Report: <a href="https://ente.com/reports/Cure53-Audit-Report-Oct-2025.pdf">ente.com/reports/Cure53-Audit-Report-Oct-2025.pdf</a>; Ankündigung: <a href="https://ente.io/blog/cern-audit/">ente.io/blog/cern-audit</a>.</li>
+    <li id="fn4">Bitwarden-Authenticator-Launch (1. Mai 2024) — <a href="https://bitwarden.com/blog/bitwarden-just-launched-a-new-authenticator-app-heres-what-it-means-to-users/">bitwarden.com/blog/bitwarden-just-launched-a-new-authenticator-app...</a>.</li>
+    <li id="fn5">Bitwarden authenticator-android Repo, archiviert 6. März 2025 — <a href="https://github.com/bitwarden/authenticator-android">github.com/bitwarden/authenticator-android</a>.</li>
+    <li id="fn6">Bitwarden TOTP-Sync-Dokumentation (PM → Auth automatisch, Auth → PM manuell) — <a href="https://bitwarden.com/help/totp-sync/">bitwarden.com/help/totp-sync</a>.</li>
+    <li id="fn7">Vaultwarden-Diskussion zum Authenticator-Sync — <a href="https://github.com/dani-garcia/vaultwarden/discussions/6090">github.com/dani-garcia/vaultwarden/discussions/6090</a>.</li>
+    <li id="fn8">KeePassXC 2.7.11 (23. November 2025) — <a href="https://keepassxc.org/blog/2025-11-23-2.7.11-released/">keepassxc.org/blog/2025-11-23-2.7.11-released</a>.</li>
+    <li id="fn9">KeePassXC 2.7.7 (10. März 2024, Passkeys via Browser-Extension) — <a href="https://keepassxc.org/blog/2024-03-10-2.7.7-released/">keepassxc.org/blog/2024-03-10-2.7.7-released</a>.</li>
+    <li id="fn10">KeePassXC 2.7.10 (4. März 2025, Bitwarden-/Proton-Pass-Importer) — <a href="https://keepassxc.org/blog/2025-03-04-2.7.10-released/">keepassxc.org/blog/2025-03-04-2.7.10-released</a>.</li>
+    <li id="fn11">KeePassXC-Sicherheitsaudit-Report (Zaur Molotnikov gegen 2.7.4, publiziert 15. April 2023) — <a href="https://keepassxc.org/blog/2023-04-15-audit-report/">keepassxc.org/blog/2023-04-15-audit-report</a>.</li>
+    <li id="fn12">KeePassium Cure53-Audit Oktober 2024 — <a href="https://keepassium.com/audit/2024-10-Cure53.pdf">keepassium.com/audit/2024-10-Cure53.pdf</a>; Ankündigung: <a href="https://keepassium.com/blog/2024/11/independent-security-audit-complete/">keepassium.com/blog/2024/11/independent-security-audit-complete</a>.</li>
+    <li id="fn13">KeePassXC-Dokumentation/FAQ (Separate-TOTP-DB) — <a href="https://keepassxc.org/docs/">keepassxc.org/docs</a>.</li>
+    <li id="fn14">Proton-Authenticator-Launch (31. Juli 2025) — <a href="https://proton.me/blog/authenticator-app">proton.me/blog/authenticator-app</a>.</li>
+    <li id="fn15">Proton-Authenticator-Source (protonpass-Org, Kotlin/Swift/Rust) — <a href="https://github.com/protonpass">github.com/protonpass</a>.</li>
+    <li id="fn16">TidBITS-Bericht zum Mac-Import-Bug (7. August 2025) — <a href="https://tidbits.com/2025/08/07/appbits-proton-authenticator-takes-on-2fa-apps/">tidbits.com/2025/08/07/appbits-proton-authenticator-takes-on-2fa-apps</a>.</li>
+    <li id="fn17">2FAS Pass (separates Passwort-Manager-Produkt) — <a href="https://2fas.com/pass/">2fas.com/pass</a>.</li>
+    <li id="fn18">Aegis v3.4.2 (F-Droid) — <a href="https://f-droid.org/packages/com.beemdevelopment.aegis/">f-droid.org/packages/com.beemdevelopment.aegis</a>.</li>
+    <li id="fn19">Aegis Vault-Crypto-Dokumentation (AES-256-GCM + scrypt N=2^15, r=8, p=1) — <a href="https://github.com/beemdevelopment/Aegis/blob/master/docs/vault.md">github.com/beemdevelopment/Aegis/blob/master/docs/vault.md</a>.</li>
+    <li id="fn20">Stratum-FAQ (Rebrand, Package-ID, DAVx5/WebDAV-Backup) — <a href="https://github.com/stratumauth/app/wiki/Frequently-Asked-Questions">github.com/stratumauth/app/wiki/Frequently-Asked-Questions</a>.</li>
+    <li id="fn21">YubiKey-5.7-Firmware-Spezifika (64 OATH-Slots) — <a href="https://docs.yubico.com/hardware/yubikey/yk-tech-manual/5.7-firmware-specifics.html">docs.yubico.com/hardware/yubikey/yk-tech-manual/5.7-firmware-specifics.html</a>.</li>
+    <li id="fn22">YubiKey-Firmware ist nicht feldaktualisierbar — <a href="https://support.yubico.com/s/article/YubiKey-firmware-is-not-upgradable">support.yubico.com/s/article/YubiKey-firmware-is-not-upgradable</a>.</li>
+    <li id="fn23">YubiKey-5.7-Firmware angekündigt 6. Mai 2024 — <a href="https://www.yubico.com/blog/now-available-for-purchase-yubikey-5-series-and-security-key-series-with-new-5-7-firmware/">yubico.com/blog/now-available-for-purchase-yubikey-5-series-and-security-key-series-with-new-5-7-firmware</a>.</li>
+    <li id="fn24">EUCLEAK (NinjaLab, 3. September 2024) — <a href="https://ninjalab.io/eucleak/">ninjalab.io/eucleak</a>; Paper (PDF): <a href="https://ninjalab.io/wp-content/uploads/2024/09/20240903_eucleak.pdf">ninjalab.io/wp-content/uploads/2024/09/20240903_eucleak.pdf</a>.</li>
+    <li id="fn25">Yubico Security Advisory YSA-2024-03 (5.7 verwendet Yubicos eigene Krypto; ältere Keys nicht nachrüstbar) — <a href="https://www.yubico.com/support/security-advisories/ysa-2024-03/">yubico.com/support/security-advisories/ysa-2024-03</a>.</li>
+    <li id="fn26">Bitwarden Premium/TOTP-Generation (Preisliste) — <a href="https://bitwarden.com/pricing/">bitwarden.com/pricing</a>; Integrated-Authenticator-Doku: <a href="https://bitwarden.com/help/integrated-authenticator/">bitwarden.com/help/integrated-authenticator</a>.</li>
+    <li id="fn27">Bitwarden-Passkey-Login für Windows 11 (4. März 2026) — <a href="https://bitwarden.com/blog/log-into-windows-with-a-bitwarden-passkey/">bitwarden.com/blog/log-into-windows-with-a-bitwarden-passkey</a>.</li>
+    <li id="fn28">1Password zum Credential-Exchange-Format — <a href="https://blog.1password.com/fido-alliance-import-export-passkeys-draft-specs/">blog.1password.com/fido-alliance-import-export-passkeys-draft-specs</a>.</li>
+    <li id="fn29">Microsoft-Authenticator Passwort-Manager-Sunset (Juni–August 2025) — <a href="https://thehackernews.com/2025/07/microsoft-removes-password-management.html">thehackernews.com/2025/07/microsoft-removes-password-management.html</a>.</li>
+    <li id="fn30">Entra ID MC1221452 (synchronisierte Passkeys GA, März 2026) — <a href="https://mc.merill.net/message/MC1221452">mc.merill.net/message/MC1221452</a>.</li>
+    <li id="fn31">Google-Authenticator-Cloud-Sync ohne E2EE (Mysk, 2023) — <a href="https://www.macrumors.com/2023/04/27/google-authenticator-cloud-sync-no-e2e/">macrumors.com/2023/04/27/google-authenticator-cloud-sync-no-e2e</a>.</li>
+    <li id="fn32">Google-Ankündigung zu zukünftigem E2EE — <a href="https://www.bleepingcomputer.com/news/google/google-will-add-end-to-end-encryption-to-google-authenticator/">bleepingcomputer.com/news/google/google-will-add-end-to-end-encryption-to-google-authenticator</a>.</li>
+    <li id="fn33">Twilio Authy Desktop EOL (19. März 2024) — <a href="https://help.twilio.com/articles/22771146070299-User-guide-End-of-Life-EOL-for-Twilio-Authy-Desktop-app">help.twilio.com/articles/22771146070299</a>.</li>
+    <li id="fn34">Authy-API-Leak (33.420.546 Nummern, ShinyHunters/BreachForums) — <a href="https://www.bleepingcomputer.com/news/security/hackers-abused-api-to-verify-millions-of-authy-mfa-phone-numbers/">bleepingcomputer.com</a>.</li>
+    <li id="fn35">Twilio bestätigt den Leak (TechCrunch, 3. Juli 2024) — <a href="https://techcrunch.com/2024/07/03/twilio-says-hackers-identified-cell-phone-numbers-of-two-factor-app-authy-users/">techcrunch.com</a>.</li>
+    <li id="fn36">ICO-Strafbescheid gegen LastPass UK Ltd (20. November 2025, £1.228.283) — <a href="https://ico.org.uk/action-weve-taken/enforcement/2025/11/lastpass-uk-ltd/">ico.org.uk/action-weve-taken/enforcement/2025/11/lastpass-uk-ltd</a>; Penalty Notice (PDF): <a href="https://ico.org.uk/media2/xfbl1uaa/lastpass-uk-ltd-penalty-notice.pdf">ico.org.uk/media2/xfbl1uaa/lastpass-uk-ltd-penalty-notice.pdf</a>.</li>
+    <li id="fn37">LastPass-$24,45-Mio-Class-Action-Settlement (Initial Approval 2025) — <a href="https://news.bloomberglaw.com/privacy-and-data-security/lastpass-gets-initial-nod-for-24-5-million-data-breach-deal">news.bloomberglaw.com</a>.</li>
+    <li id="fn38">Raivo-OTP-Verkauf an Mobime (Juli 2023) — gHacks, 19. Dezember 2023: <a href="https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/">ghacks.net</a>.</li>
+    <li id="fn39">Privacy-Guides-Delisting in v3.14 (27. Juli 2023) — <a href="https://discuss.privacyguides.net/t/remove-raivo-otp-ios-mfa/13305">discuss.privacyguides.net/t/remove-raivo-otp-ios-mfa/13305</a>.</li>
+    <li id="fn40">Raivo-OTP Changelog (Donation-Prompt/Master-Key-Recovery-Issues unter Mobime) — <a href="https://raivo-otp.com/changelog/">raivo-otp.com/changelog</a>; HN-Diskussion: <a href="https://news.ycombinator.com/item?id=40523411">news.ycombinator.com/item?id=40523411</a>.</li>
+    <li id="fn41">FreeOTP+ Releases (3.2 vom 24. März 2026; Commits bis 12. April 2026) — <a href="https://github.com/helloworld1/FreeOTPPlus/releases">github.com/helloworld1/FreeOTPPlus/releases</a>.</li>
+    <li id="fn42">Tofu App-Lock-Issue #27 (seit 2019 offen) — <a href="https://github.com/iKenndac/Tofu/issues/27">github.com/iKenndac/Tofu/issues/27</a>.</li>
+    <li id="fn43">Tofu Repo/Commit-Aktivität — <a href="https://github.com/iKenndac/Tofu">github.com/iKenndac/Tofu</a>.</li>
+    <li id="fn44">Ente Auth Desktop-Launch (März/April 2024) — <a href="https://alternativeto.net/news/2024/4/ente-releases-desktop-version-ente-auth-s-open-source-2fa-authenticator-app/">alternativeto.net</a>.</li>
+  </ol>
+</section>
+
 <footer>
-  Recherche-Stand 19. April 2026. Matrix basiert auf öffentlich verfügbaren Informationen aus offiziellen Projekt-Repositories, Vendor-Changelogs, Privacy Guides, publizierten Cure53-Audits, Bleeping Computer, Ars Technica und primärer Entwicklerdokumentation. Aktuelle Release-Versionen vor Migration produktiver Accounts prüfen.
+  Recherche-Stand April 2026. Jede faktische Behauptung ist per Fußnote mit einer Primärquelle (Projekt-Repository, Vendor-Announcement, Regulator-Page, Audit-PDF, Security-News) belegt. Aktuelle Release-Versionen vor Migration produktiver Accounts prüfen.
 </footer>
 
 </main>
