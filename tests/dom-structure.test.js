@@ -146,7 +146,80 @@ describe('required scripts', () => {
   });
 });
 
-// ── 11. Built-with section ────────────────────────────────────────────────────
+// ── 11. Mobile burger menu ────────────────────────────────────────────────────
+
+describe('mobile burger menu', () => {
+  let nav;
+  let burger;
+  let navLinks;
+
+  beforeAll(() => {
+    nav = document.getElementById('main-nav');
+    burger = document.getElementById('burger');
+    navLinks = document.getElementById('main-nav-links');
+  });
+
+  test('nav has id="main-nav" so the toggle script can find it', () => {
+    expect(nav).not.toBeNull();
+    expect(nav.tagName.toLowerCase()).toBe('nav');
+  });
+
+  test('burger button exists inside the nav', () => {
+    expect(burger).not.toBeNull();
+    expect(burger.closest('nav')).toBe(nav);
+  });
+
+  test('burger is a real <button type="button"> for accessibility', () => {
+    expect(burger.tagName.toLowerCase()).toBe('button');
+    expect(burger.getAttribute('type')).toBe('button');
+  });
+
+  test('burger has aria-label and aria-expanded="false" by default', () => {
+    expect(burger.getAttribute('aria-label')).toBeTruthy();
+    expect(burger.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  test('burger aria-controls points at the nav-links id', () => {
+    expect(burger.getAttribute('aria-controls')).toBe('main-nav-links');
+    expect(navLinks).not.toBeNull();
+  });
+
+  test('burger has exactly three .burger-line spans (three-line icon)', () => {
+    const lines = burger.querySelectorAll('.burger-line');
+    expect(lines.length).toBe(3);
+  });
+
+  test('nav-links ul is the first-party menu and contains anchor links', () => {
+    expect(navLinks.tagName.toLowerCase()).toBe('ul');
+    expect(navLinks.querySelectorAll('a').length).toBeGreaterThan(0);
+  });
+
+  test('stylesheet has a max-width:700px breakpoint that shows the burger', () => {
+    const styles = Array.from(document.querySelectorAll('style'))
+      .map(s => s.textContent)
+      .join('\n');
+    expect(styles).toMatch(/@media\s*\(max-width:\s*700px\)/);
+    expect(styles).toMatch(/\.burger\s*\{\s*display:\s*none/); // hidden on desktop
+
+    // Extract the body of the `@media (max-width: 700px)` rule and assert the
+    // burger is shown inside it. Counts nested braces to find the matching `}`.
+    const mqRe = /@media\s*\(max-width:\s*700px\)\s*\{/;
+    const m = mqRe.exec(styles);
+    expect(m).not.toBeNull();
+    let depth = 1;
+    let i = m.index + m[0].length;
+    while (i < styles.length && depth > 0) {
+      const ch = styles[i];
+      if (ch === '{') depth++;
+      else if (ch === '}') depth--;
+      i++;
+    }
+    const mqBody = styles.slice(m.index + m[0].length, i - 1);
+    expect(mqBody).toMatch(/\.burger\s*\{\s*display:\s*block/);
+  });
+});
+
+// ── 12. Built-with section ────────────────────────────────────────────────────
 
 describe('#built-with section content', () => {
   let section;

@@ -102,6 +102,30 @@
   nav .nav-links a:hover { color: var(--bark); }
   nav .nav-links a:hover::after { width: 100%; }
 
+  /* Burger button — hidden on desktop */
+  .burger {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 0.35rem;
+    cursor: pointer;
+    width: 2.2rem;
+    height: 2.2rem;
+    position: relative;
+    z-index: 110;
+  }
+  .burger-line {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    margin: 5px auto;
+    background: var(--bark);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  nav.open .burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  nav.open .burger-line:nth-child(2) { opacity: 0; }
+  nav.open .burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
   /* ── Hero ── */
   .hero {
     min-height: 100vh;
@@ -1027,22 +1051,57 @@
   /* ── Mobile ── */
   @media (max-width: 700px) {
     nav { padding: 1rem 1.5rem; }
-    nav .nav-links { gap: 1rem; }
-    nav .nav-links a { font-size: 0.72rem; }
+
+    .burger { display: block; }
+
+    nav .nav-links {
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+      background: rgba(250, 247, 242, 0.98);
+      backdrop-filter: blur(14px);
+      transform: translateY(-100%);
+      transition: transform 0.35s ease;
+      z-index: 105;
+      padding: 5rem 1.5rem 2rem;
+      overflow-y: auto;
+    }
+    nav.open .nav-links { transform: translateY(0); }
+    nav .nav-links a { font-size: 1rem; letter-spacing: 0.14em; }
+
+    /* Language switcher sits in the overlay too */
+    nav .lang-switcher {
+      position: fixed;
+      top: 1rem;
+      right: 4rem;
+      z-index: 110;
+    }
+
     section { padding: 4.5rem 1.5rem; }
     .quote-block { padding: 1.5rem 1.5rem 1.5rem 2rem; }
     .quote-block blockquote { font-size: 1.25rem; }
     .contact-links { flex-direction: column; align-items: center; }
     .lang-dropdown { right: auto; left: 0; }
+
+    /* Lock body scroll when the burger menu is open */
+    body.nav-open { overflow: hidden; }
   }
 </style>
 </head>
 <body>
 
 <!-- Navigation -->
-<nav>
+<nav id="main-nav">
   <a href="#" class="logo">S.O. Hüllinghorst</a>
-  <ul class="nav-links">
+  <button type="button" class="burger" id="burger" aria-label="Menu" aria-controls="main-nav-links" aria-expanded="false">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
+  <ul class="nav-links" id="main-nav-links">
     <li><a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a></li>
     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
     <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
@@ -2160,6 +2219,32 @@
       currentBtn.textContent = code.toUpperCase();
       switcher.classList.remove('open');
     });
+  });
+
+  // Burger menu
+  const mainNav = document.getElementById('main-nav');
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('main-nav-links');
+
+  function setNavOpen(open) {
+    mainNav.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setNavOpen(!mainNav.classList.contains('open'));
+  });
+
+  // Close menu when an in-menu link is clicked
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setNavOpen(false));
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mainNav.classList.contains('open')) setNavOpen(false);
   });
 </script>
 
