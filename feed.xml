@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Gedanken aus dem täglichen Leben.</description>
     <language>de</language>
-    <lastBuildDate>Mon, 20 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>Die drei Wächter der 2FA</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix.html</guid>
+    <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Nach dem Authy-Desaster und dem LastPass-Fallout: 22 Authenticator-Apps verglichen. Drei bleiben übrig, fünf fliegen raus.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
   <item>
     <title>ICE 541, vom kleinen B ins große B</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-20-ice-541.html</link>

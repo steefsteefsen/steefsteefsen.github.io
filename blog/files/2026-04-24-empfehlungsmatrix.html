@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authenticator-App Empfehlungsmatrix 2026 — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Vergleich von 22 2FA-/TOTP-/Passkey-Authenticator-Apps — bewertet nach Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor dem Nutzer. Stand April 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+    --good: #5a6e4a;
+    --warn: #b88a3a;
+    --bad: #8b3a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .back-link {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav .back-link:hover { color: var(--bark); }
+
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 8rem 2rem 5rem;
+  }
+
+  header.doc {
+    border-bottom: 1px solid rgba(201, 169, 110, 0.25);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--bark);
+    margin: 3rem 0 1.2rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--clay);
+  }
+
+  h3 {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--bark);
+    margin: 0 0 0.35rem;
+  }
+
+  p { margin: 0.6rem 0; color: var(--stone); }
+  p.sub { color: var(--stone); font-size: 0.95rem; }
+
+  code {
+    background: var(--sand);
+    padding: 0.05rem 0.35rem;
+    border-radius: 2px;
+    font-size: 0.9em;
+    color: var(--earth);
+    font-family: 'Courier New', monospace;
+  }
+
+  a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+  }
+  a:hover { color: var(--bark); border-color: var(--bark); }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .card {
+    background: var(--cream);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 4px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+
+  .card.gold {
+    border-color: var(--clay);
+    background: linear-gradient(180deg, rgba(201, 169, 110, 0.08), var(--cream));
+  }
+
+  .card h3 { margin-top: 0; }
+
+  .tier {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-right: 0.45rem;
+    color: var(--cream);
+  }
+  .tier.one { background: var(--earth); }
+  .tier.two { background: var(--moss); }
+  .tier.three { background: var(--stone); }
+
+  .pro { color: var(--moss); }
+  .con { color: var(--bad); }
+
+  .matrix-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 4px;
+    background: var(--cream);
+    box-shadow: 0 1px 4px var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 1100px;
+  }
+
+  th, td {
+    padding: 0.6rem 0.7rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.18);
+    vertical-align: top;
+    color: var(--bark);
+  }
+
+  th {
+    background: var(--sand);
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--earth);
+  }
+
+  th.app, td.app {
+    position: sticky;
+    left: 0;
+    background: var(--sand);
+    font-weight: 500;
+    z-index: 3;
+    min-width: 165px;
+  }
+
+  tbody tr:hover td { background: rgba(201, 169, 110, 0.06); }
+  tbody tr:hover td.app { background: rgba(201, 169, 110, 0.18); }
+
+  .yes { color: var(--good); font-weight: 500; }
+  .no { color: var(--bad); font-weight: 500; }
+  .partial { color: var(--warn); font-weight: 500; }
+  .muted { color: var(--stone); }
+
+  .row-pick td.app { border-left: 3px solid var(--clay); }
+  .row-good td.app { border-left: 3px solid var(--moss); }
+  .row-avoid td.app { border-left: 3px solid var(--bad); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    font-size: 0.85rem;
+    color: var(--stone);
+    margin: 0.6rem 0 1.2rem;
+  }
+  .legend span strong { color: var(--bark); }
+
+  details {
+    background: var(--cream);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 4px;
+    padding: 0.5rem 1.1rem;
+    margin: 0.5rem 0;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.35rem 0;
+    color: var(--bark);
+    font-family: 'Jost', sans-serif;
+  }
+  details p { margin: 0.5rem 0; }
+
+  ul.tight {
+    margin: 0.3rem 0 0.8rem 1.3rem;
+    padding: 0;
+  }
+  ul.tight li { margin: 0.2rem 0; color: var(--stone); }
+
+  .pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: var(--sand);
+    color: var(--stone);
+    margin-left: 0.3rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .pill.ok { background: rgba(90, 110, 74, 0.15); color: var(--moss); }
+  .pill.warn { background: rgba(184, 138, 58, 0.15); color: var(--warn); }
+  .pill.bad { background: rgba(139, 58, 42, 0.15); color: var(--bad); }
+
+  footer {
+    margin-top: 3rem;
+    padding: 2rem 0 1rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.25);
+    color: var(--stone);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  footer a {
+    color: inherit;
+    border-bottom: 1px solid rgba(140,123,107,0.3);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <a href="/blog/posts/2026-04-24-authenticator-matrix.html" class="back-link">← Zum Blog-Eintrag</a>
+</nav>
+
+<main>
+
+<header class="doc">
+  <h1>Authenticator-App Empfehlungsmatrix 2026</h1>
+  <p class="sub">Vergleich von 2FA- / TOTP- / Passkey-Authenticator-Apps, optimiert für einen Linux-nahen, self-hostenden, Bitwarden-nutzenden, privatsphäre-respektierenden Workflow. Stand: 19. April 2026.</p>
+</header>
+
+<section>
+  <h2>Methodik und Prioritäten</h2>
+  <p>Jede App wurde bewertet nach <strong>Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor dem Nutzer</strong> — in dieser Reihenfolge. Open-Source ist stark bevorzugt, und nur reife, gepflegte, reputable Projekte schaffen es in die erste Reihe. Plattform-Abdeckung wiegt schwer, weil ein Linux-Desktop-Client seit dem Authy-Aus im August 2024 ein echtes Problem ist. Self-hostbare oder dateibasierte Synchronisation kompatibel mit Nextcloud/WebDAV bekommt Bonuspunkte.</p>
+  <p>Vier Entscheidungsachsen leiten die Empfehlungen: (1) funktioniert die App nativ auf Linux Mint, (2) lassen sich Backups auf eine selbst gehostete Nextcloud auf einem Raspberry&nbsp;Pi 5 legen, (3) ist sie unabhängig auditiert, und (4) respektiert sie echte Zwei-Faktor-Trennung — d.h. hebelt das Speichern von TOTP-Seeds im selben Tresor wie Passwörter nicht den ganzen Zweck aus?</p>
+  <div class="legend">
+    <span><strong class="yes">✓</strong> unterstützt</span>
+    <span><strong class="no">✗</strong> nicht unterstützt</span>
+    <span><strong class="partial">~</strong> teilweise / mit Einschränkungen</span>
+    <span><span class="pill ok">pick</span> empfohlen</span>
+    <span><span class="pill warn">caution</span> mit Einschränkungen nutzbar</span>
+    <span><span class="pill bad">avoid</span> 2026 nicht empfehlenswert</span>
+  </div>
+</section>
+
+<section>
+  <h2>Top-Empfehlungen nach Anwendungsfall</h2>
+  <div class="grid">
+
+    <div class="card gold">
+      <h3><span class="tier one">Pick #1</span>Ente Auth</h3>
+      <p class="sub">Beste Open-Source-Option plattformübergreifend.</p>
+      <p>Native Clients auf <strong>Linux, Windows, macOS, Android, iOS und im Web</strong>; Ende-zu-Ende-verschlüsselte Sync via Ente-Account oder Local-only-Modus; auditiert von <strong>Cure53 + Symbolic Software (2023)</strong> und erneut von <strong>Cure53 im Oktober 2025</strong> (CERN-gefördert, ENT-02). AGPL-Codebase, keine Werbung, keine Tracker, umfangreicher Import (Google Auth, 2FAS, Aegis, Raivo, Authy, Bitwarden, LastPass, andOTP). Aktuelle Primärempfehlung von Privacy Guides.</p>
+      <p><span class="pro">+ Einzige Mainstream-Option mit E2EE-Sync über alle großen Plattformen inkl. Linux.</span><br>
+      <span class="con">− Sync setzt Vertrauen in Entes Cloud-Implementierung voraus (durch Audits abgemildert). Flutter-Desktop-UI weniger poliert als native.</span></p>
+    </div>
+
+    <div class="card gold">
+      <h3><span class="tier two">Pick #2</span>Bitwarden Authenticator (mobil)</h3>
+      <p class="sub">Beste Ergänzung für wer schon Bitwarden nutzt.</p>
+      <p>Kostenlos, Open-Source (GPL-3), nur mobil. Am 6. März 2025 in die Hauptrepositories <code>bitwarden/android</code> und <code>bitwarden/ios</code> konsolidiert. Den optionalen Toggle <em>„Authenticator-Sync"</em> <strong>ausgeschaltet</strong> lassen, damit die TOTP-Seeds auf einem separaten Gerät bleiben — echte Zwei-Faktor-Trennung, obwohl beide Produkte Bitwarden-branded sind.</p>
+      <p><span class="pro">+ Vertrauter Anbieter, kein Zusatz-Account, saubere App, funktioniert mit selbst gehostetem Vaultwarden.</span><br>
+      <span class="con">− Kein Desktop-Client. Keine eigenständige Cross-Device-Sync; Handy verlieren ohne Backup-Export ist schmerzhaft.</span></p>
+    </div>
+
+    <div class="card gold">
+      <h3><span class="tier three">Pick #3</span>KeePassXC + KeePassDX (self-hosted)</h3>
+      <p class="sub">Beste rein selbst gehostete Lösung — ideologisch sauber.</p>
+      <p>Eine <em>zweite</em> <code>.kdbx</code>-Datei nur für TOTP anlegen, mit eigenem Masterpasswort, via Nextcloud auf dem Pi&nbsp;5 synchronisieren (WebDAV geht; Syncthing vermeidet Konflikte besser). KeePassXC 2.7.11 (Nov 2025) ist das aktuelle Stable-Release; KeePassDX das Android-Pendant; KeePassium (Cure53-Audit Okt 2024) oder Strongbox auf iOS. Null Abo, voll FOSS, kein Vendor.</p>
+      <p><span class="pro">+ Vollständig unter eigener Kontrolle. Keine Dritt-Cloud. Bitwarden-Passkey-Import seit 2.7.10.</span><br>
+      <span class="con">− Passkey-Story schwächer als bei 1Password/Bitwarden; Datei-Sync erfordert Disziplin gegen Konflikte.</span></p>
+    </div>
+
+    <div class="card">
+      <h3>Runner-up: Proton Authenticator</h3>
+      <p class="sub">Am 31. Juli 2025 gelauncht — der neueste ernsthafte Kandidat.</p>
+      <p>GPL-3, Schweizer Jurisdiktion, nativ auf <strong>Linux, Windows, macOS, Android, iOS</strong>. Drei Sync-Modi: local-only, iCloud, oder Gratis-Proton-Account mit E2EE-Sync. Breiter Import und — entscheidend — <strong>Export</strong> von TOTP-Seeds. Ein Mac-Version-Import-Bug (gefixt nach v1.1.1) ist für Early Adopters zu beachten.</p>
+      <p><span class="pro">+ Sauberster Linux+mobile-Standalone-Sync außer Ente in 2026.</span><br>
+      <span class="con">− Junge App, ein paar Post-Launch-Bugs; nicht self-hostbar.</span></p>
+    </div>
+
+    <div class="card">
+      <h3>Hardware-gestützt: Yubico Authenticator + YubiKey 5.7</h3>
+      <p class="sub">Für hochwertige Accounts, bei denen Secret-Extraktion unmöglich sein muss.</p>
+      <p>Open-Source-Companion-App auf <strong>Linux (AppImage/.deb/Flatpak)</strong>, Win, Mac, Android, iOS. TOTP-Secrets leben auf dem YubiKey; 64 Slots auf Firmware 5.7+, 32 auf älteren. Immer <strong>zwei Schlüssel</strong> kaufen und beim TOTP-Setup beide enrollen. Als zweiter Faktor für Bitwarden selbst verwenden — nicht dessen Seed in der App speichern, die es schützen soll.</p>
+      <p><span class="pro">+ Phishing-resistent FIDO2 + TOTP in einem; Secrets verlassen den Chip nie.</span><br>
+      <span class="con">− Slot-Limit; jeder Code braucht den Schlüssel; EUCLEAK (Sept 2024) Side-Channel auf Pre-5.7-Firmware.</span></p>
+    </div>
+
+    <div class="card">
+      <h3>Android-Purist: Aegis</h3>
+      <p class="sub">Maximale Privatsphäre, keine Cloud, kein Account.</p>
+      <p>GPL-3, AES-256-GCM + scrypt, verschlüsselte Backups in ein beliebiges Verzeichnis (DAVx5-gemounteter Nextcloud-Ordner → self-hosted Backup). Breitester Import-Support im Android-Ökosystem. Kein iOS, kein Desktop.</p>
+      <p><span class="pro">+ Offline-first; keine Netzberechtigung nötig; sauberer Export.</span><br>
+      <span class="con">− Nur Android; keine eigenständige Cross-Device-Sync.</span></p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Vollständige Vergleichsmatrix</h2>
+  <p class="sub">Zeilen sind Apps; Spalten sind die Bewertungsachsen. Zeile hovern zum Hervorheben.</p>
+  <div class="matrix-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="app">App</th>
+        <th>Lizenz</th>
+        <th>Linux</th>
+        <th>Win</th>
+        <th>macOS</th>
+        <th>Android</th>
+        <th>iOS</th>
+        <th>Web/Ext</th>
+        <th>CLI</th>
+        <th>E2EE-Sync</th>
+        <th>Self-host</th>
+        <th>Audit</th>
+        <th>Export</th>
+        <th>Passkey</th>
+        <th>Werbung</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row-pick">
+        <td class="app">Ente Auth</td>
+        <td>AGPL-3 (OSS)</td>
+        <td class="yes">✓ Flatpak/AppImage</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓ Web + Ext</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="partial">~ Server self-hostbar</td>
+        <td class="yes">Cure53 2023, 2025</td>
+        <td class="yes">JSON, verschl.</td>
+        <td class="partial">~ nur Account-2FA</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-pick">
+        <td class="app">Bitwarden Authenticator</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">~ nur via BW-Vault</td>
+        <td class="yes">via Vaultwarden</td>
+        <td class="yes">Cure53 jährlich</td>
+        <td class="yes">JSON</td>
+        <td class="no">✗ nur TOTP</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-pick">
+        <td class="app">KeePassXC (+ KeePassDX)</td>
+        <td>GPL-2 / GPL-3 (OSS)</td>
+        <td class="yes">✓ nativ</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">via KeePassDX</td>
+        <td class="yes">via KeePassium</td>
+        <td class="partial">~ Browser-Ext</td>
+        <td class="yes">keepassxc-cli</td>
+        <td class="partial">~ dateibasiert</td>
+        <td class="yes">✓ voll</td>
+        <td class="partial">1× Audit 2023</td>
+        <td class="yes">CSV/KDBX/XML</td>
+        <td class="partial">nur Browser-Ext</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">Proton Authenticator</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="yes">✓ .deb/.rpm</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="partial">Proton-Audits</td>
+        <td class="yes">ja, Seeds</td>
+        <td class="no">✗ nur TOTP</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">2FAS</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="partial">~ Browser-Ext</td>
+        <td class="partial">~ Ext</td>
+        <td class="partial">~ Ext</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓ (+ Watch)</td>
+        <td class="yes">✓ alle Browser</td>
+        <td class="no">✗</td>
+        <td class="partial">~ iCloud/GDrive</td>
+        <td class="partial">verschl. Backup</td>
+        <td class="no">keins publ.</td>
+        <td class="yes">JSON, verschl.</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">Aegis</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">3rd-party CLI</td>
+        <td class="no">✗ (nur lokal)</td>
+        <td class="yes">DAVx5 → Nextcloud</td>
+        <td class="partial">self-doc, kein Cure53</td>
+        <td class="yes">JSON, verschl.</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">Stratum (ex-Authenticator&nbsp;Pro)</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓ (+ Wear OS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">WebDAV via DAVx5</td>
+        <td class="no">keins publ.</td>
+        <td class="yes">JSON, verschl.</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">OTPClient</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="yes">✓ Flatpak + CLI</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">otpclient-cli</td>
+        <td class="no">✗ (Datei)</td>
+        <td class="yes">Nextcloud-Datei</td>
+        <td class="no">keins</td>
+        <td class="yes">andOTP, Aegis, FreeOTP+</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">Linux-Pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">GNOME Authenticator</td>
+        <td>GPL-3+ (OSS)</td>
+        <td class="yes">✓ Flatpak</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">Datei in Nextcloud</td>
+        <td class="no">keins</td>
+        <td class="yes">Aegis, andOTP</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill ok">Linux-Pick</span></td>
+      </tr>
+      <tr class="row-good">
+        <td class="app">Yubico Authenticator</td>
+        <td>Apache-2 (OSS)</td>
+        <td class="yes">✓ .deb/AppImage</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓ (NFC)</td>
+        <td class="yes">✓ (NFC)</td>
+        <td class="no">✗</td>
+        <td class="partial">ykman CLI</td>
+        <td class="partial">N/A (HW)</td>
+        <td class="yes">hardware-isoliert</td>
+        <td class="yes">Firmware-Audits; EUCLEAK in 5.7 gefixt</td>
+        <td class="no">by design</td>
+        <td class="yes">FIDO2</td>
+        <td class="yes">braucht $$ Key</td>
+        <td><span class="pill ok">HW-Pick</span></td>
+      </tr>
+      <tr>
+        <td class="app">Bitwarden Built-in TOTP</td>
+        <td>GPL-3 / AGPL-3 (OSS)</td>
+        <td class="yes">✓ alle Clients</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓ Vault + Ext</td>
+        <td class="yes">bw CLI</td>
+        <td class="yes">✓</td>
+        <td class="yes">Vaultwarden</td>
+        <td class="yes">Cure53 jährlich</td>
+        <td class="yes">JSON, verschl.</td>
+        <td class="yes">voll</td>
+        <td class="partial">TOTP nur mit Premium $10/J</td>
+        <td><span class="pill warn">funktioniert, aber Single-Vault-Risiko</span></td>
+      </tr>
+      <tr>
+        <td class="app">1Password (Built-in TOTP)</td>
+        <td>proprietär</td>
+        <td class="yes">✓ nativ</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">op CLI</td>
+        <td class="yes">✓ (eigene Cloud)</td>
+        <td class="no">✗ cloud-only</td>
+        <td class="yes">jährliches Dritt-Audit</td>
+        <td class="partial">1PIF/1PUX</td>
+        <td class="yes">Best-in-Class</td>
+        <td class="partial">$35.88/J, kein Free</td>
+        <td><span class="pill warn">closed, no self-host</span></td>
+      </tr>
+      <tr>
+        <td class="app">Proton Pass (TOTP)</td>
+        <td>GPL-3 (OSS)</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="yes">pass-cli</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="yes">Proton-Audits</td>
+        <td class="yes">ja</td>
+        <td class="yes">voll</td>
+        <td class="partial">TOTP nur Premium</td>
+        <td><span class="pill warn">gut, aber Paywall</span></td>
+      </tr>
+      <tr>
+        <td class="app">KeePassium / Strongbox (iOS)</td>
+        <td>GPL-3 / AGPL-3 (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">via Catalyst</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">dateibasiert</td>
+        <td class="yes">WebDAV, SFTP, Nextcloud</td>
+        <td class="yes">KeePassium: Cure53 Okt 2024</td>
+        <td class="yes">KDBX</td>
+        <td class="partial">iOS-System</td>
+        <td class="partial">Freemium $12/J</td>
+        <td><span class="pill ok">iOS-Partner zu KeePassXC</span></td>
+      </tr>
+      <tr>
+        <td class="app">Microsoft Authenticator</td>
+        <td>proprietär</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">MS/iCloud</td>
+        <td class="no">✗</td>
+        <td class="no">intern</td>
+        <td class="partial">TOTP limitiert</td>
+        <td class="yes">Entra-Passkey</td>
+        <td class="partial">MS-Lock-in</td>
+        <td><span class="pill warn">OK für MS-Stack</span></td>
+      </tr>
+      <tr>
+        <td class="app">Google Authenticator</td>
+        <td>proprietär</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">E2EE 2026 unklar</td>
+        <td class="no">✗</td>
+        <td class="no">keins publ.</td>
+        <td class="yes">QR-Export</td>
+        <td class="no">✗</td>
+        <td class="partial">viel Datensammlung</td>
+        <td><span class="pill warn">funktioniert, wenig Privatsphäre</span></td>
+      </tr>
+      <tr>
+        <td class="app">Duo Mobile</td>
+        <td>proprietär</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">verschl.</td>
+        <td class="no">✗</td>
+        <td class="partial">Cisco-intern</td>
+        <td class="no">nur Duo-Restore</td>
+        <td class="yes">WebAuthn</td>
+        <td class="partial">Enterprise-Telemetrie</td>
+        <td><span class="pill warn">eigentlich nur Enterprise</span></td>
+      </tr>
+      <tr class="row-avoid">
+        <td class="app">Authy (mobil)</td>
+        <td>proprietär</td>
+        <td class="no">✗ Aug 2024 abgeschaltet</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">Cloud-Backup</td>
+        <td class="no">✗</td>
+        <td class="no">Juli 2024: 33M Phone-# geleakt</td>
+        <td class="no">notorisch schlecht</td>
+        <td class="no">✗</td>
+        <td class="partial">Phone-#-Lock-in</td>
+        <td><span class="pill bad">avoid</span></td>
+      </tr>
+      <tr class="row-avoid">
+        <td class="app">LastPass Authenticator</td>
+        <td>proprietär</td>
+        <td class="no">✗</td>
+        <td class="partial">~ alte UWP</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">LP-Cloud</td>
+        <td class="no">✗</td>
+        <td class="no">2022-Breach-Fallout; £1,2M ICO-Strafe; $24,5M Sammelklage</td>
+        <td class="no">limitiert</td>
+        <td class="partial">teilweise</td>
+        <td class="partial">LP-Lock-in</td>
+        <td><span class="pill bad">avoid</span></td>
+      </tr>
+      <tr class="row-avoid">
+        <td class="app">Raivo OTP</td>
+        <td>MPL-2 (source-available)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">nur Empfänger</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">iCloud</td>
+        <td class="no">✗</td>
+        <td class="no">Privacy Guides delisted nach Mobime-Verkauf 2023</td>
+        <td class="yes">verschl. ZIP</td>
+        <td class="no">✗</td>
+        <td class="partial">Spenden-Prompts</td>
+        <td><span class="pill bad">avoid (Vertrauen)</span></td>
+      </tr>
+      <tr class="row-avoid">
+        <td class="app">FreeOTP+</td>
+        <td>Apache-2 (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">JSON</td>
+        <td class="no">keins</td>
+        <td class="yes">JSON</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill bad">seit Feb 2024 still</span></td>
+      </tr>
+      <tr class="row-avoid">
+        <td class="app">Tofu (iOS)</td>
+        <td>ISC (OSS)</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">nur iCloud-Backup</td>
+        <td class="no">keins</td>
+        <td class="no">kein Bulk</td>
+        <td class="no">✗</td>
+        <td class="yes">keine</td>
+        <td><span class="pill bad">stale, kein App-Lock</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Deep Dives zu jeder App</h2>
+
+  <details open>
+    <summary>Ente Auth <span class="pill ok">pick</span></summary>
+    <p>AGPL-Flutter-Codebase von Ente (ente.io). Krypto: libsodium — XChaCha20-Poly1305 für Daten, Argon2id für Key Derivation. Server mit Zero-Knowledge-Architektur. Desktop-Builds als AppImage und Flatpak mit Feature-Parität zu Mobile. Cure53 + Symbolic Software haben 2023 die Krypto auditiert; Cure53 re-auditierten im Oktober 2025 den Server (ENT-02, CERN-gefördert), fanden 15 Issues, davon 12 während des Engagements gefixt. Import aus Google Authenticator (QR-Migration), 2FAS, Aegis, Raivo, Authy (limitiert), Bitwarden, LastPass, Microsoft Authenticator (manuell), andOTP und Plain-/verschlüsseltem JSON. Account unterstützt WebAuthn/FIDO2-Passkeys als zweiten Faktor auf dem Ente-Account selbst.</p>
+    <p><strong class="pro">Pro:</strong> einzige auditierte, E2EE-, wirklich plattformübergreifende Option (inkl. Linux). Frei für Authenticator-Nutzung ohne Paywall. Auch offline. Aktive Privacy-Guides-Empfehlung.</p>
+    <p><strong class="con">Con:</strong> Desktop-UI ist Flutter und leicht weniger poliert als native. Account-Sync auf Entes Cloud (Self-Hosting des Servers möglich, aber komplexer als Vaultwarden).</p>
+  </details>
+
+  <details>
+    <summary>Bitwarden Authenticator (Standalone mobil) <span class="pill ok">pick</span></summary>
+    <p>Am 1. Mai 2024 gelauncht. Ursprünglich in separaten <code>bitwarden/authenticator-*</code>-Repos; am 6. März 2025 archiviert und in die mobilen Haupt-Codebases gemerged. Lokales AES-256 mit Schlüssel in iOS-Keychain / Android-Keystore. Mobile 2025.6.0 (Juli 2025) brachte optionale bi-direktionale Sync mit dem Bitwarden-Password-Manager-Vault — funktioniert mit der offiziellen Cloud und manchmal mit Vaultwarden (GitHub-Diskussion vaultwarden/server#6090 berichtet inkonsistentes Verhalten je nach Feature-Flags). Sync-Toggle ausgeschaltet lassen, um echte Zwei-Faktor-Trennung zu erhalten.</p>
+    <p><strong class="pro">Pro:</strong> kein Desktop-Client hilft tatsächlich, echte 2FA-Disziplin zu erzwingen. Kostenlos, kein Account nötig, keine Telemetrie. Imports aus Google Authenticator, Aegis, 2FAS, LastPass, Bitwarden.</p>
+    <p><strong class="con">Con:</strong> nur mobil. Keine eigenständige Cross-Device-Sync. Backup = manueller verschlüsselter Export.</p>
+  </details>
+
+  <details>
+    <summary>KeePassXC + KeePassDX + KeePassium / Strongbox <span class="pill ok">pick</span></summary>
+    <p>KeePassXC 2.7.11 (24. Nov 2025) ist Stable. KDBX 3.1/4 mit AES-256, Twofish oder ChaCha20, Argon2id-KDF. Passkey-Support kam in 2.7.7 (März 2024) via Browser-Extension; 2.7.10 brachte Bitwarden- und Proton-Pass-Importer inkl. Passkeys. Ein formales externes Audit (Zaur Molotnikov, Jan 2023) — älter als Bitwardens rollierende Audits. KeePassDX auf Android unterstützt alles, was KeePassXC auf Dateiebene tut. KeePassium (iOS) hatte im Oktober 2024 ein Cure53-Pentest und unterstützt WebDAV, SFTP und Nextcloud nativ — perfekter Match zu meinem Pi&nbsp;5.</p>
+    <p>Die KeePassXC-FAQ selbst sagt: <em>„Um den Sicherheitsgewinn zu maximieren... TOTP-Secrets in einer separaten Datenbank mit anderem Passwort speichern."</em> Genau das ist mein Setup.</p>
+    <p><strong class="pro">Pro:</strong> voll self-hostbar. Null Abo. Offline-fähig. Passkey-Import aus Bitwarden.</p>
+    <p><strong class="con">Con:</strong> Datei-Sync-Konflikte (Syncthing hilft, wenn WebDAV nervt). Passkey-Nutzung weiterhin an die Browser-Extension gebunden — keine FIDO2-USB-Emulation, kein Hybrid-Transport (QR/BLE) Stand April 2026.</p>
+  </details>
+
+  <details>
+    <summary>Proton Authenticator <span class="pill ok">pick</span></summary>
+    <p>Am 31. Juli 2025 gelauncht. GPL-3 über Kotlin (Android), Swift (iOS) und Rust+TS (Desktop) unter <code>protonpass/</code> auf GitHub. Drei Modi: local-only, iCloud-Sync, oder Gratis-Proton-Account mit E2EE-Sync. Kein Account nötig. Linux-Install als signiertes .deb/.rpm. Import aus Google Authenticator, Authy, Aegis, 2FAS, Bitwarden, LastPass und — wichtig — Export von Seeds in Plain oder verschlüsselt. TidBITS (August 2025) hat einen Mac-Auto-Delete-Bug beim Import gemeldet, später gepatcht; vor Massenmigration Release Notes prüfen.</p>
+    <p><strong class="pro">Pro:</strong> bester nativer Linux+mobile-E2EE-Standalone-Authenticator-Launch 2025. Schweizer Jurisdiktion. Voller Export. Keine Werbung. Kein Zwangsaccount.</p>
+    <p><strong class="con">Con:</strong> jung; nicht self-hostbar (Authenticator-Sync läuft über Protons Cloud).</p>
+  </details>
+
+  <details>
+    <summary>2FAS</summary>
+    <p>GPL-3 auf Mobile und Browser-Extension. Kein nativer Linux-Desktop-Client — die Browser-Extension ist ein Relay und braucht die Mobile-App zum Beantworten von TOTP-Requests. Verschlüsseltes Cloud-Backup auf Google Drive (Android) oder iCloud (iOS); keine native Cross-Desktop-Sync. Kein Account nötig. Kein veröffentlichtes externes Audit. Imports Google Authenticator QR, Aegis, Raivo, andOTP, LastPass, Plain. Ein separates Produkt namens „2FAS Pass" ist ein Passwort-Manager und nicht mit dem Authenticator zu verwechseln.</p>
+    <p><strong class="pro">Pro:</strong> saubere UX; Browser-Extension ist auf Shared Desktops wirklich nützlich; keine Tracker.</p>
+    <p><strong class="con">Con:</strong> kein echter Linux-Desktop. Keine Cross-Desktop-Sync.</p>
+  </details>
+
+  <details>
+    <summary>Aegis (Android)</summary>
+    <p>GPL-3, v3.4.2 (25. Feb 2026). AES-256-GCM + scrypt (N=2^15). Android-Keystore-gestützter biometrischer Credential. Screen-Capture-Prevention. Auto-Backup in beliebiges Verzeichnis — kombiniert mit DAVx5 oder dem Nextcloud-Android-Client landet das Backup in der Nextcloud auf dem Pi&nbsp;5. Tiefster Import-Support im Android-Ökosystem (andOTP, FreeOTP+, 2FAS, Google-Auth-Migration, Microsoft Authenticator, Stratum, Authy-root-only, WinAuth, Steam). Keine Netz-Berechtigung für Kernfunktion.</p>
+    <p><strong class="pro">Pro:</strong> maximale Privatsphäre. Gut dokumentierte Krypto (<code>docs/vault.md</code>). Wirklich offline.</p>
+    <p><strong class="con">Con:</strong> nur Android. Keine Cross-Device-Sync (by design). Handy verlieren ohne Backup = Schmerz.</p>
+  </details>
+
+  <details>
+    <summary>Stratum (vormals Authenticator Pro)</summary>
+    <p>Rebranded im September 2024, nachdem der Entwickler die neue Google-Play-Policy mit öffentlicher Privatadresse verweigerte. GPL-3, SQLCipher-verschlüsselte Backups. <strong>Explizites WebDAV-Backup via DAVx5</strong> — der sauberste Match für Nextcloud-Self-Hosting auf Android. Wear-OS-Sync nutzt non-FOSS-Deps; der F-Droid-Build hat sie daher nicht. Kein externes Audit publiziert.</p>
+  </details>
+
+  <details>
+    <summary>OTPClient (Linux)</summary>
+    <p>Nativer Linux-GTK4/libadwaita-Client in C, GPL-3, Flatpak + Distro-Pakete + CLI (<code>otpclient-cli</code>). Secret-Service-Integration (GNOME Keyring / KWallet) optional. Der verschlüsselte Tresor ist eine flache Datei — die kann in einem Nextcloud-synchronisierten Ordner für self-hosted Backup leben. Imports und Exports Google Auth QR, andOTP, FreeOTP+, Aegis.</p>
+  </details>
+
+  <details>
+    <summary>GNOME Authenticator (belmoussaoui)</summary>
+    <p>Flatpak auf Flathub; Rust + GTK4. Teil von GNOME Circle. Imports Aegis, andOTP, FreeOTP+, Google Authenticator. Kein Sync; Nextcloud für den Export-Datei-Transport nutzen.</p>
+  </details>
+
+  <details>
+    <summary>Yubico Authenticator + YubiKey 5.7+</summary>
+    <p>Apache-2-Companion-App auf jedem großen OS inkl. Linux. TOTP-Secrets leben auf dem YubiKey; Firmware 5.7+ unterstützt 64 OATH-Credentials (ältere: 32). YubiKey-Firmware ist nicht feldaktualisierbar — Käufer müssen 5.7 verifizieren. Der EUCLEAK-Side-Channel (Sept 2024) zielte auf Infineon-Secure-Elements auf Pre-5.7-YubiKeys; in 5.7 gefixt. Jeder TOTP-Read braucht Touch oder NFC. Immer zwei Schlüssel gleichzeitig beim TOTP-Setup enrollen — Secrets sind nicht exportierbar.</p>
+  </details>
+
+  <details>
+    <summary>Bitwarden Built-in TOTP (im Passwort-Vault)</summary>
+    <p>Free-Nutzer können TOTP-Seeds speichern; das Generieren des 6-stelligen Codes braucht Premium ($10/J) oder einen Families/Teams/Enterprise-Plan. Läuft auf jedem Bitwarden-Client inkl. Linux-Desktop, Browser-Extension und CLI. Zero-Knowledge-E2EE-Sync — mit Vaultwarden auf dem Pi 5 voll self-hosted. Bitwarden hat 2024 Passkey-Storage und 2026 Windows-11-Passkey-Login hinzugefügt. Jährliche Cure53-Audits. Die <strong>einzige relevante Sorge</strong> ist die Single-Vault-Kritik: wer den Vault kompromittiert, hat beide Faktoren. Den Bitwarden-Account selbst mit einem <em>separaten</em> Faktor schützen — ein YubiKey oder ein TOTP-Seed außerhalb von Bitwarden.</p>
+  </details>
+
+  <details>
+    <summary>1Password Built-in TOTP</summary>
+    <p>Poliert, aber Closed-Source, Paid-only und Cloud-only seit dem Ende lokaler Vaults. Best-in-Class-Passkey-Implementierung (Nick Steele sitzt im FIDO-Alliance-Board; unterstützt das Credential Exchange Format). Aber: kein Linux-Passkey-Unlock, kein Self-Host, kein Free Tier, Closed-Source — drei Disqualifikationen für dieses Nutzerprofil.</p>
+  </details>
+
+  <details>
+    <summary>Proton Pass integriertes TOTP</summary>
+    <p>Voller plattformübergreifender GPL-3-Passwortmanager mit optionalem integrierten TOTP hinter Premium. Verschlüsselt URLs (ungewöhnlich — stärker als Bitwarden). Nicht self-hostbar. Wer Bitwarden verlassen will, findet in Proton Pass + Proton Authenticator die kohärenteste reine Cloud-Alternative — auf Kosten der Self-Host-Story.</p>
+  </details>
+
+  <details>
+    <summary>Microsoft Authenticator</summary>
+    <p>Die Passwort-Manager-Funktion wurde Juni–August 2025 in drei Stufen abgekündigt; Nutzer wurden zu Microsoft Edge migriert. Der MFA-Teil — TOTP, Push, Passkeys — bleibt. Entra ID rollt im März 2026 synchronisierte Passkeys auf GA aus (MC1221452). Kein Linux-Desktop. Closed-Source.</p>
+  </details>
+
+  <details>
+    <summary>Google Authenticator</summary>
+    <p>Cloud-Sync kam am 24. April 2023 — Mysk-Researcher haben öffentlich bestätigt, dass die Sync nicht Ende-zu-Ende verschlüsselt war. Google versprach E2EE „in Zukunft", aber Stand April 2026 gibt es keine autoritative öffentliche Bestätigung ausgerollter E2EE. iOS-App-Store-Privacy-Labels beschreiben umfangreiche identitätsverknüpfte Datenerhebung. Kein Desktop. Closed-Source. QR-basierter Export ist die eine echte Stärke.</p>
+  </details>
+
+  <details>
+    <summary>Duo Mobile</summary>
+    <p>Enterprise-first. Kein Linux-Desktop. Closed-Source. Verschlüsseltes Duo-Restore-Backup an Duos Cloud gebunden. Okay, wenn der Arbeitgeber es erzwingt; sonst kein Match für dieses Profil.</p>
+  </details>
+
+  <details>
+    <summary>Authy (mobil) <span class="pill bad">avoid</span></summary>
+    <p>Desktop-Apps für Windows, macOS und Linux erreichten End-of-Life am 19. März 2024 und wurden Mitte August 2024 zwangsabgemeldet — Nutzer ohne Mobile-Sync verloren Tokens. Ende Juni 2024 postete ShinyHunters ein Dataset mit 33.420.546 Authy-Telefonnummern, erbeutet über einen unauthentifizierten API-Endpunkt (Twilio bestätigte am 1. Juli 2024). Authys fehlende echte Export-Funktion machte Migration brutal. Mobile-App funktioniert 2026 noch, wird aber von Privacy Guides und den meisten Security-Outlets nicht mehr empfohlen.</p>
+  </details>
+
+  <details>
+    <summary>LastPass Authenticator <span class="pill bad">avoid</span></summary>
+    <p>Mutterfirma kämpft weiter mit dem Fallout des 2022er-LastPass-Breach: Das UK ICO verhängte im November 2025 1,2 Mio £ Strafe gegen LastPass UK Ltd; eine 24,5-Mio-$-Sammelklage landete 2025 für Kunden, deren Vaults zugänglich waren. Die Authenticator-App selbst hatte jahrelang minimale Feature-Entwicklung. Kein frischer Start auf diesem Stack.</p>
+  </details>
+
+  <details>
+    <summary>Raivo OTP <span class="pill bad">avoid (Vertrauen)</span></summary>
+    <p>Im Juli 2023 an Mobime verkauft, nur per Tweet angekündigt. Privacy Guides hat es delistet. Unter dem neuen Besitzer wurden Spenden-Prompt-UX hinzugefügt und Master-Key-Recovery-Regressionen zugegeben. Code ist noch öffentlich, aber Vertrauen ist erodiert — bestehende Nutzer sollten Exports zu Ente Auth oder KeePassium migrieren.</p>
+  </details>
+
+  <details>
+    <summary>FreeOTP+ <span class="pill bad">stale</span></summary>
+    <p>Letzte Release v3.1.1 am 13. Februar 2024 — keine neuen Releases 2025 oder Anfang 2026. FreeOTP (das Red-Hat-Parent) bekommt weiterhin langsame Updates (Android v2.0.6, Feb 2025), hat aber schwachen Import/Export. Beide 2026 keine empfohlene Erstwahl; zu Aegis oder Ente migrieren.</p>
+  </details>
+
+  <details>
+    <summary>Tofu (iOS) <span class="pill bad">stale</span></summary>
+    <p>ISC-Lizenz, iOS-only. Kein App-Level-Biometric/Passcode-Lock (Issue offen seit 2019). Kein Bulk-Import. Letzter sinnvoller App-Store-Release 2021; Commits bis Mitte 2024, dann Stille. Für iOS-Nutzer mit Sync-Wunsch von Ente Auth abgelöst.</p>
+  </details>
+
+</section>
+
+<section>
+  <h2>Der Authy-Desktop-Fallout in einem Absatz</h2>
+  <p>Twilio kündigte End-of-Life für Authy Desktop im Januar 2024 an, zog das Datum auf den <strong>19. März 2024</strong> vor, und bis <strong>Mitte August 2024</strong> wurden alle verbleibenden Windows-, macOS- und Linux-Nutzer zwangsabgemeldet. Einen Monat davor wurde ein unauthentifizierter API-Endpunkt ausgenutzt, um <strong>33.420.546</strong> Authy-Telefonnummern zu enumerieren — von ShinyHunters auf BreachForums publiziert und von Twilio am <strong>1. Juli 2024</strong> bestätigt. Nutzer ohne Cloud-Sync verloren Tokens; die mit Sync mussten trotzdem jeden Dienst zurücksetzen, weil Authy keinen echten Export hat. Der Migrationsverkehr landete vor allem bei <strong>Ente Auth</strong> (dessen April-2024-Desktop-Launch perfekt getaktet war), <strong>2FAS</strong>, <strong>Aegis</strong> und dem neu gelaunchten <strong>Bitwarden Authenticator</strong>. Die Lehre, die hinter den 2026er-Empfehlungen oben steht: <em>Nie einem Authenticator ohne Open Source, echten Export und klaren Weg aus der Hersteller-Cloud vertrauen.</em></p>
+</section>
+
+<section>
+  <h2>Empfohlenes konkretes Setup</h2>
+  <p>Basierend auf den Bewertungsachsen ist die verteidigbarste Haltung im April 2026 ein <strong>Drei-Ebenen-Stack</strong>:</p>
+  <ul class="tight">
+    <li><strong>Passwörter und Passkeys</strong>: Bitwarden auf Linux Mint + mobil, self-hosted via Vaultwarden auf dem Pi 5 (läuft schon). Den Bitwarden-Account selbst mit einem <strong>Hardware-FIDO2-Key</strong> schützen (YubiKey 5.7 oder Nitrokey 3) — zwei enrollen.</li>
+    <li><strong>TOTP (Alltag)</strong>: <strong>Ente Auth</strong> für plattformübergreifenden Komfort (Linux-Desktop + Android/iOS + Web, E2EE). Oder, für die strikte self-hosted Alternative, eine <strong>zweite KeePassXC-Datenbank</strong> nur für TOTP, anderes Masterpasswort, via Nextcloud/WebDAV zu KeePassDX oder KeePassium auf mobil.</li>
+    <li><strong>TOTP (hochwertige Accounts)</strong>: Yubico Authenticator mit TOTP-Seeds direkt auf dem Hardware-Key, sodass diese Seeds selbst bei vollem OS-Compromise nicht extrahierbar sind.</li>
+  </ul>
+  <p>Den TOTP-Seed für Bitwarden <em>nicht</em> in Bitwarden speichern. Den Recovery-Seed des Authenticators <em>nicht</em> auf dem Gerät halten, das den Authenticator trägt. Den Nextcloud-Master-Key-Recovery-Zettel ausdrucken oder USB-verschlüsselt ablegen.</p>
+</section>
+
+<section>
+  <h2>Key Takeaways</h2>
+  <p>Der Authy-Kollaps 2024 und der anhaltende LastPass-Fallout haben den Markt klargestellt: 2026 lohnen sich nur Authenticator-Apps, die <strong>Open Source, auditiert, exportierbar und entweder dateibasiert oder echt E2EE</strong> sind. Ente Auth ist der Konsens-Default; Proton Authenticator ist ein starker neuerer Konkurrent; die KeePassXC-Familie ist die puristische self-hosted Antwort; und Bitwarden Authenticator ist die reibungsärmste Wahl für bestehende Bitwarden-Nutzer — solange TOTP-Sync aus bleibt, um echte Zwei-Faktor-Trennung zu erhalten. Die Closed-Source-Platzhirsche — Google, Microsoft, Duo, Authy, LastPass — sind entweder kein Linux, kein E2EE, kein Export oder tragen ungelösten Vertrauensballast, und keiner davon sollte erste Wahl sein.</p>
+</section>
+
+<footer>
+  Recherche-Stand 19. April 2026. Matrix basiert auf öffentlich verfügbaren Informationen aus offiziellen Projekt-Repositories, Vendor-Changelogs, Privacy Guides, publizierten Cure53-Audits, Bleeping Computer, Ars Technica und primärer Entwicklerdokumentation. Aktuelle Release-Versionen vor Migration produktiver Accounts prüfen.
+</footer>
+
+</main>
+
+</body>
+</html>
