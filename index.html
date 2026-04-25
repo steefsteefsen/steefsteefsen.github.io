@@ -1122,6 +1122,9 @@
     <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
     <li><a href="#built-with" data-i18n="nav_built_with">Built With</a></li>
     <li><a href="blog/">Blog</a></li>
+    <li><a href="tribe/">Tribe</a></li>
+    <li><a href="science/">Wissenschaft</a></li>
+    <li><a href="mentorship/">Mentorship</a></li>
     <li><a href="invest.html" target="_blank" data-i18n="nav_invest">Invest</a></li>
     <li><a href="#idols" data-i18n="nav_idols">Idols</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
@@ -1158,7 +1161,7 @@
 <header class="hero">
   <div class="hero-leaf left">&#128011;</div>
   <div class="hero-leaf right">23</div>
-  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.1s ease forwards;max-width:560px;">&bdquo;Hands on ist nicht das Buzz-, sondern das Zauberwort!&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Stefan Hüllinghorst</cite></blockquote>
+  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.1s ease forwards;max-width:560px;">&bdquo;Mindset is key.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Horst von Hülling</cite></blockquote>
   <h1>
     Stefan-Olav Hüllinghorst
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
@@ -1328,6 +1331,11 @@
       <div class="timeline-year" data-i18n="journey1_year">TU Berlin</div>
       <h3 data-i18n="journey1_h3">Master of Science</h3>
       <p data-i18n="journey1_p">I studied mostly among men, having grown up with three older sisters. The contrast was formative. What stayed was something more valuable than the degree: the ability to think scientifically, trust evidence, and question assumptions — including my own.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year" data-i18n="journey_gensor_year">2017 – 2022</div>
+      <h3>GENSOR</h3>
+      <p data-i18n="journey_gensor_p">Eigenes Unternehmen in Berlin: Software für Produktions- und Prüfsystemsteuerung, Bildverarbeitung, ML, Sensorik. GENSOR Production Validation Systems UG, gegründet 2017, Geschäftsführer. Insolvent gegangen. Drei Jahre ohne Geld danach. Daten und Lehren habe ich noch — beides wird wieder gebraucht.</p>
     </div>
     <div class="timeline-item">
       <div class="timeline-year" data-i18n="journey2_year">Three Years</div>
@@ -1585,6 +1593,13 @@
   </div>
 
   <div class="support-card support-card--local reveal">
+    <h3>MBzwo</h3>
+    <p data-i18n="local_mbzwo_p">Massivholzmöbel nach Maß aus dem Showroom in den Spreestudios an der Rummelsburger Bucht. Köpenicker Chaussee 4, Berlin. Echtes Holz, ehrliche Arbeit, kein IKEA-Kompromiss. Tische, die deine Enkel noch benutzen.</p>
+    <a href="https://mb-zwo.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    <a href="https://www.openstreetmap.org/?mlat=52.4904&amp;mlon=13.4928#map=18/52.4904/13.4928" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
     <h3 data-i18n="local_placeholder_h3">Waiting for consent</h3>
     <p data-i18n="local_placeholder_p">There are local businesses I want to mention here — people doing good work in their neighbourhood. Waiting for their go-ahead.</p>
   </div>
@@ -1743,6 +1758,22 @@
       <p data-i18n="idol_birkenbiehl_p">German author, speaker, and learning expert. She spent her life dismantling the idea that intelligence is fixed — arguing that the brain is a muscle, not a rank. She made complex ideas accessible without dumbing them down. That is harder than it looks, and rarer than it should be.</p>
 
       <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Wer aufhört zu lernen, ist alt. Egal ob mit zwanzig oder achtzig."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Vera F. Birkenbihl</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;background:var(--bark);">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#129309;</span>
+      <h3>Karina Buschsieweke</h3>
+      <p data-i18n="idol_buschsieweke_p">Mitgründerin von MBzwo (Massivholzmöbel, Berlin) und Lana Labs (Process Mining, von Appian übernommen). Heute Director of Product Strategy bei Appian. Hat mir gezeigt, dass eine Position mit jemand anderem zu teilen kein Kompromiss ist — sondern Integrität. Zwei Menschen, eine Rolle, doppelte Ehrlichkeit. Die Sorte, bei der das Team sich anfühlt wie ein Ort, an dem niemand allein ist mit seiner Arbeit.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">&bdquo;Geteilte Verantwortung ist doppelte Ehrlichkeit.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— im Geiste von Karina Buschsieweke</cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
