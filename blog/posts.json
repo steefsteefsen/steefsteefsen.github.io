@@ -1,5 +1,21 @@
 [
   {
+    "slug": "2026-04-25-github-spiegel",
+    "date": "2026-04-25",
+    "translations": {
+      "de": {
+        "slug": "2026-04-25-github-spiegel",
+        "title": "Spiegel live — alles auf einmal",
+        "teaser": "Ein Commit. Sechs neue Unterseiten. RSS. Kommentare. Tägliche automatische Posts. Kein schrittweiser Rollout."
+      },
+      "en": {
+        "slug": "2026-04-25-github-spiegel-en",
+        "title": "Mirror live — everything at once",
+        "teaser": "One commit. Six new subpages. RSS. Comments. A daily automated post agent. No phased rollout."
+      }
+    }
+  },
+  {
     "slug": "2026-04-25-eine-nacht-sechs-saulen",
     "date": "2026-04-25",
     "translations": {
