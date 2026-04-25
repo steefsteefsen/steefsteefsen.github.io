@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethik — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Wie wir uns benehmen, wenn niemand zuschaut. Awareness, Drug Checking, Gentleman/Lady-Verhalten, das Recht jedes Menschen, einen Übergriff beim Namen zu nennen. Blueprint, in Bewegung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --stone: #8c7b6b; --cream: #faf7f2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  .wip { display: inline-block; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--clay); border: 1px solid var(--clay); padding: 0.25rem 0.7rem; border-radius: 999px; margin-bottom: 1.5rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: var(--bark); margin-bottom: 1rem; line-height: 1.2; }
+  .lede { font-size: 1.15rem; color: var(--bark); margin-bottom: 2.5rem; font-style: italic; opacity: 0.85; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: var(--bark); margin-top: 3rem; margin-bottom: 0.8rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 1.8rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.4rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 2.5rem 0; }
+  .pillar { background: rgba(201, 169, 110, 0.06); border-left: 3px solid var(--clay); padding: 1.4rem 1.6rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .pillar h3 { margin-top: 0; }
+  .pillar p:last-child { margin-bottom: 0; }
+  .pillar .draft { font-size: 0.8rem; color: var(--clay); font-style: italic; margin-top: 0.6rem; display: block; }
+  .one-line { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; line-height: 1.4; }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+</nav>
+
+<main>
+  <div class="section-label">Ethik</div>
+  <span class="wip">Blueprint · in Bewegung</span>
+  <h1>Wie wir uns benehmen, wenn niemand zuschaut</h1>
+  <p class="lede">Diese Seite ist ein Blueprint. Ideation auf <code>.io</code>. Die Linien stehen — die Worte, die Fußnoten, die Beispiele wachsen noch. Wenn dir was fehlt oder schief erscheint: <a href="mailto:stefan@huellinghorst.info?subject=Ethik">schreib mir</a>.</p>
+
+  <h2>Die Prämisse</h2>
+  <p>Werte, die nur unter Beobachtung gelten, sind keine Werte. Sie sind Marketing.</p>
+  <p>Diese Sektion handelt von dem, was wir tun, wenn die Tür zu ist, das Licht aus, die Kamera nicht läuft. In Clubs um 4 Uhr morgens. In WhatsApp-Gruppen. Wenn jemand zu viel getrunken hat. Wenn jemand sagt „eigentlich wollte ich nicht". Wenn jemand etwas gesehen hat und überlegt, ob es wirklich so schlimm war.</p>
+  <p>Es war so schlimm. Sag es.</p>
+
+  <div class="divider"></div>
+
+  <h2>Vier Säulen (Draft)</h2>
+
+  <div class="pillar">
+    <h3>1. Gentleman / Lady — neu gelesen</h3>
+    <p>Nicht das aus den 50ern. Kein Türenaufhalten als Geschlechter-Choreografie. Sondern: <strong>jemand, der den Raum besser verlässt, als er ihn betreten hat.</strong> Wer sich kümmert, ohne aufzudrängen. Wer einen Schritt zurücktritt, wenn jemand anderes den Moment braucht. Wer Verantwortung trägt, ohne sich dafür eine Bühne zu suchen. Geschlechtsneutral. Klassenneutral. Verhalten, nicht Etikette.</p>
+    <span class="draft">Draft — Beispiele und Gegenbeispiele folgen.</span>
+  </div>
+
+  <div class="pillar">
+    <h3>2. Awareness</h3>
+    <p>Awareness ist nicht ein Schild am Eingang vom Club. Awareness ist eine Haltung: <strong>ich bemerke, was um mich herum passiert, und ich bin bereit zu handeln.</strong> Nicht nur, wenn es mich betrifft. Auch — und gerade — wenn es jemand anderen betrifft, der gerade nicht selbst handeln kann.</p>
+    <p>Konkret: das Glas im Auge behalten. Den Blick zur Person zurückgehen, die zu ruhig geworden ist. Einsteigen, wenn jemand bedrängt wird, statt wegzuschauen.</p>
+    <span class="draft">Draft — Verlinkung zu konkreten Awareness-Initiativen folgt (Initiative Awareness, Safer Spaces Berlin, …).</span>
+  </div>
+
+  <div class="pillar">
+    <h3>3. Drug Checking</h3>
+    <p>Menschen nehmen Drogen. Das war so, das wird so bleiben, und das moralisch zu bewerten hilft niemandem. Was hilft: <strong>zu wissen, was tatsächlich in der Pille ist.</strong></p>
+    <p>Drug Checking — staatlich finanzierte, anonyme Substanzanalysen — ist in der Schweiz und in Österreich seit Jahren Standard und rettet Leben. In Deutschland gibt es Pilotprojekte (Berlin seit 2023). Unsere Position: <strong>weiter ausbauen. Bundesweit. Niedrigschwellig. Ohne Strafverfolgung.</strong></p>
+    <p>Konsumkompetenz schlägt Konsumverbot. Immer.</p>
+    <span class="draft">Draft — Footnotes zu Studien (z.B. Schweizer Modell), aktuellen Pilotprojekten und politischen Forderungen folgen.</span>
+  </div>
+
+  <div class="pillar">
+    <h3>4. Jeder Mensch darf sexuelle Übergriffe beim Namen nennen</h3>
+    <p>Nicht nur die betroffene Person. Nicht nur Frauen. <strong>Jeder.</strong> Wenn du etwas siehst, das ein Übergriff war, sag es. Wenn du etwas erlebst, das ein Übergriff war, sag es. Wenn jemand anderes es nicht selbst sagen kann oder will, sag es für sie — wenn sie das wollen.</p>
+    <p>Das Wort „Übergriff" ist nicht das Problem. Der Übergriff ist das Problem. Wer beim Aussprechen des Wortes mehr zuckt als beim Übergriff selbst, hat die Prioritäten falsch.</p>
+    <p>Männer: das gilt besonders für uns. Wir hören Sachen, die andere nicht hören. Wir sehen Verhalten, das andere nicht sehen. Schweigen ist Komplizenschaft. Es gibt keine neutrale Position.</p>
+    <span class="draft">Draft — Verlinkungen zu Hilfetelefonen, Anlaufstellen und Awareness-Trainings folgen.</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Was wir nicht tun</h2>
+  <ul>
+    <li>Wir machen daraus kein Trockenkurs-Seminar. Niemand lernt Verhalten aus PowerPoint.</li>
+    <li>Wir performen unsere Awareness nicht für Likes. Stille Arbeit schlägt laute Posts.</li>
+    <li>Wir verurteilen keine Menschen, die Fehler gemacht haben und sich ändern wollen. Wir verurteilen Menschen, die Fehler machen und es immer noch tun.</li>
+    <li>Wir verwechseln Konsens nicht mit „hat nicht nein gesagt". Konsens ist enthusiastisch, freiwillig, jederzeit zurückziehbar.</li>
+  </ul>
+
+  <h2>Was wir tun</h2>
+  <ul>
+    <li>Wir reden vorher. Mit Freunden, Partner:innen, Tribe-Mitgliedern. Vor der Situation, nicht erst danach.</li>
+    <li>Wir geben Awareness-Teams Geld, wenn wir auf ihren Veranstaltungen sind. Sie arbeiten meistens umsonst.</li>
+    <li>Wir testen unsere Substanzen, wenn wir welche nehmen. Und wir respektieren Leute, die es ohne tun, genauso.</li>
+    <li>Wir nennen Dinge beim Namen — auch wenn es unbequem wird. Besonders dann.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <blockquote class="one-line">Werte, die nur unter Beobachtung gelten, sind Marketing.</blockquote>
+
+  <p style="margin-top:2rem;font-size:0.9rem;">
+    Dieser Blueprint ist nicht abgeschlossen. Er ist die Einladung, weiter zu denken — und mitzubauen.
+    <a href="mailto:stefan@huellinghorst.info?subject=Ethik">Beitragen</a>.
+  </p>
+
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophie</a> &middot;
+  <a href="/science/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Wissenschaft</a> &middot;
+  <a href="/mentorship/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>
