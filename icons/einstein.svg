@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-label="Albert Einstein">
+  <!-- Hair: wild, asymmetric mass -->
+  <path d="M58 92 Q42 70 50 50 Q60 30 84 28 Q92 14 116 16 Q140 12 154 26 Q178 22 192 44 Q206 62 198 88 Q204 102 196 118 Q200 132 188 142"/>
+  <path d="M62 100 Q50 88 54 76"/>
+  <path d="M70 78 Q66 60 80 52"/>
+  <path d="M104 32 Q108 22 122 22"/>
+  <path d="M148 30 Q160 28 168 40"/>
+  <path d="M186 60 Q196 70 192 84"/>
+  <!-- Forehead and face contour -->
+  <path d="M64 110 Q60 130 66 152 Q72 180 88 200 Q104 220 124 222 Q146 224 162 210 Q178 194 184 172 Q190 150 188 128 Q188 110 184 96"/>
+  <!-- Right ear -->
+  <path d="M186 138 Q196 142 196 156 Q194 168 184 170"/>
+  <!-- Eyebrows: bushy -->
+  <path d="M84 130 Q92 124 104 128"/>
+  <path d="M86 132 Q94 128 104 130"/>
+  <path d="M138 128 Q150 122 162 126"/>
+  <path d="M138 130 Q150 126 162 128"/>
+  <!-- Eyes: small, tired-wise -->
+  <path d="M92 142 Q98 140 104 142"/>
+  <path d="M144 140 Q150 138 156 140"/>
+  <!-- Nose -->
+  <path d="M122 144 Q118 162 114 176 Q116 184 124 184"/>
+  <!-- Moustache: thick, drooping -->
+  <path d="M96 196 Q110 192 124 194 Q138 192 152 196"/>
+  <path d="M96 196 Q92 204 98 210 Q108 212 124 208 Q140 212 150 210 Q156 204 152 196"/>
+  <!-- Mouth line under moustache -->
+  <path d="M108 212 Q124 216 140 212"/>
+  <!-- Chin and jaw -->
+  <path d="M108 224 Q124 232 140 224"/>
+  <!-- Neck -->
+  <path d="M104 230 L100 256"/>
+  <path d="M148 230 L154 256"/>
+  <!-- Collar / sweater hint -->
+  <path d="M76 268 Q104 254 124 256 Q146 254 176 268"/>
+  <path d="M70 282 Q100 270 124 272 Q150 270 182 282"/>
+</svg>

@@ -159,6 +159,25 @@
     letter-spacing: -0.05em;
   }
 
+  .hero-portrait {
+    position: absolute;
+    width: clamp(180px, 22vw, 320px);
+    height: auto;
+    opacity: 0.07;
+    color: var(--clay);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-portrait--einstein { top: 14%; left: 4%; transform: rotate(-4deg); }
+  .hero-portrait--merkel   { bottom: 12%; right: 4%; transform: rotate(3deg); }
+  .hero > * { position: relative; z-index: 1; }
+  @media (max-width: 720px) {
+    .hero-portrait { width: 38vw; opacity: 0.05; }
+    .hero-portrait--einstein { top: 6%; left: -4%; }
+    .hero-portrait--merkel   { bottom: 6%; right: -4%; }
+  }
+
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
@@ -1163,7 +1182,11 @@
 <header class="hero">
   <div class="hero-leaf left">&#128011;</div>
   <div class="hero-leaf right">23</div>
+  <img class="hero-portrait hero-portrait--einstein" src="icons/einstein.svg" alt="" aria-hidden="true">
+  <img class="hero-portrait hero-portrait--merkel" src="icons/merkel.svg" alt="" aria-hidden="true">
   <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.1s ease forwards;max-width:560px;">&bdquo;Mindset is key.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Horst von Hülling</cite></blockquote>
+  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.3s ease forwards;max-width:560px;">&bdquo;Du bist Mutti.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Boris Zubert</cite></blockquote>
+  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.5s ease forwards;max-width:560px;">&bdquo;Peace cannot be kept by force; it can only be achieved by understanding.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Albert Einstein</cite></blockquote>
   <h1>
     Stefan-Olav Hüllinghorst
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
