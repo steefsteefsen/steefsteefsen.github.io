@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>One night, six pillars</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-25-eine-nacht-sechs-saulen-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-25-eine-nacht-sechs-saulen-en.html</guid>
+    <pubDate>Sat, 25 Apr 2026 00:00:00 GMT</pubDate>
+    <description>In one night, the personal site grew a frame: Philosophy, Science, Ethics, Mentorship, Tribe, Movement. Plus a movement that launches on May 1. The soundtrack fits.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
   <item>
     <title>The Three Guardians of 2FA</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix-en.html</link>

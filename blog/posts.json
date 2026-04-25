@@ -1,5 +1,21 @@
 [
   {
+    "slug": "2026-04-25-eine-nacht-sechs-saulen",
+    "date": "2026-04-25",
+    "translations": {
+      "de": {
+        "slug": "2026-04-25-eine-nacht-sechs-saulen",
+        "title": "Eine Nacht, sechs Säulen",
+        "teaser": "In einer Nacht aus dem persönlichen Homepage ein Gerüst gebaut: Philosophie, Wissenschaft, Ethik, Mentorship, Tribe, Bewegung. Plus eine Bewegung, die am 1. Mai launcht. Der Soundtrack passt."
+      },
+      "en": {
+        "slug": "2026-04-25-eine-nacht-sechs-saulen-en",
+        "title": "One night, six pillars",
+        "teaser": "In one night, the personal site grew a frame: Philosophy, Science, Ethics, Mentorship, Tribe, Movement. Plus a movement that launches on May 1. The soundtrack fits."
+      }
+    }
+  },
+  {
     "slug": "2026-04-24-authenticator-matrix",
     "date": "2026-04-24",
     "translations": {

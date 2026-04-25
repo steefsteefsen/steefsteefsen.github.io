@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bewegung der Malochenden — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Eine politische Bewegung, keine Partei. Launch am 1. Mai 2026, Tag der Arbeit. In der Tradition der guten Piraten — ohne deren Fehler zu wiederholen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --stone: #8c7b6b; --cream: #faf7f2;
+    --rust: #a85a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  .countdown { display: inline-block; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--cream); background: var(--rust); padding: 0.4rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.8vw, 3.4rem); color: var(--bark); margin-bottom: 1rem; line-height: 1.15; }
+  .lede { font-size: 1.15rem; color: var(--bark); margin-bottom: 2.5rem; font-style: italic; opacity: 0.85; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: var(--bark); margin-top: 3rem; margin-bottom: 0.8rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 1.8rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.5rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 2.5rem 0; }
+  .pillar { background: rgba(201, 169, 110, 0.06); border-left: 3px solid var(--clay); padding: 1.4rem 1.6rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .pillar h3 { margin-top: 0; }
+  .pillar p:last-child { margin-bottom: 0; }
+  .lessons-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  @media (min-width: 760px) { .lessons-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  .lesson { padding: 1.2rem 1.4rem; border-radius: 4px; }
+  .lesson--keep { background: rgba(90, 110, 74, 0.08); border-left: 3px solid var(--moss); }
+  .lesson--avoid { background: rgba(168, 90, 58, 0.08); border-left: 3px solid var(--rust); }
+  .lesson h3 { margin-top: 0; font-size: 1.05rem; }
+  .lesson--keep h3 { color: var(--moss); }
+  .lesson--avoid h3 { color: var(--rust); }
+  .lesson ul { margin: 0.5rem 0 0 1.2rem; font-size: 0.95rem; }
+  .lesson li { margin-bottom: 0.4rem; }
+  .one-line { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.4rem, 3.2vw, 2rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; line-height: 1.4; }
+  .central-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); text-align: center; color: var(--bark); border-top: 2px solid var(--rust); border-bottom: 2px solid var(--rust); padding: 1.5rem 1rem; margin: 3rem 0; line-height: 1.3; }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  .cta-box { background: var(--bark); color: var(--cream); padding: 1.8rem 2rem; border-radius: 4px; margin: 2.5rem 0; }
+  .cta-box h3 { color: var(--clay); margin-top: 0; }
+  .cta-box p { color: var(--cream); }
+  .cta-box a { color: var(--clay); border-bottom-color: rgba(201, 169, 110, 0.4); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+</nav>
+
+<main>
+  <div class="section-label">Bewegung</div>
+  <span class="countdown">Launch: 1. Mai 2026 · Tag der Arbeit</span>
+  <h1>Die Bewegung der Malochenden</h1>
+  <p class="lede">Keine Partei. Eine Bewegung. In der Tradition der guten Piraten — ohne ihre Fehler zu wiederholen.</p>
+
+  <blockquote class="central-quote">Wer arbeitet, soll auch entscheiden dürfen.</blockquote>
+
+  <h2>Warum jetzt</h2>
+  <p>Weil die Leute, die das Land tatsächlich am Laufen halten — Pflege, Handwerk, Logistik, Kassen, Küche, Putzen, Bau, Lager — politisch entweder ignoriert oder von Demagogen abgegriffen werden. Weil „Arbeit" in der politischen Sprache zum Standortvorteil verkommen ist, statt das zu bezeichnen, was Menschen acht Stunden am Tag erschöpft.</p>
+  <p>Wir bauen einen dritten Weg. Nicht Linkspartei-Folklore. Nicht AfD-Hass. Einen Weg, der die Würde der Maloche ernst nimmt — und gleichzeitig versteht, dass Maloche im 21. Jahrhundert auch Care-Arbeit, Code-Arbeit, Plattformarbeit ist.</p>
+
+  <h2>Was wir sind</h2>
+  <ul>
+    <li><strong>Keine Wahlpartei.</strong> Noch nicht. Wahlen sind ein Werkzeug, kein Selbstzweck. Wir bauen erst die Bewegung, dann sehen wir.</li>
+    <li><strong>Eine politische Forderung.</strong> Mit Manifesto, Mitgliedern, Aktionen, Beteiligungstool.</li>
+    <li><strong>Anschlussfähig.</strong> An netzpolitik.org, Digitalcourage, FragDenStaat, CCC, GFF, aula. Die haben die Infrastruktur, wir bringen die Klassenfrage.</li>
+    <li><strong>Radikal transparent.</strong> Sitzungen offen. Finanzen offen. Entscheidungen nachvollziehbar.</li>
+    <li><strong>Eine scharfe Kernfrage:</strong> <em>Wer arbeitet, soll auch entscheiden dürfen.</em> Alles andere folgt daraus.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Was wir von den Piraten lernen</h2>
+  <p>Die Piratenpartei (gegründet 2006, Höhepunkt 2011/12 mit 8,9% in Berlin und vier Landtagen, Kollaps ab 2013) hat etwas Echtes geschafft — und etwas Wichtiges versemmelt. Beides hat Lehren.</p>
+
+  <div class="lessons-grid">
+
+    <div class="lesson lesson--keep">
+      <h3>Was wir behalten</h3>
+      <ul>
+        <li><strong>Radikale Transparenz</strong> — Vorstandssitzungen live, Protokolle öffentlich, Finanzen offen.</li>
+        <li><strong>Echte Beteiligung</strong> — ein Tool, das normale Mitglieder benutzen, nicht nur 200 Aktivisten.</li>
+        <li><strong>Eine scharfe Kernfrage</strong> — bei den Piraten: digitale Rechte. Bei uns: Maloche, Arbeit, Reproduktionskosten.</li>
+        <li><strong>Operative Leute aus NGOs</strong> — wir holen Erfahrung, nicht nur Begeisterung.</li>
+        <li><strong>Parlamentsarbeit als Handwerk</strong> — wenn wir je einziehen: Anträge, Ausschüsse, Akten. Keine Talkshow-Karrieren.</li>
+      </ul>
+    </div>
+
+    <div class="lesson lesson--avoid">
+      <h3>Was wir nicht wiederholen</h3>
+      <ul>
+        <li><strong>Keine „alle dürfen alles sagen"-Toleranz</strong> bei Antisemitismus, Rassismus, Holocaust-Relativierung. Schnell, öffentlich, raus.</li>
+        <li><strong>Keine Vorstandsrotation alle 12 Monate.</strong> Wer gewählt ist, kriegt eine volle Periode und Rückendeckung.</li>
+        <li><strong>Kein Twitter-Shitstorm-Regieren.</strong> Interne Konflikte intern. Öffentlich nur das fertige Ergebnis.</li>
+        <li><strong>Keine 200-Aktivisten-Kern-Demokratie.</strong> Wenn nur 1% der Mitglieder das Beteiligungstool nutzt, ist es kein Beteiligungstool.</li>
+        <li><strong>Medienpräsenz ist nicht Politik.</strong> Gemessen werden wir an dem, was sich ändert. Nicht an Sendezeit.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Drei Forderungen für den Anfang</h2>
+  <p>Mehr kommt zum Launch. Diese drei stehen.</p>
+
+  <div class="pillar">
+    <h3>1. Reproduktionskosten als politische Größe anerkennen</h3>
+    <p>Was es kostet, einen arbeitsfähigen Menschen morgens aus dem Bett zu kriegen — Miete, Essen, Transport, Pflege, Bildung — gehört in die Lohndebatte. Nicht die abstrakte „Tarifrunde". Was bleibt am Ende des Monats, wenn das Leben bezahlt ist.</p>
+  </div>
+
+  <div class="pillar">
+    <h3>2. Care-Arbeit, Plattform-Arbeit, Schicht-Arbeit gleich behandelt</h3>
+    <p>Eine Pflegekraft, ein Lieferando-Fahrer und ein:e Schicht-Programmierer:in haben mehr gemeinsam als ihre jeweilige Branche zugeben will. Wir bauen die Allianz, die diese drei Gruppen erkennt — bevor die AfD sie sich schnappt.</p>
+  </div>
+
+  <div class="pillar">
+    <h3>3. Mitbestimmung dort, wo das Geld erwirtschaftet wird</h3>
+    <p>Mehr Demokratie im Betrieb. Nicht weniger. Nicht der Werkleiter entscheidet allein, wer wann Pause macht — sondern die, die in der Pause sind.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Was wir nicht sind</h2>
+  <ul>
+    <li>Wir sind keine Linkspartei 2.0. Wer „Solidarität, Genosse" als Floskel verwendet, hat noch nie morgens um 5 Uhr im Pflegeheim gestanden.</li>
+    <li>Wir sind keine Identitätspolitik-Avantgarde. Klasse vor Pose.</li>
+    <li>Wir sind keine AfD-Light. Wir definieren „der kleine Mann" nicht über das, was er hasst, sondern über das, was er morgens aus dem Bett kriegt.</li>
+    <li>Wir sind keine Tech-Utopisten. KI rettet die Pflegekraft nicht. Wir auch nicht — aber wir tun nicht so.</li>
+  </ul>
+
+  <div class="cta-box">
+    <h3>Launch: 1. Mai 2026</h3>
+    <p>Tag der Arbeit. Volles Manifest, erste Mitgliedsstrukturen, Beteiligungstool live. Wer dabei sein will: <a href="mailto:stefan@huellinghorst.info?subject=Bewegung%20der%20Malochenden">schreib mir</a>.</p>
+    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.8;">Diese Seite ist ein Blueprint. Ideation. Bis zum 1. Mai wird sie wachsen — wenn du was beitragen willst, jetzt ist der Zeitpunkt.</p>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophie</a> &middot;
+  <a href="/science/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Wissenschaft</a> &middot;
+  <a href="/ethics/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Ethik</a> &middot;
+  <a href="/mentorship/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>
