@@ -116,10 +116,10 @@
   }
   .burger-line {
     display: block;
-    width: 22px;
-    height: 1.5px;
+    width: 26px;
+    height: 3px;
     margin: 5px auto;
-    background: var(--bark);
+    background: #000;
     transition: transform 0.3s, opacity 0.3s;
   }
   nav.open .burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -148,6 +148,7 @@
     color: var(--moss);
     user-select: none;
     pointer-events: none;
+    z-index: 0;
   }
   .hero-leaf.left { font-size: 18rem; top: 10%; left: -3rem; transform: rotate(-25deg); }
   .hero-leaf.right {
@@ -159,24 +160,7 @@
     letter-spacing: -0.05em;
   }
 
-  .hero-portrait {
-    position: absolute;
-    width: clamp(180px, 22vw, 320px);
-    height: auto;
-    opacity: 0.07;
-    color: var(--clay);
-    user-select: none;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-portrait--einstein { top: 14%; left: 4%; transform: rotate(-4deg); }
-  .hero-portrait--merkel   { bottom: 12%; right: 4%; transform: rotate(3deg); }
-  .hero > * { position: relative; z-index: 1; }
-  @media (max-width: 720px) {
-    .hero-portrait { width: 38vw; opacity: 0.05; }
-    .hero-portrait--einstein { top: 6%; left: -4%; }
-    .hero-portrait--merkel   { bottom: 6%; right: -4%; }
-  }
+  .hero > *:not(.hero-leaf) { position: relative; z-index: 1; }
 
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
@@ -1082,21 +1066,29 @@
       margin-left: auto;
     }
 
-    /* Full-screen overlay menu */
+    /* Full-screen overlay menu.
+       Note: <nav> uses backdrop-filter, which makes it the containing block
+       for fixed-position descendants. Use viewport units instead of inset:0
+       so the overlay actually fills the screen. */
     nav .nav-links {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 1.6rem;
+      justify-content: flex-start;
+      gap: 1.4rem;
       background: rgba(250, 247, 242, 0.98);
       backdrop-filter: blur(14px);
       transform: translateY(-100%);
       transition: transform 0.35s ease;
       z-index: 105;
-      padding: 5rem 1.5rem 2rem;
+      padding: 5rem 1.5rem 5rem;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     nav.open .nav-links { transform: translateY(0); }
     nav .nav-links a { font-size: 1rem; letter-spacing: 0.14em; }
@@ -1182,8 +1174,6 @@
 <header class="hero">
   <div class="hero-leaf left">&#128011;</div>
   <div class="hero-leaf right">23</div>
-  <img class="hero-portrait hero-portrait--einstein" src="icons/einstein.svg" alt="" aria-hidden="true">
-  <img class="hero-portrait hero-portrait--merkel" src="icons/merkel.svg" alt="" aria-hidden="true">
   <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.1s ease forwards;max-width:560px;">&bdquo;Mindset is key.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Horst von Hülling</cite></blockquote>
   <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.3s ease forwards;max-width:560px;">&bdquo;Du bist Mutti.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Boris Zubert</cite></blockquote>
   <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.5s ease forwards;max-width:560px;">&bdquo;Peace cannot be kept by force; it can only be achieved by understanding.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Albert Einstein</cite></blockquote>
@@ -2148,6 +2138,20 @@
       <div x-collapse x-show="open">
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
           <iframe src="https://www.youtube-nocookie.com/embed/ZA3sNM1vPIg?controls=0" title="Gregor Gysi — Rede des Jahres, Bundestag 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#129412;</span>
+      <h3>Peer Adelt</h3>
+      <p data-i18n="idol_adelt_p">Wie Megaloh ein integerer Mensch — nur ganz anders. Hier soll Jim Jarmusch oder Fatih Akın mal eine Geschichte erzählen. Oder Ariane Kareev.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/OVUwHv43HqM?controls=0" title="Das Leben des Brian — Steinigung (HQ)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
       </div>
     </div>

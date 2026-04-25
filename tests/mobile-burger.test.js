@@ -22,22 +22,29 @@ const path = require('path');
 
 const REPO = path.resolve(__dirname, '..');
 
-function findChrome() {
-  const candidates = [
-    process.env.CHROME_PATH,
-    '/usr/bin/google-chrome',
-    '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  ].filter(Boolean);
-  for (const p of candidates) {
+function findExe(candidates) {
+  for (const p of candidates.filter(Boolean)) {
     try { if (fs.statSync(p).isFile()) return p; } catch {}
   }
   return null;
 }
-
-const CHROME = findChrome();
-const describeOrSkip = CHROME ? describe : describe.skip;
+const CHROME = findExe([
+  process.env.CHROME_PATH,
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+]);
+const FIREFOX = findExe([
+  process.env.FIREFOX_PATH,
+  '/usr/bin/firefox',
+  '/Applications/Firefox.app/Contents/MacOS/firefox',
+]);
+const BROWSERS = [
+  CHROME && { name: 'chrome',  exe: CHROME,  launch: { executablePath: CHROME, args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: 'new' } },
+  FIREFOX && { name: 'firefox', exe: FIREFOX, launch: { browser: 'firefox', executablePath: FIREFOX, headless: true } },
+].filter(Boolean);
+const describeOrSkip = BROWSERS.length ? describe : describe.skip;
 
 function startServer() {
   return new Promise((resolve) => {
@@ -58,40 +65,53 @@ function startServer() {
   });
 }
 
-describeOrSkip('mobile burger menu — live render', () => {
-  jest.setTimeout(30000);
+jest.setTimeout(60000);
 
-  let server;
-  let baseUrl;
+let sharedServer;
+let sharedBaseUrl;
+let puppeteer;
+
+beforeAll(async () => {
+  puppeteer = require('puppeteer-core');
+  sharedServer = await startServer();
+  sharedBaseUrl = `http://127.0.0.1:${sharedServer.address().port}`;
+});
+afterAll(() => { if (sharedServer) sharedServer.close(); });
+
+const viewports = [
+  // Portrait
+  { name: 'iphone-se-portrait', width: 375, height: 667 },
+  { name: 'pixel-5-portrait',   width: 393, height: 851 },
+  // Landscape — narrow height, must still show the burger overlay correctly.
+  // Both stay below the 700px width breakpoint so mobile rules still apply.
+  { name: 'iphone-se-landscape', width: 667, height: 375 },
+  { name: 'pixel-5-landscape',   width: 660, height: 393 },
+];
+
+BROWSERS.forEach((browserSpec) => describeOrSkip(`mobile burger menu — ${browserSpec.name}`, () => {
   let browser;
-  let puppeteer;
 
   beforeAll(async () => {
-    puppeteer = require('puppeteer-core');
-    server = await startServer();
-    const addr = server.address();
-    baseUrl = `http://127.0.0.1:${addr.port}`;
-    browser = await puppeteer.launch({
-      executablePath: CHROME,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      headless: 'new',
-    });
+    browser = await puppeteer.launch(browserSpec.launch);
   });
-
   afterAll(async () => {
     if (browser) await browser.close();
-    if (server) server.close();
   });
 
-  const viewports = [
-    { name: 'iphone-se', width: 375, height: 667 },
-    { name: 'pixel-5',   width: 393, height: 851 },
-  ];
+  // Firefox doesn't accept isMobile/hasTouch on setViewport — it just resizes.
+  // The CSS media queries we test are width-based, so this is fine.
+  const setViewport = async (page, width, height) => {
+    if (browserSpec.name === 'firefox') {
+      await page.setViewport({ width, height });
+    } else {
+      await page.setViewport({ width, height, isMobile: true, hasTouch: true });
+    }
+  };
 
   test.each(viewports)('burger is visible and right-aligned at $width×$height', async ({ width, height }) => {
     const page = await browser.newPage();
-    await page.setViewport({ width, height, isMobile: true, hasTouch: true });
-    await page.goto(baseUrl, { waitUntil: 'networkidle0' });
+    await setViewport(page, width, height);
+    await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
 
     const report = await page.evaluate(() => {
       const burger = document.getElementById('burger');
@@ -148,24 +168,104 @@ describeOrSkip('mobile burger menu — live render', () => {
 
   test.each(viewports)('tapping the burger opens the menu at $width×$height', async ({ width, height }) => {
     const page = await browser.newPage();
-    await page.setViewport({ width, height, isMobile: true, hasTouch: true });
-    await page.goto(baseUrl, { waitUntil: 'networkidle0' });
+    await setViewport(page, width, height);
+    await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
 
-    // Use click instead of tap — puppeteer's tap insists on a non-zero
-    // clickable rect visible in the viewport, and sometimes fails with fixed
-    // nav on mobile. click() uses the same code path for our handler anyway.
-    await page.evaluate(() => document.getElementById('burger').click());
-    await page.waitForFunction(
-      () => document.getElementById('main-nav').classList.contains('open'),
-      { timeout: 2000 }
-    );
-    const linksVisible = await page.evaluate(() => {
+    // Single round-trip: click and inspect the resulting DOM state in one
+    // evaluate(). Splitting click() and waitForFunction() into two awaits
+    // is racy in Firefox (BiDi), since the open class is set synchronously.
+    const result = await page.evaluate(() => {
+      document.getElementById('burger').click();
+      const nav = document.getElementById('main-nav');
       const a = document.querySelectorAll('#main-nav-links a');
-      if (!a.length) return false;
-      const r = a[0].getBoundingClientRect();
-      return r.width > 0 && r.height > 0;
+      const r = a[0]?.getBoundingClientRect();
+      return {
+        navOpen: nav.classList.contains('open'),
+        ariaExpanded: document.getElementById('burger').getAttribute('aria-expanded'),
+        firstLinkVisible: r ? (r.width > 0 && r.height > 0) : false,
+      };
     });
     await page.close();
-    expect(linksVisible).toBe(true);
+    expect(result.navOpen).toBe(true);
+    expect(result.ariaExpanded).toBe('true');
+    expect(result.firstLinkVisible).toBe(true);
   });
-});
+
+  // Full physics suite: closed → open → close. Single round-trip per click so
+  // both Chrome (CDP) and Firefox (BiDi) see consistent state.
+  test.each(viewports)('physics: full open/close lifecycle at $width×$height', async ({ width, height }) => {
+    const page = await browser.newPage();
+    await setViewport(page, width, height);
+    await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
+
+    // Disable CSS transitions for the test. Chrome happens to apply the
+    // transformed end state immediately; Firefox waits the full 350ms for the
+    // transition before computed transform reaches translateY(0). For
+    // testing layout *correctness* we want the end state, not the animation.
+    await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation: none !important; }' });
+
+    const physics = await page.evaluate(() => {
+      const snap = (label) => {
+        const burger = document.getElementById('burger');
+        const nav = document.getElementById('main-nav');
+        const ul = document.getElementById('main-nav-links');
+        const links = Array.from(ul.querySelectorAll('a'));
+        const langSwitcher = document.getElementById('lang-switcher');
+        const ulRect = ul.getBoundingClientRect();
+        const ulCs = getComputedStyle(ul);
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        return {
+          label,
+          navOpen: nav.classList.contains('open'),
+          ariaExpanded: burger.getAttribute('aria-expanded'),
+          bodyScrollLocked: getComputedStyle(document.body).overflow === 'hidden',
+          // Overlay layout (only meaningful when open)
+          ulTop: Math.round(ulRect.top),
+          ulHeight: Math.round(ulRect.height),
+          ulWidth: Math.round(ulRect.width),
+          ulTransform: ulCs.transform,
+          // All link rects — every link must be inside [0, vh] when open
+          linkTops: links.map(a => Math.round(a.getBoundingClientRect().top)),
+          linkBottoms: links.map(a => Math.round(a.getBoundingClientRect().bottom)),
+          // Lang-switcher visibility
+          langSwitcherDisplay: getComputedStyle(langSwitcher).display,
+          vw, vh,
+        };
+      };
+
+      const out = { closed_initial: snap('closed_initial') };
+      document.getElementById('burger').click();
+      out.opened = snap('opened');
+      document.getElementById('burger').click();
+      out.closed_again = snap('closed_again');
+      return out;
+    });
+
+    await page.close();
+
+    // Closed initial: no open class, no scroll lock, overlay translated off-screen
+    expect(physics.closed_initial.navOpen).toBe(false);
+    expect(physics.closed_initial.ariaExpanded).toBe('false');
+    expect(physics.closed_initial.bodyScrollLocked).toBe(false);
+    // Open: class set, aria flipped, body locked, overlay fills viewport
+    expect(physics.opened.navOpen).toBe(true);
+    expect(physics.opened.ariaExpanded).toBe('true');
+    expect(physics.opened.bodyScrollLocked).toBe(true);
+    expect(physics.opened.ulTop).toBe(0);
+    // Overlay must be substantially larger than the nav header (~80px tall, ~100px logo+burger
+    // wide) — i.e. it actually covers the page, not just the header strip. We don't pin to vw/vh
+    // because Chrome+isMobile reports inflated viewport metrics due to DPR, and Firefox+landscape
+    // shows native scrollbars. Both produce false negatives when we compare to vw/vh directly.
+    expect(physics.opened.ulHeight).toBeGreaterThan(200);
+    expect(physics.opened.ulWidth).toBeGreaterThan(280);
+    expect(physics.opened.langSwitcherDisplay).not.toBe('none');
+    // Every link must be within the viewport (with small tolerance for overflow:auto scroll)
+    const tooHigh = physics.opened.linkTops.filter(t => t < -2);
+    expect(tooHigh).toEqual([]);
+    // Closed again: state mirrors initial
+    expect(physics.closed_again.navOpen).toBe(false);
+    expect(physics.closed_again.ariaExpanded).toBe('false');
+    expect(physics.closed_again.bodyScrollLocked).toBe(false);
+  });
+}));
