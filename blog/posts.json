@@ -1,5 +1,21 @@
 [
   {
+    "slug": "2026-04-25-jeder-hat-jemanden-zu-fuettern",
+    "date": "2026-04-25",
+    "translations": {
+      "de": {
+        "slug": "2026-04-25-jeder-hat-jemanden-zu-fuettern",
+        "title": "Jeder hat jemanden zu füttern",
+        "teaser": "Ein Aufruf an Polizei wie Aktivisten — bleibt friedlich, bleibt respektvoll. Auf beiden Seiten jeder Linie steht ein Mensch, der jemanden zu Hause hat."
+      },
+      "en": {
+        "slug": "2026-04-25-jeder-hat-jemanden-zu-fuettern-en",
+        "title": "Everyone has someone to feed",
+        "teaser": "A call to police and activists alike — stay peaceful, stay respectful. On both sides of every line stands a person with someone waiting at home."
+      }
+    }
+  },
+  {
     "slug": "2026-04-25-github-spiegel",
     "date": "2026-04-25",
     "translations": {

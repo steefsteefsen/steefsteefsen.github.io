@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeder hat jemanden zu füttern — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Ein Aufruf an Polizei wie Aktivisten: friedlich und respektvoll bleiben. Auf beiden Seiten der Linie steht ein Mensch, der jemanden zu füttern hat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --moss-light: #7a9463; --stone: #8c7b6b;
+    --cream: #faf7f2; --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern.html" class="active">DE</a>
+      <a href="/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">25. April 2026</p>
+  <h1>Jeder hat jemanden zu füttern</h1>
+
+  <div class="post-body">
+    <p>
+      Kurz und klar. Ein Aufruf, jetzt — an alle, die in den nächsten Tagen auf der Straße sind. Polizei wie Aktivisten. Linke wie Rechte. Drinnen wie draußen.
+    </p>
+
+    <p>
+      <strong>Bleibt friedlich. Bleibt respektvoll.</strong>
+    </p>
+
+    <p>
+      Auf beiden Seiten jeder Linie steht ein Mensch. Mit Familie. Mit Schulden. Mit einem Kind, das morgens das Brot will. Mit einer Mutter, die das Telefon abnimmt, wenn der Anruf um 22 Uhr kommt. Mit einem Hund, der schwanzwedelnd an der Tür steht.
+    </p>
+
+    <p>
+      <em>Jeder hat jemanden zu füttern.</em>
+    </p>
+
+    <p>
+      Das ist keine Phrase. Das ist die Bedingung, unter der wir uns gegenüberstehen. Der Polizist im Helm ist nicht nur ein Helm. Der Aktivist mit Schild ist nicht nur ein Schild. Beide gehen heute Abend nach Hause. Beide werden gefragt, wie der Tag war. Beide haben jemanden, der hofft, dass sie ganz heimkommen.
+    </p>
+
+    <h2>Was respektvoll heißt</h2>
+
+    <p>
+      Respektvoll heißt nicht: einverstanden. Heißt nicht: schweigen. Heißt nicht: nachgeben.
+    </p>
+
+    <p>
+      Respektvoll heißt: dem anderen ein Gesicht lassen. Keine Eskalation um der Eskalation willen. Keine Trophäen. Keine Demütigung, die noch in zehn Jahren in einem Kopf hängt.
+    </p>
+
+    <p>
+      Wer Recht hat, muss nicht schreien. Wer Recht durchsetzt, muss nicht treten. Stärke, die sich bücken muss, war keine.
+    </p>
+
+    <h2>An die Polizei</h2>
+
+    <p>
+      Ihr habt einen Auftrag. Ihr habt auch eine Wahl, wie ihr ihn ausführt. Verhältnismäßigkeit ist kein bürokratisches Wort — sie ist der Unterschied zwischen einem Dienst und einer Wunde, die ein Mensch sein Leben lang trägt. Und ihr habt jemanden zu Hause. Geht ganz heim.
+    </p>
+
+    <h2>An die Aktivisten</h2>
+
+    <p>
+      Eure Sache ist wichtig. Sonst wärt ihr nicht da. Aber eine Sache wird nicht stärker, weil ein Stein fliegt — sie wird stärker, weil ein Argument steht. Die Bilder, die heute entstehen, gehen morgen durchs Land. Macht Bilder, die für euch sprechen, nicht gegen euch. Und ihr habt jemanden zu Hause. Geht ganz heim.
+    </p>
+
+    <h2>An alle anderen</h2>
+
+    <p>
+      Wenn ihr es seht, sagt es. <em>Bleibt friedlich. Bleibt respektvoll.</em> Drei Worte, die in einem Moment der Aufladung mehr verändern können als ein Tweet danach.
+    </p>
+
+    <blockquote>
+      Peace cannot be kept by force; it can only be achieved by understanding.
+      <br><span style="font-family:'Jost',sans-serif;font-style:normal;font-size:0.85rem;color:var(--stone);letter-spacing:0.06em;">— Albert Einstein</span>
+    </blockquote>
+
+    <h2>Wer sehen will, wohin Eskalation führt</h2>
+
+    <p>
+      Wer noch nicht weiß, was passiert wenn Verhältnismäßigkeit verloren geht, sollte sich <a href="https://www.hamburger-gitter.org/" target="_blank" rel="noopener"><em>Hamburger Gitter</em></a> ansehen — die Dokumentation des Kollektivs leftvision über die G20-Proteste 2017 in Hamburg. 78 Minuten, in denen sichtbar wird, was passiert wenn Versammlungs- und Pressefreiheit zur Verhandlungsmasse werden. Kein Lager-Film. Eine Beweisaufnahme.
+    </p>
+
+    <p>
+      Geht ganz heim. Alle. Heute Abend.
+    </p>
+  </div>
+
+  <div class="post-nav">
+    <a href="/blog/">← Alle Einträge</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
