@@ -1,5 +1,21 @@
 [
   {
+    "slug": "2026-04-26-zitate-burger-adelt",
+    "date": "2026-04-26",
+    "translations": {
+      "de": {
+        "slug": "2026-04-26-zitate-burger-adelt",
+        "title": "Zitate, Burger, Adelt",
+        "teaser": "Zwei neue Zitate in der Hero-Section, ein Burger-Fix für Firefox und Safari Mobile, und Peer Adelt in den Idols."
+      },
+      "en": {
+        "slug": "2026-04-26-zitate-burger-adelt-en",
+        "title": "quotes, burger, adelt",
+        "teaser": "Two new quotes in the hero, a hamburger menu fix for Firefox and Safari Mobile, and Peer Adelt in the idols section."
+      }
+    }
+  },
+  {
     "slug": "2026-04-25-jeder-hat-jemanden-zu-fuettern",
     "date": "2026-04-25",
     "translations": {

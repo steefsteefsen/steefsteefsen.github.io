@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zitate, Burger, Adelt — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Zwei neue Zitate in der Hero-Section, ein Burger-Fix für Firefox und Safari Mobile, und Peer Adelt in den Idols.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c9a96e;
+    --bark: #3d2b1f;
+    --moss: #5a6e4a;
+    --moss-light: #7a9463;
+    --stone: #8c7b6b;
+    --cream: #faf7f2;
+    --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  nav .back-link {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav .back-link:hover { color: var(--bark); }
+
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .lang-toggle a {
+    padding: 0.25rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active {
+    background: var(--clay);
+    color: var(--cream);
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 9rem 2rem 6rem;
+  }
+
+  .post-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--moss);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .post-meta::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+    flex-shrink: 0;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.2;
+    color: var(--bark);
+    margin-bottom: 2.5rem;
+  }
+
+  .post-body {
+    font-size: 1.05rem;
+    color: var(--stone);
+    line-height: 1.9;
+  }
+
+  .post-body p { margin-bottom: 1.5rem; }
+
+  .post-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin: 2.75rem 0 1rem;
+  }
+
+  .post-body strong {
+    color: var(--earth);
+    font-weight: 500;
+  }
+
+  .post-body blockquote {
+    border-left: 2px solid var(--clay);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--earth);
+    line-height: 1.6;
+  }
+
+  .post-body a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .post-body a:hover {
+    color: var(--bark);
+    border-color: var(--bark);
+  }
+
+  .post-nav {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+  }
+
+  .post-nav a {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .post-nav a:hover { color: var(--bark); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.15);
+    margin-top: 4rem;
+  }
+
+  footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,123,107,0.3);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-26-zitate-burger-adelt.html" class="active">DE</a>
+      <a href="/blog/posts/2026-04-26-zitate-burger-adelt-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">26. April 2026</p>
+  <h1>Zitate, Burger, Adelt</h1>
+
+  <div class="post-body">
+    <p>
+      Die Hero-Section hat gestern zwei neue Zitate bekommen: Boris Zubert mit
+      &bdquo;Du bist Mutti.&ldquo; und Albert Einstein mit &bdquo;Peace cannot be
+      kept by force; it can only be achieved by understanding.&ldquo; Dazu kamen
+      Einstein- und Merkel-Silhouetten als schwach opake Hintergrundgrafiken —
+      nach einem Commit wieder raus. Die Porträts kollidierten mit der bestehenden
+      z-index-Logik der Leaf-Elemente; die Zitate sind geblieben, die Bilder nicht.
+    </p>
+
+    <p>
+      Der mobile Burger-Button war zu fein. Linien jetzt <strong>26 px</strong>
+      breit und <strong>3 px</strong> hoch, Farbe auf reines Schwarz. Das
+      Overlay-Menü hat <code>inset: 0</code> gegen explizite
+      <code>top / left / width: 100vw / height: 100dvh</code> getauscht — weil
+      <code>backdrop-filter</code> auf <code>&lt;nav&gt;</code> einen neuen
+      Containing Block aufspannt, was <code>inset: 0</code> gegenüber dem Element
+      statt dem Viewport auflöst. Firefox und Safari Mobile hatten das Menü nie
+      richtig auf Vollbild ausgedehnt. Jetzt schon.
+    </p>
+
+    <p>
+      Peer Adelt ist in der Idols-Section gelandet, mit Text in allen 17 Sprachen.
+      Kurz, weil ich ihn noch nicht vollständig einordnen kann. Er steht da, bis
+      ich mehr habe.
+    </p>
+  </div>
+
+  <div class="post-nav">
+    <a href="/blog/">← Alle Einträge</a>
+  </div>
+
+<section class="comments" id="comments" style="margin:3rem auto 4rem;max-width:720px;padding:0 1.5rem;">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:var(--bark);margin-bottom:0.5rem;">Kommentare</h2>
+  <p style="font-size:0.85rem;color:var(--stone);margin-bottom:1.5rem;">
+    Powered by <a href="https://giscus.app" style="color:var(--moss);">Giscus</a> &middot; GitHub-Login erforderlich &middot; keine Tracker, keine Ads.
+  </p>
+  <script src="https://giscus.app/client.js"
+          data-repo="steefsteefsen/steefsteefsen.github.io"
+          data-repo-id="REPLACE_ME"
+          data-category="Blog Comments"
+          data-category-id="REPLACE_ME"
+          data-mapping="pathname"
+          data-strict="1"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="light"
+          data-lang="de"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>

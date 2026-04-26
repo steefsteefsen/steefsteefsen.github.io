@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 25 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 26 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>quotes, burger, adelt</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-26-zitate-burger-adelt-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-26-zitate-burger-adelt-en.html</guid>
+    <pubDate>Sun, 26 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Two new quotes in the hero, a hamburger menu fix for Firefox and Safari Mobile, and Peer Adelt in the idols section.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
   <item>
     <title>Everyone has someone to feed</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern-en.html</link>

@@ -46,6 +46,10 @@ const BROWSERS = [
 ].filter(Boolean);
 const describeOrSkip = BROWSERS.length ? describe : describe.skip;
 
+if (!BROWSERS.length) {
+  test.skip('mobile burger — skipped (no Chrome or Firefox binary found)', () => {});
+}
+
 function startServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
