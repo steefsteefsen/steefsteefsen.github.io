@@ -1051,69 +1051,61 @@
   [dir="rtl"] .project-item::before { left: auto; right: 0; border-radius: 0 4px 4px 0; }
   [dir="rtl"] .booking-form { text-align: right; }
 
-  /* ── Mobile ── */
+  /* ── Burger overlay layout ──
+     Activated by:
+       (a) viewport <= 700px (mobile media query, CSS-only, no JS dependency)
+       (b) nav.burger-mode (set by JS when nav-links would overflow at wider widths)
+     Both paths use the same rules below via a shared selector list. */
   @media (max-width: 700px) {
-    /* Logo on the left, burger pinned to the right, nothing in between. */
-    nav {
-      padding: 1rem 1.5rem;
-      justify-content: flex-start;
-    }
+    nav { padding: 1rem 1.5rem; justify-content: flex-start; }
     nav .logo { margin-right: auto; }
-
-    .burger {
-      display: block;
-      order: 10;           /* force to the right of every sibling */
-      margin-left: auto;
-    }
-
-    /* Full-screen overlay menu.
-       Note: <nav> uses backdrop-filter, which makes it the containing block
-       for fixed-position descendants. Use viewport units instead of inset:0
-       so the overlay actually fills the screen. */
+    nav .burger { display: block; order: 10; margin-left: auto; }
     nav .nav-links {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1.4rem;
-      background: rgba(250, 247, 242, 0.98);
-      backdrop-filter: blur(14px);
-      transform: translateY(-100%);
-      transition: transform 0.35s ease;
-      z-index: 105;
-      padding: 5rem 1.5rem 5rem;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh; height: 100dvh;
+      flex-direction: column; align-items: center; justify-content: flex-start;
+      gap: 1.4rem; background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(14px);
+      transform: translateY(-100%); transition: transform 0.35s ease;
+      z-index: 105; padding: 5rem 1.5rem 5rem;
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
     }
     nav.open .nav-links { transform: translateY(0); }
     nav .nav-links a { font-size: 1rem; letter-spacing: 0.14em; }
-
-    /* Language switcher only visible inside the open overlay, as a row below the links. */
-    nav .lang-switcher {
-      display: none;
-    }
+    nav .lang-switcher { display: none; }
     nav.open .lang-switcher {
-      display: block;
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 106;
+      display: block; position: fixed; bottom: 2rem;
+      left: 50%; transform: translateX(-50%); z-index: 106;
     }
+  }
 
+  nav.burger-mode { padding: 1rem 1.5rem; justify-content: flex-start; }
+  nav.burger-mode .logo { margin-right: auto; }
+  nav.burger-mode .burger { display: block; order: 10; margin-left: auto; }
+  nav.burger-mode .nav-links {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh; height: 100dvh;
+    flex-direction: column; align-items: center; justify-content: flex-start;
+    gap: 1.4rem; background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(14px);
+    transform: translateY(-100%); transition: transform 0.35s ease;
+    z-index: 105; padding: 5rem 1.5rem 5rem;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+  nav.burger-mode.open .nav-links { transform: translateY(0); }
+  nav.burger-mode .nav-links a { font-size: 1rem; letter-spacing: 0.14em; }
+  nav.burger-mode .lang-switcher { display: none; }
+  nav.burger-mode.open .lang-switcher {
+    display: block; position: fixed; bottom: 2rem;
+    left: 50%; transform: translateX(-50%); z-index: 106;
+  }
+  body.nav-open { overflow: hidden; }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
     section { padding: 4.5rem 1.5rem; }
     .quote-block { padding: 1.5rem 1.5rem 1.5rem 2rem; }
     .quote-block blockquote { font-size: 1.25rem; }
     .contact-links { flex-direction: column; align-items: center; }
     .lang-dropdown { right: auto; left: 0; }
-
-    /* Lock body scroll when the burger menu is open */
-    body.nav-open { overflow: hidden; }
   }
 </style>
 </head>
@@ -2306,12 +2298,48 @@
   const mainNav = document.getElementById('main-nav');
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('main-nav-links');
+  const navLogo = mainNav.querySelector('.logo');
+  const langSwitcher = mainNav.querySelector('.lang-switcher');
 
   function setNavOpen(open) {
     mainNav.classList.toggle('open', open);
     document.body.classList.toggle('nav-open', open);
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
+
+  // Decide whether the nav should collapse into burger mode.
+  // Triggers: viewport <= 700px, or the laid-out nav-links wouldn't fit
+  // beside the logo + lang switcher + burger reservation.
+  function updateBurgerMode() {
+    const wasBurger = mainNav.classList.contains('burger-mode');
+    if (wasBurger) mainNav.classList.remove('burger-mode');
+
+    let shouldBurger = window.innerWidth <= 700;
+    if (!shouldBurger) {
+      const navStyles = getComputedStyle(mainNav);
+      const padX = parseFloat(navStyles.paddingLeft) + parseFloat(navStyles.paddingRight);
+      const logoW = navLogo ? navLogo.offsetWidth : 0;
+      const langW = langSwitcher ? langSwitcher.offsetWidth : 0;
+      const linksW = navLinks.scrollWidth;
+      const reserve = 24; // gap/safety
+      shouldBurger = (logoW + linksW + langW + padX + reserve) > mainNav.clientWidth;
+    }
+
+    mainNav.classList.toggle('burger-mode', shouldBurger);
+    if (!shouldBurger && mainNav.classList.contains('open')) setNavOpen(false);
+  }
+
+  updateBurgerMode();
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(updateBurgerMode).observe(document.body);
+  } else {
+    window.addEventListener('resize', updateBurgerMode);
+  }
+  // Recompute after a language change (i18n applyTranslations dispatches no event,
+  // so we re-check on the next animation frame after click).
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.lang-switcher')) requestAnimationFrame(updateBurgerMode);
+  });
 
   burger.addEventListener('click', (e) => {
     e.stopPropagation();
