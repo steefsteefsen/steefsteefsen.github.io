@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calling a genocide a genocide — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="If denying past genocides is criminal, then naming present genocides must be possible. A legal stocktake on Gaza, Xinjiang, Tigray — with a note on Salgado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --moss-light: #7a9463; --stone: #8c7b6b;
+    --cream: #faf7f2; --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--earth); margin: 1.8rem 0 0.6rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  .sources { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.2); font-size: 0.85rem; line-height: 1.7; }
+  .sources h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.8rem; }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.4rem; }
+  .sources a { color: var(--moss); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen.html">DE</a>
+      <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">27 April 2026</p>
+  <h1>Calling a genocide a genocide</h1>
+
+  <div class="post-body">
+    <p>
+      A simple symmetry question. If a society makes <strong>denying</strong> a past genocide a criminal offence — and Germany does, via § 130 (3) of the Criminal Code<sup class="fn">1</sup> — then in that same society, <strong>naming</strong> a present genocide must at least be sayable. Otherwise the law is folklore: sacred backwards, taboo forwards.
+    </p>
+
+    <p>
+      The term itself was coined by Raphael Lemkin, a Polish-Jewish jurist, in 1944, and he was a key author of the <strong>UN Convention on the Prevention and Punishment of the Crime of Genocide</strong> in 1948.<sup class="fn">2</sup> The Convention is not ambiguous. Article II defines genocide as specific acts „committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group, as such" — killing, serious bodily or mental harm, deliberate conditions of life calculated to bring about destruction, prevention of births, forcible transfer of children.<sup class="fn">3</sup>
+    </p>
+
+    <p>
+      Lemkin did not coin the term as a gift to future generations. He coined it because <em>every other word</em> — massacre, pogrom, ethnic cleansing — felt too small to him during the Shoah, and because a society that cannot name a crime cannot prohibit it. The term is a tool. It is meant to be <em>used</em>.
+    </p>
+
+    <h2>Three cases, legally placed</h2>
+
+    <h3>Gaza</h3>
+
+    <p>
+      On 26 January 2024, the <strong>International Court of Justice</strong> in The Hague, in <em>South Africa v. Israel</em> (Application of the Convention on the Prevention and Punishment of the Crime of Genocide), found that at least some of the rights asserted by South Africa under the Genocide Convention are <em>plausible</em> — namely the right of Palestinians in Gaza to be protected from acts identified in Article II of the Convention.<sup class="fn">4</sup> The Court ordered six provisional measures, including the obligation for Israel to take all measures within its power to prevent acts under Article II(a)–(d), and to prevent and punish „direct and public incitement to commit genocide".<sup class="fn">4</sup>
+    </p>
+
+    <p>
+      „Plausible risk of genocide" is not „genocide proven" — the merits phase is still pending. But it is the highest international court establishing that the threshold for taking the term seriously here has been crossed. Add to that the position of Francesca Albanese, UN Special Rapporteur on the situation of human rights in the Palestinian territories<sup class="fn">5</sup>, and the joint statement of genocide and Holocaust scholars — including Omer Bartov, Amos Goldberg, Raz Segal — who consider the threshold met.<sup class="fn">6</sup>
+    </p>
+
+    <h3>Uyghurs in Xinjiang</h3>
+
+    <p>
+      Several parliaments and governments have officially designated the actions of the People's Republic of China against the Uyghurs in Xinjiang as genocide: the United States (State Department, January 2021)<sup class="fn">7</sup>, Canada (House of Commons, February 2021, unanimous 266:0)<sup class="fn">8</sup>, the Netherlands (parliament, February 2021)<sup class="fn">9</sup>, the United Kingdom (House of Commons, April 2021, unanimous)<sup class="fn">10</sup>. The German federal government has so far not adopted this designation.
+    </p>
+
+    <h3>Tigray</h3>
+
+    <p>
+      The Tigray war (2020–2022) was the subject of an explicit concern in the final report of the UN-mandated <em>International Commission of Human Rights Experts on Ethiopia</em> in 2023: that acts by all parties — particularly Eritrean forces and the Ethiopian government — may constitute crimes against humanity or genocide.<sup class="fn">11</sup> The report is clear enough to justify the term. International attention was nevertheless limited.
+    </p>
+
+    <h2>Salgado, Rwanda, Yugoslavia</h2>
+
+    <p>
+      Wim Wenders' documentary <em>The Salt of the Earth</em> (2014) follows the work of Brazilian photographer Sebastião Salgado.<sup class="fn">12</sup> Since the late 1980s, Salgado has documented the great catastrophes of the late 20th century — including the <strong>Rwandan genocide of 1994</strong>, whose elements were later established by the International Criminal Tribunal for Rwanda, and the <strong>Yugoslav wars</strong>, in the course of which the Srebrenica massacre was confirmed as genocide both by the International Criminal Tribunal for the former Yugoslavia and by the ICJ.<sup class="fn">13</sup>
+    </p>
+
+    <p>
+      Salgado returned a year after his Rwanda photographs to follow Hutu refugees in the camps. In the film he describes — and this is the only scene where his voice breaks — how at what he saw he lost faith in humanity and believed he had to stop photographing.
+    </p>
+
+    <p>
+      Anyone who has seen Salgado's images knows: the word genocide is not too big. It is exactly right. And its use — by courts, by special rapporteurs, by scholarly consortiums — is not activism. It is the duty of states party to the Convention.<sup class="fn">3</sup>
+    </p>
+
+    <h2>Consequence</h2>
+
+    <p>
+      The Genocide Convention contains, in Article I, an obligation of <em>prevention</em> and of <em>punishment</em>.<sup class="fn">3</sup> Both presuppose that the crime is named. A government that avoids the term out of foreign-policy deference violates the Convention's spirit. A public that experiences the word as <em>extreme</em> has understood the Shoah and Lemkin's work sentimentally rather than legally.
+    </p>
+
+    <p>
+      § 130 of the German Criminal Code says: denying past genocides is criminal. The UN Convention says: preventing present genocides is a duty. Together: <strong>calling a genocide a genocide — when the legal criteria are met or are made plausible by competent bodies — is not radical. It is the precondition for the Convention to function at all.</strong>
+    </p>
+
+    <p>
+      Those who stay silent here are not protecting diplomacy. They are quietly suspending the very definition we committed to after 1945.
+    </p>
+  </div>
+
+  <section class="sources">
+    <h2>Sources</h2>
+    <ol>
+      <li id="fn1">§ 130 (3) of the German Criminal Code (Volksverhetzung — denial of National Socialist crimes): <a href="https://www.gesetze-im-internet.de/stgb/__130.html" target="_blank" rel="noopener">gesetze-im-internet.de/stgb/__130.html</a></li>
+      <li id="fn2">Raphael Lemkin: <em>Axis Rule in Occupied Europe</em> (1944) — the volume in which the word „genocide" was introduced. Carnegie Endowment for International Peace. <a href="https://www.preventgenocide.org/lemkin/AxisRule1944-1.htm" target="_blank" rel="noopener">preventgenocide.org/lemkin/AxisRule1944-1.htm</a></li>
+      <li id="fn3">UN Convention on the Prevention and Punishment of the Crime of Genocide, 9 December 1948 (entered into force 12 January 1951). Full text: <a href="https://www.un.org/en/genocideprevention/documents/atrocity-crimes/Doc.1_Convention%20on%20the%20Prevention%20and%20Punishment%20of%20the%20Crime%20of%20Genocide.pdf" target="_blank" rel="noopener">un.org — Convention on the Prevention and Punishment of the Crime of Genocide (PDF)</a></li>
+      <li id="fn4">ICJ, <em>Application of the Convention on the Prevention and Punishment of the Crime of Genocide in the Gaza Strip (South Africa v. Israel)</em>, Order of 26 January 2024 (Provisional Measures). <a href="https://www.icj-cij.org/node/203447" target="_blank" rel="noopener">icj-cij.org — Order of 26 January 2024</a></li>
+      <li id="fn5">Francesca Albanese (UN Special Rapporteur on the Situation of Human Rights in the Palestinian Territories Occupied since 1967): report <em>Anatomy of a Genocide</em>, A/HRC/55/73 (March 2024). <a href="https://www.ohchr.org/en/documents/country-reports/ahrc5573-anatomy-genocide-report-special-rapporteur-situation-human" target="_blank" rel="noopener">ohchr.org — A/HRC/55/73</a></li>
+      <li id="fn6">Omer Bartov, „As a former IDF soldier and historian of genocide, I was deeply disturbed by my recent visit to Israel", <em>The Guardian</em>, 2024 — one of the most influential statements from the academic genocide-studies field. <a href="https://www.theguardian.com/commentisfree/2024/aug/13/israel-gaza-historian-omer-bartov" target="_blank" rel="noopener">theguardian.com</a></li>
+      <li id="fn7">U.S. Department of State, Determination of the Secretary of State on Atrocities in Xinjiang, 19 January 2021. <a href="https://2017-2021.state.gov/determination-of-the-secretary-of-state-on-atrocities-in-xinjiang/" target="_blank" rel="noopener">state.gov — archive</a></li>
+      <li id="fn8">House of Commons of Canada, Vote No. 56, 22 February 2021 (266 to 0): <a href="https://www.ourcommons.ca/Members/en/votes/43/2/56" target="_blank" rel="noopener">ourcommons.ca — Vote 56</a></li>
+      <li id="fn9">Tweede Kamer der Staten-Generaal, Motion 35 207, 25 February 2021. Report: <a href="https://www.rfa.org/english/news/uyghur/dutch-02252021165026.html" target="_blank" rel="noopener">Radio Free Asia — Dutch MPs Pass Motion</a></li>
+      <li id="fn10">UK House of Commons, 22 April 2021, Hansard: <a href="https://hansard.parliament.uk/commons/2021-04-22/debates/6FA4F300-D244-443E-A48C-57378876DE54/HumanRightsXinjiang" target="_blank" rel="noopener">hansard.parliament.uk — Human Rights: Xinjiang</a></li>
+      <li id="fn11">UN International Commission of Human Rights Experts on Ethiopia, Final Report A/HRC/54/55 (September 2023). <a href="https://www.ohchr.org/en/hr-bodies/hrc/ichre-ethiopia/index" target="_blank" rel="noopener">ohchr.org — ICHREE Ethiopia</a></li>
+      <li id="fn12">Wim Wenders &amp; Juliano Ribeiro Salgado: <em>The Salt of the Earth</em> (2014). César for best documentary 2015; Oscar nomination. <a href="https://en.wikipedia.org/wiki/The_Salt_of_the_Earth_(2014_film)" target="_blank" rel="noopener">Wikipedia — The Salt of the Earth (film)</a></li>
+      <li id="fn13">ICJ, <em>Application of the Convention on the Prevention and Punishment of the Crime of Genocide (Bosnia and Herzegovina v. Serbia and Montenegro)</em>, Judgment of 26 February 2007 — finding of the genocide of Srebrenica. <a href="https://www.icj-cij.org/case/91" target="_blank" rel="noopener">icj-cij.org — Case 91</a>. On the Rwandan genocide: International Criminal Tribunal for Rwanda (ICTR), <em>Prosecutor v. Akayesu</em>, Judgment of 2 September 1998 — the first conviction for genocide by an international court. <a href="https://unictr.irmct.org/en/cases/ictr-96-4" target="_blank" rel="noopener">unictr.irmct.org — Akayesu</a></li>
+    </ol>
+  </section>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← Back to blog</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Home</a>
+</footer>
+
+</body>
+</html>

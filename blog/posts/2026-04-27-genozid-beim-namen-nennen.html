@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genozid beim Namen nennen — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Wenn das Bestreiten vergangener Genozide strafbar ist, dann muss das Benennen gegenwärtiger Genozide möglich sein. Eine juristische Bestandsaufnahme zu Gaza, Xinjiang, Tigray — und ein Hinweis auf Salgado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --moss-light: #7a9463; --stone: #8c7b6b;
+    --cream: #faf7f2; --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--earth); margin: 1.8rem 0 0.6rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  .sources { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.2); font-size: 0.85rem; line-height: 1.7; }
+  .sources h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.8rem; }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.4rem; }
+  .sources a { color: var(--moss); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen.html" class="active">DE</a>
+      <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">27. April 2026</p>
+  <h1>Genozid beim Namen nennen</h1>
+
+  <div class="post-body">
+    <p>
+      Eine einfache Symmetrie-Frage: Wenn eine Gesellschaft das <strong>Leugnen</strong> eines vergangenen Genozids mit Strafe bewehrt — und das tut die Bundesrepublik mit § 130 Abs. 3 StGB<sup class="fn">1</sup> — dann muss in derselben Gesellschaft das <strong>Benennen</strong> eines gegenwärtigen Genozids zumindest sagbar sein. Sonst wäre die Strafnorm Folklore: rückwärts heilig, vorwärts tabu.
+    </p>
+
+    <p>
+      Der Begriff selbst stammt von Raphael Lemkin, einem polnisch-jüdischen Juristen, der das Wort 1944 prägte und die <strong>UN-Konvention über die Verhütung und Bestrafung des Völkermordes</strong> 1948 maßgeblich mitformulierte.<sup class="fn">2</sup> Die Konvention ist nicht mehrdeutig. Artikel II definiert Völkermord als bestimmte Handlungen, „begangen in der Absicht, eine nationale, ethnische, rassische oder religiöse Gruppe als solche ganz oder teilweise zu zerstören" — Tötung, schwere Schädigung, vorsätzliche Lebensbedingungen die zur Zerstörung führen, Geburtenverhinderung, Kinderverschleppung.<sup class="fn">3</sup>
+    </p>
+
+    <p>
+      Lemkin hat den Begriff nicht erfunden, weil er ihn künftigen Generationen schenken wollte. Er hat ihn erfunden, weil ihm während der Schoah <em>jedes andere Wort zu klein</em> war — Massaker, Pogrom, ethnische Säuberung — und weil eine Gesellschaft, die das Verbrechen nicht benennen kann, es auch nicht verbieten kann. Der Begriff ist ein Werkzeug. Er soll <em>verwendet</em> werden.
+    </p>
+
+    <h2>Drei Fälle, juristisch eingeordnet</h2>
+
+    <h3>Gaza</h3>
+
+    <p>
+      Am 26. Januar 2024 hat der <strong>Internationale Gerichtshof</strong> in Den Haag im Verfahren <em>Südafrika gegen Israel</em> (Application of the Convention on the Prevention and Punishment of the Crime of Genocide) festgestellt, dass mindestens einige der von Südafrika geltend gemachten Rechte aus der Genozid-Konvention <em>plausibel</em> seien — namentlich das Recht der palästinensischen Bevölkerung in Gaza, vor Akten gemäß Artikel II der Konvention geschützt zu werden.<sup class="fn">4</sup> Das Gericht hat sechs einstweilige Maßnahmen angeordnet, darunter die Verpflichtung Israels, alle in seiner Macht stehenden Maßnahmen zu ergreifen, um Handlungen nach Artikel II(a)–(d) zu verhindern, und „direkte und öffentliche Aufstachelung zum Völkermord" zu verfolgen.<sup class="fn">4</sup>
+    </p>
+
+    <p>
+      „Plausibles Risiko eines Genozids" ist nicht „Genozid bewiesen" — das Hauptverfahren läuft. Aber es ist die höchste internationale Gerichtsinstanz, die feststellt: <em>Die Schwelle, dass dieser Begriff hier ernsthaft zu prüfen ist, ist überschritten.</em> Hinzu kommen Stellungnahmen von Francesca Albanese (UN-Sonderberichterstatterin für die besetzten palästinensischen Gebiete)<sup class="fn">5</sup> und ein Statement von Genozid- und Holocaust-Forschenden — darunter Omer Bartov, Amos Goldberg, Raz Segal — die den Tatbestand in Gaza als erfüllt ansehen.<sup class="fn">6</sup>
+    </p>
+
+    <h3>Uigur:innen in Xinjiang</h3>
+
+    <p>
+      Mehrere Parlamente und Regierungen haben das Vorgehen der Volksrepublik China gegen die Uigur:innen in der Region Xinjiang offiziell als Genozid eingestuft: USA (Außenministerium, Januar 2021)<sup class="fn">7</sup>, Kanada (Unterhaus, Februar 2021, einstimmig 266:0)<sup class="fn">8</sup>, Niederlande (Parlament, Februar 2021)<sup class="fn">9</sup>, Vereinigtes Königreich (Unterhaus, April 2021, einstimmig)<sup class="fn">10</sup>. Die Bundesregierung hat diese Einstufung bislang nicht übernommen.
+    </p>
+
+    <h3>Tigray</h3>
+
+    <p>
+      Der Tigray-Krieg (2020–2022) wurde von der UN-eingesetzten <em>International Commission of Human Rights Experts on Ethiopia</em> in ihrem Abschlussbericht 2023 mit der ausdrücklichen Sorge versehen, Handlungen aller beteiligter Parteien — insbesondere eritreischer Streitkräfte und der äthiopischen Regierung — könnten den Tatbestand des Verbrechens gegen die Menschlichkeit oder des Völkermordes erfüllen.<sup class="fn">11</sup> Der Bericht ist eindeutig genug, um den Begriff zu rechtfertigen. Die internationale Aufmerksamkeit war gleichwohl begrenzt.
+    </p>
+
+    <h2>Salgado, Ruanda, Jugoslawien</h2>
+
+    <p>
+      Wim Wenders' Dokumentarfilm <em>Das Salz der Erde</em> (2014) zeichnet die Arbeit des brasilianischen Fotografen Sebastião Salgado nach.<sup class="fn">12</sup> Salgado hat seit Ende der 1980er Jahre die großen Katastrophen des ausgehenden 20. Jahrhunderts dokumentiert — darunter den <strong>Genozid in Ruanda 1994</strong>, dessen Tatbestandsmerkmale später vom Internationalen Strafgerichtshof für Ruanda festgestellt wurden, und die <strong>Jugoslawienkriege</strong>, in deren Verlauf das Massaker von Srebrenica vom Internationalen Strafgerichtshof für das ehemalige Jugoslawien sowie vom IGH als Genozid bestätigt wurde.<sup class="fn">13</sup>
+    </p>
+
+    <p>
+      Salgado kehrte ein Jahr nach den Ruanda-Aufnahmen zurück, um die geflüchteten Hutu in den Lagern weiter zu begleiten. Im Film schildert er — und das ist die einzige Stelle, an der seine Stimme bricht —, wie er an dem, was er sah, den Glauben an die Menschheit verlor und glaubte, er müsse aufhören zu fotografieren.
+    </p>
+
+    <p>
+      Wer Salgados Bilder gesehen hat, weiß: das Wort Genozid ist nicht zu groß. Es ist genau richtig. Und seine Verwendung — durch Gerichte, durch Sonderberichterstatter:innen, durch Forschungs-Kollektive — ist nicht Aktivismus, sondern Pflicht der zur Konvention verpflichteten Staaten.<sup class="fn">3</sup>
+    </p>
+
+    <h2>Konsequenz</h2>
+
+    <p>
+      Die Genozid-Konvention enthält in Artikel I eine Verpflichtung zur <em>Verhütung</em> und zur <em>Bestrafung</em>.<sup class="fn">3</sup> Beides setzt voraus, dass der Tatbestand benannt wird. Eine Regierung, die den Begriff aus außenpolitischer Rücksichtnahme vermeidet, verletzt den Geist der Konvention. Eine Öffentlichkeit, die das Wort als <em>extrem</em> empfindet, hat die Schoah und Lemkins Werk sentimental verstanden statt juristisch.
+    </p>
+
+    <p>
+      § 130 StGB sagt: Vergangene Genozide zu leugnen ist strafbar. Die UN-Konvention sagt: Gegenwärtige Genozide zu verhindern ist Pflicht. Beides zusammen ergibt: <strong>Genozide beim Namen nennen — wenn die juristischen Kriterien erfüllt sind oder von zuständigen Instanzen plausibel gemacht werden — ist nicht radikal. Es ist die Voraussetzung dafür, dass die Konvention überhaupt funktioniert.</strong>
+    </p>
+
+    <p>
+      Wer dazu schweigt, schützt nicht die Diplomatie. Wer dazu schweigt, setzt die Definition außer Kraft, der wir uns nach 1945 verschrieben haben.
+    </p>
+  </div>
+
+  <section class="sources">
+    <h2>Quellen</h2>
+    <ol>
+      <li id="fn1">§ 130 Abs. 3 StGB (Volksverhetzung, Leugnung nationalsozialistischer Verbrechen): <a href="https://www.gesetze-im-internet.de/stgb/__130.html" target="_blank" rel="noopener">gesetze-im-internet.de/stgb/__130.html</a></li>
+      <li id="fn2">Raphael Lemkin: <em>Axis Rule in Occupied Europe</em> (1944) — der Band, in dem das Wort „Genocide" eingeführt wird. Carnegie Endowment for International Peace. <a href="https://www.preventgenocide.org/lemkin/AxisRule1944-1.htm" target="_blank" rel="noopener">preventgenocide.org/lemkin/AxisRule1944-1.htm</a></li>
+      <li id="fn3">UN-Konvention über die Verhütung und Bestrafung des Völkermordes, 9. Dezember 1948 (in Kraft 12. Januar 1951). Volltext: <a href="https://www.un.org/en/genocideprevention/documents/atrocity-crimes/Doc.1_Convention%20on%20the%20Prevention%20and%20Punishment%20of%20the%20Crime%20of%20Genocide.pdf" target="_blank" rel="noopener">un.org — Convention on the Prevention and Punishment of the Crime of Genocide (PDF)</a></li>
+      <li id="fn4">IGH, <em>Application of the Convention on the Prevention and Punishment of the Crime of Genocide in the Gaza Strip (South Africa v. Israel)</em>, Order of 26 January 2024 (Provisional Measures). <a href="https://www.icj-cij.org/node/203447" target="_blank" rel="noopener">icj-cij.org — Order of 26 January 2024</a></li>
+      <li id="fn5">Francesca Albanese (UN Special Rapporteur on the Situation of Human Rights in the Palestinian Territories Occupied since 1967): Bericht <em>Anatomy of a Genocide</em>, A/HRC/55/73 (März 2024). <a href="https://www.ohchr.org/en/documents/country-reports/ahrc5573-anatomy-genocide-report-special-rapporteur-situation-human" target="_blank" rel="noopener">ohchr.org — A/HRC/55/73</a></li>
+      <li id="fn6">Omer Bartov, „As a former IDF soldier and historian of genocide, I was deeply disturbed by my recent visit to Israel", <em>The Guardian</em>, 2024 — eine der einflussreichsten Stellungnahmen aus der akademischen Genozidforschung. <a href="https://www.theguardian.com/commentisfree/2024/aug/13/israel-gaza-historian-omer-bartov" target="_blank" rel="noopener">theguardian.com</a></li>
+      <li id="fn7">U.S. Department of State, Determination of the Secretary of State on Atrocities in Xinjiang, 19. Januar 2021. <a href="https://2017-2021.state.gov/determination-of-the-secretary-of-state-on-atrocities-in-xinjiang/" target="_blank" rel="noopener">state.gov — archive</a></li>
+      <li id="fn8">House of Commons of Canada, Vote No. 56, 22. Februar 2021 (266 zu 0): <a href="https://www.ourcommons.ca/Members/en/votes/43/2/56" target="_blank" rel="noopener">ourcommons.ca — Vote 56</a></li>
+      <li id="fn9">Tweede Kamer der Staten-Generaal, Motion 35 207, 25. Februar 2021. Bericht: <a href="https://www.rfa.org/english/news/uyghur/dutch-02252021165026.html" target="_blank" rel="noopener">Radio Free Asia — Dutch MPs Pass Motion</a></li>
+      <li id="fn10">UK House of Commons, 22. April 2021, Hansard: <a href="https://hansard.parliament.uk/commons/2021-04-22/debates/6FA4F300-D244-443E-A48C-57378876DE54/HumanRightsXinjiang" target="_blank" rel="noopener">hansard.parliament.uk — Human Rights: Xinjiang</a></li>
+      <li id="fn11">UN International Commission of Human Rights Experts on Ethiopia, Final Report A/HRC/54/55 (September 2023). <a href="https://www.ohchr.org/en/hr-bodies/hrc/ichre-ethiopia/index" target="_blank" rel="noopener">ohchr.org — ICHREE Ethiopia</a></li>
+      <li id="fn12">Wim Wenders &amp; Juliano Ribeiro Salgado: <em>Das Salz der Erde</em> (2014). César für den besten Dokumentarfilm 2015; Oscar-Nominierung. <a href="https://en.wikipedia.org/wiki/The_Salt_of_the_Earth_(2014_film)" target="_blank" rel="noopener">Wikipedia — The Salt of the Earth (film)</a></li>
+      <li id="fn13">IGH, <em>Application of the Convention on the Prevention and Punishment of the Crime of Genocide (Bosnia and Herzegovina v. Serbia and Montenegro)</em>, Urteil vom 26. Februar 2007 — Feststellung des Genozids von Srebrenica. <a href="https://www.icj-cij.org/case/91" target="_blank" rel="noopener">icj-cij.org — Case 91</a>. Zum Genozid in Ruanda: International Criminal Tribunal for Rwanda (ICTR), <em>Prosecutor v. Akayesu</em>, Urteil vom 2. September 1998 — erste Verurteilung wegen Völkermordes durch ein internationales Gericht überhaupt. <a href="https://unictr.irmct.org/en/cases/ictr-96-4" target="_blank" rel="noopener">unictr.irmct.org — Akayesu</a></li>
+    </ol>
+  </section>
+
+  <div class="post-nav">
+    <a href="/blog/">← Zurück zum Blog</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Hauptseite</a>
+</footer>
+
+</body>
+</html>
