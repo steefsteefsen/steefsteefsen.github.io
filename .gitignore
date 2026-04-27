@@ -24,3 +24,15 @@ logs/
 
 # Session docs
 #docs/
+
+# Session logs (root-level)
+SESSION-*.md
+
+# Scratch test scripts and debug artifacts
+tests/burger-*.js
+tests/firefox-*.js
+tests/debug-*.js
+tests/diag-*.js
+tests/show-*.js
+tests/screenshots/
+tests/wip/
