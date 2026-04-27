@@ -216,6 +216,42 @@ Headless screenshots are still useful as a *sanity check before handing
 off* (e.g. "I rendered it once headless to confirm it loads"), but they
 do not replace the human review.
 
+## Gender-inclusive language (German, hard requirement)
+
+All German-language content on the site uses **gender-inclusive language**.
+Default to **neutrum or collective forms** before reaching for binary
+constructs or Gender-Stern/Doppelpunkt.
+
+Preferred patterns (in order):
+
+1. **Neutrum / abstract noun**: "der kleine Mann" → "das einfache Leben",
+   "der Bürger" → "die Bevölkerung", "der Wähler" → "die Wählerschaft" or
+   "wer wählt".
+2. **Plural and collective forms**: "die Pflegekraft" stays, "die Pflegenden"
+   for plural. "Aktivisten" → "Aktive" or "Menschen, die sich engagieren".
+3. **Personalize via verb**: "Anyone who…" / "Wer …" instead of a gendered
+   noun. "Wer um 5 Uhr im Pflegeheim steht" rather than "Der Pfleger,
+   der um 5 Uhr im Pflegeheim steht".
+4. **Doppelpunkt only as last resort**: "Bürger:innen" — only when neutrum
+   and "wer …" don't fit cleanly. Do not use Gender-Stern (`*`).
+
+For pronouns referring to a previously introduced subject:
+- After "das einfache Leben" / "die Bevölkerung" → "es" / "sie".
+- After a "wer …" clause → "wer das tut, …" or restructure.
+- Never default to "er" alone for a generic person.
+
+Avoid:
+- Generic-masculine nouns ("der Bürger", "der Mensch im Land") as the
+  default subject of a sentence.
+- "Er" / "ihn" when the antecedent is a generic role rather than a named
+  person.
+- Colloquial "kriegt" — write "bekommt".
+
+This applies to: index.html, blog posts (DE), pillar pages (movement/,
+science/, ethics/, mentorship/, tribe/), idol cards, footnotes, hero
+copy. EN content follows standard inclusive-English conventions
+(singular "they", avoid "mankind", etc.).
+
 ## Source-citation rule (hard requirement)
 
 **Every factual claim on the site or in a blog post must have a source citation.**
