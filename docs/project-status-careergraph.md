@@ -1,7 +1,7 @@
 # CareerGraph — Project Status & Roadmap
 
 **Project Owner:** Stefan Hüllinghorst, Berlin (from Bielefeld)
-**Contact:** stefan@huellinghorst.info | +49 172 749 1769
+**Contact:** stefan@huellinghorst.info
 **LinkedIn:** linkedin.com/in/stefan-huellinghorst
 **Last Updated:** 2026-04-07
 
