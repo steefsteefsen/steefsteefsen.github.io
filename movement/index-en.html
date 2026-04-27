@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movement of the Working Many — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="A political movement, not a party. Launches 1 May 2026, International Workers' Day. In the tradition of the good Pirates — without repeating their mistakes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --stone: #8c7b6b; --cream: #faf7f2;
+    --rust: #a85a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  .countdown { display: inline-block; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--cream); background: var(--rust); padding: 0.4rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.8vw, 3.4rem); color: var(--bark); margin-bottom: 1rem; line-height: 1.15; }
+  .lede { font-size: 1.15rem; color: var(--bark); margin-bottom: 2.5rem; font-style: italic; opacity: 0.85; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: var(--bark); margin-top: 3rem; margin-bottom: 0.8rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 1.8rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.5rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 2.5rem 0; }
+  .pillar { background: rgba(201, 169, 110, 0.06); border-left: 3px solid var(--clay); padding: 1.4rem 1.6rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .pillar h3 { margin-top: 0; }
+  .pillar p:last-child { margin-bottom: 0; }
+  .lessons-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  @media (min-width: 760px) { .lessons-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  .lesson { padding: 1.2rem 1.4rem; border-radius: 4px; }
+  .lesson--keep { background: rgba(90, 110, 74, 0.08); border-left: 3px solid var(--moss); }
+  .lesson--avoid { background: rgba(168, 90, 58, 0.08); border-left: 3px solid var(--rust); }
+  .lesson h3 { margin-top: 0; font-size: 1.05rem; }
+  .lesson--keep h3 { color: var(--moss); }
+  .lesson--avoid h3 { color: var(--rust); }
+  .lesson ul { margin: 0.5rem 0 0 1.2rem; font-size: 0.95rem; }
+  .lesson li { margin-bottom: 0.4rem; }
+  .one-line { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.4rem, 3.2vw, 2rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; line-height: 1.4; }
+  .central-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); text-align: center; color: var(--bark); border-top: 2px solid var(--rust); border-bottom: 2px solid var(--rust); padding: 1.5rem 1rem; margin: 3rem 0; line-height: 1.3; }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  .cta-box { background: var(--bark); color: var(--cream); padding: 1.8rem 2rem; border-radius: 4px; margin: 2.5rem 0; }
+  .cta-box h3 { color: var(--clay); margin-top: 0; }
+  .cta-box p { color: var(--cream); }
+  .cta-box a { color: var(--clay); border-bottom-color: rgba(201, 169, 110, 0.4); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/movement/">DE</a>
+      <a href="/movement/index-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="section-label">Movement</div>
+  <span class="countdown">Launch: 1 May 2026 · International Workers' Day</span>
+  <h1>The Movement of the Working Many</h1>
+  <p class="lede">Not a party. A movement. In the tradition of the good Pirates — without repeating their mistakes.</p>
+
+  <blockquote class="central-quote">Those who do the work should also have a say.</blockquote>
+
+  <h2>Why now</h2>
+  <p>Because the people who actually keep the country running — care, trades, logistics, checkout, kitchens, cleaning, construction, warehouses — are either ignored politically or skimmed off by demagogues. Because „work" in political language has been reduced to a competitive-advantage talking point, instead of describing what exhausts people for eight hours a day.</p>
+  <p>We're building a third path. Not Left-party folklore. Not AfD hatred. A path that takes the dignity of labour seriously — and at the same time understands that labour in the 21st century is also care work, code work, platform work.</p>
+
+  <h2>What we are</h2>
+  <ul>
+    <li><strong>Not an electoral party.</strong> Not yet. Elections are a tool, not an end. We build the movement first, then we'll see.</li>
+    <li><strong>A political demand.</strong> With manifesto, members, actions, participation tooling.</li>
+    <li><strong>Compatible.</strong> With netzpolitik.org, Digitalcourage, FragDenStaat, CCC, GFF, aula. They have the infrastructure, we bring the class question.</li>
+    <li><strong>Radically transparent.</strong> Open meetings. Open finances. Decisions traceable.</li>
+    <li><strong>One sharp core question:</strong> <em>Those who do the work should also have a say.</em> Everything else follows from that.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>What we learn from the Pirates</h2>
+  <p>The Pirate Party (founded 2006, peaked 2011/12 with 8.9% in Berlin and seats in four state parliaments, collapsed from 2013 onward) achieved something real — and screwed up something important. Both have lessons.</p>
+
+  <div class="lessons-grid">
+
+    <div class="lesson lesson--keep">
+      <h3>What we keep</h3>
+      <ul>
+        <li><strong>Radical transparency</strong> — board meetings live, minutes public, finances open.</li>
+        <li><strong>Real participation</strong> — a tool that ordinary members actually use, not just 200 activists.</li>
+        <li><strong>One sharp core question</strong> — for the Pirates: digital rights. For us: labour, work, reproduction costs.</li>
+        <li><strong>Operational people from NGOs</strong> — we bring in experience, not just enthusiasm.</li>
+        <li><strong>Parliamentary work as craft</strong> — if we ever get in: motions, committees, files. No talk-show careers.</li>
+      </ul>
+    </div>
+
+    <div class="lesson lesson--avoid">
+      <h3>What we will not repeat</h3>
+      <ul>
+        <li><strong>No „everyone-is-allowed-to-say-anything" tolerance</strong> for antisemitism, racism, Holocaust relativisation. Fast, public, out. And no language policy of diplomatic deference: <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen-en.html">genocides get called genocides</a> when the legal criteria are met.</li>
+        <li><strong>No 12-month board rotation.</strong> Whoever is elected gets a full term and backing.</li>
+        <li><strong>No Twitter-shitstorm governance.</strong> Internal conflicts internal. Public only the finished result.</li>
+        <li><strong>No 200-activist core democracy.</strong> If only 1% of members use the participation tool, it isn't a participation tool.</li>
+        <li><strong>Media presence is not politics.</strong> We will be measured by what changes. Not by airtime.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Three demands to start with</h2>
+  <p>More to come at launch. These three stand.</p>
+
+  <div class="pillar">
+    <h3>1. Recognise reproduction costs as a political quantity</h3>
+    <p>What it costs to get a working person out of bed in the morning — rent, food, transport, care, education — belongs in the wage debate. Not the abstract „pay round". What's left at the end of the month, after life is paid for.</p>
+  </div>
+
+  <div class="pillar">
+    <h3>2. Care work, platform work, shift work treated equally</h3>
+    <p>A care worker, a Lieferando rider and a shift programmer have more in common than their respective industries want to admit. We build the alliance that recognises these three groups — before the AfD scoops them up.</p>
+  </div>
+
+  <div class="pillar">
+    <h3>3. Co-determination where the money is made</h3>
+    <p>More democracy in the workplace. Not less. Not the plant manager alone deciding who takes a break when — but the people on break.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What we are not</h2>
+  <ul>
+    <li>We are not Left Party 2.0. Anyone who uses „solidarity, comrade" as a phrase has never stood in a care home at 5 a.m.</li>
+    <li>We are not the identity-politics avant-garde. Class before pose.</li>
+    <li>We are not AfD-Light. We define ordinary life not by what it hates, but by what gets it out of bed in the morning.</li>
+    <li>We are not tech-utopians. AI doesn't save the care worker. Neither do we — but we don't pretend to.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>What we name</h2>
+  <p>A movement positioned against AfD-Light, one that explicitly excludes the denial of the Shoah, cannot at the same time stay silent when present-day genocides are not called by their name. That would be asymmetry: sacred backwards, taboo forwards.</p>
+  <p>Germany criminalises the denial of past genocides under § 130 (3) of the Criminal Code. The same Germany, as a state party to the 1948 UN Genocide Convention, is obliged to <em>prevent and punish</em> present genocides. Both presuppose that the crime is named.</p>
+  <p>We take seriously the definition we committed to after 1945. When the International Court of Justice, UN special rapporteurs, or genocide and Holocaust scholarship examine or affirm the elements — for Gaza, for Xinjiang, for Tigray, for past cases like Rwanda and Srebrenica — then silence out of foreign-policy deference is not neutrality. It is a quiet abandonment of the tool we built after Auschwitz.</p>
+  <p>More on this: <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen-en.html">Calling a genocide a genocide — a legal stocktake</a>.</p>
+
+  <div class="cta-box">
+    <h3>Launch: 1 May 2026</h3>
+    <p>International Workers' Day. Full manifesto, first member structures, participation tool live. If you want to be part of it: <a href="mailto:stefan@huellinghorst.info?subject=Movement%20of%20the%20Working%20Many">write to me</a>.</p>
+    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.8;">This page is a blueprint. Ideation. By 1 May it will grow — if you want to contribute, now is the time.</p>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophy</a> &middot;
+  <a href="/science/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Science</a> &middot;
+  <a href="/ethics/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Ethics</a> &middot;
+  <a href="/mentorship/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>

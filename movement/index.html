@@ -19,6 +19,11 @@
   body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
   nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
   main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
   .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
   .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
@@ -61,6 +66,12 @@
 
 <nav>
   <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/movement/" class="active">DE</a>
+      <a href="/movement/index-en.html">EN</a>
+    </div>
+  </div>
 </nav>
 
 <main>
@@ -105,7 +116,7 @@
     <div class="lesson lesson--avoid">
       <h3>Was wir nicht wiederholen</h3>
       <ul>
-        <li><strong>Keine „alle dürfen alles sagen"-Toleranz</strong> bei Antisemitismus, Rassismus, Holocaust-Relativierung. Schnell, öffentlich, raus.</li>
+        <li><strong>Keine „alle dürfen alles sagen"-Toleranz</strong> bei Antisemitismus, Rassismus, Holocaust-Relativierung. Schnell, öffentlich, raus. Und keine Sprachpolitik der diplomatischen Rücksicht: <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen.html">Genozide werden beim Namen genannt</a>, wenn die juristischen Kriterien erfüllt sind.</li>
         <li><strong>Keine Vorstandsrotation alle 12 Monate.</strong> Wer gewählt ist, bekommt eine volle Periode und Rückendeckung.</li>
         <li><strong>Kein Twitter-Shitstorm-Regieren.</strong> Interne Konflikte intern. Öffentlich nur das fertige Ergebnis.</li>
         <li><strong>Keine 200-Aktive-Kerndemokratie.</strong> Wenn nur 1% der Mitglieder das Beteiligungstool nutzt, ist es kein Beteiligungstool.</li>
@@ -144,6 +155,14 @@
     <li>Wir sind keine AfD-Light. Wir definieren das einfache Leben nicht über das, was es hasst, sondern über das, was es morgens aus dem Bett bekommt.</li>
     <li>Wir sind keine Tech-Utopisten. KI rettet die Pflegekraft nicht. Wir auch nicht — aber wir tun nicht so.</li>
   </ul>
+
+  <div class="divider"></div>
+
+  <h2>Was wir benennen</h2>
+  <p>Eine Bewegung, die sich gegen AfD-Light positioniert und das Leugnen der Schoah explizit ausschließt, kann nicht gleichzeitig schweigen, wenn aktuelle Genozide nicht beim Namen genannt werden. Das wäre Asymmetrie: rückwärts heilig, vorwärts tabu.</p>
+  <p>Die Bundesrepublik bestraft das Leugnen vergangener Genozide nach § 130 Abs. 3 StGB. Dieselbe Republik ist als Vertragsstaat der UN-Genozid-Konvention von 1948 zur <em>Verhütung und Bestrafung</em> gegenwärtiger Genozide verpflichtet. Beides setzt voraus, dass der Tatbestand benannt wird.</p>
+  <p>Wir nehmen die Definition ernst, der wir uns nach 1945 verschrieben haben. Wenn der Internationale Gerichtshof, UN-Sonderberichterstatter:innen oder die Holocaust- und Genozidforschung den Tatbestand prüfen oder feststellen — zu Gaza, zu Xinjiang, zu Tigray, zu vergangenen Fällen wie Ruanda und Srebrenica — dann ist Schweigen aus außenpolitischer Rücksicht keine Neutralität. Es ist ein leiser Verzicht auf das Werkzeug, das wir nach Auschwitz gebaut haben.</p>
+  <p>Mehr dazu: <a href="/blog/posts/2026-04-27-genozid-beim-namen-nennen.html">Genozid beim Namen nennen — eine juristische Bestandsaufnahme</a>.</p>
 
   <div class="cta-box">
     <h3>Launch: 1. Mai 2026</h3>

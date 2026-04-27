@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="I trust science 100%. Method over opinion. Primary sources. Falsifiable before viral. Behavioural and depth psychology as the foundation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --stone: #8c7b6b; --cream: #faf7f2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: var(--bark); margin-bottom: 1rem; line-height: 1.2; }
+  .creed { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.4rem, 3.2vw, 2rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 1.5rem 0 2.5rem; line-height: 1.4; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: var(--bark); margin-top: 3rem; margin-bottom: 0.8rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 1.8rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.4rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 2.5rem 0; }
+  .grid-two { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin: 2rem 0; }
+  @media (min-width: 760px) { .grid-two { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+  .branch { background: rgba(201, 169, 110, 0.06); border-left: 3px solid var(--clay); padding: 1.2rem 1.5rem; border-radius: 0 4px 4px 0; }
+  .branch h2 { margin-top: 0; font-size: 1.5rem; }
+  .branch h3 { font-size: 1rem; margin-top: 1rem; }
+  .branch ul { margin: 0.4rem 0 0 1.2rem; font-size: 0.95rem; }
+  .branch li { margin-bottom: 0.3rem; }
+  .branch li strong { color: var(--bark); }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/science/">DE</a>
+      <a href="/science/index-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="section-label">Science</div>
+  <h1>Method over opinion</h1>
+  <blockquote class="creed">I trust science 100%.</blockquote>
+
+  <h2>Why</h2>
+  <p>Because it's the only system built to correct itself. A hypothesis that survives one test is still only a hypothesis that survived one test. A hypothesis that survives every test gets as close to truth as anything on this planet.</p>
+  <p>Science is not one opinion among many. It's the method we use to figure out which opinions are garbage. That's not a detail. That's everything.</p>
+  <p>I do <strong>not</strong> trust it because researchers are infallible — they are not. I trust it because the system is designed to find their mistakes. Peer review, replication, falsifiability, primary sources. That beats every influencer hype, every gut-feel politics, every „my truth" podcast format, every time.</p>
+
+  <h2>What that means in practice</h2>
+  <ul>
+    <li><strong>Primary sources before headlines.</strong> If BILD or the NYT writes about a study, read the study.</li>
+    <li><strong>Effect size before p-value.</strong> „Statistically significant" doesn't mean „relevant". A significant 0.3% improvement is usually noise in a suit.</li>
+    <li><strong>Replication before hype.</strong> A single study is a beginning, not proof. The replication crisis in psychology was a wake-up call, not a scandal.</li>
+    <li><strong>Consensus is not vibes.</strong> When 97% of climate research says something and 3% disagree, those aren't two equal sides. That's a consensus with three outliers.</li>
+    <li><strong>Skepticism includes science skepticism.</strong> I don't believe everything a paper says. I believe the process that pulls papers apart and keeps the best.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Two schools that shape my thinking</h2>
+  <p>Psychology is the science I work with most — privately, in relationships, in teams. Two strands, both indispensable, both incomplete without the other.</p>
+
+  <div class="grid-two">
+
+    <div class="branch">
+      <h2>Behavioural psychology</h2>
+      <p>What you do is what you are. Behaviour is measurable, changeable, trainable. Conditioning, reinforcement, heuristics — the tools that actually move the needle.</p>
+
+      <h3>Minds that count</h3>
+      <ul>
+        <li><strong>Ivan Pavlov</strong> — classical conditioning. The dog, the bell, the saliva. The start of everything.</li>
+        <li><strong>B. F. Skinner</strong> — operant conditioning. Reinforcement shapes behaviour. Skinner box, schedules of reinforcement.</li>
+        <li><strong>Albert Bandura</strong> — observational learning. The Bobo doll experiment. Self-efficacy as a concept.</li>
+        <li><strong>Daniel Kahneman</strong> — System 1 and System 2. Cognitive biases as standard equipment for the brain. „Thinking, Fast and Slow" should be required reading.</li>
+        <li><strong>Amos Tversky</strong> — with Kahneman: prospect theory. We aren't rational actors, we are loss-averse with bad statistical intuition.</li>
+      </ul>
+
+      <h3>What I use them for</h3>
+      <ul>
+        <li>Building habits (small triggers, immediate reward).</li>
+        <li>Catching my own biases before they trick me at decision time.</li>
+        <li>Understanding others structurally rather than morally — behaviour follows incentives.</li>
+      </ul>
+    </div>
+
+    <div class="branch">
+      <h2>Depth psychology</h2>
+      <p>What you do has roots you don't see. Unconscious, early imprint, symbols, dreams, transference. Less measurable, often more true.</p>
+
+      <h3>Minds that count</h3>
+      <ul>
+        <li><strong>Sigmund Freud</strong> — the beginning. Much of it is outdated, but the fact that an unconscious exists was a revolution. The super-ego explains more politics than most political science.</li>
+        <li><strong>C. G. Jung</strong> — archetypes, shadow, individuation. The part of yourself you reject rules you most. „What we cannot stand in another can lead us to a better understanding of ourselves."</li>
+        <li><strong>Alfred Adler</strong> — individual psychology. Inferiority feeling and the striving for significance. Sense of community as life goal. Underrated.</li>
+        <li><strong>Viktor Frankl</strong> — logotherapy. Meaning as psychological necessity, not luxury. „Saying yes to life in spite of everything" is depth psychology lived under the most extreme conditions.</li>
+        <li><strong>Erich Fromm</strong> — the bridge to society. „To Have or to Be". What consumer culture does to the psyche.</li>
+      </ul>
+
+      <h3>What I use them for</h3>
+      <ul>
+        <li>Understanding patterns of my own that reinforcement schedules can't explain.</li>
+        <li>Taking dreams seriously without making a religion of them.</li>
+        <li>Seeing the shadow in relationships — mine and other people's.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What both need</h2>
+  <p>Behavioural psychology without depth becomes marketing. „How do I get you to do X?" That's the discipline that built casinos and social-media apps. Powerful, but empty.</p>
+  <p>Depth psychology without method becomes esoterics. „Your star sign explains your mother." Nice to read, hard to test, easy to mistake for truth.</p>
+  <p>Both together — strict method plus the courage to look behind behaviour — actually understands people. And understanding people is the foundation for everything we build here.</p>
+
+  <div class="divider"></div>
+
+  <h2>What we don't do</h2>
+  <ul>
+    <li>We don't call gut feelings „my truth". Gut feeling is a hypothesis, not proof.</li>
+    <li>We don't treat „studies show…" as proof. Which study, which method, what n, what replication.</li>
+    <li>We don't celebrate pseudoscience because it feels good. Homeopathy is water. Astrology is mythology. Both can exist — not as science.</li>
+    <li>We don't get intimidated by „science has been wrong before". Yes, it has. That's why it corrected itself. That's the feature, not the bug.</li>
+  </ul>
+
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophy</a> &middot;
+  <a href="/ethics/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Ethics</a> &middot;
+  <a href="/movement/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Movement</a> &middot;
+  <a href="/mentorship/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>

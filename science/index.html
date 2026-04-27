@@ -18,6 +18,11 @@
   body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
   nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
   main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
   .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
   .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
@@ -48,6 +53,12 @@
 
 <nav>
   <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/science/" class="active">DE</a>
+      <a href="/science/index-en.html">EN</a>
+    </div>
+  </div>
 </nav>
 
 <main>
@@ -65,7 +76,7 @@
     <li><strong>Primärquellen vor Headlines.</strong> Wenn die BILD oder die NYT was über eine Studie schreibt, lies die Studie.</li>
     <li><strong>Effektgröße vor p-Wert.</strong> „Statistisch signifikant" heißt nicht „relevant". Eine signifikante Verbesserung von 0,3% ist meist Lärm in Anzug.</li>
     <li><strong>Replikation vor Hype.</strong> Eine einzelne Studie ist ein Anfang, kein Beweis. Die Replikationskrise in der Psychologie war ein Weckruf, kein Skandal.</li>
-    <li><strong>Konsens ist nicht Stimmungsmache.</strong> Wenn 97% der Klimawissenschaftler etwas sagen und 3% widersprechen, sind das keine zwei gleichberechtigten Seiten. Das ist ein Konsens mit drei Ausreißern.</li>
+    <li><strong>Konsens ist nicht Stimmungsmache.</strong> Wenn 97% der Klimaforschung etwas sagt und 3% widersprechen, sind das keine zwei gleichberechtigten Seiten. Das ist ein Konsens mit drei Ausreißern.</li>
     <li><strong>Skepsis schließt Wissenschaftsskepsis ein.</strong> Ich glaube nicht alles, was ein Paper sagt. Ich glaube dem Prozess, der Papers zerlegt und das Beste übrig lässt.</li>
   </ul>
 
@@ -103,7 +114,7 @@
 
       <h3>Köpfe, die zählen</h3>
       <ul>
-        <li><strong>Sigmund Freud</strong> — der Anfang. Vieles davon ist heute überholt, aber dass es ein Unbewusstes gibt, war eine Revolution. Das Über-Ich erklärt mehr Politik als die meisten Politikwissenschaftler.</li>
+        <li><strong>Sigmund Freud</strong> — der Anfang. Vieles davon ist heute überholt, aber dass es ein Unbewusstes gibt, war eine Revolution. Das Über-Ich erklärt mehr Politik als die meiste Politikwissenschaft.</li>
         <li><strong>C. G. Jung</strong> — Archetypen, Schatten, Individuation. Der Anteil, den du ablehnst, regiert dich am meisten. „Das, was wir am anderen nicht ertragen, kann uns zu einem besseren Verständnis unserer selbst führen."</li>
         <li><strong>Alfred Adler</strong> — Individualpsychologie. Minderwertigkeitsgefühl und Streben nach Bedeutung. Gemeinschaftsgefühl als Lebensziel. Unterschätzt.</li>
         <li><strong>Viktor Frankl</strong> — Logotherapie. Sinn als psychologische Notwendigkeit, nicht als Luxus. „Trotzdem Ja zum Leben sagen" ist gelebte Tiefenpsychologie unter den extremsten Bedingungen.</li>

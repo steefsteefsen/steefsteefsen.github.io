@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="How we behave when no one is watching. Awareness, drug checking, gentleman/lady-conduct, the right of every person to call sexual assault by its name. Blueprint, in motion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --stone: #8c7b6b; --cream: #faf7f2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  .wip { display: inline-block; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--clay); border: 1px solid var(--clay); padding: 0.25rem 0.7rem; border-radius: 999px; margin-bottom: 1.5rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: var(--bark); margin-bottom: 1rem; line-height: 1.2; }
+  .lede { font-size: 1.15rem; color: var(--bark); margin-bottom: 2.5rem; font-style: italic; opacity: 0.85; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: var(--bark); margin-top: 3rem; margin-bottom: 0.8rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 1.8rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.4rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 2.5rem 0; }
+  .pillar { background: rgba(201, 169, 110, 0.06); border-left: 3px solid var(--clay); padding: 1.4rem 1.6rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .pillar h3 { margin-top: 0; }
+  .pillar p:last-child { margin-bottom: 0; }
+  .pillar .draft { font-size: 0.8rem; color: var(--clay); font-style: italic; margin-top: 0.6rem; display: block; }
+  .one-line { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; line-height: 1.4; }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/ethics/">DE</a>
+      <a href="/ethics/index-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="section-label">Ethics</div>
+  <span class="wip">Blueprint · in motion</span>
+  <h1>How we behave when no one is watching</h1>
+  <p class="lede">This page is a blueprint. Ideation on <code>.io</code>. The lines stand — the words, the footnotes, the examples are still growing. If something feels missing or off: <a href="mailto:stefan@huellinghorst.info?subject=Ethics">write to me</a>.</p>
+
+  <h2>The premise</h2>
+  <p>Values that only hold under observation are not values. They're marketing.</p>
+  <p>This section is about what we do when the door is shut, the lights are off, the camera isn't running. In clubs at 4 a.m. In WhatsApp groups. When someone has had too much to drink. When someone says „actually, I didn't want to". When someone saw something and is wondering whether it was really that bad.</p>
+  <p>It was that bad. Say it.</p>
+
+  <blockquote class="one-line" style="font-size:clamp(1.8rem,4.5vw,2.6rem);text-align:center;border-left:none;border-top:2px solid var(--clay);border-bottom:2px solid var(--clay);padding:1.5rem 1rem;margin:3rem 0;">Watch your language.</blockquote>
+  <p style="text-align:center;font-size:0.95rem;margin-top:-1rem;margin-bottom:2.5rem;">Language is behaviour. Anyone who forgets that has no business in the next four pillars.</p>
+
+  <div class="divider"></div>
+
+  <h2>Four pillars (draft)</h2>
+
+  <div class="pillar">
+    <h3>1. Gentleman / lady — re-read</h3>
+    <p>Not the 1950s version. Not opening doors as gender choreography. Rather: <strong>someone who leaves the room better than they entered it.</strong> Someone who looks after others without intruding. Someone who steps back when another person needs the moment. Someone who carries responsibility without seeking a stage for it. Gender-neutral. Class-neutral. Conduct, not etiquette.</p>
+    <span class="draft">Draft — examples and counter-examples to follow.</span>
+  </div>
+
+  <div class="pillar">
+    <h3>2. Awareness</h3>
+    <p>Awareness is not a sign at the club entrance. Awareness is a stance: <strong>I notice what's going on around me, and I'm ready to act.</strong> Not just when it concerns me. Also — and especially — when it concerns someone else who can't act for themselves right now.</p>
+    <p>In practice: keep an eye on your glass. Bring your gaze back to the person who has gone too quiet. Step in when someone is being pressured, instead of looking away.</p>
+    <span class="draft">Draft — links to specific awareness initiatives to follow (Initiative Awareness, Safer Spaces Berlin, …).</span>
+  </div>
+
+  <div class="pillar">
+    <h3>3. Drug checking</h3>
+    <p>People take drugs. That has always been so, will continue to be so, and moralising about it helps no one. What helps: <strong>knowing what's actually in the pill.</strong></p>
+    <p>Drug checking — state-funded, anonymous substance analysis — has been standard practice in Switzerland and Austria for years and saves lives. In Germany there are pilot projects (Berlin since 2023). Our position: <strong>expand it. Nationwide. Low-threshold. Without prosecution.</strong></p>
+    <p>Competence in use beats prohibition of use. Always.</p>
+    <span class="draft">Draft — footnotes on studies (e.g. the Swiss model), current pilot projects, and political demands to follow.</span>
+  </div>
+
+  <div class="pillar">
+    <h3>4. Every person may call sexual assault by its name</h3>
+    <p>Not just the person affected. Not just women. <strong>Everyone.</strong> If you see something that was an assault, say so. If you experience something that was an assault, say so. If someone else can't or won't say it themselves, say it for them — if they want that.</p>
+    <p>The word „assault" is not the problem. The assault is the problem. Whoever flinches more at the word being spoken than at the assault itself has their priorities backwards.</p>
+    <p>Men: this applies particularly to us. We hear things others don't hear. We see behaviour others don't see. Silence is complicity. There is no neutral position.</p>
+    <span class="draft">Draft — links to helplines, support services, and awareness training to follow.</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What we don't do</h2>
+  <ul>
+    <li>We don't turn this into a dry-run seminar. Nobody learns conduct from PowerPoint.</li>
+    <li>We don't perform our awareness for likes. Quiet work beats loud posts.</li>
+    <li>We don't condemn people who made mistakes and want to change. We condemn people who make mistakes and keep doing it.</li>
+    <li>We don't confuse consent with „didn't say no". Consent is enthusiastic, voluntary, withdrawable at any time.</li>
+  </ul>
+
+  <h2>What we do</h2>
+  <ul>
+    <li>We talk beforehand. With friends, partners, tribe members. Before the situation, not just after.</li>
+    <li>We give awareness teams money when we attend their events. They mostly work for free.</li>
+    <li>We test our substances if we take them. And we respect those who don't, just as much.</li>
+    <li>We call things by their name — even when it's uncomfortable. Especially then.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <blockquote class="one-line">Values that only hold under observation are marketing.</blockquote>
+
+  <p style="margin-top:2rem;font-size:0.9rem;">
+    This blueprint isn't finished. It's the invitation to keep thinking — and to build with us.
+    <a href="mailto:stefan@huellinghorst.info?subject=Ethics">Contribute</a>.
+  </p>
+
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophy</a> &middot;
+  <a href="/science/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Science</a> &middot;
+  <a href="/movement/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Movement</a> &middot;
+  <a href="/mentorship/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>
