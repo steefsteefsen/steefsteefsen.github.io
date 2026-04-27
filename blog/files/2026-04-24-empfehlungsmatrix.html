@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Authenticator-App Empfehlungsmatrix 2026 — Stefan-Olav Hüllinghorst</title>
-<meta name="description" content="Vergleich von 22 2FA-/TOTP-/Passkey-Authenticator-Apps — bewertet nach Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor dem Nutzer. Stand April 2026.">
+<meta name="description" content="Vergleich von 22 2FA-/TOTP-/Passkey-Authenticator-Apps — bewertet nach Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor den Nutzenden. Stand April 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -341,7 +341,7 @@
 
 <section>
   <h2>Methodik und Prioritäten</h2>
-  <p>Jede App wurde bewertet nach <strong>Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor dem Nutzer</strong> — in dieser Reihenfolge. Open-Source ist stark bevorzugt, und nur reife, gepflegte, reputable Projekte schaffen es in die erste Reihe. Plattform-Abdeckung wiegt schwer, weil ein Linux-Desktop-Client seit dem Authy-Aus im August 2024 ein echtes Problem ist. Self-hostbare oder dateibasierte Synchronisation kompatibel mit Nextcloud/WebDAV bekommt Bonuspunkte.</p>
+  <p>Jede App wurde bewertet nach <strong>Zuverlässigkeit, Sicherheit, Privatsphäre und Respekt vor den Nutzenden</strong> — in dieser Reihenfolge. Open-Source ist stark bevorzugt, und nur reife, gepflegte, reputable Projekte schaffen es in die erste Reihe. Plattform-Abdeckung wiegt schwer, weil ein Linux-Desktop-Client seit dem Authy-Aus im August 2024 ein echtes Problem ist. Self-hostbare oder dateibasierte Synchronisation kompatibel mit Nextcloud/WebDAV bekommt Bonuspunkte.</p>
   <p>Vier Entscheidungsachsen leiten die Empfehlungen: (1) funktioniert die App nativ auf Linux Mint, (2) lassen sich Backups auf eine selbst gehostete Nextcloud auf einem Raspberry&nbsp;Pi 5 legen, (3) ist sie unabhängig auditiert, und (4) respektiert sie echte Zwei-Faktor-Trennung — d.h. hebelt das Speichern von TOTP-Seeds im selben Tresor wie Passwörter nicht den ganzen Zweck aus?</p>
   <div class="legend">
     <span><strong class="yes">✓</strong> unterstützt</span>
@@ -903,12 +903,12 @@
 
   <details>
     <summary>Bitwarden Built-in TOTP (im Passwort-Vault)</summary>
-    <p>Free-Nutzer können TOTP-Seeds speichern; das Generieren des 6-stelligen Codes braucht Premium ($10/J) oder einen Families/Teams/Enterprise-Plan<sup class="fn"><a href="#fn26">26</a></sup>. Läuft auf jedem Bitwarden-Client inkl. Linux-Desktop, Browser-Extension und CLI. Zero-Knowledge-E2EE-Sync — mit Vaultwarden auf dem Pi 5 voll self-hosted. Bitwarden hat 2024 Passkey-Storage und am 4. März 2026 Windows-11-Passkey-Login (Entra-ID-Devices) hinzugefügt<sup class="fn"><a href="#fn27">27</a></sup>. Jährliche Cure53-Audits. Die <strong>einzige relevante Sorge</strong> ist die Single-Vault-Kritik: wer den Vault kompromittiert, hat beide Faktoren. Den Bitwarden-Account selbst mit einem <em>separaten</em> Faktor schützen — ein YubiKey oder ein TOTP-Seed außerhalb von Bitwarden.</p>
+    <p>Free-Nutzende können TOTP-Seeds speichern; das Generieren des 6-stelligen Codes braucht Premium ($10/J) oder einen Families/Teams/Enterprise-Plan<sup class="fn"><a href="#fn26">26</a></sup>. Läuft auf jedem Bitwarden-Client inkl. Linux-Desktop, Browser-Extension und CLI. Zero-Knowledge-E2EE-Sync — mit Vaultwarden auf dem Pi 5 voll self-hosted. Bitwarden hat 2024 Passkey-Storage und am 4. März 2026 Windows-11-Passkey-Login (Entra-ID-Devices) hinzugefügt<sup class="fn"><a href="#fn27">27</a></sup>. Jährliche Cure53-Audits. Die <strong>einzige relevante Sorge</strong> ist die Single-Vault-Kritik: wer den Vault kompromittiert, hat beide Faktoren. Den Bitwarden-Account selbst mit einem <em>separaten</em> Faktor schützen — ein YubiKey oder ein TOTP-Seed außerhalb von Bitwarden.</p>
   </details>
 
   <details>
     <summary>1Password Built-in TOTP</summary>
-    <p>Poliert, aber Closed-Source, Paid-only und Cloud-only seit dem Ende lokaler Vaults. Best-in-Class-Passkey-Implementierung — Nick Steele ist Co-Chair einer FIDO-Alliance-Working-Group, und 1Password ist einer der treibenden Autoren des Credential-Exchange-Format (CXF/CXP)<sup class="fn"><a href="#fn28">28</a></sup>. Aber: kein Linux-Passkey-Unlock, kein Self-Host, kein Free Tier, Closed-Source — drei Disqualifikationen für dieses Nutzerprofil.</p>
+    <p>Poliert, aber Closed-Source, Paid-only und Cloud-only seit dem Ende lokaler Vaults. Best-in-Class-Passkey-Implementierung — Nick Steele ist Co-Chair einer FIDO-Alliance-Working-Group, und 1Password gehört zu den treibenden Kräften hinter dem Credential-Exchange-Format (CXF/CXP)<sup class="fn"><a href="#fn28">28</a></sup>. Aber: kein Linux-Passkey-Unlock, kein Self-Host, kein Free Tier, Closed-Source — drei Disqualifikationen für dieses Nutzerprofil.</p>
   </details>
 
   <details>
@@ -918,7 +918,7 @@
 
   <details>
     <summary>Microsoft Authenticator</summary>
-    <p>Die Passwort-Manager-Funktion wurde Juni–August 2025 in drei Stufen abgekündigt (keine neuen Passwörter ab Juni, Autofill aus ab Juli, Passwörter weg ab August)<sup class="fn"><a href="#fn29">29</a></sup>; Nutzer wurden zu Microsoft Edge migriert. Der MFA-Teil — TOTP, Push, Passkeys — bleibt. Entra ID rollt im März 2026 synchronisierte Passkeys auf GA aus (Message Center MC1221452)<sup class="fn"><a href="#fn30">30</a></sup>. Kein Linux-Desktop. Closed-Source.</p>
+    <p>Die Passwort-Manager-Funktion wurde Juni–August 2025 in drei Stufen abgekündigt (keine neuen Passwörter ab Juni, Autofill aus ab Juli, Passwörter weg ab August)<sup class="fn"><a href="#fn29">29</a></sup>; Nutzende wurden zu Microsoft Edge migriert. Der MFA-Teil — TOTP, Push, Passkeys — bleibt. Entra ID rollt im März 2026 synchronisierte Passkeys auf GA aus (Message Center MC1221452)<sup class="fn"><a href="#fn30">30</a></sup>. Kein Linux-Desktop. Closed-Source.</p>
   </details>
 
   <details>
@@ -933,7 +933,7 @@
 
   <details>
     <summary>Authy (mobil) <span class="pill bad">avoid</span></summary>
-    <p>Desktop-Apps für Windows, macOS und Linux erreichten End-of-Life am 19. März 2024<sup class="fn"><a href="#fn33">33</a></sup> — Nutzer ohne Mobile-Sync verloren Tokens. Ende Juni 2024 postete ShinyHunters auf BreachForums ein Dataset mit exakt 33.420.546 Authy-Telefonnummern, erbeutet über einen unauthentifizierten API-Endpunkt<sup class="fn"><a href="#fn34">34</a></sup>; Twilio bestätigte den Leak am 3. Juli 2024<sup class="fn"><a href="#fn35">35</a></sup>. Authys fehlende echte Export-Funktion machte Migration brutal. Mobile-App funktioniert 2026 noch, wird aber von Privacy Guides und den meisten Security-Outlets nicht mehr empfohlen.</p>
+    <p>Desktop-Apps für Windows, macOS und Linux erreichten End-of-Life am 19. März 2024<sup class="fn"><a href="#fn33">33</a></sup> — Nutzende ohne Mobile-Sync verloren Tokens. Ende Juni 2024 postete ShinyHunters auf BreachForums ein Dataset mit exakt 33.420.546 Authy-Telefonnummern, erbeutet über einen unauthentifizierten API-Endpunkt<sup class="fn"><a href="#fn34">34</a></sup>; Twilio bestätigte den Leak am 3. Juli 2024<sup class="fn"><a href="#fn35">35</a></sup>. Authys fehlende echte Export-Funktion machte Migration brutal. Mobile-App funktioniert 2026 noch, wird aber von Privacy Guides und den meisten Security-Outlets nicht mehr empfohlen.</p>
   </details>
 
   <details>
@@ -943,7 +943,7 @@
 
   <details>
     <summary>Raivo OTP <span class="pill bad">avoid (Vertrauen)</span></summary>
-    <p>Im Juli 2023 an Mobime verkauft, via Twitter/X angekündigt<sup class="fn"><a href="#fn38">38</a></sup>. Privacy Guides hat es in v3.14 am 27. Juli 2023 delistet<sup class="fn"><a href="#fn39">39</a></sup>. Unter dem neuen Besitzer wurden Spenden-Prompt-Frequenz-Probleme und Master-Key-Recovery-Regressionen eingeräumt<sup class="fn"><a href="#fn40">40</a></sup>. Code ist noch öffentlich, aber Vertrauen ist erodiert — bestehende Nutzer sollten Exports zu Ente Auth oder KeePassium migrieren.</p>
+    <p>Im Juli 2023 an Mobime verkauft, via Twitter/X angekündigt<sup class="fn"><a href="#fn38">38</a></sup>. Privacy Guides hat es in v3.14 am 27. Juli 2023 delistet<sup class="fn"><a href="#fn39">39</a></sup>. Unter dem neuen Besitzer wurden Spenden-Prompt-Frequenz-Probleme und Master-Key-Recovery-Regressionen eingeräumt<sup class="fn"><a href="#fn40">40</a></sup>. Code ist noch öffentlich, aber Vertrauen ist erodiert — bestehende Nutzende sollten Exports zu Ente Auth oder KeePassium migrieren.</p>
   </details>
 
   <details>
@@ -953,7 +953,7 @@
 
   <details>
     <summary>Tofu (iOS) <span class="pill bad">stale</span></summary>
-    <p>ISC-Lizenz, iOS-only. Kein App-Level-Biometric/Passcode-Lock (Issue #27 offen seit 2019)<sup class="fn"><a href="#fn42">42</a></sup>. Kein Bulk-Import. Letzter sinnvoller App-Store-Release v1.11 vom Oktober 2021; GitHub-Aktivität mit Security-Commits bis Juni 2024, dann ruhig<sup class="fn"><a href="#fn43">43</a></sup>. Für iOS-Nutzer mit Sync-Wunsch von Ente Auth abgelöst.</p>
+    <p>ISC-Lizenz, iOS-only. Kein App-Level-Biometric/Passcode-Lock (Issue #27 offen seit 2019)<sup class="fn"><a href="#fn42">42</a></sup>. Kein Bulk-Import. Letzter sinnvoller App-Store-Release v1.11 vom Oktober 2021; GitHub-Aktivität mit Security-Commits bis Juni 2024, dann ruhig<sup class="fn"><a href="#fn43">43</a></sup>. Für iOS-Nutzende mit Sync-Wunsch von Ente Auth abgelöst.</p>
   </details>
 
 </section>
@@ -976,7 +976,7 @@
 
 <section>
   <h2>Key Takeaways</h2>
-  <p>Der Authy-Kollaps 2024 und der anhaltende LastPass-Fallout haben den Markt klargestellt: 2026 lohnen sich nur Authenticator-Apps, die <strong>Open Source, auditiert, exportierbar und entweder dateibasiert oder echt E2EE</strong> sind. Ente Auth ist der Konsens-Default; Proton Authenticator ist ein starker neuerer Konkurrent; die KeePassXC-Familie ist die puristische self-hosted Antwort; und Bitwarden Authenticator ist die reibungsärmste Wahl für bestehende Bitwarden-Nutzer — solange TOTP-Sync aus bleibt, um echte Zwei-Faktor-Trennung zu erhalten. Die Closed-Source-Platzhirsche — Google, Microsoft, Duo, Authy, LastPass — sind entweder kein Linux, kein E2EE, kein Export oder tragen ungelösten Vertrauensballast, und keiner davon sollte erste Wahl sein.</p>
+  <p>Der Authy-Kollaps 2024 und der anhaltende LastPass-Fallout haben den Markt klargestellt: 2026 lohnen sich nur Authenticator-Apps, die <strong>Open Source, auditiert, exportierbar und entweder dateibasiert oder echt E2EE</strong> sind. Ente Auth ist der Konsens-Default; Proton Authenticator ist ein starker neuerer Konkurrent; die KeePassXC-Familie ist die puristische self-hosted Antwort; und Bitwarden Authenticator ist die reibungsärmste Wahl für bestehende Bitwarden-Nutzende — solange TOTP-Sync aus bleibt, um echte Zwei-Faktor-Trennung zu erhalten. Die Closed-Source-Platzhirsche — Google, Microsoft, Duo, Authy, LastPass — sind entweder kein Linux, kein E2EE, kein Export oder tragen ungelösten Vertrauensballast, und keiner davon sollte erste Wahl sein.</p>
 </section>
 
 <section class="footnotes">

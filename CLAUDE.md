@@ -216,41 +216,67 @@ Headless screenshots are still useful as a *sanity check before handing
 off* (e.g. "I rendered it once headless to confirm it loads"), but they
 do not replace the human review.
 
-## Gender-inclusive language (German, hard requirement)
+## Gender-inclusive language (German, hard requirement) — Neutrum first
 
-All German-language content on the site uses **gender-inclusive language**.
-Default to **neutrum or collective forms** before reaching for binary
-constructs or Gender-Stern/Doppelpunkt.
+All German-language content on the site uses **gender-inclusive language**,
+**Neutrum or collective forms first**, before any other strategy.
 
-Preferred patterns (in order):
+Preferred patterns, in strict order:
 
-1. **Neutrum / abstract noun**: "der kleine Mann" → "das einfache Leben",
-   "der Bürger" → "die Bevölkerung", "der Wähler" → "die Wählerschaft" or
-   "wer wählt".
-2. **Plural and collective forms**: "die Pflegekraft" stays, "die Pflegenden"
-   for plural. "Aktivisten" → "Aktive" or "Menschen, die sich engagieren".
-3. **Personalize via verb**: "Anyone who…" / "Wer …" instead of a gendered
-   noun. "Wer um 5 Uhr im Pflegeheim steht" rather than "Der Pfleger,
-   der um 5 Uhr im Pflegeheim steht".
-4. **Doppelpunkt only as last resort**: "Bürger:innen" — only when neutrum
-   and "wer …" don't fit cleanly. Do not use Gender-Stern (`*`).
+1. **Neutrum / abstract noun first.** This is the default move. "der kleine
+   Mann" → "das einfache Leben". "der Bürger" → "die Bevölkerung". "der
+   Wähler" → "die Wählerschaft". "der Künstler" → "die Kunstszene".
+   "der Forscher" → "die Forschung" oder, wenn Personen gemeint sind,
+   substantiviertes Partizip: "Forschende".
+2. **Substantiviertes Partizip / Adjektiv (kollektive Personenform).**
+   "Studenten" → "Studierende". "Mitarbeiter" → "Mitarbeitende". "Nutzer"
+   → "Nutzende". "Wissenschaftler" → "Forschende". "Aktivisten" →
+   "Aktive". This is the second-best move and works in most cases.
+3. **Plural / Kollektivum.** "die Pflegekraft" stays singular; for plural
+   "die Pflegenden". "die Kunden" → "die Kundschaft". Use when the abstract
+   noun (1) doesn't fit and substantiviertes Partizip (2) reads stiff.
+4. **Verb-based personalization with "wer …".** "Wer um 5 Uhr im Pflegeheim
+   steht" rather than "Der Pfleger, der …". Use when a sentence is built
+   around a single hypothetical actor.
+5. **Doppelpunkt only as last resort.** "Bürger:innen" — only if 1–4
+   genuinely don't work. Never use Gender-Stern (`*`).
 
-For pronouns referring to a previously introduced subject:
-- After "das einfache Leben" / "die Bevölkerung" → "es" / "sie".
-- After a "wer …" clause → "wer das tut, …" or restructure.
-- Never default to "er" alone for a generic person.
+Pronoun rules following these subjects:
+- After "das einfache Leben" / "die Bevölkerung" / "die Forschung" → "es" / "sie".
+- After "die Forschenden" / "die Studierenden" → "sie" (plural).
+- After a "wer …" clause → re-use "wer das tut, …" or restructure;
+  do not switch to "er".
+- Never default to "er" / "ihn" / "ihm" for a generic role.
 
-Avoid:
+Hard "do not"s:
 - Generic-masculine nouns ("der Bürger", "der Mensch im Land") as the
   default subject of a sentence.
 - "Er" / "ihn" when the antecedent is a generic role rather than a named
   person.
 - Colloquial "kriegt" — write "bekommt".
 
+Exceptions (do NOT rewrite):
+- **Quotes from named people** (blockquotes, footnoted citations) — their
+  words stay verbatim.
+- **Concrete named individuals** referred to with the correct grammatical
+  gender (e.g. "Pasadakis ist Lecturer und Postdoc" — Pasadakis is a
+  specific man, this is not generic-masculine).
+- **Stefan's first-person self-description** ("Ich bin ein Macher") — it's
+  a self-statement, not a generic claim.
+
 This applies to: index.html, blog posts (DE), pillar pages (movement/,
-science/, ethics/, mentorship/, tribe/), idol cards, footnotes, hero
-copy. EN content follows standard inclusive-English conventions
-(singular "they", avoid "mankind", etc.).
+science/, ethics/, mentorship/, tribe/, philosophy/), idol cards,
+footnotes, hero copy, all i18n.js DE entries. EN content follows
+standard inclusive-English conventions (singular "they", avoid "mankind",
+etc.) — no special German rules apply.
+
+When generating new DE copy, always run a final scan with patterns like:
+```
+\b(der|dem|den) (Bürger|Wähler|Mitarbeiter|Pfleger|Lehrer|Künstler|Forscher|Entwickler|Gründer|Politiker|Aktivist|Sportler|Kunde|Nutzer|Leser)\b
+\bAktivisten|Mitarbeiter|Wähler|Studenten|Anwender|Kunden|Wissenschaftler|Bürger\b
+\bkriegt\b
+```
+If any hit, route through patterns 1→5 above before shipping.
 
 ## Source-citation rule (hard requirement)
 
