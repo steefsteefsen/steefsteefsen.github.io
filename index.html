@@ -1712,6 +1712,20 @@
         </div>
       </div>
     </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127908;</span>
+      <h3>Dimosthenis Pasadakis</h3>
+      <p data-i18n="idol_pasadakis_p">WG-Mitbewohner in der Bülowstraße in Berlin während seines Erasmus. Heute Lecturer und Postdoc an der USI Lugano, Graph-Learning-Forscher und COO bei Panua Technologies — und immer noch DJ. Hat auf meinem 30. aufgelegt, soll auf meinem 40. wieder.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="margin-top:1rem;border-radius:6px;overflow:hidden;">
+          <iframe height="300" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/dmskmn&color=%235a6e4a&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" title="dmskmn on SoundCloud" style="width:100%;border:0;display:block;"></iframe>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── Philosophy & Thought ── -->
@@ -2138,20 +2152,6 @@
       <div x-collapse x-show="open">
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
           <iframe src="https://www.youtube-nocookie.com/embed/ZA3sNM1vPIg?controls=0" title="Gregor Gysi — Rede des Jahres, Bundestag 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="value-card" x-data="{open:false}">
-      <span class="icon">&#129412;</span>
-      <h3>Peer Adelt</h3>
-      <p data-i18n="idol_adelt_p">Wie Megaloh ein integerer Mensch — nur ganz anders. Hier soll Jim Jarmusch oder Fatih Akın mal eine Geschichte erzählen. Oder Ariane Kareev.</p>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
-          <iframe src="https://www.youtube-nocookie.com/embed/OVUwHv43HqM?controls=0" title="Das Leben des Brian — Steinigung (HQ)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
       </div>
     </div>

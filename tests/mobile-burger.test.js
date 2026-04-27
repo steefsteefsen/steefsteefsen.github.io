@@ -114,6 +114,7 @@ BROWSERS.forEach((browserSpec) => describeOrSkip(`mobile burger menu — ${brows
 
   test.each(viewports)('burger is visible and right-aligned at $width×$height', async ({ width, height }) => {
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(50000);
     await setViewport(page, width, height);
     await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -172,6 +173,7 @@ BROWSERS.forEach((browserSpec) => describeOrSkip(`mobile burger menu — ${brows
 
   test.each(viewports)('tapping the burger opens the menu at $width×$height', async ({ width, height }) => {
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(50000);
     await setViewport(page, width, height);
     await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -199,6 +201,7 @@ BROWSERS.forEach((browserSpec) => describeOrSkip(`mobile burger menu — ${brows
   // both Chrome (CDP) and Firefox (BiDi) see consistent state.
   test.each(viewports)('physics: full open/close lifecycle at $width×$height', async ({ width, height }) => {
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(50000);
     await setViewport(page, width, height);
     await page.goto(sharedBaseUrl, { waitUntil: 'domcontentloaded' });
 

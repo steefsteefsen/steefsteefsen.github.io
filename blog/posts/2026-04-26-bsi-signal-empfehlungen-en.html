@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Germany's cyber-security agency recommends Signal — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Germany's federal cyber-security agency just published a guide for Signal users targeted by state-sponsored attackers. The same government that recommends end-to-end encryption is negotiating to break it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8; --clay: #c9a96e; --bark: #3d2b1f;
+    --moss: #5a6e4a; --moss-light: #7a9463; --stone: #8c7b6b;
+    --cream: #faf7f2; --earth: #6b4f3a;
+    --shadow: rgba(61, 43, 31, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body ul { margin: 0 0 1.5rem 1.5rem; padding: 0; }
+  .post-body li { margin-bottom: 0.4rem; }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  .sources { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.2); font-size: 0.85rem; line-height: 1.7; }
+  .sources h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.8rem; }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.4rem; }
+  .sources a { color: var(--moss); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-26-bsi-signal-empfehlungen.html">DE</a>
+      <a href="/blog/posts/2026-04-26-bsi-signal-empfehlungen-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">26 April 2026</p>
+  <h1>When Germany's cyber-security agency recommends Signal</h1>
+
+  <div class="post-body">
+    <p>
+      In February 2026, the <strong>German Federal Office for Information Security (BSI)</strong>, jointly with the domestic intelligence service (BfV), published an advisory: <em>recommendations for Signal users targeted by a "likely state-sponsored cyber actor."</em><sup class="fn">1</sup> Audience: politicians, military, diplomats, investigative journalists.
+    </p>
+
+    <p>
+      Read that again. A federal German agency is explicitly recommending Signal — an open-source messenger with end-to-end encryption designed so that <strong>not even the operator can read the messages</strong> — to its own at-risk citizens. In writing. On bsi.bund.de.
+    </p>
+
+    <h2>The punchline</h2>
+
+    <p>
+      The same German government that recommends Signal as protection has been negotiating <em>Chat Control</em> at the EU level for years — a regulation that would force providers like Signal to scan private messages before encryption.<sup class="fn">2</sup> Client-side scanning. A backdoor by another name. Signal has stated repeatedly that they would leave the European market rather than break their security model.<sup class="fn">3</sup>
+    </p>
+
+    <p>
+      The BSI, meanwhile, writes: change your PIN, enable registration lock, use disappearing messages, hide your phone number. The tools the BSI recommends to at-risk groups are <strong>exactly the tools Chat Control would render useless</strong>.
+    </p>
+
+    <p>
+      One arm of government recommends what the other arm wants to dismantle.
+    </p>
+
+    <h2>What the advisory actually says</h2>
+
+    <p>
+      Three scenarios, scaled by damage:
+    </p>
+
+    <p>
+      <strong>If someone sent you a verification code but you didn't enter it:</strong> block and report the contact, enable registration lock or 2FA.<sup class="fn">1</sup>
+    </p>
+
+    <p>
+      <strong>If you entered the code but still have account access:</strong> change your Signal PIN immediately, delete the account (not the app), re-register with a new PIN, consider a new phone number, enable registration lock, hide the phone number on your profile, turn on disappearing messages.<sup class="fn">1</sup>
+    </p>
+
+    <p>
+      <strong>If you've lost account access:</strong> set a new PIN, warn contacts via a different channel, remove deleted accounts from your groups, recreate groups if needed, get a new number and account, request deletion of the old account via Signal Support.<sup class="fn">1</sup>
+    </p>
+
+    <h2>What this means in practice</h2>
+
+    <p>
+      The recommendations are technically sound. Anyone connected — even peripherally — to investigative work, activism, whistleblowing, opposition politics, or anything else that displeases someone with money and intelligence-service access should apply them <em>now</em>, not after something happens:
+    </p>
+
+    <ul>
+      <li><strong>Set a Signal PIN</strong>, if you haven't. One that isn't recoverable from the password-manager backup of another service.</li>
+      <li><strong>Enable registration lock</strong> — prevents anyone from registering a new Signal account on your phone number without your PIN.</li>
+      <li><strong>Hide your phone number</strong> on your Signal profile.</li>
+      <li><strong>Disappearing messages</strong> as default for sensitive chats.</li>
+      <li><strong>Use a username</strong> instead of your phone number for first contact — Signal rolled this out in 2024.<sup class="fn">4</sup></li>
+    </ul>
+
+    <h2>Why this is also political</h2>
+
+    <p>
+      The fact that the BSI has to write this advisory at all is an <em>admission</em>: the threat from state-sponsored cyber actors against the country's own population is real, documented, and the protective tool is <em>encryption</em>. The exact encryption that other agencies — through Chat Control, government trojans, mandatory access laws — would like to weaken.
+    </p>
+
+    <p>
+      A government that wants to protect encryption <em>for its citizens</em>, rather than break it for its own intelligence operations, writes documents like the BSI advisory. A government that wants to <em>break</em> encryption for its operations writes regulations like Chat Control. You can't have both. There is no backdoor that only the good guys use.<sup class="fn">5</sup>
+    </p>
+
+    <p>
+      The BSI is right on this. Follow the advisory. And the next time you read about Chat Control negotiations at an EU interior ministers' meeting, remember where the pressure on Signal comes from — and that the BSI itself does not recommend a single workaround that doesn't rely on strong encryption.
+    </p>
+  </div>
+
+  <section class="sources">
+    <h2>Sources</h2>
+    <ol>
+      <li id="fn1">BSI &amp; BfV: <em>Phishing via Signal: Recommendations for those affected and at-risk groups</em> (in German). Published February 2026. <a href="https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Signal-Support/signal-support_node.html" target="_blank" rel="noopener">bsi.bund.de</a></li>
+      <li id="fn2">European Commission: <em>Regulation laying down rules to prevent and combat child sexual abuse</em> (CSAR / "Chat Control"), proposed 2022, ongoing negotiations. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52022PC0209" target="_blank" rel="noopener">eur-lex.europa.eu</a></li>
+      <li id="fn3">Meredith Whittaker (Signal President), public position on Chat Control: <a href="https://signal.org/blog/pdfs/cda-letter.pdf" target="_blank" rel="noopener">Signal Letter on Encryption</a>. Further statements via the official Signal blog. <a href="https://signal.org/blog/" target="_blank" rel="noopener">signal.org/blog</a></li>
+      <li id="fn4">Signal Foundation: <em>Phone Numbers, Privacy, and the Future of Signal</em> (2024). <a href="https://signal.org/blog/phone-number-privacy-usernames/" target="_blank" rel="noopener">signal.org/blog/phone-number-privacy-usernames</a></li>
+      <li id="fn5">Bruce Schneier et al.: <em>Keys Under Doormats: Mandating insecurity by requiring government access to all data and communications</em> (MIT CSAIL, 2015) — the standard reference on whether secure backdoors are technically possible. <a href="https://dspace.mit.edu/handle/1721.1/97690" target="_blank" rel="noopener">dspace.mit.edu/handle/1721.1/97690</a></li>
+    </ol>
+  </section>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← Back to blog</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Home</a>
+</footer>
+
+</body>
+</html>

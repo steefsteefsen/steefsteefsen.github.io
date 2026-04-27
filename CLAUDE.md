@@ -72,6 +72,12 @@ Blog posts support DE + EN. Each post is two HTML files (one per language) plus 
 5. Regenerate feeds: `node generate-feed.js` (writes `feed.xml` and `feed-en.xml`).
 6. If the post makes factual claims about software status (releases, audits, maintenance), verify each against the project's GitHub releases/commits before publishing.
 
+**Drafts and scheduled posts** go in `blog/planned/` instead of `blog/posts/`.
+Files there are pushed with the repo (so multiple machines see the same draft)
+but stay invisible publicly: not in `posts.json`, not in the feeds, not linked
+from the blog index. To release one, move both language files to `blog/posts/`
+and follow the steps above.
+
 ### Adding a new idol card
 - Place `<div class="value-card" x-data="{open:false}">` inside `#idols .values-grid`.
 - Include: icon, h3, short paragraph, optional blockquote, `card-more-btn` button, `x-collapse x-show="open"` div with video embed or placeholder.
@@ -189,6 +195,55 @@ npx purgecss --css index.html --content index.html
 # Accessibility audit (axe-cli)
 npx axe http://localhost:8080 --exit
 ```
+
+## "Review" means Stefan reviews — start the local server
+
+When Stefan says **"review"** (e.g. "ich reviewe", "lass mich reviewen",
+"warte mit Push, ich reviewe"), he means *he* will look at the site
+himself in his browser. The human is the reviewer, not Claude. Claude's
+visual judgment caps at maybe 95% of what a human catches; the rest is
+context, taste, and the Mendix-instinct that Stefan brings.
+
+What to do when Stefan says "review":
+1. Make sure `python3 -m http.server 8080` is running in the background
+   (start it if not — check first with `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/`).
+2. List the URLs Stefan should open, including DE/EN variants if the
+   change has both.
+3. Wait. Don't push, don't keep editing, don't pre-empt. He'll come back
+   with feedback or with "OK push".
+
+Headless screenshots are still useful as a *sanity check before handing
+off* (e.g. "I rendered it once headless to confirm it loads"), but they
+do not replace the human review.
+
+## Source-citation rule (hard requirement)
+
+**Every factual claim on the site or in a blog post must have a source citation.**
+This includes — but is not limited to — statements about people, organizations,
+events, statistics, software status, legal frameworks, government recommendations,
+historical claims, and quotes.
+
+How to cite:
+- **In the page**: footnote `<sup class="fn">N</sup>` plus a `<li>` entry in the
+  `<section class="footnotes">` with title, publisher, and URL.
+- **In a blog post**: inline link via `<a href="..." rel="noopener" target="_blank">`
+  to the primary source. Prefer the original (publisher's site, official PDF,
+  GitHub release page) over secondary aggregators.
+- **For quotes**: include the speaker, the work or context, and a link if the
+  quote is verifiable online.
+- **For software status, audits, releases**: link the GitHub release tag or
+  the commit, not a third-party blog summarizing it.
+
+If you cannot find a primary source, do not make the claim — soften the
+language ("often described as", "according to X"), add a clear caveat, or
+omit the line. Never fabricate a source. Never paraphrase a fact you cannot
+verify into something that sounds confident.
+
+This rule applies to Claude when generating content too: do not write a
+"sounds plausible" sentence about a real person, organization, or event
+without an attached link to where you got it. If a draft has facts without
+sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
+silently shipping unsourced text.
 
 ## Known architectural decisions
 - No build step — all CSS and JS is inline in `index.html` to keep the deploy as a single file with no asset pipeline.

@@ -1,17 +1,17 @@
 [
   {
-    "slug": "2026-04-26-zitate-burger-adelt",
+    "slug": "2026-04-26-bsi-signal-empfehlungen",
     "date": "2026-04-26",
     "translations": {
       "de": {
-        "slug": "2026-04-26-zitate-burger-adelt",
-        "title": "Zitate, Burger, Adelt",
-        "teaser": "Zwei neue Zitate in der Hero-Section, ein Burger-Fix für Firefox und Safari Mobile, und Peer Adelt in den Idols."
+        "slug": "2026-04-26-bsi-signal-empfehlungen",
+        "title": "Wenn das BSI Signal empfiehlt",
+        "teaser": "Das BSI empfiehlt Risikogruppen Ende-zu-Ende-Verschlüsselung — während dieselbe Regierung auf EU-Ebene über Chatkontrolle verhandelt. Über die Ironie, wenn ein Arm des Staats genau das schützt, was der andere zerlegen will."
       },
       "en": {
-        "slug": "2026-04-26-zitate-burger-adelt-en",
-        "title": "quotes, burger, adelt",
-        "teaser": "Two new quotes in the hero, a hamburger menu fix for Firefox and Safari Mobile, and Peer Adelt in the idols section."
+        "slug": "2026-04-26-bsi-signal-empfehlungen-en",
+        "title": "When Germany's cyber-security agency recommends Signal",
+        "teaser": "Germany's BSI recommends end-to-end encryption to at-risk groups — while the same government negotiates Chat Control at the EU level. On the irony of one arm of the state protecting exactly what the other arm wants to dismantle."
       }
     }
   },

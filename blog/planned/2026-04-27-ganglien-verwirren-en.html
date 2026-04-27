@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Everyone has someone to feed — Stefan-Olav Hüllinghorst</title>
-<meta name="description" content="A call to police and activists alike: stay peaceful, stay respectful. On both sides of every line stands a person who has someone to feed.">
+<title>Confusing the ganglia — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="I'm quitting smoking. Instead, I'm teaching myself Arch Linux. On addiction-substitution as a strategy — and why a pacman command can feel as satisfying as a cigarette. Beta test for a platform concept.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -39,9 +39,7 @@
   .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
   .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
   .post-body a:hover { color: var(--bark); border-color: var(--bark); }
-  figure.embed { margin: 2.5rem 0; }
-  figure.embed iframe { width: 100%; border: none; border-radius: 6px; box-shadow: 0 2px 12px var(--shadow); }
-  figure.embed figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--stone); font-style: italic; text-align: center; }
+  .post-body code { font-family: 'Jost', monospace; background: rgba(201, 169, 110, 0.12); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.92em; color: var(--earth); }
   .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
   .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
   .post-nav a:hover { color: var(--bark); }
@@ -55,105 +53,102 @@
   <a href="/" class="logo">S.O. Hüllinghorst</a>
   <div class="nav-right">
     <div class="lang-toggle" role="group" aria-label="Sprache / Language">
-      <a href="/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern.html">DE</a>
-      <a href="/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern-en.html" class="active">EN</a>
+      <a href="/blog/posts/2026-04-27-ganglien-verwirren.html">DE</a>
+      <a href="/blog/posts/2026-04-27-ganglien-verwirren-en.html" class="active">EN</a>
     </div>
     <a href="/blog/?lang=en" class="back-link">← Blog</a>
   </div>
 </nav>
 
 <main>
-  <p class="post-meta">April 25, 2026</p>
-  <h1>Everyone has someone to feed</h1>
+  <p class="post-meta">27 April 2026</p>
+  <h1>Confusing the ganglia</h1>
 
   <div class="post-body">
     <p>
-      Short and clear. A call, now — to anyone who will be in the streets in the coming days. Police and activists. Left and right. Inside and outside.
+      I'm quitting smoking. As of today. The occasional drink goes too. And — this is the point — I'm teaching myself <strong>Arch Linux</strong> instead.
     </p>
 
     <p>
-      <strong>Stay peaceful. Stay respectful.</strong>
+      Not as a reward. As <em>cover</em>.
+    </p>
+
+    <h2>Addiction doesn't go away. It gets redirected.</h2>
+
+    <p>
+      There's a story — usually told by therapists, self-help gurus, and wellness apps — that you beat addiction with <em>willpower</em>. You sit it out. Breathe deep. Journal. Feel yourself. Drink water.
     </p>
 
     <p>
-      On both sides of every line stands a human being. With a family. With debt. With a child who wants bread in the morning. With a mother who picks up the phone when the call comes at 10 p.m. With a dog at the door, tail wagging.
+      That's nonsense. Addiction isn't the craving for nicotine. Addiction is a <strong>routine in the brain</strong>, burned in over years, that now fires automatically. Stress comes → hand reaches for the pack. Break starts → hand reaches for the pack. Phone call ends → hand reaches for the pack. The pack is the symbol, not the substance. The actual addictive vessel is the <em>gesture</em>, the <em>pause</em>, the <em>small permission to oneself</em>.
     </p>
 
     <p>
-      <em>Everyone has someone to feed.</em>
+      Take that away without a replacement and you leave a hole. The hole finds something. If you don't steer it, it grabs sugar. Or doom-scrolling. Or irritability with your family. Or — the classic — the old thing again.
+    </p>
+
+    <h2>So: Arch.</h2>
+
+    <p>
+      Arch Linux is the perfect substitute for exactly this mechanism. It has everything a good addiction needs:
     </p>
 
     <p>
-      That isn't a slogan. That's the condition under which we face each other. The officer in the helmet isn't only a helmet. The activist with the sign isn't only a sign. Both are going home tonight. Both will be asked how their day was. Both have someone hoping they come home whole.
-    </p>
-
-    <h2>What respectful means</h2>
-
-    <p>
-      Respectful doesn't mean agreeing. Doesn't mean silent. Doesn't mean yielding.
+      <strong>Small reward loops.</strong> <code>pacman -Syu</code>, a reboot, everything still works — dopamine. <code>yay -S</code>, new tool compiles cleanly — dopamine. Edit a `.conf` file just right and the display manager starts two seconds faster on next boot — <em>dopamine</em>.
     </p>
 
     <p>
-      Respectful means: leaving the other person their face. No escalation for escalation's sake. No trophies. No humiliation that lives in someone's head ten years from now.
+      <strong>Frustration phases with resolution.</strong> Three hours of wiki-reading, four forum threads, a Reddit post, then you find it. Exactly the same relief that the cigarette would have triggered after a stretch of stress. Just with a recognisable skill gain at the end.
     </p>
 
     <p>
-      Whoever has the better argument doesn't need to shout. Whoever enforces the law doesn't need to kick. Strength that has to bend down was never strength.
+      <strong>Self-efficacy as a drug.</strong> That's the joke about Arch: you build your system from nothing. Every config line is a decision. After three weeks there is a computer running that nobody else in the world has set up exactly that way. It's the antithesis of the consumption that the old addiction lived on.
     </p>
 
-    <h2>To the police</h2>
-
     <p>
-      You have a duty. You also have a choice in how you carry it out. Proportionality isn't a bureaucratic word — it's the difference between a shift and a wound someone carries for life. And you have someone at home. Get home whole.
+      <strong>No hangover.</strong> When I tweak my dwm setup at 1 a.m. and go to bed at 2, I don't feel wrecked the next morning. That is the decisive difference from the alcohol substitute, which I tested and which doesn't work.
     </p>
 
-    <h2>To the activists</h2>
+    <h2>Beta test for a platform</h2>
 
     <p>
-      Your cause matters. Otherwise you wouldn't be there. But a cause doesn't get stronger because a stone flies — it gets stronger because an argument lands. The images made today travel tomorrow. Make images that speak for you, not against you. And you have someone at home. Get home whole.
-    </p>
-
-    <h2>To everyone else</h2>
-
-    <p>
-      If you see it, say it. <em>Stay peaceful. Stay respectful.</em> Three words, in a charged moment, can shift more than a tweet afterward.
+      What's happening here is — and I'll say this openly — not a self-improvement Sunday stroll. It's an <strong>n=1 beta test</strong> for a concept I've been carrying around for weeks and that will soon get its own platform:
     </p>
 
     <blockquote>
-      Peace cannot be kept by force; it can only be achieved by understanding.
-      <br><span style="font-family:'Jost',sans-serif;font-style:normal;font-size:0.85rem;color:var(--stone);letter-spacing:0.06em;">— Albert Einstein</span>
+      Addiction reverse-engineering. Instead of denying it — understanding it, mapping its mechanics, deliberately rerouting it onto something that takes you forward.
     </blockquote>
 
-    <h2>If you want to see where escalation leads</h2>
-
     <p>
-      If you don't yet know what happens when proportionality is lost, watch <a href="https://www.hamburger-gitter.org/" target="_blank" rel="noopener"><em>Hamburger Gitter</em></a> — the documentary by the leftvision collective about the 2017 G20 protests in Hamburg. 78 minutes that make visible what happens when freedom of assembly and freedom of the press become bargaining chips. Not a partisan film. A record of evidence.
+      Working title: <strong>diedorismachtdasgift.io</strong> (German wordplay on "Doris is making the poison"). Domain not bought yet. Possibly a second domain depending on the audience — because there's a difference between guiding a student off speed and guiding a 50-year-old manager off wine.
     </p>
 
-    <h2>Soundtrack</h2>
-
     <p>
-      Written with this set in my ears — Bachstelzen floor, Fusion 2025, Panne Eichel. Long lines, patient drops, no noise. Fits the message.
+      Core principle: <em>Nobody quits without starting something else.</em> Addiction is the default. The only question is what for. Anyone who accepts that honestly is already halfway there.
     </p>
 
-    <figure class="embed">
-      <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/monkymanmusic/fusion-2025-panne-eichel&color=%235a6e4a&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" title="MONKyMAN — Fusion 2025 Bachstelzen (Panne Eichel)" style="width:100%;border:0;"></iframe>
-      <figcaption>MONKyMAN — <em>@FUSION 2025 Bachstelzen (Panne Eichel)</em>. <a href="https://soundcloud.com/monkymanmusic/fusion-2025-panne-eichel" target="_blank" rel="noopener">SoundCloud</a>.</figcaption>
-    </figure>
+    <h2>Practical, starting today</h2>
 
     <p>
-      Get home whole. All of you. Tonight.
+      I'll write here irregularly over the next weeks about what the substitution does. Not in a "14 days detox" format. More like: what falls away, what comes in, where I notice the redirection working, where it doesn't. Including — honestly — where it fails.
+    </p>
+
+    <p>
+      This is not a story about a healed person. It's the real-time documentation of an addict who decided to repurpose his addiction instead of denying it. My suspicion: this scales. If yes, the platform follows.
+    </p>
+
+    <p>
+      If not — at least it was a good reason to finally learn Arch. That counts too.
     </p>
   </div>
 
   <div class="post-nav">
-    <a href="/blog/?lang=en">← All entries</a>
+    <a href="/blog/?lang=en">← Back to blog</a>
   </div>
 </main>
 
 <footer>
-  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
-  <a href="/impressum.html">Impressum</a>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Home</a>
 </footer>
 
 </body>

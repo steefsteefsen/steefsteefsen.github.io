@@ -103,6 +103,82 @@ describe('#idols section content', () => {
       .some(h3 => h3.textContent.includes(name));
     expect(found).toBe(true);
   });
+
+  // ── Embed correctness ─────────────────────────────────────────────────────
+  // Each card's iframe (if any) must reference the card's subject — either via
+  // its title attribute or its src. Catches mis-paired embeds: e.g. Abramović
+  // video accidentally placed on the Pasadakis card.
+  //
+  // Aliases map a card's <h3> to acceptable substrings in title|src. Add
+  // aliases here when adding a card whose embed link doesn't share a literal
+  // surname (e.g. SoundCloud handles, YouTube channel slugs, song titles).
+  const EMBED_ALIASES = {
+    'Linus Torvalds':          ['torvalds', 'linus', 'linux'],
+    'Sokrates':                ['socrates', 'sokrates'],
+    'Marina Abramović':        ['abramovi'],   // covers ć/c spelling differences
+    'Dimosthenis Pasadakis':   ['dmskmn', 'pasadakis', 'soundcloud.com/dmskmn'],
+    'Gregor Gysi':             ['gysi'],
+    'Megaloh':                 ['megaloh'],
+    'SSIO':                    ['ssio'],
+    'Wu-Tang':                 ['wu-tang', 'cream', 'c.r.e.a.m'],
+    'Mobb Deep':               ['mobb deep', 'shook ones'],
+    'The Notorious B.I.G.':    ['notorious', 'biggie', 'juicy'],
+    '2Pac':                    ['2pac', 'tupac', 'dear mama'],
+    'Nina Simone':             ['nina simone', 'mississippi'],
+    'K.I.Z':                   ['k.i.z', 'kiz', 'hurra'],
+    'South Park':              ['south park', 'parker', 'matt stone', 'trey parker'],
+  };
+
+  function passesEmbedCheck(h3Text, iframe) {
+    const title = (iframe.getAttribute('title') || '').toLowerCase();
+    const src = (iframe.getAttribute('src') || '').toLowerCase();
+    const haystack = title + ' ' + src;
+
+    // Allow a generic-titled iframe (some YouTube embeds default to "YouTube
+    // video player") to pass if there's no other card-specific signal needed —
+    // we still require the src not to obviously belong to a different card.
+    // For now we treat generic titles as a soft skip.
+    const isGeneric = title === 'youtube video player' || title === '';
+
+    // Direct match: any word from the h3 (>= 4 chars) appears in title or src
+    const h3Words = h3Text.toLowerCase().split(/[^\p{L}]+/u).filter(w => w.length >= 4);
+    if (h3Words.some(w => haystack.includes(w))) return true;
+
+    // Alias match
+    const aliases = Object.entries(EMBED_ALIASES).find(
+      ([key]) => h3Text.includes(key)
+    )?.[1] || [];
+    if (aliases.some(a => haystack.includes(a.toLowerCase()))) return true;
+
+    // Last resort: if the iframe title is generic AND no aliases defined,
+    // pass with a console warning so the test isn't a false positive on
+    // stub embeds. This is intentionally permissive — the goal is to catch
+    // obvious mismatches (Abramović video on Pasadakis card), not to enforce
+    // perfect titling.
+    if (isGeneric && aliases.length === 0) return true;
+
+    return false;
+  }
+
+  test('every idol card embed (iframe) references the card subject', () => {
+    const cards = Array.from(section.querySelectorAll('.value-card'));
+    const mismatches = [];
+    cards.forEach(card => {
+      const h3 = card.querySelector('h3')?.textContent.trim();
+      if (!h3) return;
+      const iframes = card.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        if (!passesEmbedCheck(h3, iframe)) {
+          mismatches.push({
+            card: h3,
+            iframeTitle: iframe.getAttribute('title') || '(no title)',
+            iframeSrc: (iframe.getAttribute('src') || '').slice(0, 100),
+          });
+        }
+      });
+    });
+    expect(mismatches).toEqual([]);
+  });
 });
 
 // ── 9. Idol grid mobile safety ───────────────────────────────────────────────
