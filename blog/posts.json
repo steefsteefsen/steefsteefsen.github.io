@@ -16,6 +16,22 @@
     }
   },
   {
+    "slug": "2026-04-28-dinge-beim-namen-nennen",
+    "date": "2026-04-28",
+    "translations": {
+      "de": {
+        "slug": "2026-04-28-dinge-beim-namen-nennen",
+        "title": "Dinge beim Namen nennen",
+        "teaser": "Ein neuer Post zur juristischen Frage der Genozid-Benennung und ein site-weites Gendering-Audit: beide aus dem gleichen Impuls."
+      },
+      "en": {
+        "slug": "2026-04-28-dinge-beim-namen-nennen-en",
+        "title": "Calling things what they are",
+        "teaser": "A new post on the legal question of naming genocide and a site-wide gender-language audit: both from the same impulse."
+      }
+    }
+  },
+  {
     "slug": "2026-04-27-genozid-beim-namen-nennen",
     "date": "2026-04-27",
     "translations": {
