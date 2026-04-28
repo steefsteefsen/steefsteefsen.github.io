@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who's pushing the couriers? — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="The delivery industry runs on speed. The bodies holding the speed are human. On piece rates, subcontracting, an accident — and the antidote: slower.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body ul { margin: 0 0 1.5rem 1.5rem; padding: 0; }
+  .post-body li { margin-bottom: 0.4rem; }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  .sources { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.2); font-size: 0.85rem; line-height: 1.7; }
+  .sources h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.8rem; }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.4rem; }
+  .sources a { color: var(--moss); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-29-wer-treibt-die-kuriere.html">DE</a>
+      <a href="/blog/posts/2026-04-29-wer-treibt-die-kuriere-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">29 April 2026</p>
+  <h1>Who's pushing the couriers?</h1>
+
+  <div class="post-body">
+    <p>
+      A friend got hit on her bike. She's a courier. She survived. That's all I'm writing about her — she owes you no story.
+    </p>
+
+    <p>
+      What I'm writing about is the system that puts her on the bike. And the pace the system demands.
+    </p>
+
+    <h2>Who's pushing them?</h2>
+
+    <p>
+      The German delivery industry is shifting away from directly-employed riders toward subcontractors. In 2025, Lieferando announced it would lay off over 2,000 of its own couriers nationwide and switch to a <em>shadow fleet</em> model.<sup class="fn">1</sup> Couriers report having to <strong>pay up to 500 euros for access to an account</strong> at these subcontractors, <strong>handing over 20 percent of their wages to middlemen</strong>, and <strong>being paid in cash without a contract</strong>. One full-time Lieferando courier — full-time — reports earning 240 to 350 euros a month.<sup class="fn">2</sup>
+    </p>
+
+    <p>
+      Pay per item. The algorithm assigning the next ride. The app counting how fast you go. The pace isn't accidentally high. The pace is the business model.
+    </p>
+
+    <h2>What the pace costs</h2>
+
+    <p>
+      Germany's Berufsgenossenschaft Verkehr (the statutory accident insurer for the transport sector) ran a special analysis between July 2022 and June 2023. The result: <strong>bicycles and pedelecs are involved in more on-the-job traffic accidents than heavy trucks</strong>. 685 recorded insurance cases, scaled to roughly 7,650 accidents in a single year.<sup class="fn">3</sup>
+    </p>
+
+    <p>
+      That's the bookkeeping of pace. It's not about individual error. It's about an industry that consumes bodies faster than they can recover.
+    </p>
+
+    <h2>What's moving</h2>
+
+    <p>
+      The EU Platform Work Directive came into force in 2024. Member states have to transpose it by the end of 2026. It targets bogus self-employment and gives platform workers a legal presumption of employee status.<sup class="fn">4</sup> Berlin is examining a Bundesrat initiative for a direct-employment requirement in delivery work.<sup class="fn">1</sup> NGG and ver.di are organising at the subcontractors that carry the model.<sup class="fn">5</sup>
+    </p>
+
+    <p>
+      All of that is good. It's happening. It's not enough.
+    </p>
+
+    <h2>What you can do</h2>
+
+    <p>
+      What you personally can do is not: order faster, tip bigger, or "only order from the good ones." What you can do is: lower the pressure in your own life, so you can notice the people around you.
+    </p>
+
+    <p>
+      The person bringing your food <em>is not alone in the world</em>. Your friend who's a courier is not alone. The neighbours you don't greet are not alone. They have stories. Injuries. If you forget that, you also forget that you yourself are not alone.
+    </p>
+
+    <p>
+      Stop scrolling. Bring yourself to a tempo where you can see people. Listen to slow music. Concretely: this set, <em>mori — something slow 0178</em>,<sup class="fn">6</sup> is the pace this piece is written at. Read on while it plays. It makes room for the arguments.
+    </p>
+
+    <p>
+      <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/somethingslow/mori-something-slow-0178&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="mori — something slow 0178" style="width:100%;border:0;display:block;border-radius:6px;"></iframe>
+    </p>
+
+    <h2>My offer</h2>
+
+    <p>
+      If something serious lands — for you or for someone close to you — a conflict, an accident, a break that can't be carried alone:
+    </p>
+
+    <blockquote>
+      I'll cook and make tea. You bring the people involved in the conflict, or their chosen representatives. There is strength in stillness.
+    </blockquote>
+
+    <p>
+      That's not a programme. That's a kitchen. But a kitchen is more than nothing. A kitchen is the place where the pace comes down.
+    </p>
+
+    <p>
+      Who's pushing the couriers — that's not you. But who slows down — that's you.
+    </p>
+  </div>
+
+  <section class="sources">
+    <h2>Sources</h2>
+    <ol>
+      <li id="fn1">Aktuelle Sozialpolitik: <em>Aus den Untiefen der Lieferbotengesellschaft: Lieferando lässt liefern und entlässt 2.000 eigene Fahrer</em>, 20 July 2025. <a href="https://aktuelle-sozialpolitik.de/2025/07/20/aus-den-untiefen-der-lieferbotengesellschaft/" target="_blank" rel="noopener">aktuelle-sozialpolitik.de</a></li>
+      <li id="fn2">taz: <em>Ausbeutung in der Lieferbranche: Senat will Subunternehmern an den Kragen</em>. <a href="https://taz.de/Ausbeutung-in-der-Lieferbranche/!6160070/" target="_blank" rel="noopener">taz.de</a></li>
+      <li id="fn3">BG Verkehr: <em>Special analysis of bicycle accidents at work, July 2022–June 2023</em>; 685 insurance cases, scaled to ≈ 7,650 accidents. <a href="https://www.bg-verkehr.de/die-bg-verkehr/zahlen-daten-fakten" target="_blank" rel="noopener">bg-verkehr.de — Zahlen, Daten, Fakten</a>; see also <em>BG Verkehr warns of bicycle accident risks</em>: <a href="https://www.bg-verkehr.de/presse/pressemitteilungen/bg-verkehr-warnt-vor-unfallrisiken-mit-fahrraedern" target="_blank" rel="noopener">press release</a>. Safety guide: <a href="https://www.bg-verkehr.de/medien/medienkatalog/dguv-informationen/dguv-information-208-049" target="_blank" rel="noopener">DGUV Information 208-049 — Bicycle courier services</a>.</li>
+      <li id="fn4">Directive (EU) 2024/2831 of the European Parliament and of the Council of 23 October 2024 on improving working conditions in platform work. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024L2831" target="_blank" rel="noopener">eur-lex.europa.eu</a></li>
+      <li id="fn5">LabourNet Germany: <em>Better working conditions for Lieferando riders — and works council elections!</em> <a href="https://www.labournet.de/politik/alltag/gesundheit/gesundheitsschutz/bessere-arbeitsbedingungen-fuer-lieferando-rider-und-betriebsratswahlen/" target="_blank" rel="noopener">labournet.de</a></li>
+      <li id="fn6">mori, <em>something slow 0178</em>, in the <em>something slow</em> series: <a href="https://soundcloud.com/somethingslow/mori-something-slow-0178" target="_blank" rel="noopener">soundcloud.com/somethingslow/mori-something-slow-0178</a>. Series overall: <a href="https://soundcloud.com/somethingslow" target="_blank" rel="noopener">soundcloud.com/somethingslow</a>.</li>
+    </ol>
+  </section>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← Back to Blog</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Main page</a>
+</footer>
+
+</body>
+</html>
