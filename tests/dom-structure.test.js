@@ -127,6 +127,8 @@ describe('#idols section content', () => {
     'Nina Simone':             ['nina simone', 'mississippi'],
     'K.I.Z':                   ['k.i.z', 'kiz', 'hurra'],
     'South Park':              ['south park', 'parker', 'matt stone', 'trey parker'],
+    'Tschaikowski':            ['tchaikovsky', 'tschaikowski', 'symphony no. 4'],
+    'O/Y':                     ['oh_why', 'live im salon', 'soundcloud.com/oh_why'],
   };
 
   function passesEmbedCheck(h3Text, iframe) {
@@ -313,5 +315,138 @@ describe('#built-with section content', () => {
     const found = Array.from(section.querySelectorAll('h3'))
       .some(h => h.textContent.includes(name));
     expect(found).toBe(true);
+  });
+});
+
+// ── 13. Footnote numbering ────────────────────────────────────────────────────
+// Catches drift between in-text <sup class="fn">N</sup> markers and the
+// auto-numbered <li> entries in <section class="footnotes">. The <ol> renders
+// li #1 as "1.", li #2 as "2.", etc. — so a <sup>N</sup> is *meaningful* only
+// if the Nth <li> exists, and an <li> without any matching <sup> is orphaned.
+
+describe('footnote numbering', () => {
+  let supNumbers;
+  let liCount;
+
+  beforeAll(() => {
+    supNumbers = Array.from(document.querySelectorAll('sup.fn'))
+      .map(sup => parseInt(sup.textContent.trim(), 10))
+      .filter(n => Number.isFinite(n));
+    const footnoteSection = document.querySelector('section.footnotes ol');
+    liCount = footnoteSection ? footnoteSection.querySelectorAll(':scope > li').length : 0;
+  });
+
+  test('<section class="footnotes"><ol> exists', () => {
+    expect(document.querySelector('section.footnotes ol')).not.toBeNull();
+  });
+
+  test('every in-text <sup class="fn">N</sup> points to an existing <li> (N <= li count)', () => {
+    const broken = supNumbers.filter(n => n < 1 || n > liCount);
+    expect(broken).toEqual([]);
+  });
+
+  test('every <li> in footnotes is referenced by at least one <sup> (no orphans)', () => {
+    const referenced = new Set(supNumbers);
+    const orphans = [];
+    for (let i = 1; i <= liCount; i++) {
+      if (!referenced.has(i)) orphans.push(i);
+    }
+    expect(orphans).toEqual([]);
+  });
+
+  test('<sup> markers are contiguous starting at 1 (no gaps)', () => {
+    const referenced = new Set(supNumbers);
+    const max = Math.max(0, ...referenced);
+    const gaps = [];
+    for (let i = 1; i <= max; i++) {
+      if (!referenced.has(i)) gaps.push(i);
+    }
+    expect(gaps).toEqual([]);
+  });
+});
+
+// ── 14. Tier-2 (private person) privacy rule ─────────────────────────────────
+// Per CLAUDE.md "Privacy rule for third parties": a card whose subject is a
+// Tier-2 (private) person may only link to SoundCloud. No LinkedIn, Instagram,
+// Bandcamp, personal websites, etc. — even if the person publishes themselves
+// on those platforms. The site only points at SoundCloud.
+//
+// Add a stage name here when a new private-person card is added. Public-
+// interest people (Tier 1) are not listed and are not subject to this check.
+
+describe('tier-2 privacy rule', () => {
+  // Stage names of private persons whose cards must link to SoundCloud only.
+  // Match is by exact <h3> textContent, normalised for whitespace and the
+  // " — der Friedensfürst" / " — joy frempong" style suffix that some cards use.
+  const TIER_2_STAGE_NAMES = [
+    'Greyscale',
+    'REYNEKE',
+    'S. Bass',
+    'ciao 3lla',
+    'O/Y',
+    'Skinny Shef',
+    'Mira',
+  ];
+
+  function findCardByH3(stageName) {
+    const cards = Array.from(document.querySelectorAll('.support-card, .value-card'));
+    return cards.find(card => {
+      const h3 = card.querySelector('h3')?.textContent.trim() || '';
+      return h3 === stageName || h3.startsWith(stageName + ' ') || h3.startsWith(stageName + ' —');
+    });
+  }
+
+  test.each(TIER_2_STAGE_NAMES)('Tier-2 card "%s": every <a href> is a soundcloud.com link (or no link)', (stageName) => {
+    const card = findCardByH3(stageName);
+    if (!card) return; // card may not exist yet — soft skip rather than fail
+    const links = Array.from(card.querySelectorAll('a[href]'));
+    const offending = links
+      .map(a => a.getAttribute('href'))
+      .filter(href => {
+        // Allow only soundcloud.com links. Block everything else, including
+        // intra-page docs links, instagram, linkedin, bandcamp, custom domains.
+        if (/^https?:\/\/(www\.)?soundcloud\.com\//i.test(href)) return false;
+        // Embedded SoundCloud player iframe href is fine if encoded as a SC URL —
+        // but those live in <iframe src>, not <a href>, so we don't see them here.
+        return true;
+      });
+    expect({ stageName, offending }).toEqual({ stageName, offending: [] });
+  });
+});
+
+// ── 15. Banned-string sweep (private surnames already scrubbed) ──────────────
+// If any of these reappear in index.html or i18n.js, the privacy rule was
+// violated. Add a name here whenever a private-person mention is removed,
+// so reintroduction triggers a CI failure.
+
+describe('banned-string sweep', () => {
+  const BANNED_PRIVATE_REFERENCES = [
+    // Skinny Shef's real first name and a private collaborator he was named with
+    'Siggi aufgehört',
+    'Timi Hendrix',
+    // Karibik nickname previously named teammate
+    'Vergeben von Torben',
+    'Given by Torben',
+    // Landstreicher nickname previously named mentors
+    'Vergeben von Boris',
+    'Given by Boris',
+    'Boris &amp; Uwe',
+    'Boris & Uwe',
+    // OY namedrop incident
+    'Joy Frempong',
+    'Lleluja-Ha',
+    'Marcel Blatti',
+    'Gun!lla',
+    'Gunilla',
+  ];
+
+  test.each(BANNED_PRIVATE_REFERENCES)('"%s" does not appear in index.html', (needle) => {
+    expect(html.includes(needle)).toBe(false);
+  });
+
+  // i18n.js read once for sweep
+  const i18nJs = fs.readFileSync(path.resolve(__dirname, '../i18n.js'), 'utf8');
+  test.each(BANNED_PRIVATE_REFERENCES)('"%s" does not appear in i18n.js', (needle) => {
+    expect(i18nJs.includes(needle)).toBe(false);
   });
 });

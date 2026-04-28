@@ -89,6 +89,17 @@ and follow the steps above.
 
 
 ### Footnote numbering (current state)
+
+The `<ol>` in `<section class="footnotes">` auto-numbers entries 1, 2, 3 …
+in document order. Every in-text `<sup class="fn">N</sup>` must reference
+the **N-th `<li>`** in that list — and every `<li>` must be referenced
+by at least one `<sup>`. The jest suite enforces this (see "footnote
+numbering" describe block in `tests/dom-structure.test.js`).
+
+When adding or removing a footnote: update the table below, the `<sup>`
+markers, and the `<li>` order in the same commit. Don't leave gaps and
+don't leave orphans.
+
 | # | Subject |
 |---|---------|
 | 1 | Neven Subotic Stiftung |
@@ -108,9 +119,12 @@ and follow the steps above.
 | 15 | Restlos e.V. |
 | 16 | Werrepiraten e.V. |
 | 17 | Die Zwote |
-| 18 | (renumbered → 20) |
-| 19 | Özil documentary (Amazon Prime, 2022) |
-| 20 | Rec & Play |
+| 18 | Özil documentary (Amazon Prime, 2022) — referenced from Philosophy reflection paragraph |
+| 19 | Rec & Play (Skinny Shef quote) |
+| 20 | Tschaikowski — Symphony No. 4, II. Andantino oboe solo |
+| 21 | OY — Berlin duo + Salon at Rummels Bucht + Bucht der Träumer Festival |
+| 22 | "Strong minds discuss ideas…" — misattributed to Socrates, traces to H. T. Buckle |
+| 23 | YAAM Berlin (Young African Art Market, Schillingbrücke 3) — referenced from Ciao Ella card |
 
 ## Writing your own tests
 
@@ -306,6 +320,78 @@ This rule applies to Claude when generating content too: do not write a
 without an attached link to where you got it. If a draft has facts without
 sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
 silently shipping unsourced text.
+
+## Privacy rule for third parties (hard requirement)
+
+**Don't namedrop. The source-citation rule and the privacy rule pull in
+opposite directions and the privacy rule wins.** Every real-person
+mention on the site is classified into one of two tiers, and the tier
+determines what you may publish.
+
+### Tier 1 — Public-interest persons
+
+People who are public figures *on the basis you are citing them*:
+politicians, published authors, internationally-touring artists with
+press kits, named-position academics with public faculty pages, Wikipedia-
+eligible historical figures.
+
+**Allowed:** full name, all relevant links (Wikipedia, official site,
+faculty page, press piece, Bandcamp, Spotify, SoundCloud, etc.), normal
+source-citation rule applies.
+
+**Examples on this site:** Linus Torvalds, Albert Einstein, Edward
+Snowden, Jimmy Wales, Sokrates, Plato, Dave Chappelle, SSIO, Wu-Tang
+Clan, Mobb Deep, The Notorious B.I.G., 2Pac, Nina Simone, Leonard
+Cohen, K.I.Z, Gregor Gysi, Prof. Dr. Paula Herber (named faculty
+position), Pjotr Iljitsch Tschaikowski, Mesut Özil, Sandra Frotscher
+(she publishes herself at sandrafrotscher.com, the domain matches her
+name), Dimosthenis Pasadakis (reviewed his card; published academic).
+
+### Tier 2 — Private persons
+
+Friends, collaborators, family members of a subject, people Stefan met
+in passing, anyone who isn't publicly findable in the role being cited.
+
+**Identifier format:** `Vorname N.` — first name plus initial of
+surname only. (Stefan Hüllinghorst → Stefan H.) Stage names that the
+person publishes themselves are fine as-is (Greyscale, REYNEKE, S. Bass,
+Skinny Shef, Ciao Ella, O/Y).
+
+**Outbound links: SoundCloud only.** No LinkedIn, no Instagram, no
+personal website, no portfolio, no Bandcamp, no Spotify. One
+SoundCloud link per private person, or zero. Even if the person links
+themselves elsewhere, the site only points at SoundCloud.
+
+**Don't add:** real surnames, employers, alma mater, schools, neighbourhood,
+relatives, partners, social graph ("his sister X", "her partner at Y",
+"they grew up with Z"), even if a third-party source confirms it. The
+fact that someone *can* be sourced doesn't mean it belongs on the site.
+
+**When in doubt, ask Stefan before shipping.** "Is this person Tier 1
+or Tier 2?" and "Should I include the sibling fact?" are the right
+questions. Don't decide unilaterally based on what you can find on
+the open web.
+
+### Applies to Claude generating content too
+
+If a draft mentions people in someone's circle by name, role, relation,
+employer, or school, strip those mentions before shipping unless the
+person is Tier 1 *on that basis*. Default to Tier 2.
+
+### Enforcement
+
+The jest suite enforces both halves of the rule mechanically:
+
+- `describe('tier-2 privacy rule')` in `tests/dom-structure.test.js`
+  walks each Tier-2 stage name and asserts that every `<a href>` inside
+  that card resolves to `soundcloud.com`. Adding a new private-person
+  card means appending the stage name to `TIER_2_STAGE_NAMES` in that
+  file.
+- `describe('banned-string sweep')` in the same file blocks
+  reintroduction of named private people in `index.html` and `i18n.js`.
+  When you scrub a private-person reference, append the surname /
+  collaborator name to `BANNED_PRIVATE_REFERENCES` so CI catches
+  regressions.
 
 ## Known architectural decisions
 - No build step — all CSS and JS is inline in `index.html` to keep the deploy as a single file with no asset pipeline.

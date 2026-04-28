@@ -9,19 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="/tokens.css">
 <style>
-  :root {
-    --sand: #f5f0e8;
-    --clay: #c9a96e;
-    --bark: #3d2b1f;
-    --moss: #5a6e4a;
-    --moss-light: #7a9463;
-    --stone: #8c7b6b;
-    --cream: #faf7f2;
-    --earth: #6b4f3a;
-    --shadow: rgba(61, 43, 31, 0.08);
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
@@ -161,6 +150,71 @@
   }
 
   .hero > *:not(.hero-leaf) { position: relative; z-index: 1; }
+
+  .hero-citations { width: 100%; max-width: 1100px; margin: 0 0 2.4rem; }
+  .hero-citations-row {
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2rem; align-items: stretch;
+    justify-content: center;
+  }
+  .hero-citation {
+    flex: 1 1 200px; max-width: 260px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+    color: var(--clay);
+    border-left: 2px solid var(--clay);
+    padding: 0.2rem 0 0.2rem 0.85rem;
+    line-height: 1.45;
+    text-align: left;
+    opacity: 0; animation: fadeUp 1s ease forwards;
+  }
+  .hero-citation cite {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--stone);
+    margin-top: 0.35rem;
+  }
+  .hero-citation:nth-child(1) { animation-delay: 0.1s; }
+  .hero-citation:nth-child(2) { animation-delay: 0.25s; }
+  .hero-citation:nth-child(3) { animation-delay: 0.4s; }
+  .hero-citation:nth-child(4) { animation-delay: 0.55s; }
+
+  .hero-citations-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.5);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--stone);
+    cursor: pointer;
+    margin: 0 auto 1.4rem;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .hero-citations-toggle:hover { background: var(--clay); color: var(--cream); border-color: var(--clay); }
+  .hero-citations-toggle .chev {
+    display: inline-block;
+    margin-left: 0.5rem;
+    transition: transform 0.25s;
+  }
+  .hero-citations-toggle.open .chev { transform: rotate(180deg); }
+
+  @media (max-width: 640px) {
+    .hero-citations-toggle { display: inline-flex; align-items: center; }
+    .hero-citations-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    .hero-citation { max-width: 100%; }
+  }
 
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
@@ -1166,9 +1220,18 @@
 <header class="hero">
   <div class="hero-leaf left">&#128011;</div>
   <div class="hero-leaf right">23</div>
-  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.1s ease forwards;max-width:560px;">&bdquo;Mindset is key.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Horst von Hülling</cite></blockquote>
-  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.3s ease forwards;max-width:560px;">&bdquo;Du bist Mutti.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Boris Zubert</cite></blockquote>
-  <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--clay);border-left:3px solid var(--clay);padding:0.3rem 0 0.3rem 1.1rem;margin:0 0 2rem;line-height:1.5;opacity:0;animation:fadeUp 1s 0.5s ease forwards;max-width:560px;">&bdquo;Peace cannot be kept by force; it can only be achieved by understanding.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Albert Einstein</cite></blockquote>
+  <div class="hero-citations" x-data="{open:false, isWide:window.matchMedia('(min-width: 641px)').matches, init(){const m=window.matchMedia('(min-width: 641px)');m.addEventListener('change',e=>this.isWide=e.matches);}}">
+    <button type="button" class="hero-citations-toggle" :class="{open}" @click="open=!open" :aria-expanded="open ? 'true' : 'false'">
+      <span data-i18n="hero_citations_toggle">Stimmen</span>
+      <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="hero-citations-row" x-show="isWide || open" x-collapse>
+      <blockquote class="hero-citation">&bdquo;Mindset is key.&ldquo;<cite>— Horst von Hülling</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Du bist Mutti.&ldquo;<cite>— B. Z.</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Jede Person ist die Summe ihrer Traumata.&ldquo;<cite>— S. W.</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Peace cannot be kept by force; it can only be achieved by understanding.&ldquo;<cite>— Albert Einstein</cite></blockquote>
+    </div>
+  </div>
   <h1>
     Stefan-Olav Hüllinghorst
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
@@ -1198,7 +1261,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open" class="nickname-detail">
-        <p data-i18n="nickname_karibik_p">Vergeben von Torben, meinem Mitspieler bei <em>Die Zwote</em><sup class="fn">17</sup> — einer Institution aus Enger-Steinbeck bei Bielefeld — nachdem ich drei Monate lang in Pula, Kroatien gearbeitet hatte. Zurück kam ich mit Sonne im Gesicht und dem Feeling eines endlosen Sommers — seitdem: Karibik.</p>
+        <p data-i18n="nickname_karibik_p">Vergeben von einem Mitspieler bei <em>Die Zwote</em><sup class="fn">17</sup> — einer Institution aus Enger-Steinbeck bei Bielefeld — nachdem ich drei Monate lang in Pula, Kroatien gearbeitet hatte. Zurück kam ich mit Sonne im Gesicht und dem Feeling eines endlosen Sommers — seitdem: Karibik.</p>
       </div>
     </div>
     <div class="nickname-card" x-data="{open:false}">
@@ -1225,7 +1288,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div x-collapse x-show="open" class="nickname-detail">
-        <p data-i18n="nickname_landstreicher_p">Vergeben von Boris &amp; Uwe — meinen Mentoren — während meiner Insolvenz. Ich reiste mit dem Deutschlandticket durch Deutschland, auf der Suche nach einem Job bei einem Unternehmen, das es verdient, für das man arbeitet. Ein Landstreicher nicht aus Antriebslosigkeit, sondern aus Anstand.</p>
+        <p data-i18n="nickname_landstreicher_p">Vergeben von meinen Mentoren während meiner Insolvenz. Ich reiste mit dem Deutschlandticket durch Deutschland, auf der Suche nach einem Job bei einem Unternehmen, das es verdient, für das man arbeitet. Ein Landstreicher nicht aus Antriebslosigkeit, sondern aus Anstand.</p>
       </div>
     </div>
   </div>
@@ -1254,6 +1317,11 @@
     <div class="quote-block">
       <blockquote data-i18n="retrogott_quote">„Geld löst Verhaltensveränderungen aus und auf einmal gehen dich beschützende Männer um dein Haus."</blockquote>
       <cite data-i18n="retrogott_cite">— Retrogott</cite>
+    </div>
+
+    <div class="quote-block">
+      <blockquote data-i18n="minds_quote">"Strong minds discuss ideas, average minds discuss events, weak minds discuss people."</blockquote>
+      <cite data-i18n="minds_cite">— oft Sokrates zugeschrieben<sup class="fn">22</sup></cite>
     </div>
   </div>
 
@@ -1291,8 +1359,12 @@
     <div class="value-card">
       <span class="icon">&#9877;&#65039;</span>
       <h3 data-i18n="val_feminism">Feminism</h3>
-      <p data-i18n="val_feminism_p">A guiding principle — until it's no longer necessary. Until then: full equality, no exceptions.<sup class="fn">19</sup></p>
+      <p data-i18n="val_feminism_p">A guiding principle — until it's no longer necessary. Until then: full equality, no exceptions.</p>
     </div>
+  </div>
+
+  <div class="reveal" style="max-width:760px;margin:3rem auto 0;">
+    <p data-i18n="oezil_reflection_p">Mesut Özil hat seinen Rücktritt aus der deutschen Nationalmannschaft 2018 mit „Rassismus und Respektlosigkeit" begründet. Ich glaube nicht, dass das Erdoğan-Foto die Ursache war — es war der Anlass. Als Deutscher trage ich Mitverantwortung dafür, dass wir einen Spieler in eine Position gedrückt haben, statt eine Auseinandersetzung auszuhalten. Mein Weg, damit umzugehen, ist die Arbeit, die ich hier mache: einbinden, nicht ausgrenzen.<sup class="fn">18</sup></p>
   </div>
 </section>
 
@@ -1559,8 +1631,6 @@
     <h3>Greyscale</h3>
     <p data-i18n="artist_greyscale_p">Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. We make music together.</p>
     <a href="https://soundcloud.com/greyscale" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
-    <a href="https://www.instagram.com/greyscale_blfld" target="_blank" class="support-link">Instagram &#8594;</a>
-    <a href="docs/steephie361_banner_v7.html" target="_blank" class="support-link" data-i18n="support_visit">steefsteefsen &amp; greyscale. &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
@@ -1573,13 +1643,19 @@
     <h3>REYNEKE</h3>
     <p data-i18n="artist_reyneke_p">Berlin-based producer and live act — genrefluid electronic music with bounce, bass, and depth. Raised on classical guitar and reggae, rooted in the underground. Slower, darker, and more alive than most things on the dancefloor.</p>
     <a href="https://soundcloud.com/reyneke" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
-    <a href="https://www.instagram.com/reynekemusic/" target="_blank" class="support-link">Instagram &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
     <h3>S. Bass</h3>
     <img src="docs/photo_2026-04-13_23-52-50.jpg" alt="S. Bass" style="width:100%;border-radius:6px;margin:0.6rem 0 0.8rem;display:block;">
     <p><em data-i18n="artist_consent_pending">Waiting for consent.</em></p>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>ciao 3lla</h3>
+    <p data-i18n="artist_ciaoella_p">Habe ihr im YAAM Berlin<sup class="fn">23</sup> gesagt: du bist frei. Heute macht sie als ciao 3lla Karriere. Jede Person hat ihren eigenen Weg — wir sollten aufhören, einander dafür anzugreifen, und Authentizität anerkennen.</p>
+    <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0.8rem;line-height:1.5;" data-i18n="artist_ciaoella_quote">„Tut, was ihr wollt — aber steht dazu."</blockquote>
+    <a href="https://soundcloud.com/ciaoella" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
   </div>
 
   <div class="support-subsection reveal">
@@ -1916,7 +1992,7 @@
 
   <!-- ── Music ── -->
   <div class="idols-subsection reveal">
-    <h3 class="idols-subsection-title" data-i18n="idols_sub_music">Music <span class="idols-subsection-genre">Rap &amp; Hip-Hop · Soul · Singer-Songwriter</span></h3>
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_music">Music <span class="idols-subsection-genre">Rap &amp; Hip-Hop · Soul · Singer-Songwriter · Klassik · Avant-Pop</span></h3>
   </div>
   <div class="values-grid reveal">
     <div class="value-card" x-data="{open:false}">
@@ -2035,15 +2111,12 @@
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127908;</span>
       <h3>Skinny Shef — der Friedensfürst</h3>
-      <p data-i18n="idol_skinnyshef_p">Bielefeld. Bad Taste, dann Pimpulsiv mit Timi Hendrix, dann Mitgründer von Trailerpark — und dann raus. Als das Label kommerzieller wurde, hat Siggi aufgehört. Nicht laut, nicht dramatisch. Er ist einfach gegangen. Mediendesigner, echter Mensch. Ich nenne ihn den Friedensfürst.</p>
+      <p data-i18n="idol_skinnyshef_p">Bielefeld. Bad Taste, dann Pimpulsiv, dann Mitgründer von Trailerpark — und dann raus. Als das Label kommerzieller wurde, ist er einfach gegangen. Nicht laut, nicht dramatisch. Echter Mensch. Ich nenne ihn den Friedensfürst.</p>
       <p style="margin-top:0.6rem;font-size:0.85rem;">
-        <a href="https://de.linkedin.com/in/marcel-siekmann-4b336058" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">LinkedIn &#8594;</a>
-        <a href="https://www.instagram.com/marcel_siekmann/" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Instagram &#8594;</a>
-        <a href="https://www.marcelsiekmann.de/" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Portfolio &#8594;</a>
         <a href="https://soundcloud.com/skinny-shef" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
       </p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich hab nur noch ein Projekt. Und das bin ich und mein Sohn. Und Rec and Play."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Skinny Shef<sup class="fn">20</sup></cite></blockquote>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich hab nur noch ein Projekt. Und das bin ich und mein Sohn. Und Rec and Play."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Skinny Shef<sup class="fn">19</sup></cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -2082,6 +2155,39 @@
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
           <iframe src="https://www.youtube-nocookie.com/embed/bfqJcSPnlbU?si=_QE_g4MrX3sNj4MB&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127931;</span>
+      <h3>Pjotr Iljitsch Tschaikowski</h3>
+      <p data-i18n="idol_tschaikowski_p">Russischer Komponist, 1840–1893. Das Oboensolo zu Beginn des zweiten Satzes (Andantino in modo di canzona) seiner 4. Sinfonie ist eine Stelle, an der das Schwere singt, statt zu klagen. Diesen Klang habe ich später in Berlin nur einmal wiedergehört — bei OY, im Salon at Rummels Bucht.<sup class="fn">20</sup></p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Inspiration is a guest that does not willingly visit the lazy."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Pjotr Iljitsch Tschaikowski</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1rem;border-radius:6px;">
+          <iframe src="https://www.youtube-nocookie.com/embed/5fW2DGuZSPg?controls=0" title="Tchaikovsky — Symphony No. 4, II. Andantino in modo di canzona" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127911;</span>
+      <h3>O/Y</h3>
+      <p data-i18n="idol_oy_p">Berliner Produzent. Ein Set im Salon at Rummels Bucht endete mit einem letzten Stück, das mir geholfen hat, über einen großen Fehler hinwegzukommen — derselbe Klang, den ich nur bei der Tschaikowski-Oboe gehört hatte. Die Bucht ist 2021 geschlossen worden, das Kollektiv lebt weiter im <em>Bucht der Träumer</em>-Festival.<sup class="fn">21</sup></p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="margin-top:1rem;border-radius:6px;overflow:hidden;">
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/oh_why/live-im-salon&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="O/Y — live im Salon on SoundCloud"></iframe>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:0.8rem;">
+          <a href="https://soundcloud.com/oh_why" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">SoundCloud &#8594;</a>
+          <a href="https://soundcloud.com/oh_why/live-im-salon" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">live im Salon &#8594;</a>
+        </p>
       </div>
     </div>
     <div class="value-card" x-data="{open:false}">
@@ -2251,6 +2357,10 @@
     <li><em>Die Zwote</em> is a legendary grassroots football institution based in Enger-Steinbeck (Kreis Herford, NRW) near Bielefeld — rooted in community values, fair-play culture, and a strong collective identity. From 2003 onwards, Die Zwote organized <em>Kicken für Afrika</em>, an annual 32-team football tournament at the Brillweg sports ground in Enger-Steinbeck, combining football with live music. Over its twelve-year run the event raised tens of thousands of euros — at least 18,000 € in a single year — channelled to the Thuthuka project in Bulawayo, Zimbabwe: a street children's centre supporting 40 young people with schooling and vocational training in furniture-making, car repair, and agriculture, run by Scripture Union Zimbabwe in partnership with terre des hommes. The event ended around 2015 when the original venue was developed into residential housing. Source: <a href="https://www.nw.de/lokal/kreis_herford/enger/20514953_Kicken-fuer-Afrika-faellt-dieses-Jahr-aus.html" target="_blank">Neue Westfälische</a>; <a href="https://www.tdh.de/mitmachen/aktiv-sein/testimonials-wir-machen-mit/meldungen/kicken-fuer-afrika-spendet-18000-euro/" target="_blank">terre des hommes</a>.</li>
     <li>Mesut Özil's story is documented in the Amazon Prime documentary <em>Mesut Özil: 10 Behind the Mask</em> (2022). After winning the 2014 World Cup with Germany, Özil was subjected to sustained racist abuse from German football officials, politicians, and the public — particularly following a photo with Turkish President Erdoğan in 2018. He retired from the German national team citing "racism and disrespect." His mother Gülizar held the family together through poverty, illness, and a hostile public environment. The DFB's handling of the affair was widely condemned. Sources: Özil's retirement statement (July 2018); Amazon documentary (2022); <em>Der Spiegel</em>, <em>The Guardian</em>.</li>
     <li>Rec &amp; Play is a regular producer meetup in Bielefeld, held at Cutie (Große Kurfürsten Straße 81 / Jöllenbecker Str. 21). Producers, beatmakers, and music enthusiasts bring their beats and tracks — played on a quality sound system throughout the evening. Skinny Shef appeared as a guest on the Rec &amp; Play Podcast. Podcast: <a href="https://podcasts.apple.com/de/podcast/rec-play-podcast/id1751177230" target="_blank">Apple Podcasts</a>.</li>
+    <li>Pjotr Iljitsch Tschaikowski (1840–1893), russischer Komponist. Das Oboensolo zu Beginn des zweiten Satzes (Andantino in modo di canzona) seiner 4. Sinfonie f-Moll, op. 36, gehört zum Standardrepertoire für Probespiele. Quellen: <a href="https://en.wikipedia.org/wiki/Symphony_No._4_(Tchaikovsky)" target="_blank">Wikipedia — Symphony No. 4 (Tchaikovsky)</a>; <a href="https://www.laphil.com/musicdb/pieces/5197/symphony-no-4" target="_blank">LA Phil Programmnotiz</a>; <a href="https://orchestraexcerpts.com/oboe-tchaikovsky-symphony-no-4-mvts-ii-iii-excerpts/" target="_blank">Orchestra Excerpts (Probespiel)</a>.</li>
+    <li>O/Y, Berliner Produzent. SoundCloud: <a href="https://soundcloud.com/oh_why" target="_blank">soundcloud.com/oh_why</a>; das hier referenzierte Set im Salon: <a href="https://soundcloud.com/oh_why/live-im-salon" target="_blank">live-im-salon</a>. — Salon at Rummels Bucht: Berliner Club am Ostkreuz/Rummelsburg, am 20. September 2021 endgültig geschlossen. Quelle: <a href="https://www.tip-berlin.de/konzerte-party/clubs/rummels-bucht-club-geschlossen-gruende-bebauung/" target="_blank">tip Berlin</a>. Aus diesem Umfeld lebt das Kollektiv im Festival <em>Bucht der Träumer*</em> weiter, seit 2017 jährlich am Helenesee bei Frankfurt (Oder): <a href="https://bucht-der-traeumer.de/" target="_blank">bucht-der-traeumer.de</a>.</li>
+    <li>Das Zitat „Strong minds discuss ideas, average minds discuss events, weak minds discuss people" wird häufig Sokrates zugeschrieben, taucht aber in keiner antiken Quelle auf. Die früheste belegte Form stammt vom englischen Historiker Henry Thomas Buckle (1821–1862), wiedergegeben in Charles Stewarts <em>Haddo House and its Owners</em> (1901): „Men and women range themselves into three classes or orders of intelligence; you can tell the lowest class by their habit of always talking about persons; the next by the fact that their habit is always to converse about things; the highest, by their preference for the discussion of ideas." Auch die Zuschreibung an Eleanor Roosevelt ist nicht belegt. Quelle: <a href="https://quoteinvestigator.com/2014/11/18/great-minds/" target="_blank">Quote Investigator</a>.</li>
+    <li>YAAM — Young African Art Market — ist seit 1994 ein unabhängiger sozio-kultureller Ort an der Schillingbrücke 3 in Berlin-Friedrichshain, direkt an der Spree zwischen Ostbahnhof und Jannowitzbrücke. Bühne für Reggae, Dancehall, Hip-Hop, Afrobeat und Soul, kombiniert mit Strandbar, Streetfood, Kunst, urbanem Sport und Workshops. Quelle: <a href="https://www.visitberlin.de/en/yaam-young-african-arts-market" target="_blank">visitBerlin</a>.</li>
   </ol>
 </section>
 
