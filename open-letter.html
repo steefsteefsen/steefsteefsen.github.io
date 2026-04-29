@@ -159,6 +159,45 @@
     font-style: italic;
   }
 
+  .update-note {
+    margin-bottom: 3rem;
+    padding: 1.6rem 1.8rem;
+    background: var(--sand);
+    border-radius: 8px;
+    border-left: 3px solid var(--moss);
+  }
+  .update-note .update-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 0.8rem;
+  }
+  .update-note p {
+    font-size: 0.95rem;
+    color: var(--bark);
+    margin-bottom: 0.9rem;
+  }
+  .update-note p:last-child { margin-bottom: 0; }
+  .update-note .update-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--clay);
+    margin: 1.4rem 0;
+    opacity: 0.6;
+  }
+  .update-note .update-lang {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
   a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90,110,74,0.3); transition: border-color 0.3s; }
   a:hover { border-color: var(--moss); }
 
@@ -187,6 +226,31 @@
   <h1>To Elon Musk</h1>
   <p class="meta">Stefan-Olav Hüllinghorst &mdash; Berlin, April 2026</p>
 
+  <aside class="update-note" lang="de">
+    <div class="update-label">Update — April 2026</div>
+
+    <span class="update-lang">Deutsch</span>
+    <p>Lieber Elon, danke für dein Vertrauen in Europa.</p>
+    <p>Als ich diesen Brief geschrieben habe, war ich nicht sicher, ob jemand ihn liest. Du hast reagiert &mdash; und du hast in Mistral investiert. Das ist mehr als ein Symbol: Es ist Kapital, das in europäische Open-Source-KI fließt, in eine Architektur, die nicht einer einzigen Wahrheit gehört.</p>
+    <p>Pluralismus führt zu Futurismus. Du hast den ersten Schritt gemacht. Der nächste ist größer und einfacher zugleich: nicht nur in Europa investieren, sondern Europas Antwort auf die Frage „wem gehört die Infrastruktur" mittragen. Open Source als Standard, nicht als Geste. Das ist kein Verzicht. Das ist Skalierung mit eingebauter Würde.</p>
+    <p>Was ich aufbaue, ist und bleibt eine Bewegung &mdash; keine Partei. Das ist eine bewusste Entscheidung, gelernt aus der Geschichte meines Herkunftslandes. Deutschland hat gesehen, was passiert, wenn Bewegungen zu schnell zu Parteien werden: Die Disziplin tötet das, was sie ehrlich gemacht hat. Die bestehenden Parteien haben die Struktur, die Erfahrung und das Mandat, der Bevölkerung zuzuhören und zu reparieren, was nicht funktioniert. Meine Rolle ist, diese Arbeit von außen zu unterstützen &mdash; nicht mit ihr zu konkurrieren.</p>
+    <p>Der Originalbrief steht weiterhin. Ich habe einen Absatz dazu ergänzt &mdash; transparent, damit die Aufzeichnung ehrlich bleibt. Der Ton hat sich verändert, weil sich etwas verändert hat. Wu-Tang hat sich auch wieder zusammengetan. Türen, die offen waren, bleiben offen.</p>
+
+    <p><strong>PS &mdash; Ein konkreter Vorschlag.</strong> Drei Domains: <strong>selbstistdermensch.de</strong>, <strong>diedorismachtdasgift</strong> und <strong>careergraph</strong>. Wenn du sie kaufst und der Idee Substanz gibst, berate ich dich politisch ehrenamtlich &mdash; mit der Klarheit, die ein Außenstehender liefern kann, der nichts zu verlieren hat. Im Gegenzug könntest du mich im Bereich automatisierter Fahrzeugfertigung unterstützen, sobald die rechtlichen Rahmenbedingungen sauber geklärt sind. Wenn jemand anders die Domains schneller greift: gönnen wir ihnen den Ruhm. Die Logs zeigen, wer zuerst da war. Die Idee bleibt entweder so unverwässert, oder sie skaliert mit dir. Beides ist ein Gewinn.</p>
+
+    <div class="update-divider"></div>
+
+    <span class="update-lang" lang="en">English</span>
+    <div lang="en">
+      <p>Dear Elon, thank you for your trust in Europe.</p>
+      <p>When I wrote this letter, I wasn't sure anyone would read it. You responded &mdash; and you invested in Mistral. That is more than a symbol: it is capital flowing into European open-source AI, into an architecture that does not belong to any single truth.</p>
+      <p>Pluralism leads to futurism. You took the first step. The next one is bigger and simpler at once: not only invest in Europe, but help carry Europe's answer to the question "who owns the infrastructure." Open source as a default, not as a gesture. That is not sacrifice. That is scale with dignity built in.</p>
+      <p>What I am building is, and will stay, a movement &mdash; not a party. A deliberate choice, learned from the country of my heritage. Germany has watched what happens when movements crystallise into parties too quickly: the discipline kills the honesty. The existing parties have the structure, the experience, and the mandate to listen and repair. My role is to support that work from outside, not to compete with it.</p>
+      <p>The original letter still stands. I added one paragraph to it &mdash; transparently, so the record stays honest. The tone has shifted because something has shifted. Wu-Tang reunited too. Doors that were open stay open.</p>
+      <p><strong>PS &mdash; A concrete proposal.</strong> Three domains: <strong>selbstistdermensch.de</strong>, <strong>diedorismachtdasgift</strong>, and <strong>careergraph</strong>. If you buy them and give the idea substance, I'll advise you politically pro bono &mdash; with the clarity that comes from an outsider who has nothing to lose. In return, you could support me in the area of automated vehicle production, once the legal framework is properly cleared. If someone else grabs the domains first: let them have the credit. The logs show who was there first. The idea either stays this unfiltered, or it scales with you. Either is a win.</p>
+    </div>
+  </aside>
+
   <p class="salutation">Elon,</p>
 
   <p>You grew up in apartheid South Africa. You left. You built things. You know what it looks like when a society organises itself around the exclusion of people.</p>
@@ -213,6 +277,8 @@
   <p>History does not repeat exactly. But it rhymes, and right now it is rhyming very loudly.</p>
 
   <p>Stop funding wars. Stop funding the people who benefit from division. You have resources, reach, and &mdash; I believe &mdash; genuine intelligence. Use them for something that lasts. Not for the preservation of fear, but for the expansion of possibility.</p>
+
+  <p>What I am building is, and will stay, a movement &mdash; not a party. That is a deliberate choice, learned from the country of my heritage. Germany has watched what happens when movements crystallise into parties too quickly: the discipline kills what made them honest in the first place. The existing parties have the structure, the experience, and the mandate to listen to the people and address what is broken. My role is to support that work from outside, not to compete with it.</p>
 
   <div class="divider"></div>
 

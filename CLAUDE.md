@@ -65,6 +65,92 @@ Before Claude builds the card, Stefan must collect on-site (verbal OK to feature
 
 If any field is missing, Claude does not guess — Claude asks Stefan and waits.
 
+#### Resolution test (mechanical CI guard)
+`tests/local-resolve.test.js` runs against every local-business card and
+verifies that:
+1. the card with the expected `<h3>` exists in `index.html`
+2. the card has at least one external link
+3. every external link resolves (HTTP < 400). For `openstreetmap.org/`
+   links the OSM API is queried so a deleted node/way fails even when
+   the public page renders a generic shell.
+
+When adding a new local-business card, append the exact `<h3>` text to
+`EXPECTED_LOCAL_CARDS` in that test file. Skip with `JEST_SKIP_NETWORK=1`
+when offline. The pre-push hook should run with network so a 404'd OSM
+node is caught before users see it.
+
+### Test the visitor's setup before rendering it
+**Hard rule: every external resource the site offers a visitor — Visit
+button, OpenStreetMap link, embedded iframe, image source, font CDN —
+must be probed before it ships.** "Probe" means: real HTTP request from
+this machine, status < 400, valid TLS, expected content type. If the
+probe fails or is ambiguous, the link does not ship; the card renders
+without it (text-only, OSM-only) until the upstream is fixed.
+
+This rule exists because Stefan's visitors do not all run modern Chrome
+on a fast line. They land on Firefox-on-mobile, NoScript-on-desktop,
+strict-DNS networks, or sometimes a TLS-1.2-only ancient browser. A
+"Visit" button that 301-redirects to a PDF on a third-party WordPress,
+or a domain whose HTTPS handshake fails with `unrecognized name`, is
+worse than no link — it breaks the visitor's session and reads as
+sloppy.
+
+Concrete checks Claude must run before adding any external link to a
+support card, idol card, blog post or footnote:
+1. **DNS resolves** (`host <domain>`) and the IP is sensible.
+2. **HTTPS handshakes cleanly** (`curl -sI https://<host>/`) — no TLS
+   alert `unrecognized name`, no certificate mismatch.
+3. **HTTP status < 400** on the actual URL the card uses (not the
+   apex). Follow redirects: a Visit link that redirects from
+   `howzitbielefeld.de` to a WordPress PDF is *not* a Visit link, it's
+   a download — surface that and ask Stefan whether to drop the link
+   or rephrase the button.
+4. **Content type matches the affordance.** "Visit" implies HTML.
+   "OpenStreetMap" implies osm.org. If the upstream returns
+   `application/pdf`, the affordance is wrong even if the byte stream
+   loads.
+5. **OSM links go through the OSM API** (`api.openstreetmap.org/api/0.6/<kind>/<id>`)
+   so a deleted node fails even when the public page renders a generic
+   shell. The local-resolve test does this automatically.
+
+Failure mode: prefer **fewer working links over more broken ones**. A
+card with one OSM link that resolves is shippable. A card with a
+website link that times out is not — drop the link, leave a TODO in
+the commit, and tell Stefan that the upstream needs fixing on their
+side before we link it.
+
+### Status badges on cards (Try & Error pattern)
+Cards can carry a status badge to mark them as "still being figured out"
+without moving them into a separate section. The badge is a sibling of
+the `<h3>` — between the title and the paragraph. Use it sparingly; if
+half the cards in a section carry it, the badge has lost meaning.
+
+Markup:
+```html
+<div class="support-card support-card--local reveal">
+  <h3>Bucht Kollektiv</h3>
+  <span class="status-badge status-badge--try">Try &amp; Error</span>
+  <p data-i18n="local_buchtkollektiv_p">…</p>
+  …
+</div>
+```
+
+Why this lives as a per-card badge instead of a "Try & Error" section:
+the privacy rule (Tier-1 vs Tier-2) is a *card* property, not a section
+property. A separate section would force every card in it to share a
+single tier policy, which collides with reality — some collectives are
+public, others are friends-of-friends. The badge respects each card's
+existing tier classification while still surfacing the "still
+experimental" status.
+
+Adding a new badge variant (e.g. `status-badge--seasonal`,
+`status-badge--archive`): mint a new modifier class, add the styling
+under the existing `.status-badge` block in `index.html`, and update
+the structural test in `dom-structure.test.js` if the new variant
+needs different placement rules. The base test guarantees every badge
+carries *some* modifier class and sits after its `<h3>` — that
+contract should not break.
+
 ### Card artwork — multi-format buffering (Johann/MBzwo pattern)
 For business and artist cards where artwork quality matters, ship **multiple resolutions** of the same image and let the browser pick based on network conditions. Credit: Johann, CEO of MBzwo, who introduced this pattern — sharper image when the line is fast, lighter image when it's not, no JS needed.
 
@@ -119,6 +205,16 @@ and follow the steps above.
 - Only update DE + EN first. Wait for explicit instruction before updating other languages.
 - All user-facing strings that appear in multiple languages must have a `data-i18n="key"` attribute pointing to an entry in `i18n.js`.
 - Hardcoded content (personal names, addresses, URLs) does not need i18n keys.
+- **Bilingual content order: DE first, EN second.** When a single page or
+  block contains both DE and EN side-by-side (open letters, manifestos,
+  inline-bilingual sections that are not driven by `data-i18n` switching),
+  the German text comes first, the English text second. The site is
+  primarily a German person's homepage; the EN mirror is a courtesy to
+  international readers, not the default. The same rule applies even
+  when the addressee is anglophone (e.g. an open letter to an English
+  speaker): DE is the publisher's voice, EN is the courtesy translation.
+  Exception: if a piece of content is *exclusively* aimed at an English
+  audience and has no German counterpart, EN may stand alone.
 
 
 ### Footnote numbering (current state)
@@ -301,6 +397,10 @@ Hard "do not"s:
 - "Er" / "ihn" when the antecedent is a generic role rather than a named
   person.
 - Colloquial "kriegt" — write "bekommt".
+- "Kamerad" / "Schulkamerad" — historically loaded in German
+  (Wehrmacht, AfD-circles). Use **"Kompagnon"** / **"Schulkompagnon"**,
+  or restructure ("ein Freund aus Schulzeiten", "wir waren zusammen
+  auf der Schule").
 
 Exceptions (do NOT rewrite):
 - **Quotes from named people** (blockquotes, footnoted citations) — their
@@ -322,6 +422,7 @@ When generating new DE copy, always run a final scan with patterns like:
 \b(der|dem|den) (Bürger|Wähler|Mitarbeiter|Pfleger|Lehrer|Künstler|Forscher|Entwickler|Gründer|Politiker|Aktivist|Sportler|Kunde|Nutzer|Leser)\b
 \bAktivisten|Mitarbeiter|Wähler|Studenten|Anwender|Kunden|Wissenschaftler|Bürger\b
 \bkriegt\b
+\b(Schul)?[Kk]amerad(en|in|innen)?\b
 ```
 If any hit, route through patterns 1→5 above before shipping.
 

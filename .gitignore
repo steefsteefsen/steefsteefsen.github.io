@@ -25,6 +25,10 @@ logs/
 # Session docs
 #docs/
 
+# Local-only issue tracker (synced to GitLab via API when token is provided;
+# until then this file is the single source of truth and stays off the web)
+docs/issues-pending.md
+
 # Session logs (root-level)
 SESSION-*.md
 
