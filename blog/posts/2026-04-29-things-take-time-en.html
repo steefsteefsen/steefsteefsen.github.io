@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Things take time — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="On living with ADHD, a new book by Judith Holofernes, a Sido track, and an open letter to Elon that just got milder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  .sources { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.2); font-size: 0.85rem; line-height: 1.7; }
+  .sources h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--bark); margin-bottom: 0.8rem; }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.4rem; }
+  .sources a { color: var(--moss); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-29-things-take-time.html">DE</a>
+      <a href="/blog/posts/2026-04-29-things-take-time-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">29 April 2026</p>
+  <h1>Things take time</h1>
+
+  <div class="post-body">
+    <p>
+      I live with ADHD. That isn't a surprise to anyone who reads this site for a while — the jumps, the connections that cut across everything, the pace. What was less clear for a long time, to me and to the people around me: that the pace is both a gift and a burden, and that not everyone carries it the same way. And that's fine.
+    </p>
+
+    <p>
+      There is a saying I have heard often in many African contexts: <em>"Europeans have the watches — we have the time."</em> The exact origin is contested,<sup class="fn">1</sup> but the point survives every attribution. It isn't about being slow. It is about being present.
+    </p>
+
+    <p>
+      Two recommendations:
+    </p>
+
+    <h2>Hummelhirn — Judith Holofernes</h2>
+
+    <p>
+      The new book by the former singer of <em>Wir sind Helden</em>, out 12 March 2026 with Kiepenheuer &amp; Witsch.<sup class="fn">2</sup> Holofernes describes herself as someone with "plenty of attention but no working filter to sort the impressions" — ADHD, in plain words. The audiobook is read by <a href="https://en.wikipedia.org/wiki/Nora_Tschirner" target="_blank" rel="noopener">Nora Tschirner</a>, and the two are touring together with the book.<sup class="fn">3</sup> It is the kind of book I want to put in the hands of people who work or live with me — so they understand what the inside of this looks like.
+    </p>
+
+    <h2>Relax — Sido</h2>
+
+    <p>
+      When I need to come down, music does more than any plan. One track that does it reliably is <em>Relax</em> by Sido — first released on <em>Aggro Ansage Nr. 2X</em> (2006), later on <em>#Beste</em> (2012).<sup class="fn">4</sup> The voice that always has to be too fast listens for three minutes. That is often enough to put the day back in order.
+    </p>
+
+    <p>
+      <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sido-official&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Sido — official SoundCloud profile" style="width:100%;border:0;display:block;border-radius:6px;"></iframe>
+    </p>
+
+    <h2>What this has to do with Elon</h2>
+
+    <p>
+      A few weeks ago I published an <a href="/open-letter.html">Open Letter to Elon Musk</a>. The letter was sharp because the situation was sharp. Since then Elon has responded — and invested in <em>Mistral</em>, i.e. in European open-source AI. That changes the tone, not the line. The letter received an update today, transparently appended: <em>Pluralism leads to futurism. You took the first step.</em>
+    </p>
+
+    <p>
+      Elon lives publicly with ADHD himself. Anyone carrying the kind of pace he carries knows what is meant here. <em>Things take time.</em> Even when you own the watch — the time isn't automatically yours.
+    </p>
+
+    <blockquote>
+      Not everyone is as fast as us. And we ourselves are not always on time like the Japanese train system.
+    </blockquote>
+
+    <p>
+      Make tea. Read Hummelhirn when it comes out. Listen to <em>Relax</em> when it gets too much. Write your letters. Update them when something shifts. Stay with it.
+    </p>
+  </div>
+
+  <section class="sources">
+    <h2>Sources</h2>
+    <ol>
+      <li id="fn1">The saying <em>"The Europeans have the watches, we have the time"</em> is quoted across many African contexts and has surfaced in debates around Robert McNamara's tenure. There is no single uncontested first attribution; the phrase lives in oral tradition.</li>
+      <li id="fn2">Judith Holofernes, <em>Hummelhirn</em>, Kiepenheuer &amp; Witsch, 12 March 2026, ISBN 978-3-462-01366-5. <a href="https://www.kiwi-verlag.de/buch/judith-holofernes-hummelhirn-9783462013665" target="_blank" rel="noopener">kiwi-verlag.de</a></li>
+      <li id="fn3"><em>»Hummelhirn« – Die Tour</em> with Judith Holofernes and Nora Tschirner, dates at KiWi: <a href="https://www.kiwi-verlag.de/veranstaltung/lesung-und-gespraech-judith-holofernes-koeln-4029154-260519" target="_blank" rel="noopener">kiwi-verlag.de — Cologne, 19 May 2026</a>.</li>
+      <li id="fn4">Sido, <em>Relax</em>, originally on <em>Aggro Ansage Nr. 2X</em> (Aggro Berlin, 2006), later on <em>#Beste</em> (Urban/Universal, 2012). Discography: <a href="https://en.wikipedia.org/wiki/Sido_discography" target="_blank" rel="noopener">Wikipedia — Sido discography</a>. Official SoundCloud profile: <a href="https://soundcloud.com/sido-official" target="_blank" rel="noopener">soundcloud.com/sido-official</a>.</li>
+    </ol>
+  </section>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← Back to blog</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Stefan-Olav Hüllinghorst — <a href="/">Home</a>
+</footer>
+
+</body>
+</html>
