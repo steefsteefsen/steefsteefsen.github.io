@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>one css file instead of thirty-six — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="tokens.css centralises the colour palette from 36 HTML files into one. Plus: privacy rule written down and jest-enforced, three new cards, a Socrates quote corrected.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body code { font-family: monospace; font-size: 0.92em; background: var(--sand); padding: 0.1em 0.4em; border-radius: 2px; }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body sup.fn { font-size: 0.7em; color: var(--clay); margin-left: 2px; vertical-align: super; }
+  .post-body sup.fn a { color: var(--clay); border-bottom: none; font-weight: 500; }
+  .post-body sup.fn a:hover { color: var(--bark); }
+  .footnotes { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 110, 0.25); font-size: 0.85rem; line-height: 1.6; }
+  .footnotes h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--bark); margin-bottom: 1rem; }
+  .footnotes ol { padding-left: 1.5rem; color: var(--stone); }
+  .footnotes li { margin-bottom: 0.6rem; }
+  .footnotes a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90,110,74,0.25); word-break: break-all; }
+  .footnotes a:hover { color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-04-29-tokens-und-tier2.html">DE</a>
+      <a href="/blog/posts/2026-04-29-tokens-und-tier2-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">29 April 2026</p>
+  <h1>one css file instead of thirty-six</h1>
+
+  <div class="post-body">
+    <p>
+      The site's colour palette lived as an inline <code>:root</code> block in every
+      HTML file — thirty-six copies. Changing <code>--clay</code> meant running
+      find-replace across half a dozen subdirectories and hoping nothing was missed.
+      That's done: <code>tokens.css</code> at the repo root holds the block once, every
+      page links it. Page-specific variables — <code>--rust</code> on the movement page,
+      <code>--artist</code> on the homepage — stay inline where they belong.
+    </p>
+
+    <p>
+      I also wrote down the privacy rule I'd been carrying in my head. Two tiers:
+      Tier&nbsp;1 for public-interest persons cited in the role they're public for — full
+      name, all relevant links. Tier&nbsp;2 for private people — first name and initial,
+      outbound links to SoundCloud only, no mention of employer, school, family or social
+      graph. The jest suite now enforces this mechanically: every link inside a Tier-2
+      card is checked against an allowlist, and a banned-string list catches accidentally
+      reintroduced names in later edits.
+    </p>
+
+    <p>
+      Three new content pieces: Pjotr Ilyich Tchaikovsky (the oboe solo in the Andantino
+      of Symphony No.&nbsp;4), Berlin duo O/Y, and a support card for Ciao Ella. The
+      philosophy section now has a paragraph on the 2018 Özil affair — shared German
+      responsibility that was missing from the page.
+    </p>
+
+    <p>
+      Last detail: the quote "Strong minds discuss ideas, average minds discuss events,
+      small minds discuss people" had been sitting in the philosophy section uncited,
+      attributed to Socrates. Quote Investigator traces it to Henry Thomas
+      Buckle.<sup class="fn"><a href="#fn1">1</a></sup> The site carries a proper
+      footnote now.
+    </p>
+
+    <section class="footnotes">
+      <h2>Sources</h2>
+      <ol>
+        <li id="fn1">"Great minds discuss ideas…" — attribution research: <a href="https://quoteinvestigator.com/2014/11/18/great-minds/" rel="noopener" target="_blank">quoteinvestigator.com/2014/11/18/great-minds</a>. Traced to Buckle, Henry Thomas: <em>History of Civilization in England</em>, Vol.&nbsp;1 (1857).</li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← Back to Blog</a>
+  </div>
+
+<section class="comments" id="comments" style="margin:3rem auto 4rem;max-width:720px;padding:0 1.5rem;">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:var(--bark);margin-bottom:0.5rem;">Kommentare</h2>
+  <p style="font-size:0.85rem;color:var(--stone);margin-bottom:1.5rem;">
+    Powered by <a href="https://giscus.app" style="color:var(--moss);">Giscus</a> &middot; GitHub-Login erforderlich &middot; keine Tracker, keine Ads.
+  </p>
+  <script src="https://giscus.app/client.js"
+          data-repo="steefsteefsen/steefsteefsen.github.io"
+          data-repo-id="REPLACE_ME"
+          data-category="Blog Comments"
+          data-category-id="REPLACE_ME"
+          data-mapping="pathname"
+          data-strict="1"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="light"
+          data-lang="de"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
