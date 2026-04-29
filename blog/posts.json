@@ -1,5 +1,13 @@
 [
   {
+    "slug": "2026-04-29-tokens-und-tier2",
+    "date": "2026-04-29",
+    "translations": {
+      "de": {"slug": "2026-04-29-tokens-und-tier2", "title": "eine css-datei statt sechsunddreißig", "teaser": "tokens.css zentralisiert die Farbpalette aus 36 HTML-Dateien in eine einzige Datei. Dazu: Privatheitsregel schriftlich und Jest-gesichert, drei neue Karten (Tschaikowski, O/Y, Ciao Ella), ein Sokrates-Zitat richtiggestellt."},
+      "en": {"slug": "2026-04-29-tokens-und-tier2-en", "title": "one css file instead of thirty-six", "teaser": "tokens.css pulls the colour palette out of 36 HTML files into one. Plus: privacy rule written down and jest-enforced, three new cards (Tchaikovsky, O/Y, Ciao Ella), a Socrates quote corrected."}
+    }
+  },
+  {
     "slug": "2026-04-29-things-take-time",
     "date": "2026-04-29",
     "translations": {

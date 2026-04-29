@@ -9,6 +9,14 @@
     <atom:link href="https://steefsteefsen.github.io/feed.xml" rel="self" type="application/rss+xml"/>
 
   <item>
+    <title>eine css-datei statt sechsunddreißig</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2.html</guid>
+    <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
+    <description>tokens.css zentralisiert die Farbpalette aus 36 HTML-Dateien in eine einzige Datei. Dazu: Privatheitsregel schriftlich und Jest-gesichert, drei neue Karten (Tschaikowski, O/Y, Ciao Ella), ein Sokrates-Zitat richtiggestellt.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
+  <item>
     <title>Things take time</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-29-things-take-time.html</link>
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-29-things-take-time.html</guid>
