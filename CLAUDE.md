@@ -51,6 +51,39 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 1. Insert `<div class="support-card support-card--<cause|artist|local> reveal">` before the placeholder card.
 2. If the card references external facts, add a `<sup class="fn">N</sup>` inline and a `<li>` entry in the `<section class="footnotes">` at the bottom.
 3. Footnotes are numbered sequentially — update any displaced numbers in both the `<sup>` tags and the `<ol>`.
+4. **Local Businesses (Berlin) — map links: OpenStreetMap only, never Google.** For any Berlin-based local business, the location/map link must point to OpenStreetMap (e.g. `https://www.openstreetmap.org/?mlat=...&mlon=...#map=18/...` or `https://www.openstreetmap.org/node/<id>`). Do not link to Google Maps, do not embed a Google Maps iframe, and do not use a Google place ID. If the business has its own website, link the website too — but the *map* link is OSM. This applies to the card body, footnotes, and any structured data.
+
+#### Pre-flight checklist for a new local-business card
+Before Claude builds the card, Stefan must collect on-site (verbal OK to feature is *not* enough — Claude needs the data):
+- **Exact business name** as on the shop sign (not "the Späti at Kotti", not "the African restaurant on my street"). Also: nail the *category* — restaurant vs. shop vs. bar vs. Späti — before resolving OSM, because OSM tags differ (`amenity=restaurant` vs. `shop=*` vs. `amenity=pub`).
+- **Exact street + house number.** OSM may use ASCII spelling (e.g. "Bärwaldstraße" → "Baerwaldstraße"); Claude resolves the OSM spelling, Stefan supplies the human one.
+- **Postal address sanity check.** Berlin renamed several streets recently (e.g. Kohlfurter Str. → Regina-Jonas-Str. in Dec 2023). Confirm with the owner which name they want printed — official-current vs. neighbourhood-known.
+- **Tier classification (per privacy rule).** Is the *business* the subject (Tier-1-style: name the shop, link website + OSM) or is the *owner* the subject (Tier 2: shop name only if it is itself a public-facing brand, no owner surname, OSM map link only, no Insta/LinkedIn/website-of-the-person)? When unclear, ask the owner what they want linked.
+- **One-sentence "why I push them"** from Stefan — the angle that goes on the card (sortiment, late-night reliability, kindness, neighbourhood anchor, etc.).
+- **Photo of the shop sign / logo** (phone snap is fine) — used both to confirm the name and as artwork source. If no usable artwork, the card uses a text-only layout, not a stand-in image.
+- **Owner consent record.** A verbal "yeah push us" is the bar; note date + who said it in the commit message so we have a paper trail if anyone objects later.
+
+If any field is missing, Claude does not guess — Claude asks Stefan and waits.
+
+### Card artwork — multi-format buffering (Johann/MBzwo pattern)
+For business and artist cards where artwork quality matters, ship **multiple resolutions** of the same image and let the browser pick based on network conditions. Credit: Johann, CEO of MBzwo, who introduced this pattern — sharper image when the line is fast, lighter image when it's not, no JS needed.
+
+Implementation:
+- Store assets as `name-320.webp`, `name-640.webp`, `name-1280.webp` (and a `.jpg` fallback at one size for older browsers) under `images/local/` or `images/artists/`.
+- Use the native `<img srcset>` + `sizes` attributes — the browser handles the negotiation:
+  ```html
+  <img
+    src="images/local/shopname-640.jpg"
+    srcset="images/local/shopname-320.webp 320w,
+            images/local/shopname-640.webp 640w,
+            images/local/shopname-1280.webp 1280w"
+    sizes="(max-width: 600px) 320px, (max-width: 1024px) 640px, 1280px"
+    alt="<business name> shopfront"
+    loading="lazy">
+  ```
+- `loading="lazy"` is mandatory for cards below the fold.
+- Don't ship a single 2MB JPEG and call it done — the whole point is the buffer of formats.
+- Keep originals (the unscaled source) in `images/_originals/` outside the deploy, so we can re-derive resolutions later without losing quality.
 
 ### Adding a new blog post
 Blog posts support DE + EN. Each post is two HTML files (one per language) plus one entry in `blog/posts.json`.
