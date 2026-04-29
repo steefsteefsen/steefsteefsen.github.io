@@ -814,6 +814,31 @@
     margin-bottom: 0.5rem;
   }
 
+  /* Status badge — Try & Error etc. Sits between h3 and p, never on its own line above. */
+  .status-badge {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    margin: 0 0 1rem;
+    background: var(--cream);
+    color: var(--earth);
+    border: 1px solid var(--clay);
+  }
+  .status-badge--try {
+    background: var(--cream);
+    color: var(--earth);
+    border-color: var(--clay);
+  }
+  .status-badge--try::before {
+    content: '⚙ ';
+    margin-right: 0.15rem;
+  }
+
   .support-card p {
     font-size: 0.95rem;
     color: var(--stone);
@@ -1534,6 +1559,18 @@
       <p data-i18n="tool_ublock_p">Free, open-source content blocker by Raymond Hill. Blocks ads, trackers, and malware sites with low memory and CPU footprint — and without selling user data on the side. The reason a Firefox session stays usable.</p>
       <a href="https://github.com/gorhill/uBlock" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
     </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/openstreetmap.svg" alt="OpenStreetMap"></span>
+      <h3>OpenStreetMap</h3>
+      <p data-i18n="tool_osm_p">Freie Weltkarte, kollaborativ gepflegt von einer globalen Community — ODbL-lizenziert, keine Tracker, kein Konzern dahinter. Die Karte hinter jedem Local-Business-Link auf dieser Seite. Wer Berlin ernst nimmt, nutzt OSM, nicht Google.</p>
+      <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/spreadshop.png" alt="Spreadshop"></span>
+      <h3>Spreadshop</h3>
+      <p data-i18n="tool_spreadshop_p">White-Label-Shop-Plattform der Spreadshirt-Group aus Leipzig-Plagwitz. On-Demand-Druck, kein Lager, kein Vorab-Risiko — eigene Designs auf T-Shirts, Beuteln, Hoodies. Made in Germany, Print-on-Demand statt Massenproduktion. Die Plattform hinter Stabielefeld und vielen anderen Kiez-Initiativen, die Merchandise machen ohne Lagerhalle.</p>
+      <a href="https://www.spreadshop.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
   </div>
 </section>
 
@@ -1671,6 +1708,7 @@
   <div class="support-card support-card--local reveal">
     <h3>Kaffeerösterei Kiezbohne</h3>
     <p data-i18n="local_kiezbohne_p">Hand-roasted specialty coffee in Spandau. Nonnendammallee 91. Small-batch, craft, neighbourhood — the kind of place that takes coffee seriously without taking itself too seriously.</p>
+    <a href="https://www.openstreetmap.org/node/1419145185" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
   </div>
 
   <div class="support-card support-card--local reveal">
@@ -1692,6 +1730,32 @@
     <p data-i18n="local_dansart_p">Tanzzentrum und Produktionshaus in Bielefeld. Am Bach 11, Mitte. Eigenes Theater, Außenbühnen, Artist Residencies, internationales Festivalprogramm. Dreijährige staatlich anerkannte Ausbildung, Akademie, mehrere Companies. Tribe — Bielefeld-Heimat für die, die ihren eigenen Weg tanzen.</p>
     <a href="https://www.dansart.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
     <a href="https://www.openstreetmap.org/node/9447108196" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>HOWZIT Let's Meet</h3>
+    <p data-i18n="local_howzit_p">Südafrikanisches Restaurant in Bielefeld-Mitte, August-Bebel-Straße 167. Cape Malay Curry, Boerewors Roll, Burger, regional und international gemixt. Familiengeführt, entspannt, mit Bar. Mi–So ab 18:00. Howzit ist südafrikanischer Slang für „Wie geht's?" — und genau so ist die Stimmung dort.</p>
+    <a href="https://www.openstreetmap.org/node/2518549094" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>JZ Kamp</h3>
+    <p data-i18n="local_jzkamp_p">Ältestes Jugendzentrum Bielefelds, Niedermühlenkamp 43. Betrieben von den Falken, seit 2023 frisch saniert. Treff für Jugendliche, queere Räume, Tanz-Workshops, gemeinsames Kochen. Veranstaltungen via Kulturkombinat Kamp e.V. — Konzerte, Parties, Kultur. Selbstverwaltet, politisch, offen.</p>
+    <a href="https://diefalken-bielefeld.de/jz-kamp/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    <a href="https://www.kulturkombinat-kamp.de/" target="_blank" class="support-link">Kulturkombinat &#8594;</a>
+    <a href="https://www.openstreetmap.org/way/204009916" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Stabielefeld</h3>
+    <p data-i18n="local_stabielefeld_p">„Bielefeld bleibt stabil." Lokale Identitäts- und Solidaritäts-Initiative aus Bielefeld — Stoffbeutel, Shirts, Tank Tops mit Kiez-Logo. Print-on-Demand über Spreadshop, also kein Lager und kein Verschnitt. Wer den Mythos „Bielefeld gibt es nicht" mit einem Augenzwinkern trägt, statt ihn zu erklären.</p>
+    <a href="https://stabielefeld.myspreadshop.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Späti Bros</h3>
+    <p data-i18n="local_spaetibros_p">Spätkauf an der Warschauer Straße 80, Friedrichshain. Klein, nachts auf, der Kiez kennt sie. Convenience-Sortiment plus eigener TikTok-Auftritt — die Generation, die den Späti zur Marke macht, ohne dass er aufhört Späti zu sein.</p>
+    <a href="https://www.openstreetmap.org/node/7541757198" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
   </div>
 
   <div class="support-card support-card--local reveal">
@@ -1719,6 +1783,7 @@
     <div class="section-label" data-i18n="idols_label">Idols</div>
     <h2 data-i18n="idols_h2">People Who Shaped My Thinking</h2>
     <p data-i18n="idols_p">Not role models to copy — but minds that opened something.</p>
+    <p data-i18n="idols_quote_note" style="font-size:0.88rem;color:var(--stone);font-style:italic;margin-top:0.6rem;">Wer kein Zitat hat, ist out of this world — im besten Sinne.</p>
   </div>
 
   <!-- ── Tech & Science ── -->
@@ -1990,6 +2055,12 @@
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
       </div>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#127911;</span>
+      <h3>Max Meis</h3>
+      <p data-i18n="idol_meis_p">Schulkompagnon. Dokumentarfilmer aus Münster, Gründer von DOWNSIDEUP®. Erstes großes Werk: „The Dorp" (2009) — 86 Minuten in einem Township in den Cape Flats bei Kapstadt. Hingehen, bleiben, zuhören, drehen. Seitdem WDR/arte-Dokus zwischen Westfalen und der Welt. Filmen als Form von Anwesenheit, nicht von Aussage.</p>
+      <a href="https://downsideup.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127914;</span>
@@ -2277,6 +2348,13 @@
           <iframe src="https://www.youtube-nocookie.com/embed/ZA3sNM1vPIg?controls=0" title="Gregor Gysi — Rede des Jahres, Bundestag 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:6px;border:0;"></iframe>
         </div>
       </div>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#9878;&#65039;</span>
+      <h3>Anne Pertsch</h3>
+      <p data-i18n="idol_pertsch_p">Menschenrechtsanwältin bei Equal Rights Beyond Borders. Vertritt Schutzsuchende an der EU-Außengrenze gegen unwürdige Lagerbedingungen, rechtswidrige Inhaftierung und illegale Abschiebungen — von Lesbos und Chios bis Berlin. Co-Autorin von „Behind Walls and Bars" (2023) zur Inhaftierungspraxis auf den griechischen Inseln. Schreibt am Verfassungsblog. Recht als Werkzeug, nicht als Deko.</p>
+      <a href="https://verfassungsblog.de/author/anne-pertsch/" target="_blank" class="support-link">Verfassungsblog &#8594;</a>
+      <a href="https://www.equal-rights.org/" target="_blank" class="support-link">Equal Rights Beyond Borders &#8594;</a>
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#9994;</span>

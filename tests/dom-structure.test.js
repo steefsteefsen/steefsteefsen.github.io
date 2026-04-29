@@ -309,7 +309,7 @@ describe('#built-with section content', () => {
     expect(section.querySelectorAll('.tool-card').length).toBeGreaterThan(0);
   });
 
-  const EXPECTED_TOOLS = ['DuckDNS', 'Ubuntu Server', 'Raspberry Pi', 'Python', 'GitLab'];
+  const EXPECTED_TOOLS = ['DuckDNS', 'Ubuntu Server', 'Raspberry Pi', 'Python', 'GitLab', 'OpenStreetMap'];
 
   test.each(EXPECTED_TOOLS)('tool card for "%s" is present', (name) => {
     const found = Array.from(section.querySelectorAll('h3'))
@@ -448,5 +448,46 @@ describe('banned-string sweep', () => {
   const i18nJs = fs.readFileSync(path.resolve(__dirname, '../i18n.js'), 'utf8');
   test.each(BANNED_PRIVATE_REFERENCES)('"%s" does not appear in i18n.js', (needle) => {
     expect(i18nJs.includes(needle)).toBe(false);
+  });
+});
+
+// Local-business card resolution tests live in tests/local-resolve.test.js
+// (separate file so it can opt into @jest-environment node, where fetch is
+// natively available — jest-environment-jsdom does not expose fetch).
+
+// ── 17. Try & Error status badge — well-formed where used ─────────────────────
+// Option A from CLAUDE.md: instead of a "Try & Error" section, individual
+// cards may carry a <span class="status-badge status-badge--try"> badge. This
+// test does NOT require any badges to exist — but if they do, they must:
+//   - sit inside a .support-card or .value-card,
+//   - carry both the base class and a modifier (status-badge--<type>),
+//   - appear after the <h3> and before any <p> (so screen readers announce
+//     the card name first, the status second, the description third).
+
+describe('status badge structure (Try & Error and friends)', () => {
+  const badges = Array.from(document.querySelectorAll('.status-badge'));
+
+  test('every .status-badge carries a modifier class', () => {
+    const bare = badges.filter(b => {
+      const classes = Array.from(b.classList);
+      return !classes.some(c => c.startsWith('status-badge--'));
+    });
+    expect(bare).toEqual([]);
+  });
+
+  test('every .status-badge sits inside a .support-card or .value-card', () => {
+    const orphaned = badges.filter(b => !b.closest('.support-card, .value-card'));
+    expect(orphaned).toEqual([]);
+  });
+
+  test('every .status-badge appears after the <h3> in its card', () => {
+    const misplaced = badges.filter(b => {
+      const card = b.closest('.support-card, .value-card');
+      if (!card) return false;
+      const h3 = card.querySelector('h3');
+      if (!h3) return true;
+      return !(h3.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+    expect(misplaced).toEqual([]);
   });
 });
