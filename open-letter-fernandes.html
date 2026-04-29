@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offener Brief an Collien Fernandes — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="Ein offener Brief an Collien Fernandes — über Mut, gesellschaftliche Limits und die Frage, wie wir digitale Würde rechtlich verankern. Auf Deutsch, Spanisch und Katalanisch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    line-height: 1.75;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 9rem 2rem 6rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+
+  .meta {
+    font-size: 0.82rem;
+    color: var(--stone);
+    letter-spacing: 0.06em;
+    margin-bottom: 3rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--stone);
+    margin-bottom: 1.4rem;
+    max-width: 620px;
+  }
+
+  .salutation {
+    font-size: 1.1rem;
+    color: var(--bark);
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+  }
+
+  .lang-section {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.18);
+  }
+  .lang-section:last-of-type {
+    border-bottom: none;
+  }
+  .lang-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1.2rem;
+  }
+
+  blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--bark);
+    border-left: 3px solid var(--clay);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.5;
+  }
+
+  .signature {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--bark);
+    line-height: 2;
+  }
+
+  .signature a {
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+  }
+
+  .public-note {
+    margin-top: 3rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--sand);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90,110,74,0.3); transition: border-color 0.3s; }
+  a:hover { border-color: var(--moss); }
+
+  .sources {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .sources h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 0.8rem;
+  }
+  .sources ol { padding-left: 1.5rem; color: var(--stone); }
+  .sources li { margin-bottom: 0.5rem; }
+  .sources a { color: var(--moss); }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    main { padding: 8rem 1.5rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">S.O. Hüllinghorst</a>
+</nav>
+
+<main>
+  <div class="section-label">Offener Brief</div>
+  <h1>An Collien Fernandes</h1>
+  <p class="meta">Stefan-Olav Hüllinghorst &mdash; Berlin, 29. April 2026</p>
+
+  <!-- ─────────────── DEUTSCH ─────────────── -->
+  <section class="lang-section" lang="de">
+    <div class="lang-label">Deutsch</div>
+
+    <p class="salutation">Sehr geehrte Frau Fernandes,</p>
+
+    <p>ich schreibe Ihnen, weil das, was Sie tun, mehr ist als ein persönlicher Schritt. Sie haben in Spanien Anzeige erstattet — auf Mallorca, am 2. Dezember 2025 — weil das spanische Recht unter dem Gesetz <em>„Solo sí es sí"</em> umfassenderen Schutz vor digitaler sexualisierter Gewalt bietet, als die deutsche Rechtslage ihn aktuell hergibt.<sup class="fn">1</sup> Das ist keine private Entscheidung. Das ist ein Verschieben des Verfahrens dorthin, wo das Recht greift. Genau das macht Ihren Schritt politisch.</p>
+
+    <p>Das Gericht in Palma hat sich Anfang 2026 für unzuständig erklärt und den Fall an die deutsche Justiz überwiesen.<sup class="fn">2</sup> Sie haben Berufung eingelegt.<sup class="fn">3</sup> Sie kämpfen also nicht nur um Ihre Sache, sondern um den Raum, in dem über Ihre Sache verhandelt werden kann. Ich sehe darin eine Movement-Linie, die meiner sehr nah liegt: <em>Wie verankern wir gesellschaftlich ein Limit?</em> Wo ist die Stelle, an der das Recht sagt: bis hierher und nicht weiter, auch innerhalb von Familien und Beziehungen, auch in der digitalen Sphäre? Sie zwingen das System, diese Frage zu beantworten.</p>
+
+    <p>Ich war lange Fan der Arbeit von Christian Ulmen. Über <em>Röbel Fröbel mit Schnörkranz</em> habe ich mich damals kaputtgelacht — das gehört zur Wahrheit dazu. Es gilt die Unschuldsvermutung, und sie wird hier nicht angetastet. Was ich sage, ist nur dies: Mein Geschmack an seinem Werk wiegt weniger als das, was Sie öffentlich darlegen. Ich höre Ihnen zu, statt das Werk zu verteidigen. Diese beiden Dinge schließen sich nicht aus.</p>
+
+    <p>Mein Anliegen mit diesem Brief ist nicht, Ihnen etwas zuzurufen. Ich würde gerne mit Ihnen ins Gespräch kommen — über das Alignment unserer Bewegungen. Über die Lücke zwischen <em>„Solo sí es sí"</em>, der <a href="https://eur-lex.europa.eu/eli/dir/2024/1385/oj" target="_blank" rel="noopener">EU-Richtlinie 2024/1385 zur Bekämpfung von Gewalt gegen Frauen</a> und dem, was im deutschen Strafrecht und im Familienrecht heute tatsächlich greifbar ist. Über die Frage, wie ein <em>Recht auf Beendung</em> aussehen könnte: ein juristisch gestützter Punkt, an dem ein erwachsener Mensch sagen darf, Schluss jetzt, ohne durch zwei Jahrzehnte Gericht und Boulevard zu müssen.</p>
+
+    <p>Vor wenigen Tagen war der 25. April, der italienische <em>Festa della Liberazione</em> — der Tag der Partisanen, der an den Mut jener wenigen erinnert, die gegen ein faschistisches Regime aufgestanden sind, oft unter Lebensgefahr, oft als Einzelne gegen eine Mehrheit, die wegschaute. Was Sie tun, ist ein anderer Maßstab und ein anderer Schauplatz — aber es ist dieselbe Bewegung: die wenigen, die ein Limit setzen, wo das System keines hat. Dass Italien selbst ein massives Femizid-Problem trägt,<sup class="fn">4</sup> macht den 25. April nicht weniger passend, sondern dringlicher. Der 25. April ist ein guter Tag, um Ihnen zu schreiben.</p>
+
+    <blockquote>
+      Ich koche und mache Tee. Wenn Sie reden möchten, finden Sie mich.
+    </blockquote>
+
+    <p>Mit großem Respekt für Ihren Mut.</p>
+
+    <div class="signature">
+      Stefan-Olav Hüllinghorst<br>
+      Berlin<br>
+      <a href="mailto:stefan@huellinghorst.info">stefan@huellinghorst.info</a><br>
+      <a href="index.html">steefsteefsen.github.io</a>
+    </div>
+  </section>
+
+  <!-- ─────────────── ESPAÑOL ─────────────── -->
+  <section class="lang-section" lang="es">
+    <div class="lang-label">Español</div>
+
+    <p class="salutation">Estimada Sra. Fernandes,</p>
+
+    <p>Le escribo porque lo que está haciendo es más que un paso personal. Usted presentó denuncia en España &mdash; en Mallorca, el 2 de diciembre de 2025 &mdash; porque el derecho español, bajo la ley <em>«Solo sí es sí»</em>, ofrece una protección más completa contra la violencia sexual digital que la que actualmente brinda el derecho alemán.<sup class="fn">1</sup> Eso no es una decisión privada. Eso es desplazar el procedimiento al lugar donde el derecho sí alcanza. Precisamente eso convierte su paso en político.</p>
+
+    <p>El juzgado de Palma se declaró incompetente a comienzos de 2026 y remitió el caso a la justicia alemana.<sup class="fn">2</sup> Usted recurrió esa decisión.<sup class="fn">3</sup> No lucha solo por su causa, sino por el espacio en el que su causa pueda ser tratada. Veo en ello una línea de movimiento muy cercana a la mía: <em>¿cómo anclamos socialmente un límite?</em> ¿Dónde está el punto en el que el derecho dice: hasta aquí y no más allá, también dentro de familias y relaciones, también en la esfera digital? Usted obliga al sistema a responder esa pregunta.</p>
+
+    <p>Durante mucho tiempo fui fan del trabajo de Christian Ulmen. Con <em>Röbel Fröbel mit Schnörkranz</em> me reí a carcajadas en su momento &mdash; eso forma parte de la verdad. Rige la presunción de inocencia, y aquí no se toca. Lo único que digo es esto: mi gusto por su obra pesa menos que lo que usted expone públicamente. La escucho, en lugar de defender la obra. Las dos cosas no se excluyen.</p>
+
+    <p>Mi intención con esta carta no es lanzarle algo. Me gustaría entrar en conversación con usted &mdash; sobre la alineación de nuestros movimientos. Sobre la brecha entre <em>«Solo sí es sí»</em>, la <a href="https://eur-lex.europa.eu/eli/dir/2024/1385/oj" target="_blank" rel="noopener">Directiva (UE) 2024/1385 sobre la lucha contra la violencia contra las mujeres</a> y lo que el derecho penal y el derecho de familia alemanes ofrecen hoy en la práctica. Sobre cómo podría ser un <em>derecho a terminar</em>: un punto jurídicamente sostenido en el que una persona adulta pueda decir basta, sin tener que pasar dos décadas por tribunales y prensa rosa.</p>
+
+    <p>Hace pocos días fue el 25 de abril, la <em>Festa della Liberazione</em> italiana &mdash; el día de los partisanos, que recuerda el coraje de aquellos pocos que se levantaron contra un régimen fascista, muchas veces bajo amenaza de muerte, muchas veces solos frente a una mayoría que apartaba la mirada. Lo que usted hace tiene otra escala y otro escenario, pero es el mismo movimiento: los pocos que ponen un límite donde el sistema no lo pone. Que Italia misma cargue un grave problema de feminicidios<sup class="fn">4</sup> no hace que el 25 de abril sea menos pertinente, sino más urgente. El 25 de abril es un buen día para escribirle.</p>
+
+    <blockquote>
+      Cocino y preparo té. Si quiere hablar, sabe dónde encontrarme.
+    </blockquote>
+
+    <p>Con gran respeto por su valentía.</p>
+
+    <div class="signature">
+      Stefan-Olav Hüllinghorst<br>
+      Berlín<br>
+      <a href="mailto:stefan@huellinghorst.info">stefan@huellinghorst.info</a>
+    </div>
+  </section>
+
+  <!-- ─────────────── CATALÀ ─────────────── -->
+  <section class="lang-section" lang="ca">
+    <div class="lang-label">Català</div>
+
+    <p class="salutation">Benvolguda Sra. Fernandes,</p>
+
+    <p>Li escric perquè el que vostè està fent és més que un pas personal. Vostè va presentar denúncia a Espanya &mdash; a Mallorca, el 2 de desembre de 2025 &mdash; perquè el dret espanyol, sota la llei <em>«Solo sí es sí»</em>, ofereix una protecció més àmplia contra la violència sexual digital que la que actualment dóna el dret alemany.<sup class="fn">1</sup> Això no és una decisió privada. Això és desplaçar el procediment cap al lloc on el dret sí que arriba. Precisament això fa polític el seu pas.</p>
+
+    <p>El jutjat de Palma es va declarar incompetent a començament del 2026 i va remetre el cas a la justícia alemanya.<sup class="fn">2</sup> Vostè ha recorregut aquesta decisió.<sup class="fn">3</sup> No lluita només per la seva causa, sinó per l'espai on la seva causa pugui ser tractada. Hi veig una línia de moviment molt propera a la meva: <em>com ancorem socialment un límit?</em> On és el punt en què el dret diu: fins aquí i no més enllà, també dins de famílies i relacions, també a l'esfera digital? Vostè obliga el sistema a respondre aquesta pregunta.</p>
+
+    <p>Durant molt de temps vaig ser fan de la feina de Christian Ulmen. Amb <em>Röbel Fröbel mit Schnörkranz</em> vaig riure de valent en el seu moment &mdash; això també forma part de la veritat. Regeix la presumpció d'innocència, i aquí no es toca. L'únic que dic és això: el meu gust per la seva obra pesa menys que el que vostè exposa públicament. L'escolto, en comptes de defensar l'obra. Les dues coses no s'exclouen.</p>
+
+    <p>La meva intenció amb aquesta carta no és llançar-li res. M'agradaria poder parlar amb vostè &mdash; sobre l'alineació dels nostres moviments. Sobre l'escletxa entre <em>«Solo sí es sí»</em>, la <a href="https://eur-lex.europa.eu/eli/dir/2024/1385/oj" target="_blank" rel="noopener">Directiva (UE) 2024/1385 sobre la lluita contra la violència contra les dones</a> i el que el dret penal i el dret de família alemanys ofereixen avui a la pràctica. Sobre com podria ser un <em>dret a posar fi</em>: un punt jurídicament sostingut en què una persona adulta pugui dir prou, sense haver de passar dues dècades per tribunals i premsa rosa.</p>
+
+    <p>Fa pocs dies va ser el 25 d'abril, la <em>Festa della Liberazione</em> italiana &mdash; el dia dels partisans, que recorda el coratge d'aquells pocs que es van alçar contra un règim feixista, sovint sota amenaça de mort, sovint sols davant d'una majoria que apartava la mirada. El que vostè fa té una altra escala i un altre escenari, però és el mateix moviment: els pocs que posen un límit allà on el sistema no en posa. Que Itàlia mateixa carregui un problema greu de feminicidis<sup class="fn">4</sup> no fa el 25 d'abril menys pertinent, sinó més urgent. El 25 d'abril és un bon dia per escriure-li.</p>
+
+    <blockquote>
+      Cuino i faig te. Si vol parlar, ja sap on trobar-me.
+    </blockquote>
+
+    <p>Amb gran respecte pel seu coratge.</p>
+
+    <div class="signature">
+      Stefan-Olav Hüllinghorst<br>
+      Berlín<br>
+      <a href="mailto:stefan@huellinghorst.info">stefan@huellinghorst.info</a>
+    </div>
+  </section>
+
+  <section class="sources">
+    <h2>Quellen / Fuentes / Fonts</h2>
+    <ol>
+      <li id="fn1">Articulo14 (ES): <em>La actriz alemana Collien Fernandes denuncia en España a su exmarido por difundir 'deepfakes' pornográficos de ella</em>, 28. März 2026 — beschreibt die Wahl Spaniens unter dem Gesetz <em>„Solo sí es sí"</em>. <a href="https://www.articulo14.es/016-ni-una-mas/collien-fernandes-deepfake-20260328.html" target="_blank" rel="noopener">articulo14.es</a></li>
+      <li id="fn2">Legal Tribune Online: <em>Der Fall Ulmen/Fernandes — Spanisches Gericht lehnt Zuständigkeit ab, Fall geht nach Deutschland</em>. <a href="https://www.lto.de/recht/nachrichten/n/fall-ulmen-fernandes-spanisches-gericht-lehnt-zustaendigkeit-ab-fall-geht-nach-deutschland" target="_blank" rel="noopener">lto.de</a></li>
+      <li id="fn3">Berliner Zeitung: <em>Collien Fernandes legt Berufung ein — Verfahren gegen Christian Ulmen soll auf Mallorca bleiben</em>. <a href="https://www.berliner-zeitung.de/article/collien-fernandes-legt-berufung-ein-verfahren-gegen-christian-ulmen-soll-auf-mallorca-bleiben-10031839" target="_blank" rel="noopener">berliner-zeitung.de</a></li>
+      <li id="fn4">Italien hat 2024 laut ISTAT 106 Femizide registriert, davon 62 durch Partner oder Ex-Partner; 31,9 % der Frauen zwischen 16 und 75 berichten körperliche oder sexualisierte Gewalt. Im November 2025 hat das italienische Parlament Femizid als eigenständigen Straftatbestand mit lebenslanger Haft ins Strafgesetz aufgenommen. Quellen: <a href="https://www.istat.it/en/tag/femicide/" target="_blank" rel="noopener">ISTAT — Femicide</a>; <a href="https://www.npr.org/2025/11/26/g-s1-99444/italy-femicide-life-in-prison" target="_blank" rel="noopener">NPR, 26. November 2025</a>.</li>
+    </ol>
+  </section>
+
+  <div class="public-note">
+    Dieser Brief ist offen veröffentlicht. Es gilt die Unschuldsvermutung für Christian Ulmen.<br>
+    Esta carta se publica abiertamente. Rige la presunción de inocencia para Christian Ulmen.<br>
+    Aquesta carta es publica obertament. Regeix la presumpció d'innocència per a Christian Ulmen.
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav H&uuml;llinghorst &middot; Built with care
+  &middot; <a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a>
+  &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
+</footer>
+
+</body>
+</html>
