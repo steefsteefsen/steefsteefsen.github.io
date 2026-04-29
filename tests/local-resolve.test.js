@@ -56,7 +56,6 @@ const EXPECTED_LOCAL_CARDS = [
   'Kaffeerösterei Kiezbohne',
   'Casa Certo',
   'Restlos e.V.',
-  'DansArt Tanznetworks',
   "HOWZIT Let's Meet",
   'JZ Kamp',
   'Stabielefeld',
