@@ -1,5 +1,13 @@
 [
   {
+    "slug": "2026-05-01-roter-wink",
+    "date": "2026-05-01",
+    "translations": {
+      "de": {"slug": "2026-05-01-roter-wink", "title": "roter wink zum ersten", "teaser": "Ein Easter Egg, das heute Nacht live gegangen ist: eine rote Fahne im Scroll-Hinweis, drei Eskalationsstufen, alles im Speicher. Dazu eine neue Künstlerkarte (Lÿn) und etwas Aufräumen im Footer."},
+      "en": {"slug": "2026-05-01-roter-wink-en", "title": "a red flag for may day", "teaser": "An Easter Egg that went live last night: a red flag in the scroll-hint, three escalation stages, all in memory. Plus a new artist card (Lÿn) and some tidying in the footer."}
+    }
+  },
+  {
     "slug": "2026-04-29-tokens-und-tier2",
     "date": "2026-04-29",
     "translations": {

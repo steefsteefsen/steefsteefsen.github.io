@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Gedanken aus dem täglichen Leben.</description>
     <language>de</language>
-    <lastBuildDate>Wed, 29 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>roter wink zum ersten</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-01-roter-wink.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-01-roter-wink.html</guid>
+    <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+    <description>Ein Easter Egg, das heute Nacht live gegangen ist: eine rote Fahne im Scroll-Hinweis, drei Eskalationsstufen, alles im Speicher. Dazu eine neue Künstlerkarte (Lÿn) und etwas Aufräumen im Footer.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
   <item>
     <title>eine css-datei statt sechsunddreißig</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2.html</link>

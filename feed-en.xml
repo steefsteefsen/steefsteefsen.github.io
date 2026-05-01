@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 29 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>a red flag for may day</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-01-roter-wink-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-01-roter-wink-en.html</guid>
+    <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+    <description>An Easter Egg that went live last night: a red flag in the scroll-hint, three escalation stages, all in memory. Plus a new artist card (Lÿn) and some tidying in the footer.</description>
+    <author>Stefan-Olav Hüllinghorst</author>
+  </item>
   <item>
     <title>one css file instead of thirty-six</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2-en.html</link>

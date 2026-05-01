@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a red flag for may day — Stefan-Olav Hüllinghorst</title>
+<meta name="description" content="An Easter Egg that went live last night: a red flag in the scroll-hint, three escalation stages, all in memory. Plus a new artist card (Lÿn) and some tidying in the footer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body code { font-family: monospace; font-size: 0.92em; background: var(--sand); padding: 0.1em 0.4em; border-radius: 2px; }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body sup.fn { font-size: 0.7em; color: var(--clay); margin-left: 2px; vertical-align: super; }
+  .post-body sup.fn a { color: var(--clay); border-bottom: none; font-weight: 500; }
+  .post-body sup.fn a:hover { color: var(--bark); }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">S.O. Hüllinghorst</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-01-roter-wink.html">DE</a>
+      <a href="/blog/posts/2026-05-01-roter-wink-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <p class="post-meta">1 May 2026</p>
+  <h1>a red flag for may day</h1>
+
+  <div class="post-body">
+    <p>
+      A small red flag with a white carnation has been hiding in the hero scroll-hint
+      since last night. Hover twice and the mood shifts — restless instead of gentle.
+      Third time: the escalation caps at stage three. No fourth stage; Pianosa stays
+      controlled. Everything runs in memory: no cookie, no <code>localStorage</code>,
+      no server. Reload and the world is quiet again. A quiet gesture for May Day.
+    </p>
+
+    <p>
+      Lÿn, Berlin-based DJ and producer, gets a card in the artist section. No outbound
+      link until consent is formal — that's the Tier-2 rule. The card is there; the link
+      waits.
+    </p>
+
+    <p>
+      The footer has lost two links: the open letter to Elon Musk and the one to
+      <a href="/open-letter-fernandes.html">Collien Fernandes</a>. Both texts are still
+      reachable, just no longer as footer links. The top-level Blog nav link is also gone —
+      the blog lives at <code>/blog/</code>, anyone looking for it will find it.
+    </p>
+
+    <p>
+      Two cards were taken offline at direct request. No further comment.
+    </p>
+  </div>
+
+  <div class="post-nav">
+    <a href="/blog/?lang=en">← All posts</a>
+  </div>
+
+<section class="comments" id="comments" style="margin:3rem auto 4rem;max-width:720px;padding:0 1.5rem;">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:var(--bark);margin-bottom:0.5rem;">Kommentare</h2>
+  <p style="font-size:0.85rem;color:var(--stone);margin-bottom:1.5rem;">
+    Powered by <a href="https://giscus.app" style="color:var(--moss);">Giscus</a> &middot; GitHub-Login erforderlich &middot; keine Tracker, keine Ads.
+  </p>
+  <script src="https://giscus.app/client.js"
+          data-repo="steefsteefsen/steefsteefsen.github.io"
+          data-repo-id="REPLACE_ME"
+          data-category="Blog Comments"
+          data-category-id="REPLACE_ME"
+          data-mapping="pathname"
+          data-strict="1"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="light"
+          data-lang="de"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>
+</main>
+
+<footer>
+  &copy; 2026 Stefan-Olav Hüllinghorst &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
