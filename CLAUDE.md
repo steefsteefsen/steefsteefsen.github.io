@@ -53,6 +53,8 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 3. Footnotes are numbered sequentially — update any displaced numbers in both the `<sup>` tags and the `<ol>`.
 4. **Local Businesses (Berlin) — map links: OpenStreetMap only, never Google.** For any Berlin-based local business, the location/map link must point to OpenStreetMap (e.g. `https://www.openstreetmap.org/?mlat=...&mlon=...#map=18/...` or `https://www.openstreetmap.org/node/<id>`). Do not link to Google Maps, do not embed a Google Maps iframe, and do not use a Google place ID. If the business has its own website, link the website too — but the *map* link is OSM. This applies to the card body, footnotes, and any structured data.
 
+5. **Geo-research source order: OSM first, Google second.** When researching any place — addresses, opening hours, business names, postal codes, neighbourhood boundaries — always query OpenStreetMap (Nominatim or Overpass) **before** falling back to Google search results. OSM is the authoritative source for this site; Google is a fallback for cases where OSM has no data, and even then the Google answer must be cross-checked against the business's own primary source (its website, its registry entry, etc.) before it ends up on the page. Reasons: OSM is community-owned, ODbL-licensed, and queryable without tracking; Google's free-text results are vulnerable to outdated SEO duplicates and misattributions. If OSM and Google disagree, OSM wins unless a primary source confirms otherwise.
+
 #### Pre-flight checklist for a new local-business card
 Before Claude builds the card, Stefan must collect on-site (verbal OK to feature is *not* enough — Claude needs the data):
 - **Exact business name** as on the shop sign (not "the Späti at Kotti", not "the African restaurant on my street"). Also: nail the *category* — restaurant vs. shop vs. bar vs. Späti — before resolving OSM, because OSM tags differ (`amenity=restaurant` vs. `shop=*` vs. `amenity=pub`).
@@ -532,3 +534,7 @@ The jest suite enforces both halves of the rule mechanically:
 - Alpine.js loaded from CDN for the collapsible card interactions (`x-data`, `x-collapse`, `x-show`).
 - `IntersectionObserver` with `threshold: 0, rootMargin: '0px 0px -50px 0px'` for scroll-reveal — chosen because tall grids (idols) were invisible on mobile with the previous `threshold: 0.15`.
 - Push always goes to `gitlab` remote; GitHub is a read-only mirror via GitLab CI.
+
+## Known quirks (intentional, do not "fix")
+- **Hero `Explore` scroll-hint sits slightly off** in its CSS positioning. Stefan flagged this 2026-04-29 and asked to leave it as-is — it became the anchor for the red-flag Easter-Egg (see below). Don't normalise the position.
+- **Explore Easter-Egg: red flag with Pianosa escalation.** Hovering the `.scroll-hint` reveals a small red flag with a white carnation. The first hover stays at Stage 1 (ja, gentle wave). Second hover bumps to Stage 2 (hm, restless). Third hover and beyond stays at Stage 3 (eskalation, capped). State persists across `mouseleave` for the lifetime of the tab — only a page reload resets to Stage 1. **In-memory only**, no cookies, no localStorage, no server. Doubles as a 1st-of-May reference (movement, not party). Respects `prefers-reduced-motion`. Tested in `tests/red-flag-jsdom.test.js`.
