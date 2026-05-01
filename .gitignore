@@ -34,6 +34,11 @@ docs/issues-pending.md
 # alignment with Stefan but are not ready to ship.
 docs/*-DRAFT.md
 
+# Local-only e-mail drafts (Thunderbird .eml templates etc.).
+# These contain mailto-style envelopes, addressee mail addresses,
+# personal cover-letter text — they are working files, not shipped content.
+docs/email-drafts/
+
 # Session logs (root-level)
 SESSION-*.md
 

@@ -327,12 +327,14 @@
   .scroll-hint {
     position: absolute;
     bottom: 2.5rem;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     opacity: 0;
     animation: fadeUp 1s 1.2s ease forwards;
+    padding: 0.5rem 1rem;
   }
 
   .scroll-hint span {
@@ -1293,7 +1295,6 @@
     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
     <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
     <li><a href="#built-with" data-i18n="nav_built_with">Built With</a></li>
-    <li><a href="blog/">Blog</a></li>
     <li><a href="tribe/">Tribe</a></li>
     <li><a href="science/">Wissenschaft</a></li>
     <li><a href="ethics/">Ethik</a></li>
@@ -2569,9 +2570,6 @@
 <footer>
   &copy; 2026 Stefan-Olav Hüllinghorst &middot; Built with care
   &middot; <a href="invest.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Investors</a>
-  &middot; <a href="open-letter.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Elon Musk</a>
-  &middot; <a href="open-letter-watzke.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: BVB</a>
-  &middot; <a href="open-letter-fernandes.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Collien Fernandes</a>
   &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
 </footer>
 
@@ -2589,61 +2587,37 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── Explore Easter-Egg: red flag, Pianosa escalation ──────────────
-  // Hover reveals the flag in its current stage. CLICK on the flag
-  // bumps the stage (1 → 2 → 3, capped at 3). Pianosa logic:
-  // the user decides to escalate, escalation does not happen by
-  // accident through cursor wandering. Double-click resets to 1.
-  // Counter persists in localStorage per visitor; no server.
+  // In-memory only. No cookies, no localStorage, no server. Each
+  // mouseenter bumps the stage 1 → 2 → 3 (capped). The stage
+  // persists across mouseleave for the lifetime of the tab —
+  // Pianosa-Logik: 1. Versuch ja, 2. Versuch hm, 3. Versuch
+  // eskalation. State resets to 1 only on page reload.
   (function initRedFlag() {
     const hint = document.querySelector('.scroll-hint');
     const flag = hint && hint.querySelector('.red-flag');
     if (!hint || !flag) return;
 
-    const KEY = 'explore-flag-stage';
-    const readStage = () => {
-      const v = parseInt(localStorage.getItem(KEY) || '1', 10);
-      if (Number.isNaN(v) || v < 1) return 1;
-      if (v > 3) return 3;
-      return v;
-    };
-    const writeStage = (n) => {
-      try { localStorage.setItem(KEY, String(n)); } catch (_) {}
-      hint.setAttribute('data-flag-stage', String(n));
-    };
+    // Hover counter: 0 = noch nie / nicht aktiv, 1 = erster Hover (ja),
+    // 2 = zweiter Hover (hm), 3+ = dritter Hover (eskalation, capped).
+    let hovers = 0;
+    const stageOf = (n) => n <= 1 ? 1 : n === 2 ? 2 : 3;
+    const apply = () => hint.setAttribute('data-flag-stage', String(stageOf(hovers)));
+    apply();
 
-    writeStage(readStage());
-
-    // Make the flag itself clickable while hint stays a focusable
-    // group. The flag swallows the click so a click on "Explore"
-    // text still scrolls / does not trigger escalation.
-    flag.style.pointerEvents = 'auto';
-    flag.style.cursor = 'pointer';
-    flag.setAttribute('role', 'button');
-    flag.setAttribute('aria-label',
-      'Pianosa-Eskalation: Klick erhöht die Stufe (1 zu 2 zu 3). Doppelklick setzt zurück.');
-    flag.tabIndex = 0;
-
-    const bump = () => {
-      const next = Math.min(3, readStage() + 1);
-      writeStage(next);
-      flag.classList.remove('flag-pulse');
-      // restart the pulse animation
-      void flag.offsetWidth;
-      flag.classList.add('flag-pulse');
-    };
-    const reset = () => {
-      writeStage(1);
+    const pulse = () => {
       flag.classList.remove('flag-pulse');
       void flag.offsetWidth;
       flag.classList.add('flag-pulse');
     };
 
-    flag.addEventListener('click', (ev) => { ev.stopPropagation(); bump(); });
-    flag.addEventListener('dblclick', (ev) => { ev.stopPropagation(); reset(); });
-    flag.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); bump(); }
-      if (ev.key === 'Escape') { ev.preventDefault(); reset(); }
-    });
+    const onEnter = () => {
+      hovers += 1;
+      apply();
+      pulse();
+    };
+
+    hint.addEventListener('mouseenter', onEnter);
+    hint.addEventListener('focus',      onEnter);
   })();
 
   // Language switcher toggle
