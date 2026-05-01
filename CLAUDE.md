@@ -29,6 +29,14 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
 - **Primary remote**: `gitlab` → `git@gitlab.com:steefSteefsen/steefsteefsen-github-io.git`
 - **Mirror**: `origin` → `git@github.com:steefsteefsen/steefsteefsen.github.io.git` (auto-mirrored from GitLab CI)
 - Always push to `gitlab`, never to `origin` directly.
+- **Hotfix exception.** When Stefan calls a change a "hotfix" — e.g. taking
+  down a link, removing a card, scrubbing a name — pushing straight to
+  `gitlab` without the usual review-in-browser handoff is acceptable, *only
+  for that hotfix*. The bar: change is small, scoped, and time-sensitive
+  (the live site has something Stefan wants gone *now*). For anything else
+  (new card, new copy, refactor, blog post) the normal flow stands: local
+  server → Stefan reviews in his browser → then push. A hotfix is not a
+  shortcut around review for routine work; if in doubt, it's not a hotfix.
 
 ## Development workflow
 
