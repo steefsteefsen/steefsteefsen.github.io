@@ -3047,6 +3047,55 @@
       <p data-i18n="tool_spreadshop_p">White-Label-Shop-Plattform der Spreadshirt-Group aus Leipzig-Plagwitz. On-Demand-Druck, kein Lager, kein Vorab-Risiko — eigene Designs auf T-Shirts, Beuteln, Hoodies. Made in Germany, Print-on-Demand statt Massenproduktion. Die Plattform hinter Stabielefeld und vielen anderen Kiez-Initiativen, die Merchandise machen ohne Lagerhalle.</p>
       <a href="https://www.spreadshop.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
     </div>
+    <!-- Build & test toolchain — Open Source, sichtbar im Repo. -->
+    <div class="tool-card">
+      <span class="tool-icon">⛰️</span>
+      <h3>Alpine.js</h3>
+      <p data-i18n="tool_alpine_p">Minimalistisches JS-Framework für interaktive Karten — `x-data`, `x-collapse`, `x-show`. Lädt als ein einziges Skript per CDN, kein Build-Step. MIT-Lizenz. Macht die Aufklapp-Karten dieser Seite leicht und schnell.</p>
+      <a href="https://alpinejs.dev" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🃏</span>
+      <h3>Jest</h3>
+      <p data-i18n="tool_jest_p">Test-Framework von Meta, MIT-Lizenz. 297 Tests halten diese Site zusammen — DOM-Struktur, i18n-Vollständigkeit, Privacy-Tier-Disziplin, Easter-Egg-Verhalten. Grün heißt: Failure-Modes ausgeschlossen, nicht: Feature stimmt. Siehe Ethik-Seite, „Was wir wissen können".</p>
+      <a href="https://jestjs.io" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🌐</span>
+      <h3>jsdom</h3>
+      <p data-i18n="tool_jsdom_p">JavaScript-Implementation einer Browser-Umgebung für Node.js. Damit laufen die DOM-Tests ohne echten Browser. MIT-Lizenz, Open Source. Liest die HTML-Dateien, parst sie wie ein Browser, lässt Tests darauf laufen.</p>
+      <a href="https://github.com/jsdom/jsdom" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🎭</span>
+      <h3>Puppeteer</h3>
+      <p data-i18n="tool_puppeteer_p">Headless-Chrome-Steuerung für Mobile-Render-Tests — Burger-Menu, Touch-Tap, Layout bei 375px iPhone SE. Apache-2.0-Lizenz, Google-Open-Source-Projekt. Greift nur lokal, nicht in CI ohne Chrome-Binary.</p>
+      <a href="https://pptr.dev" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🟩</span>
+      <h3>Node.js</h3>
+      <p data-i18n="tool_node_p">JavaScript-Runtime, MIT/BSD-style-Lizenz. Hier nur als Build- und Test-Runner: `generate-feed.js` baut die RSS-Feeds, Jest läuft darauf, npm-Pakete werden damit installiert. Das Frontend selbst braucht es nicht.</p>
+      <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">✅</span>
+      <h3>html-validate</h3>
+      <p data-i18n="tool_htmlvalidate_p">Statischer HTML-Validator, MIT-Lizenz. Läuft im Pre-Push-Hook und in der GitLab-CI gegen `index.html`, `invest.html`, `impressum.html`. Fängt kaputte Tags, ungültige Attribute, fehlende `alt`-Texte. Verhindert dass dumme Fehler ins Push gehen.</p>
+      <a href="https://html-validate.org" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🌳</span>
+      <h3>git</h3>
+      <p data-i18n="tool_git_p">Verteiltes Versionskontrollsystem von Linus Torvalds, GPLv2-Lizenz. Jede Änderung dieser Seite wandert durch git — Commit für Commit, mit Hashes nachvollziehbar bis zum allerersten Stand. Ohne git kein Tribe-Stack, ohne Tribe-Stack keine Site.</p>
+      <a href="https://git-scm.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🐝</span>
+      <h3>Codeberg / Forgejo</h3>
+      <p data-i18n="tool_codeberg_p">Gemeinnützige Forge aus Berlin (Codeberg e.V.), basiert auf Forgejo (Gitea-Fork), beide MIT/Apache-Open-Source. Aktuell nicht das Hosting dieser Seite — siehe <a href="/blog/posts/2026-05-03-codeberg-anlass.html">Codeberg-Anlass-Post</a>. Aber als Option immer auf dem Tisch.</p>
+      <a href="https://codeberg.org" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
   </div>
 </section>
 
@@ -3235,6 +3284,18 @@
     <p data-i18n="local_casacerto_p">Italian restaurant in Zürich's Strassburgstrasse 5 — seasonal cuisine, 100+ wines, and the warmth of a proper Italian kitchen transplanted to the city. Run by two friends. Your mini-holiday in the middle of Zürich.</p>
     <a href="https://casa-certo.ch/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
     <a href="https://soundcloud.com/nikosvoutsas" target="_blank" class="support-link" data-i18n="local_casacerto_nikos">SoundCloud &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>MadHat Frankfurt</h3>
+    <span class="status-badge status-badge--try" data-i18n="local_madhat_badge">Card im Aufbau · Try &amp; Error</span>
+    <p data-i18n="local_madhat_p">Lokal in Frankfurt am Main, das Steef unterstützt. Pre-Flight-Daten kommen mit dem nächsten Edit: exakter Name auf dem Schild, Kategorie, Adresse, OSM-Verlinkung, ein Satz dazu warum ich sie pushe — und der Konsens vom Inhaber/in. Bis dahin steht hier die Anerkennung, ohne Detail.</p>
+  </div>
+
+  <div class="support-card support-card--local reveal">
+    <h3>Fatimah's Imbiss</h3>
+    <span class="status-badge status-badge--try" data-i18n="local_fatimah_badge">Card im Aufbau · Try &amp; Error</span>
+    <p data-i18n="local_fatimah_p">Imbiss, dessen Name ich am Schild verifiziert habe — vorher hatte ich ihn falsch in Erinnerung. Pre-Flight-Daten (Adresse, Kategorie, OSM, Konsens, ein Satz warum ich ihn pushe) kommen mit dem nächsten Edit. Bis dahin: die Anerkennung steht, das Detail folgt.</p>
   </div>
 
   <div class="support-card support-card--local reveal">

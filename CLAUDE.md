@@ -155,6 +155,30 @@ Single `index.html` with inline CSS and JS. Sections: Hero, Philosophy, Projects
    - Use `<span class="tool-icon"><img src="icons/<name>.svg" alt="<Name>"></span>` in the card.
    - Only fall back to an emoji if no artwork can be found after trying all three sources.
 
+### Hard rule — original icons, never emoji as default
+
+**Stefans Anweisung 2026-05-03**: *"Alle Icons original nehmen und bei
+jedem start und terminate session checken, ob es neue gibt."*
+
+Das heißt:
+1. **Jede Tool-Card MUSS ein original Logo-Icon** in `icons/` haben.
+   Emoji als Platzhalter ist temporär erlaubt, ist aber **technische
+   Schuld** und gehört in einen Tasklist-Eintrag oder ein TODO im
+   Commit, sodass es nicht vergessen wird.
+2. **Bei jedem Session-Init** scannt Claude `icons/` gegen die
+   Tool-Cards in `index.html`:
+   ```bash
+   grep -oE 'icons/[^"]+' index.html | sort -u
+   ls icons/ | sort -u
+   ```
+   Differenz = Cards mit Emoji-Placeholder (kein Icon) ODER ungenutzte
+   Icons im Ordner. Beide werden in der Init-Snapshot-Zeile genannt.
+3. **Bei jedem Session-Terminate** wird der Diff erneut gemacht und
+   im `docs/sessions/`-Summary aufgeführt unter *„Tool-Icons offen"*.
+   So fällt es niemals durch.
+4. **Beim Anlegen einer neuen Tool-Card mit Emoji**: Claude ergänzt
+   sofort einen `tasklist`-Eintrag *„Original-Icon für <Tool> nachreichen"*.
+
 ### Adding a new support card (I Support / Local Businesses / Artists)
 1. Insert `<div class="support-card support-card--<cause|artist|local> reveal">` before the placeholder card.
 2. If the card references external facts, add a `<sup class="fn">N</sup>` inline and a `<li>` entry in the `<section class="footnotes">` at the bottom.

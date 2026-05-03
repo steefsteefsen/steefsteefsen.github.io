@@ -61,7 +61,13 @@ const EXPECTED_LOCAL_CARDS = [
   'Stabielefeld',
   'Späti Bros',
   'MBzwo',
-  "Neneh's Imbiss",
+  // Stefan hat 2026-05-03 vor Ort am Schild verifiziert: der Imbiss
+  // heißt "Fatimah's Imbiss", nicht "Neneh's Imbiss". Vorheriger Test-
+  // Eintrag war ein Wahrnehmungsfehler. Card in index.html steht
+  // weiter aus — Pre-Flight-Daten (Adresse, OSM, Kategorie) pending,
+  // analog zur MadHat-Skelett-Card. Eintrag bleibt vorerst auskommen-
+  // tiert bis die Card existiert.
+  // "Fatimah's Imbiss",
 ];
 
 function findCard(name) {
