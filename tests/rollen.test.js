@@ -151,11 +151,12 @@ describe('Metabolisierungs-Karte (VaJoJuA) — Fibonacci-Spirale', () => {
     expect(cap.textContent.toLowerCase()).toMatch(/gedauert|nötig|verstanden|zentrum/);
   });
 
-  test('VaJoJuA attribution (Vale, Jojo, Julia, Ariane) is present in the meta card', () => {
+  test('VJoJuAK attribution (V., Jojo, Julia, A.K.) is present in the meta card', () => {
     const card = document.querySelector('.rollen-card--meta');
     expect(card).not.toBeNull();
     const attr = card.querySelector('.rollen-attribution');
-    expect(attr.textContent).toMatch(/Vale.*Jojo.*Julia.*Ariane|VaJoJuA/);
+    // Tier-Disziplin: Vale → V., Ariane → A.K.; Jojo voll, Julia Vorname-only.
+    expect(attr.textContent).toMatch(/V\..*Jojo.*Julia.*A\.K\.|VJoJuAK/);
   });
 });
 

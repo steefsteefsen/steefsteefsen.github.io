@@ -1475,8 +1475,9 @@ end-of-session signal.
   außen (roh) ins Zentrum (verstanden), Goldener Schnitt approximiert
   durch vier Quadrant-Bögen.
   Aussage: *„Gedanken müssen erst metabolisiert werden, bevor sie
-  richtig verstanden werden können."* — geprägt von Vale, Jojo, Julia
-  und Ariane (VaJoJuA-Akronym). Verstehen wächst spiralförmig, nicht
+  richtig verstanden werden können."* — geprägt von V., Jojo, Julia
+  und A.K. (VJoJuAK-Akronym; Vale und Ariane bleiben Tier-2 mit
+  Initialen). Verstehen wächst spiralförmig, nicht
   linear.
   *Karte 3 (Flowbenou-Theorie)*: Zwei Pills *„Versuch"* / *„Korrektur"*
   mit `↻`-Loop-Button dazwischen. Klick rotiert das Icon und tauscht
