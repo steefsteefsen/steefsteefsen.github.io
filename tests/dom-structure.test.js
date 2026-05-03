@@ -129,6 +129,10 @@ describe('#idols section content', () => {
     'South Park':              ['south park', 'parker', 'matt stone', 'trey parker'],
     'Tschaikowski':            ['tchaikovsky', 'tschaikowski', 'symphony no. 4'],
     'O/Y':                     ['oh_why', 'live im salon', 'soundcloud.com/oh_why'],
+    // Anonymised stage-name cards — embed src / soundcloud handle is the
+    // identifier, h3 only carries a role description.
+    'norwegischer Künstler':   ['katongo', 'soundcloud.com/katongo'],
+    'Berliner Produzent':      ['oh_why', 'soundcloud-embed', 'live im salon'],
   };
 
   function passesEmbedCheck(h3Text, iframe) {
@@ -438,6 +442,10 @@ describe('banned-string sweep', () => {
     'Marcel Blatti',
     'Gun!lla',
     'Gunilla',
+    // Reisen-Seite Couchsurfing host (Vorab-gated bis Freigabe)
+    // currently only catches index.html / i18n.js — extend sweep to journeys/
+    // and blog/ when introducing a multi-file test runner.
+    'Loyda',
   ];
 
   test.each(BANNED_PRIVATE_REFERENCES)('"%s" does not appear in index.html', (needle) => {
@@ -448,6 +456,63 @@ describe('banned-string sweep', () => {
   const i18nJs = fs.readFileSync(path.resolve(__dirname, '../i18n.js'), 'utf8');
   test.each(BANNED_PRIVATE_REFERENCES)('"%s" does not appear in i18n.js', (needle) => {
     expect(i18nJs.includes(needle)).toBe(false);
+  });
+});
+
+// ── 16. Public-name discipline ────────────────────────────────────────────────
+// On the site Stefan goes by "Steef". The civil full name "Stefan-Olav
+// Hüllinghorst" / "S. H." may only appear in legally-required places
+// (Impressum § 5 TMG). This sweep catches accidental reintroduction in
+// any other HTML/XML/JS surface.
+//
+// See CLAUDE.md → "Stefan's public-facing name" for the policy.
+
+describe('public name discipline', () => {
+  const PUBLIC_FILES = [
+    'index.html',
+    'feed.xml',
+    'feed-en.xml',
+    'blog/index.html',
+    'roadmap.html',
+    'invest.html',
+    'open-letter.html',
+    'open-letter-watzke.html',
+    'open-letter-fernandes.html',
+    'ethics/index.html',
+    'ethics/index-en.html',
+    'philosophy/index.html',
+    'philosophy/index-en.html',
+    'science/index.html',
+    'science/index-en.html',
+    'movement/index.html',
+    'movement/index-en.html',
+    'mentorship/index.html',
+    'mentorship/index-en.html',
+    'tribe/index.html',
+    'tribe/index-en.html',
+    'journeys/index.html',
+    'journeys/index-en.html',
+  ];
+  const FORBIDDEN_FRAGMENTS = [
+    'Stefan-Olav Hüllinghorst',
+    'Stefan Hüllinghorst',
+    'S. H.',
+  ];
+
+  PUBLIC_FILES.forEach(rel => {
+    const abs = path.resolve(__dirname, '..', rel);
+    if (!fs.existsSync(abs)) return; // file may not exist yet (e.g. journeys/)
+    const content = fs.readFileSync(abs, 'utf8');
+    FORBIDDEN_FRAGMENTS.forEach(needle => {
+      test(`${rel} does not contain "${needle}"`, () => {
+        expect(content.includes(needle)).toBe(false);
+      });
+    });
+  });
+
+  test('impressum.html DOES contain the full legal name (TMG § 5)', () => {
+    const imp = fs.readFileSync(path.resolve(__dirname, '../impressum.html'), 'utf8');
+    expect(imp.includes('Stefan-Olav Hüllinghorst')).toBe(true);
   });
 });
 

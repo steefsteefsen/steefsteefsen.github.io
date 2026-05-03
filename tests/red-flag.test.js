@@ -8,10 +8,13 @@
  * but it WILL run the inline <script> that wires the JS handlers,
  * so we can:
  *   - confirm the .scroll-hint exists and has data-flag-stage="1"
- *   - dispatch a synthetic mouseenter / mouseleave and check the
- *     attribute moves to "2", "3", "3" (capped) and back to "1"
+ *   - dispatch a synthetic pointerdown and check the attribute moves
+ *     to "2", "3", "3" (capped); pointerleave does NOT reset
  *   - confirm the .red-flag SVG exists with the carnation paths
  *   - confirm the flag-pulse class is added on each escalation
+ *
+ * Trigger is pointerdown (not mouseenter) — funktioniert auf
+ * Maus *und* Touch in einem Listener (Mobile-Support).
  *
  * If this passes and the user still sees no visual change in the
  * real browser, the bug is in CSS rendering, not in the JS.
@@ -65,26 +68,26 @@ describe('red flag — DOM and JS wiring', () => {
     expect(carnationParts.length).toBeGreaterThan(3);
   });
 
-  test('first hover stays at stage 1, second hover -> 2, third -> 3, capped', () => {
+  test('first trigger stays at stage 1, second -> 2, third -> 3, capped', () => {
     const hint = document.querySelector('.scroll-hint');
-    const enter = () => hint.dispatchEvent(new Event('mouseenter'));
+    const trigger = () => hint.dispatchEvent(new Event('pointerdown'));
 
-    enter();
+    trigger();
     expect(hint.getAttribute('data-flag-stage')).toBe('1');
-    enter();
+    trigger();
     expect(hint.getAttribute('data-flag-stage')).toBe('2');
-    enter();
+    trigger();
     expect(hint.getAttribute('data-flag-stage')).toBe('3');
-    enter();
+    trigger();
     expect(hint.getAttribute('data-flag-stage')).toBe('3'); // capped
   });
 
-  test('mouseleave does NOT reset (Pianosa: state persists for the tab lifetime)', () => {
+  test('pointerleave does NOT reset (Pianosa: state persists for the tab lifetime)', () => {
     const hint = document.querySelector('.scroll-hint');
-    hint.dispatchEvent(new Event('mouseenter'));
-    hint.dispatchEvent(new Event('mouseenter'));
+    hint.dispatchEvent(new Event('pointerdown'));
+    hint.dispatchEvent(new Event('pointerdown'));
     expect(hint.getAttribute('data-flag-stage')).toBe('2');
-    hint.dispatchEvent(new Event('mouseleave'));
+    hint.dispatchEvent(new Event('pointerleave'));
     expect(hint.getAttribute('data-flag-stage')).toBe('2');
   });
 
@@ -92,7 +95,24 @@ describe('red flag — DOM and JS wiring', () => {
     const hint = document.querySelector('.scroll-hint');
     const flag = hint.querySelector('.red-flag');
     flag.classList.remove('flag-pulse');
-    hint.dispatchEvent(new Event('mouseenter'));
+    hint.dispatchEvent(new Event('pointerdown'));
     expect(flag.classList.contains('flag-pulse')).toBe(true);
+  });
+
+  test('toggle off via #flag-toggle hides the flag and disables the trigger', () => {
+    const hint = document.querySelector('.scroll-hint');
+    const toggle = document.getElementById('flag-toggle');
+    expect(toggle).not.toBeNull();
+    expect(toggle.getAttribute('aria-pressed')).toBe('true'); // default on
+    expect(document.body.classList.contains('flag-off')).toBe(false);
+
+    toggle.click();
+    expect(toggle.getAttribute('aria-pressed')).toBe('false');
+    expect(document.body.classList.contains('flag-off')).toBe(true);
+
+    // Trigger after off — stage must NOT bump
+    const before = hint.getAttribute('data-flag-stage');
+    hint.dispatchEvent(new Event('pointerdown'));
+    expect(hint.getAttribute('data-flag-stage')).toBe(before);
   });
 });
