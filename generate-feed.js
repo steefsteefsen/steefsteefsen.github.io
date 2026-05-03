@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://steefsteefsen.github.io';
-const AUTHOR = 'Stefan-Olav Hüllinghorst';
+const AUTHOR = 'Steef';
 
 const postsPath = path.join(__dirname, 'blog', 'posts.json');
 const posts = JSON.parse(fs.readFileSync(postsPath, 'utf8'));
@@ -63,5 +63,5 @@ ${items}
   console.log(`${outFile} geschrieben — ${count} Einträge (${lang}).`);
 }
 
-buildFeed('de', 'Stefan-Olav Hüllinghorst — Blog', 'Gedanken aus dem täglichen Leben.', 'feed.xml');
-buildFeed('en', 'Stefan-Olav Hüllinghorst — Blog', 'Thoughts from everyday life.', 'feed-en.xml');
+buildFeed('de', 'Steef — Blog', 'Gedanken aus dem täglichen Leben.', 'feed.xml');
+buildFeed('en', 'Steef — Blog', 'Thoughts from everyday life.', 'feed-en.xml');

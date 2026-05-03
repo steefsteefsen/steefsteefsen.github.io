@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Stefan-Olav Hüllinghorst — Blog</title>
+    <title>Steef — Blog</title>
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 29 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>Version 1.0 — and two algorithms I trust</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen-en.html</guid>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+    <description>The Journeys page just shipped as version 1.0 — no editing pass. A Kollektiv Blaue Stunde podcast and an Afro-House set were playing in the background. Plus: why I trust my music algorithms more than LinkedIn or Google. And three notes from the edges — the ZenBusiness breach, the Academy's AI line, the US troop withdrawal.</description>
+    <author>Steef</author>
+  </item>
   <item>
     <title>one css file instead of thirty-six</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2-en.html</link>
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-29-tokens-und-tier2-en.html</guid>
     <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
     <description>tokens.css pulls the colour palette out of 36 HTML files into one. Plus: privacy rule written down and jest-enforced, three new cards (Tchaikovsky, O/Y, Ciao Ella), a Socrates quote corrected.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Things take time</title>
@@ -22,7 +30,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-29-things-take-time-en.html</guid>
     <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
     <description>On living with ADHD, Judith Holofernes' new book Hummelhirn (read by Nora Tschirner), a Sido track for slowing down, and an open letter to Elon that just got milder.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Who's pushing the couriers?</title>
@@ -30,7 +38,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-29-wer-treibt-die-kuriere-en.html</guid>
     <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
     <description>A friend got hit on her bike. She's a courier. On piece rates, subcontractor shadow fleets, a BG-Verkehr accident statistic — and the antidote: bringing the pace down. With a mori set running in the background.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Calling things what they are</title>
@@ -38,7 +46,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-28-dinge-beim-namen-nennen-en.html</guid>
     <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
     <description>A new post on the legal question of naming genocide and a site-wide gender-language audit: both from the same impulse.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Calling a genocide a genocide</title>
@@ -46,7 +54,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-27-genozid-beim-namen-nennen-en.html</guid>
     <pubDate>Mon, 27 Apr 2026 00:00:00 GMT</pubDate>
     <description>If denying past genocides is criminal, naming present genocides must be possible. A legal stocktake on Gaza, Xinjiang, Tigray — with a note on Salgado.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>When Germany's cyber-security agency recommends Signal</title>
@@ -54,7 +62,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-26-bsi-signal-empfehlungen-en.html</guid>
     <pubDate>Sun, 26 Apr 2026 00:00:00 GMT</pubDate>
     <description>Germany's BSI recommends end-to-end encryption to at-risk groups — while the same government negotiates Chat Control at the EU level. On the irony of one arm of the state protecting exactly what the other arm wants to dismantle.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Everyone has someone to feed</title>
@@ -62,7 +70,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-25-jeder-hat-jemanden-zu-fuettern-en.html</guid>
     <pubDate>Sat, 25 Apr 2026 00:00:00 GMT</pubDate>
     <description>A call to police and activists alike — stay peaceful, stay respectful. On both sides of every line stands a person with someone waiting at home.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>Mirror live — everything at once</title>
@@ -70,7 +78,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-25-github-spiegel-en.html</guid>
     <pubDate>Sat, 25 Apr 2026 00:00:00 GMT</pubDate>
     <description>One commit. Six new subpages. RSS. Comments. A daily automated post agent. No phased rollout.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>One night, six pillars</title>
@@ -78,7 +86,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-25-eine-nacht-sechs-saulen-en.html</guid>
     <pubDate>Sat, 25 Apr 2026 00:00:00 GMT</pubDate>
     <description>In one night, the personal site grew a frame: Philosophy, Science, Ethics, Mentorship, Tribe, Movement. Plus a movement that launches on May 1. The soundtrack fits.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>The Three Guardians of 2FA</title>
@@ -86,7 +94,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-24-authenticator-matrix-en.html</guid>
     <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
     <description>After the Authy meltdown and the ongoing LastPass fallout: 22 authenticator apps compared. Three survive, five get kicked out.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   <item>
     <title>ICE 541, from little-b to big-B</title>
@@ -94,7 +102,7 @@
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-04-20-ice-541-en.html</guid>
     <pubDate>Mon, 20 Apr 2026 00:00:00 GMT</pubDate>
     <description>€90 ticket. €11.50 coffee and a roll. Free of charge: getting barked at in the dining car by someone in the worst possible mood. Service means SERVICE.</description>
-    <author>Stefan-Olav Hüllinghorst</author>
+    <author>Steef</author>
   </item>
   </channel>
 </rss>

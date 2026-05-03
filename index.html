@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stefan-Olav Hüllinghorst</title>
-<meta name="description" content="Cultivation, philosophy, and vision — the personal page of Stefan-Olav Hüllinghorst.">
+<title>„Der springende Punkt"</title>
+<meta name="description" content="Cultivation, philosophy, and vision — the page of "Der springende Punkt".">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
@@ -139,7 +139,20 @@
     pointer-events: none;
     z-index: 0;
   }
-  .hero-leaf.left { font-size: 18rem; top: 10%; left: -3rem; transform: rotate(-25deg); }
+  .hero-leaf.left {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 1.05;
+    top: 12%;
+    left: -1rem;
+    transform: rotate(-6deg);
+    max-width: 60vw;
+    color: var(--moss);
+    opacity: 0.07;
+    letter-spacing: -0.01em;
+  }
   .hero-leaf.right {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22rem;
@@ -183,7 +196,8 @@
   .hero-citation:nth-child(4) { animation-delay: 0.55s; }
 
   .hero-citations-toggle {
-    display: none;
+    display: inline-flex;
+    align-items: center;
     background: transparent;
     border: 1px solid rgba(201, 169, 110, 0.5);
     border-radius: 999px;
@@ -207,7 +221,6 @@
   .hero-citations-toggle.open .chev { transform: rotate(180deg); }
 
   @media (max-width: 640px) {
-    .hero-citations-toggle { display: inline-flex; align-items: center; }
     .hero-citations-row {
       flex-direction: column;
       align-items: stretch;
@@ -234,6 +247,15 @@
     color: var(--moss);
     margin-top: 0.3em;
     font-weight: 400;
+  }
+
+  .hero h1 span.hero-creed {
+    font-size: 0.42em;
+    font-weight: 500;
+    color: var(--moss-light);
+    letter-spacing: 0.04em;
+    margin-top: 0.6em;
+    opacity: 0.92;
   }
 
   .hero-nicknames {
@@ -362,21 +384,37 @@
   */
   .scroll-hint { cursor: pointer; }
   .scroll-hint .red-flag {
-    position: absolute;
-    left: calc(100% + 0.6rem);
-    top: -0.3rem;
+    /* Sprung-Physik: position fixed relative to viewport so the flag can
+       teleport anywhere in the hero area. JS sets --jx / --jy per hover.
+       Default position (before first hover) sits next to the Explore label
+       via the fallback values in the calc(). */
+    position: fixed;
+    left: var(--jx, 50%);
+    top: var(--jy, 80%);
     width: 26px;
     height: 26px;
     opacity: 0;
-    transform: translateX(-6px) rotate(-8deg);
-    transform-origin: bottom left;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    transform-origin: center center;
+    transition:
+      opacity 0.25s ease,
+      left 0.18s cubic-bezier(0.5, 1.6, 0.4, 1),
+      top  0.18s cubic-bezier(0.5, 1.6, 0.4, 1),
+      transform 0.25s ease;
     pointer-events: none;
+    z-index: 6;
+    will-change: left, top;
   }
   .scroll-hint:hover .red-flag,
   .scroll-hint:focus-within .red-flag {
     opacity: 1;
-    transform: translateX(0) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  /* Reduced motion: kein Springen, Flagge bleibt am Ankerpunkt sitzen. */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-hint .red-flag {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
   }
   .scroll-hint .red-flag svg {
     width: 100%;
@@ -432,6 +470,17 @@
     .scroll-hint .red-flag .cloth { animation: none !important; }
   }
 
+  /* Toggle: visitor can switch the Easter-Egg off via #flag-toggle.
+     Default = on. Setting persists in localStorage (anders als der
+     Stage-Counter, der bewusst tab-only bleibt). */
+  body.flag-off .scroll-hint .red-flag { display: none; }
+  #flag-toggle[aria-pressed="true"] { color: #c9342f; border-color: #c9342f; }
+  #flag-toggle[aria-pressed="false"] {
+    color: var(--stone);
+    text-decoration: line-through;
+    text-decoration-color: rgba(140, 123, 107, 0.7);
+  }
+
   /* Click feedback — short pulse on the whole flag when the stage bumps. */
   .scroll-hint .red-flag.flag-pulse {
     animation: flagPulse 0.5s ease;
@@ -440,6 +489,167 @@
     0%   { transform: translateX(0) rotate(0deg) scale(1); }
     40%  { transform: translateX(0) rotate(-3deg) scale(1.18); filter: drop-shadow(0 0 6px rgba(201, 52, 47, 0.55)); }
     100% { transform: translateX(0) rotate(0deg) scale(1); }
+  }
+
+  /* ── Confetti + Sound-Toggle ── */
+  .confetti-piece {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 14px;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform, opacity;
+    animation: confetti-fall 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+    10%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--cx, 0), var(--cy, 100vh)) rotate(var(--cr, 360deg)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .confetti-piece { animation-duration: 0.001s; opacity: 0; }
+  }
+
+  .sound-toggle {
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    border-radius: 999px;
+    padding: 0.25rem 0.55rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: var(--stone);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    margin-left: 0.4rem;
+  }
+  .sound-toggle:hover { color: var(--bark); border-color: var(--clay); }
+  .sound-toggle[aria-pressed="true"] { color: var(--moss); }
+
+  /* ── Fancy: Stardust, Aurora, Tilt, Goldstaub ── */
+
+  /* Stardust: dezenter Glitzer-Layer hinter dem Grain */
+  .stardust {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    mix-blend-mode: screen;
+  }
+  .stardust .speck {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 230, 160, 0.95) 0%, rgba(255, 215, 100, 0.4) 50%, transparent 100%);
+    box-shadow: 0 0 4px rgba(255, 220, 130, 0.7);
+    animation: speck-twinkle var(--dur, 4s) ease-in-out infinite;
+    animation-delay: var(--del, 0s);
+  }
+  @keyframes speck-twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Klick-Aurora: kurzer Lichtschein am Klickpunkt */
+  .click-aurora {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99997;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(circle, rgba(255, 220, 130, 0.6) 0%, rgba(212, 175, 55, 0.25) 40%, transparent 70%);
+    animation: aurora-bloom 0.7s ease-out forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes aurora-bloom {
+    0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+  }
+
+  /* Hover-Tilt: Karten neigen sich leicht in Richtung Cursor */
+  .value-card, .support-card, .tool-card, .lifeline-card, .theorie-card, .olympia-card {
+    transform-style: preserve-3d;
+    transition: transform 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.18s;
+    will-change: transform;
+  }
+
+  /* Goldstaub-Reveal: Sections, die per .visible aktiviert werden, regnen einmal Goldstaub */
+  .gold-rain {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99996;
+    width: 6px; height: 10px;
+    border-radius: 1px;
+    background: linear-gradient(135deg, rgba(255, 230, 130, 0.95), rgba(212, 175, 55, 0.5));
+    box-shadow: 0 0 6px rgba(255, 215, 100, 0.55);
+    animation: gold-fall 1.8s cubic-bezier(0.34, 0.04, 0.55, 1.0) forwards;
+  }
+  @keyframes gold-fall {
+    0%   { opacity: 0; transform: translate(0, -30px) rotate(0deg); }
+    20%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 60vh)) rotate(var(--dr, 360deg)); }
+  }
+
+  /* Püschel-Schweif: Geister-Püschel mit Verzögerung */
+  .puschel-ghost {
+    position: fixed;
+    top: 0; left: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 209, 230, 0.5) 0%, rgba(255, 143, 193, 0.4) 50%, rgba(232, 90, 163, 0.2) 100%);
+    pointer-events: none;
+    z-index: 99997;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+    filter: blur(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stardust, .click-aurora, .gold-rain, .puschel-ghost { display: none !important; }
+    .value-card, .support-card, .tool-card, .lifeline-card, .theorie-card, .olympia-card {
+      transform: none !important;
+      transition: none;
+    }
+  }
+  @media (max-width: 700px), (hover: none) {
+    .puschel-ghost { display: none; }
+    /* Tilt nur auf hover-fähigen Geräten */
+    .value-card, .support-card, .tool-card, .lifeline-card, .theorie-card, .olympia-card {
+      transform: none !important;
+    }
+  }
+
+  /* Rosa Püschel — folgt Cursor mit Damping, dreht sich, wackelt */
+  .puschel {
+    position: fixed;
+    top: 0; left: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffd1e6 0%, #ff8fc1 45%, #e85aa3 100%);
+    box-shadow:
+      0 0 0 2px rgba(255, 175, 215, 0.4),
+      0 4px 14px rgba(232, 90, 163, 0.4),
+      inset -2px -3px 6px rgba(184, 35, 110, 0.3),
+      inset 2px 2px 4px rgba(255, 230, 240, 0.6);
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    /* Plüschig: leichte Textur via doppelter radialer Gradient + filter */
+    filter: blur(0.3px) contrast(1.05);
+  }
+  .puschel::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 50%, rgba(255, 143, 193, 0.35) 70%, transparent 85%);
+    pointer-events: none;
+  }
+  @media (max-width: 700px), (hover: none), (prefers-reduced-motion: reduce) {
+    .puschel { display: none; }
   }
 
   /* ── Sections ── */
@@ -752,6 +962,454 @@
     max-width: 680px;
     font-style: italic;
   }
+
+  .mindset-key {
+    margin: 1.5rem 0;
+    padding: 0.9rem 1.2rem;
+    border-left: 3px solid var(--moss);
+    background: rgba(90, 110, 74, 0.06);
+    color: var(--bark);
+    font-size: 1rem;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+  }
+  .mindset-key strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--moss);
+    letter-spacing: 0.02em;
+  }
+
+  /* alexislukasfluide Theorie — Dreieck Opfer / Täter / Held */
+  .theorie-card {
+    margin: 1.8rem 0;
+    padding: 1.4rem 1.6rem 1.6rem;
+    background: rgba(201, 169, 110, 0.06);
+    border: 1px dashed rgba(201, 169, 110, 0.4);
+    border-radius: 6px;
+  }
+  .theorie-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--bark);
+    margin: 0 0 0.4rem;
+    letter-spacing: 0.01em;
+  }
+  .theorie-card .theorie-author {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: var(--stone);
+    font-style: italic;
+    margin: 0 0 0.9rem;
+  }
+  .theorie-card .theorie-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 1.4rem;
+    align-items: center;
+  }
+  @media (max-width: 600px) {
+    .theorie-card .theorie-grid { grid-template-columns: 1fr; }
+    .theorie-card svg { max-width: 220px; margin: 0 auto; display: block; }
+  }
+  .theorie-card p {
+    font-size: 0.95rem;
+    color: var(--bark);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .theorie-card svg { width: 100%; height: auto; }
+  .theorie-card svg .triangle-edge { fill: none; stroke: var(--clay); stroke-width: 1.4; }
+  .theorie-card svg .triangle-vertex { fill: var(--cream); stroke: var(--bark); stroke-width: 1.2; }
+  .theorie-card svg .triangle-vertex-hero { fill: var(--moss); stroke: var(--moss); }
+  .theorie-card svg text { font-family: 'Jost', sans-serif; font-size: 11px; fill: var(--bark); }
+  .theorie-card svg .label-hero { font-weight: 600; fill: var(--moss); }
+  .theorie-card svg .triangle-edge,
+  .theorie-card svg .triangle-vertex { transition: stroke 0.25s, fill 0.25s; }
+  .theorie-card:hover svg .triangle-edge { stroke: var(--moss); }
+
+  /* Energy Channeling Olympia — Aufruf-Block */
+  .olympia-card {
+    margin: 1.8rem 0;
+    padding: 1.8rem 1.6rem 1.6rem;
+    background:
+      radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+      rgba(201, 169, 110, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    position: relative;
+  }
+  .olympia-card::before {
+    content: '🥇';
+    position: absolute;
+    top: -1.1rem;
+    left: 1.4rem;
+    font-size: 1.7rem;
+    background: var(--cream);
+    padding: 0 0.3rem;
+    line-height: 1;
+  }
+  .olympia-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--bark);
+    margin: 0 0 0.2rem;
+  }
+  .olympia-card .olympia-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--moss);
+    font-style: italic;
+    margin: 0 0 1rem;
+    letter-spacing: 0.02em;
+  }
+  .olympia-card p {
+    font-size: 0.95rem;
+    color: var(--bark);
+    line-height: 1.7;
+    margin: 0 0 0.8rem;
+  }
+  .olympia-card ol {
+    font-size: 0.92rem;
+    color: var(--bark);
+    line-height: 1.65;
+    margin: 0.4rem 0 0.9rem 1.4rem;
+  }
+  .olympia-card ol li { margin-bottom: 0.4rem; }
+  .olympia-card ol li strong { color: var(--moss); font-weight: 600; }
+  .olympia-card .olympia-foot {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+    font-size: 0.88rem;
+    color: var(--bark);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .olympia-card a { color: var(--clay); border-bottom: 1px dotted rgba(201, 169, 110, 0.5); text-decoration: none; }
+  .olympia-card a:hover { color: var(--bark); border-bottom-color: var(--bark); }
+  .olympia-card .olympia-leitsatz {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(212, 175, 55, 0.12);
+    border-radius: 3px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--earth);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* Deutschland-5.0-Card: Pianosa-Stufenlogik */
+  .d5-card {
+    margin: 1.8rem 0;
+    padding: 1.6rem 1.6rem 1.4rem;
+    background:
+      linear-gradient(135deg, rgba(90, 110, 74, 0.04) 0%, rgba(201, 169, 110, 0.04) 50%, rgba(201, 80, 30, 0.04) 100%);
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    border-radius: 8px;
+    position: relative;
+  }
+  .d5-card::before {
+    content: '5.0';
+    position: absolute;
+    top: -1.1rem;
+    left: 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    background: var(--cream);
+    padding: 0 0.4rem;
+    color: var(--bark);
+    letter-spacing: 0.02em;
+  }
+  .d5-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--bark);
+    margin: 0 0 0.4rem;
+  }
+  .d5-card .d5-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--moss);
+    font-style: italic;
+    margin: 0 0 0.9rem;
+    letter-spacing: 0.02em;
+  }
+  .d5-stufen {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) {
+    .d5-stufen { grid-template-columns: 1fr; }
+  }
+  .d5-stufe {
+    padding: 0.7rem 0.9rem;
+    border-radius: 5px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+  .d5-stufe-1 { background: rgba(90, 110, 74, 0.10); border-left: 3px solid var(--moss); color: var(--bark); }
+  .d5-stufe-2 { background: rgba(201, 80, 30, 0.10); border-left: 3px solid #c9501e; color: var(--bark); }
+  .d5-stufe-3 { background: rgba(201, 52, 47, 0.10); border-left: 3px solid #c9342f; color: var(--bark); }
+  .d5-stufe strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
+  .d5-card p {
+    font-size: 0.95rem;
+    color: var(--bark);
+    line-height: 1.65;
+    margin: 0.6rem 0;
+  }
+  .d5-card .d5-foot {
+    margin-top: 0.9rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed rgba(201, 169, 110, 0.35);
+    font-style: italic;
+    color: var(--earth);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+  }
+
+  /* ── Tribe-Teaser: zwei-Schichten-Architektur, kurz erklärt ── */
+  .tribe-teaser {
+    background: linear-gradient(135deg, rgba(90, 110, 74, 0.06), rgba(201, 169, 110, 0.08));
+    border: 1px solid rgba(90, 110, 74, 0.22);
+    border-left: 3px solid var(--moss);
+    border-radius: 6px;
+    padding: 1.6rem 1.8rem;
+    margin: 2.4rem auto;
+    max-width: 720px;
+  }
+  .tribe-teaser h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--bark);
+    margin: 0 0 0.6rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .tribe-teaser p {
+    color: var(--bark);
+    line-height: 1.65;
+    margin: 0.5rem 0;
+  }
+  .tribe-teaser .tribe-rules {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  .tribe-teaser .tribe-rules li {
+    color: var(--bark);
+    line-height: 1.6;
+    margin: 0.55rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .tribe-teaser .tribe-rules li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--moss);
+    font-weight: 700;
+    font-size: 1.4rem;
+    top: -0.25rem;
+  }
+  .tribe-teaser .tribe-contact {
+    margin-top: 1rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed rgba(201, 169, 110, 0.35);
+    font-size: 0.95rem;
+    color: var(--earth);
+  }
+  .tribe-teaser .tribe-contact a {
+    color: var(--moss);
+    border-bottom: 1px solid rgba(90, 110, 74, 0.4);
+    text-decoration: none;
+  }
+  .tribe-teaser .tribe-contact a:hover {
+    border-bottom-color: var(--moss);
+  }
+
+  /* ── Lifejourney: multi-strand interactive timeline ── */
+  .lifeline-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+  .lifeline-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    color: var(--stone);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .lifeline-pill:hover { color: var(--bark); border-color: var(--clay); }
+  .lifeline-pill.active { background: rgba(201, 169, 110, 0.15); color: var(--bark); border-color: var(--clay); }
+  .lifeline-pill .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .lifeline-pill .dot.career    { background: var(--bark); }
+  .lifeline-pill .dot.travel    { background: var(--earth); }
+  .lifeline-pill .dot.patent    { background: var(--moss); }
+  .lifeline-pill .dot.personal  { background: var(--clay); }
+
+  .lifeline {
+    position: relative;
+    margin-top: 1rem;
+    padding: 0;
+  }
+  .lifeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: linear-gradient(to bottom, transparent 0%, var(--clay) 5%, var(--clay) 95%, transparent 100%);
+    transform: translateX(-50%);
+  }
+  .lifeline-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 64px 1fr;
+    margin-bottom: 1.4rem;
+    align-items: stretch;
+  }
+  .lifeline-cell {
+    padding: 0;
+  }
+  .lifeline-cell.left  { grid-column: 1; padding-right: 1.2rem; }
+  .lifeline-cell.right { grid-column: 3; padding-left: 1.2rem; }
+  .lifeline-axis {
+    grid-column: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lifeline-year {
+    position: relative;
+    z-index: 2;
+    background: var(--cream);
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    border-radius: 999px;
+    padding: 0.18rem 0.55rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--moss);
+    min-width: 3.4rem;
+    height: 1.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .lifeline-card {
+    background: rgba(250, 247, 242, 0.6);
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    border-radius: 6px;
+    padding: 0.7rem 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .lifeline-cell.left .lifeline-card { text-align: right; }
+  .lifeline-card:hover {
+    border-color: var(--clay);
+    background: rgba(250, 247, 242, 0.95);
+    transform: translateY(-1px);
+  }
+  .lifeline-card.career    { border-left: 3px solid var(--bark); }
+  .lifeline-card.travel    { border-left: 3px solid var(--earth); }
+  .lifeline-card.patent    { border-left: 3px solid var(--moss); font-style: italic; }
+  .lifeline-card.personal  { border-left: 3px solid var(--clay); }
+  .lifeline-cell.left .lifeline-card { border-left: none; }
+  .lifeline-cell.left .lifeline-card.career    { border-right: 3px solid var(--bark); }
+  .lifeline-cell.left .lifeline-card.travel    { border-right: 3px solid var(--earth); }
+  .lifeline-cell.left .lifeline-card.patent    { border-right: 3px solid var(--moss); }
+  .lifeline-cell.left .lifeline-card.personal  { border-right: 3px solid var(--clay); }
+
+  .lifeline-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--bark);
+    margin: 0 0 0.2rem;
+    line-height: 1.3;
+  }
+  .lifeline-card .lifeline-sub {
+    font-size: 0.82rem;
+    color: var(--stone);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .lifeline-card .lifeline-detail {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s, margin-top 0.25s;
+  }
+  .lifeline-card .lifeline-detail.open {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 0.6rem;
+  }
+  .lifeline-card .lifeline-detail p {
+    font-size: 0.85rem;
+    color: var(--stone);
+    line-height: 1.7;
+    margin: 0 0 0.5rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.25);
+    padding-top: 0.5rem;
+  }
+  .lifeline-card .lifeline-detail a {
+    color: var(--moss);
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+    text-decoration: none;
+  }
+  .lifeline-card .lifeline-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+    margin-top: 0.3rem;
+  }
+
+  .lifeline-deeper {
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+    font-size: 0.9rem;
+    color: var(--stone);
+  }
+  .lifeline-deeper a {
+    color: var(--moss);
+    border-bottom: 1px solid rgba(90, 110, 74, 0.3);
+    text-decoration: none;
+  }
+  .lifeline-deeper a:hover { color: var(--bark); border-color: var(--bark); }
 
   /* ── Idols ── */
   #idols { border-top: 1px solid rgba(201, 169, 110, 0.2); }
@@ -1247,6 +1905,19 @@
       display: block; position: fixed; bottom: 2rem;
       left: 50%; transform: translateX(-50%); z-index: 106;
     }
+    /* Hero left-side text-mark: shrink for mobile */
+    .hero-leaf.left { font-size: 3rem; max-width: 75vw; left: 0.4rem; top: 6%; }
+    /* Lifejourney: collapse two-column timeline into single column */
+    .lifeline::before { left: 1.6rem; }
+    .lifeline-row { grid-template-columns: 3.6rem 1fr; }
+    .lifeline-axis { grid-column: 1; justify-content: flex-start; }
+    .lifeline-year { transform: translateX(0.2rem); }
+    .lifeline-cell.left, .lifeline-cell.right { grid-column: 2; padding: 0 0 0 1rem; text-align: left; }
+    .lifeline-cell.left .lifeline-card { text-align: left; }
+    .lifeline-cell.left .lifeline-card.career   { border-left: 3px solid var(--bark);  border-right: none; }
+    .lifeline-cell.left .lifeline-card.travel   { border-left: 3px solid var(--earth); border-right: none; }
+    .lifeline-cell.left .lifeline-card.patent   { border-left: 3px solid var(--moss);  border-right: none; }
+    .lifeline-cell.left .lifeline-card.personal { border-left: 3px solid var(--clay);  border-right: none; }
   }
 
   nav.burger-mode { padding: 1rem 1.5rem; justify-content: flex-start; }
@@ -1284,7 +1955,7 @@
 
 <!-- Navigation -->
 <nav id="main-nav">
-  <a href="#" class="logo">S.O. Hüllinghorst</a>
+  <a href="#" class="logo" title="Homepage von Steef">„Der springende Punkt"</a>
   <button type="button" class="burger" id="burger" aria-label="Menu" aria-controls="main-nav-links" aria-expanded="false">
     <span class="burger-line"></span>
     <span class="burger-line"></span>
@@ -1295,6 +1966,7 @@
     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
     <li><a href="#journey" data-i18n="nav_journey">Journey</a></li>
     <li><a href="#built-with" data-i18n="nav_built_with">Built With</a></li>
+    <li><a href="blog/" data-i18n="nav_blog">Blog</a></li>
     <li><a href="tribe/">Tribe</a></li>
     <li><a href="science/">Wissenschaft</a></li>
     <li><a href="ethics/">Ethik</a></li>
@@ -1304,10 +1976,14 @@
     <li><a href="#idols" data-i18n="nav_idols">Idols</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
+  <button type="button" class="sound-toggle" id="sound-toggle" aria-pressed="false" aria-label="Sound an / aus" title="Sound an / aus">&#128263;</button>
+  <button type="button" class="sound-toggle" id="peace-bells" aria-label="Friedensglocken läuten" title="Friedensglocken">&#128330;</button>
+  <button type="button" class="sound-toggle" id="flag-toggle" aria-pressed="true" aria-label="Springender Punkt an / aus" title="Springender Punkt an / aus">&#127988;</button>
   <div class="lang-switcher" id="lang-switcher">
     <button type="button" class="lang-current" id="lang-current-btn">EN</button>
     <div class="lang-dropdown" id="lang-dropdown">
       <button type="button" class="lang-option" data-lang="de">Deutsch</button>
+      <button type="button" class="lang-option" data-lang="eo">Esperanto</button>
       <button type="button" class="lang-option" data-lang="en">English</button>
       <button type="button" class="lang-option" data-lang="it">Italiano</button>
       <button type="button" class="lang-option" data-lang="fr">Français</button>
@@ -1334,23 +2010,36 @@
 
 <!-- Hero -->
 <header class="hero">
-  <div class="hero-leaf left">&#128011;</div>
+  <div class="hero-leaf left" aria-hidden="true">sinnvoll<br>in die<br>Zukunft</div>
   <div class="hero-leaf right">23</div>
-  <div class="hero-citations" x-data="{open:false, isWide:window.matchMedia('(min-width: 641px)').matches, init(){const m=window.matchMedia('(min-width: 641px)');m.addEventListener('change',e=>this.isWide=e.matches);}}">
+  <div class="hero-citations" x-data="{open:false}">
     <button type="button" class="hero-citations-toggle" :class="{open}" @click="open=!open" :aria-expanded="open ? 'true' : 'false'">
       <span data-i18n="hero_citations_toggle">Stimmen</span>
       <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
-    <div class="hero-citations-row" x-show="isWide || open" x-collapse>
-      <blockquote class="hero-citation">&bdquo;Mindset is key.&ldquo;<cite>— Horst von Hülling</cite></blockquote>
+    <div class="hero-citations-row" x-show="open" x-collapse>
+      <blockquote class="hero-citation">&bdquo;Mindset is key.&ldquo;<cite>— Familienerinnerung</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Du bist Mutti.&ldquo;<cite>— B. Z.</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Jede Person ist die Summe ihrer Traumata.&ldquo;<cite>— S. W.</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Quer und bunt ist das neue Normal.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Nichts ist in Konfetti gemeißelt.&ldquo;<cite>— Eine Berliner Künstlerin, in Erfurt</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Wie löst man Konflikte ohne Gesichtsverlust? Frag Kennedy und Chruschtschow. 1962. Zwei Atombomben-Vorräte, eine Lösung: beide haben heimlich nachgegeben und öffentlich gewonnen. Geht. Heute auch.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Ich lobe laut. Ich tadle leise.&ldquo;<cite>— Katharina die Große (1729–1796)</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Über sich selbst lachen ist Kunst. Nora, Joko und Klaas haben&apos;s vorgemacht — alles gesagt. Muss keiner zum Marsimoto fliegen.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Bella ciao, bella ciao, bella ciao ciao ciao. — Und innen genauso.&ldquo;<cite>— Italienische Partisanen (1943–45) &middot; und Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;#smashTransgenerationalTraume #withStyle #withAttitude #withAuthenticity #dieMachtDerSprache&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Miteinander statt gegeneinander. Das Problem bist im Zweifel du selbst.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Deutschland 5.0: keine Richtung. Jeder macht mal Fehler. Zweitens dunkel-orange. Drittens Eskalation. Die Opfer der letzten Kriege machen Kunst. Dann pragmatisches Zeitalter.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Jedes Tierchen sein Pläsierchen.&ldquo;<cite>— deutsche Volksweisheit, älter als jede Ideologie</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Deutsche Reparations: Esperanto. Ludwik Zamenhof hat sie 1887 als Friedenssprache geschaffen, die Nazis haben seine Familie ermordet und seine Sprache verboten. Diese Site spricht sie. Klein, aber gemeint.&ldquo;<cite>— Steef</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;[ Pointe folgt &mdash; der Dirigent der Musiktherapie ]&ldquo;<cite>— M. H., der Dirigent der Musiktherapie</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Peace cannot be kept by force; it can only be achieved by understanding.&ldquo;<cite>— Albert Einstein</cite></blockquote>
     </div>
   </div>
   <h1>
-    Stefan-Olav Hüllinghorst
+    „Der springende Punkt"
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
+    <span class="hero-creed" data-i18n="hero_creed">Kultur statt Unterschiede.</span>
   </h1>
   <div class="hero-nicknames">
     <div class="nickname-card" x-data="{open:false}">
@@ -1451,6 +2140,86 @@
     <h2 data-i18n="philosophy_h2">What I Believe</h2>
     <p data-i18n="philosophy_p1">I believe the best things grow slowly. Whether cultivating a garden, an idea, or a business — sustainable growth requires patience, deep roots, and an honest relationship with the soil you work in.</p>
 
+    <p class="mindset-key" data-i18n="mindset_key"><strong>Mindset is key.</strong> Werkzeuge wechseln, Märkte drehen sich, Code veraltet. Was bleibt, ist die Haltung, mit der ich am Morgen in den Tag gehe — neugierig, verbindlich, beweglich genug, um Umstände nicht als Feinde zu lesen, sondern als Material.</p>
+
+    <div class="theorie-card">
+      <h3>alexislukasfluide Theorie</h3>
+      <p class="theorie-author" data-i18n="theorie_alf_author">Eine Theorie aus dem Tribe — geprägt für Konflikte ohne Ausweg.</p>
+      <div class="theorie-grid">
+        <div>
+          <p data-i18n="theorie_alf_p">Das Dreieck steht in den unteren Ecken auf Opfer und Täter. Wer oben Held werden will, muss unten gewesen sein. Heldentum ohne Erfahrung von Opfer- oder Täter-Rolle ist Behauptung, kein Boden. Wer ehrlich oben steht, kennt beide Ecken — und entscheidet sich trotzdem für Aufrichtung statt Wiederholung. Ob das jetzt Williams Birne ist, der Nicklas von Übersee, Gamze oder Lena — scheiß. egal.</p>
+        </div>
+        <svg viewBox="0 0 200 180" role="img" aria-labelledby="theorie-alf-title">
+          <title id="theorie-alf-title">Dreieck Opfer / Täter / Held</title>
+          <!-- Edges -->
+          <path class="triangle-edge" d="M 100 25 L 30 155 L 170 155 Z"/>
+          <!-- Vertex circles -->
+          <circle class="triangle-vertex triangle-vertex-hero" cx="100" cy="25" r="7"/>
+          <circle class="triangle-vertex" cx="30" cy="155" r="6"/>
+          <circle class="triangle-vertex" cx="170" cy="155" r="6"/>
+          <!-- Labels -->
+          <text class="label-hero" x="100" y="14" text-anchor="middle">Held</text>
+          <text x="30" y="175" text-anchor="middle">Opfer</text>
+          <text x="170" y="175" text-anchor="middle">Täter</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="olympia-card" data-confetti-mode="gold">
+      <h3 data-i18n="olympia_h3">Energy Channeling Olympia</h3>
+      <p class="olympia-sub" data-i18n="olympia_sub">Eine offene Disziplin: Energie kanalisieren statt explodieren.</p>
+      <p data-i18n="olympia_p1">Diese Site ist mein Beitrag. Ich rufe auf zur Schaffung des ersten Open-Source-Homepage-Frameworks: <strong>#ichbinmensch</strong>. Eine Vorlage für persönliche Sites, die drei Standards bündelt, die heute getrennt liegen.</p>
+      <ol>
+        <li data-i18n="olympia_li1"><strong>Privacy als Design-Praxis</strong> — Tier-Klassifizierung, Vorab-Standard, kein Cookie-Banner, schritt­weise rückwirkend.</li>
+        <li data-i18n="olympia_li2"><strong>18 Sprachen mit Würde</strong> — Gender-Inklusion pro Sprache nach eigener Grammatik, kein Doppelpunkt-Salat, kein generisches Maskulinum als Default.</li>
+        <li data-i18n="olympia_li3"><strong>Kultur statt Unterschiede</strong> — Hip-Hop neben Klassik, Berlin neben Bielefeld, Mann und Frau und alles dazwischen — nebeneinander, nicht als Filter.</li>
+      </ol>
+      <p data-i18n="olympia_open">Wer mitmachen will: schreibt mir. Besonders eingeladen — Menschen, die Krieg, Flucht oder Verfolgung erlebt haben. Eure Energie, eure Form, euer Ausdruck. Wir bauen es zusammen, nicht gegeneinander.</p>
+      <p class="olympia-foot" data-i18n="olympia_prize">Preis: ewiger freier Eintritt im Promenadeneck im Schillerkiez (mein Versprechen, nicht das des Lokals — ich lade dich ein und zahle).</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;"><a href="mailto:steef@huellinghorst.info">steef@huellinghorst.info</a> · <strong>#ichbinmensch</strong></p>
+      <span class="olympia-leitsatz">Embrace talent, not show.</span>
+      <p style="margin-top:1rem;font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--earth);letter-spacing:0.02em;line-height:1.6;font-weight:500;">
+        <strong>#smashTransgenerationalTraume</strong> &middot; #withStyle &middot; #withAttitude &middot; #withAuthenticity &middot; <strong>#dieMachtDerSprache</strong>
+      </p>
+      <p class="olympia-foot" data-i18n="olympia_donate" style="margin-top:1.2rem;">
+        Wer das Werk unterstützen will: spendet für einen Malocher, der's in was Gutes steckt. <strong>Zweckgebunden</strong> &mdash; in das nächste Vorhaben, das aus dieser Site wächst. <a href="mailto:steef@huellinghorst.info?subject=Spende%20zweckgebunden">steef@huellinghorst.info</a> mit Betreff &bdquo;Spende zweckgebunden&ldquo; &mdash; ich melde mich mit IBAN oder Liberapay-Link.
+      </p>
+    </div>
+
+    <div class="d5-card">
+      <h3 data-i18n="d5_h3">Deutschland 5.0</h3>
+      <p class="d5-sub" data-i18n="d5_sub">Keine Richtung. Keine Lager. Eine Skala für Fehler.</p>
+      <p data-i18n="d5_intro">Jeder macht mal Fehler. Das ist kein Argument gegen dich, das ist ein Datenpunkt. Was zählt, ist was beim zweiten Mal kommt — und beim dritten.</p>
+      <div class="d5-stufen" aria-label="Pianosa-Skala der Fehlertoleranz">
+        <div class="d5-stufe d5-stufe-1">
+          <strong data-i18n="d5_s1_h">1. ja</strong>
+          <span data-i18n="d5_s1_t">Erste Fehler werden gehalten. Niemand fällt beim ersten Mal aus dem Spiel.</span>
+        </div>
+        <div class="d5-stufe d5-stufe-2">
+          <strong data-i18n="d5_s2_h">2. dunkel-orange</strong>
+          <span data-i18n="d5_s2_t">Zweites Mal heißt: hingucken. Etwas ist nicht zufällig.</span>
+        </div>
+        <div class="d5-stufe d5-stufe-3">
+          <strong data-i18n="d5_s3_h">3. Eskalation</strong>
+          <span data-i18n="d5_s3_t">Drittes Mal hat Konsequenz. Nicht aus Strafe — aus Schutz.</span>
+        </div>
+      </div>
+      <p data-i18n="d5_artwork">Aus Krieg, Flucht und Verfolgung wird Kunst — die Überlebenden setzen die Form, nicht die Hilfsindustrie. Danach kommt ein pragmatisches Zeitalter: weniger Ideologie, mehr Können, weniger Showbühne, mehr Werkstatt.</p>
+      <p class="d5-foot" data-i18n="d5_foot">Keine Richtung. Eine Skala. Eine Werkstatt. Das wäre 5.0.</p>
+    </div>
+
+    <div class="tribe-teaser">
+      <h3 data-i18n="tribe_h3">Das hier ist der Teaser.</h3>
+      <p data-i18n="tribe_intro">Was du auf dieser Seite liest, ist die Einladung — nicht der Inhalt. Die Substanz lebt im Tribe: Klarnamen, Drafts, Diskussionen, Schwarmintelligenz. Außen steht die Haltung. Innen steht das Wissen.</p>
+      <ul class="tribe-rules">
+        <li data-i18n="tribe_rule1"><strong>Tribe ab 2 Personen.</strong> Solange nur ein Mensch da ist, gibt es keinen Tribe — nur diesen Teaser.</li>
+        <li data-i18n="tribe_rule2"><strong>Beitritt durch Fürsprache.</strong> Eintreten kannst du nur, wenn ein Tribe-Mitglied dich vorschlägt. Selbst-Anmeldung gibt es nicht.</li>
+        <li data-i18n="tribe_rule3"><strong>Mehrheit entscheidet.</strong> Bei zwei Personen Konsens-Pflicht (beide ja). Ab drei Personen Mehrheit. Schweigen ist kein Ja.</li>
+        <li data-i18n="tribe_rule4"><strong>Gründungs-Klausel.</strong> Wer am Sonntag, 4. Mai 2026, um 14:00 Uhr Berliner Zeit vor Ort ist und sich committet, ist dabei — als Gründungsmitglied, ohne Abstimmung. Ab dann gilt die Mehrheits-Regel.</li>
+      </ul>
+      <p class="tribe-contact" data-i18n="tribe_contact">Erste Anlaufstelle: <a href="mailto:steef@huellinghorst.info">steef@huellinghorst.info</a>. Plattform kommt, wenn der Tribe steht.</p>
+    </div>
+
     <div class="quote-block">
       <blockquote data-i18n="philosophy_quote">"He who plants a tree plants a hope."</blockquote>
       <cite data-i18n="philosophy_cite">— Lucy Larcom</cite>
@@ -1541,7 +2310,7 @@
 </section>
 
 <!-- Journey -->
-<section id="journey">
+<section id="journey" x-data="{ filter: ['career','travel','patent','personal'], open: '', toggle(s) { this.filter = this.filter.includes(s) ? this.filter.filter(x => x !== s) : [...this.filter, s] }, isShown(s) { return this.filter.includes(s) } }">
   <div class="reveal">
     <div class="section-label" data-i18n="journey_label">Journey</div>
     <h2 data-i18n="journey_h2">Where I've Been</h2>
@@ -1549,28 +2318,263 @@
     <p class="journey-intro" data-i18n="journey_intro">Der Name Hüllinghorst kommt von einem Hof. Horst hat unter dem Meier auf dem Hof von Hülling gearbeitet — das ist, wo ich herkomme. Ich habe Häuser restauriert, im Garten gearbeitet, Menschen mit Behinderung gepflegt. Als Chefkoch in Kroatien, Italien und Frankreich. In einer Spedition, in einem Lager. Ich weiß, wie die Welt aussieht. Ich bin ein Macher — das hab ich mit Megaloh gemeinsam.</p>
   </div>
 
-  <div class="timeline reveal">
-    <div class="timeline-item">
-      <div class="timeline-year" data-i18n="journey1_year">TU Berlin</div>
-      <h3 data-i18n="journey1_h3">Master of Science</h3>
-      <p data-i18n="journey1_p">I studied mostly among men, having grown up with three older sisters. The contrast was formative. What stayed was something more valuable than the degree: the ability to think scientifically, trust evidence, and question assumptions — including my own.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year" data-i18n="journey_gensor_year">2017 – 2022</div>
-      <h3>GENSOR</h3>
-      <p data-i18n="journey_gensor_p">Eigenes Unternehmen in Berlin: Software für Produktions- und Prüfsystemsteuerung, Bildverarbeitung, ML, Sensorik. GENSOR Production Validation Systems UG, gegründet 2017, Geschäftsführer. Insolvent gegangen. Drei Jahre ohne Geld danach. Daten und Lehren habe ich noch — beides wird wieder gebraucht.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year" data-i18n="journey2_year">Three Years</div>
-      <h3 data-i18n="journey2_h3">Insolvency</h3>
-      <p data-i18n="journey2_p">Three years without money. It is not a chapter I am ashamed of — it is one I learned more from than almost anything else. Scarcity teaches you what actually matters and what you were just carrying out of habit.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year" data-i18n="journey3_year">Mondiali</div>
-      <h3 data-i18n="journey3_h3">Die Zwote &amp; the Mondiali Antirazzisti</h3>
-      <p data-i18n="journey3_p">My team won the Mondiali Antirazzisti in my absence. I am genuinely proud of every person who made that happen. I am also still thinking critically about the role alcohol played in the money we raised for charity — some contradictions deserve to stay open.</p>
-    </div>
+  <div class="lifeline-filters reveal">
+    <button type="button" class="lifeline-pill" :class="{ active: isShown('career') }" @click="toggle('career')">
+      <span class="dot career"></span><span data-i18n="lifeline_filter_career">Karriere</span>
+    </button>
+    <button type="button" class="lifeline-pill" :class="{ active: isShown('travel') }" @click="toggle('travel')">
+      <span class="dot travel"></span><span data-i18n="lifeline_filter_travel">Reisen</span>
+    </button>
+    <button type="button" class="lifeline-pill" :class="{ active: isShown('patent') }" @click="toggle('patent')">
+      <span class="dot patent"></span><span data-i18n="lifeline_filter_patent">Patente</span>
+    </button>
+    <button type="button" class="lifeline-pill" :class="{ active: isShown('personal') }" @click="toggle('personal')">
+      <span class="dot personal"></span><span data-i18n="lifeline_filter_personal">Persönlich</span>
+    </button>
   </div>
+
+  <div class="lifeline reveal">
+
+    <!-- 2006 — Abitur + USA mit Vater -->
+    <div class="lifeline-row" x-show="isShown('travel')" x-transition>
+      <div class="lifeline-cell left"></div>
+      <div class="lifeline-axis"><span class="lifeline-year">2006</span></div>
+      <div class="lifeline-cell right">
+        <div class="lifeline-card travel" @click="open = open === 'r1' ? '' : 'r1'">
+          <h4 data-i18n="lifeline_usa_h">USA mit dem Vater</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_usa_sub">Genealogie, Mesa Verde, Silicon Valley. Geschenk zum Abitur.</p>
+          <span class="lifeline-tag" data-i18n="lifeline_tag_journey1">Reise 1</span>
+          <div class="lifeline-detail" :class="{ open: open === 'r1' }">
+            <p data-i18n="lifeline_usa_detail">Mein Vater hatte Jahre in Handarbeit recherchiert. Wir lernten Dickey Lee Hullinghorst kennen, Demokratin in Colorado. Mesa Verde statt Las Vegas. Silicon Valley ohne Andacht. Mehr unter <a href="/journeys/">/journeys/</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2006-2010 — B.A.Sc. -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c1' ? '' : 'c1'">
+          <h4 data-i18n="lifeline_basc_h">B.A.Sc. Produktentwicklung Mechatronik</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_basc_sub">FH Bielefeld</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2006–2010</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2010-2013 — M.Sc. -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c2' ? '' : 'c2'">
+          <h4 data-i18n="lifeline_msc_h">M.Sc. Automotive Systems</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_msc_sub">TU Berlin · Thesis: FEM-Simulation aktiver Thermografie</p>
+          <div class="lifeline-detail" :class="{ open: open === 'c2' }">
+            <p data-i18n="lifeline_msc_detail">Studiert habe ich überwiegend unter Männern, aufgewachsen mit drei älteren Schwestern. Der Kontrast war prägend. Geblieben ist etwas Wertvolleres als der Abschluss: wissenschaftlich denken, Evidenz vertrauen, Annahmen — auch eigene — hinterfragen.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2010–2013</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2013-2015 — inpro -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c3' ? '' : 'c3'">
+          <h4 data-i18n="lifeline_inpro_h">Project Engineer NDT</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_inpro_sub">inpro Innovationsgesellschaft, Berlin</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2013–2015</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- ~2014 — Karibik -->
+    <div class="lifeline-row" x-show="isShown('travel')" x-transition>
+      <div class="lifeline-cell left"></div>
+      <div class="lifeline-axis"><span class="lifeline-year">~2014</span></div>
+      <div class="lifeline-cell right">
+        <div class="lifeline-card travel" @click="open = open === 'r2' ? '' : 'r2'">
+          <h4 data-i18n="lifeline_karibik_h">Karibik allein</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_karibik_sub">Couchsurfing in Santo Domingo, guagua, Wale, die Grenze nach Haiti.</p>
+          <span class="lifeline-tag" data-i18n="lifeline_tag_journey2">Reise 2</span>
+          <div class="lifeline-detail" :class="{ open: open === 'r2' }">
+            <p data-i18n="lifeline_karibik_detail">Erstes eigenes Geld aus der inpro-Phase. Eine Couchsurfing-Gastgeberin in Santo Domingo, allein im Sammelbus, erste Wale an der Halbinsel Samaná, eine Grenze, die separiert. Mehr unter <a href="/journeys/">/journeys/</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2015 — Patent 1 -->
+    <div class="lifeline-row" x-show="isShown('patent')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card patent" @click="open = open === 'p1' ? '' : 'p1'">
+          <h4 data-i18n="lifeline_patent1_h">Patent DE102016005822A1</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_patent1_sub">Zerstörungsfreie Einschweißtiefen-Detektion (mit Co-Erfinder, inpro).</p>
+          <div class="lifeline-detail" :class="{ open: open === 'p1' }">
+            <p data-i18n="lifeline_patent1_detail">Permalink: <a href="https://patents.google.com/patent/DE102016005822A1" target="_blank" rel="noopener">Google Patents DE102016005822A1</a> · Original beim DPMA.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2015</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2015-2017 — VW -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c4' ? '' : 'c4'">
+          <h4 data-i18n="lifeline_vw_h">SME Thermografie</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_vw_sub">Volkswagen Group Services, Wolfsburg</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2015–2017</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2017 — Patent 2 -->
+    <div class="lifeline-row" x-show="isShown('patent')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card patent" @click="open = open === 'p2' ? '' : 'p2'">
+          <h4 data-i18n="lifeline_patent2_h">Patent DE102017206261A1</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_patent2_sub">Kantenpositions-Detektion für Laserschweißen (mit Co-Erfinder, VW). Algorithmus bis heute in Produktion.</p>
+          <div class="lifeline-detail" :class="{ open: open === 'p2' }">
+            <p data-i18n="lifeline_patent2_detail">Permalink: <a href="https://patents.google.com/patent/DE102017206261A1" target="_blank" rel="noopener">Google Patents DE102017206261A1</a> · Original beim DPMA.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2017</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2017-2021 — GENSOR -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c5' ? '' : 'c5'">
+          <h4 data-i18n="lifeline_gensor_h">GENSOR Production Validation Systems</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_gensor_sub">CEO &amp; Founder · Inline-Vision für Automotive-QA · zwei Produkte am Markt</p>
+          <div class="lifeline-detail" :class="{ open: open === 'c5' }">
+            <p data-i18n="lifeline_gensor_detail">Eigenes Unternehmen in Berlin: Software für Produktions- und Prüfsystemsteuerung, Bildverarbeitung, ML, Sensorik. GENSOR Production Validation Systems UG, gegründet 2017, Geschäftsführer. Volles P&amp;L. Daten und Lehren habe ich noch — beides wird wieder gebraucht.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2017–2021</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- ~2019 — Brüssel -> Seychellen -> SA -->
+    <div class="lifeline-row" x-show="isShown('travel')" x-transition>
+      <div class="lifeline-cell left"></div>
+      <div class="lifeline-axis"><span class="lifeline-year">~2019</span></div>
+      <div class="lifeline-cell right">
+        <div class="lifeline-card travel" @click="open = open === 'r3' ? '' : 'r3'">
+          <h4 data-i18n="lifeline_sa_h">Brüssel → Seychellen → Südafrika</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_sa_sub">Strand, Rastafari, Nestlé-Manager im Flieger, Garden Route. Kein Pickup in Johannesburg.</p>
+          <span class="lifeline-tag" data-i18n="lifeline_tag_journey3">Reise 3</span>
+          <div class="lifeline-detail" :class="{ open: open === 'r3' }">
+            <p data-i18n="lifeline_sa_detail">Mit Respekt, Höflichkeit und einem Zwinkern lassen sich die meisten Situationen klären. Garden Route statt Big-Five-Safari. Mehr unter <a href="/journeys/">/journeys/</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2021 — Insolvenz (Persönlich) -->
+    <div class="lifeline-row" x-show="isShown('personal')" x-transition>
+      <div class="lifeline-cell left"></div>
+      <div class="lifeline-axis"><span class="lifeline-year">2021</span></div>
+      <div class="lifeline-cell right">
+        <div class="lifeline-card personal" @click="open = open === 'x1' ? '' : 'x1'">
+          <h4 data-i18n="lifeline_insolvenz_h">Insolvenz, sauber</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_insolvenz_sub">COVID kappt VW-Pivot · geordnete Schließung · €13k Restschuld · drei Jahre ohne Geld danach</p>
+          <div class="lifeline-detail" :class="{ open: open === 'x1' }">
+            <p data-i18n="lifeline_insolvenz_detail">Drei Jahre ohne Geld. Kein Kapitel, für das ich mich schäme — eines, aus dem ich mehr gelernt habe als aus fast allem anderen. Knappheit lehrt einen, was wirklich zählt und was man nur aus Gewohnheit getragen hat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2021-2022 — Buschsieweke -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c6' ? '' : 'c6'">
+          <h4 data-i18n="lifeline_busch_h">Head of Technical Digitalisation</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_busch_sub">Möbelwerkstätten Buschsieweke, Verl</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2021–2022</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2022-2023 — MBzwo -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c7' ? '' : 'c7'">
+          <h4 data-i18n="lifeline_mbzwo_h">CTO MBzwo GmbH</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_mbzwo_sub">Berlin · Industrie-4.0-Datenflüsse · 3D-Konfigurator</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2022–2023</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2023-2024 — Independent -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c8' ? '' : 'c8'">
+          <h4 data-i18n="lifeline_indie_h">Independent Developer</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_indie_sub">CRM/ERP für KMU · Selbständig, Berlin</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2023–2024</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2024-2026 — Siemens Energy -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c9' ? '' : 'c9'">
+          <h4 data-i18n="lifeline_sieenergy_h">Data Engineer Manufacturing Analytics</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_sieenergy_sub">Siemens Energy Gas Services (via FERCHAU) · €245k/yr Business Case · Mendix Rapid Developer Cert</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2024–2026</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- 2026 — Siemens Schaltwerk -->
+    <div class="lifeline-row" x-show="isShown('career')" x-transition>
+      <div class="lifeline-cell left">
+        <div class="lifeline-card career" @click="open = open === 'c10' ? '' : 'c10'">
+          <h4 data-i18n="lifeline_schaltwerk_h">Senior Fullstack Developer AI</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_schaltwerk_sub">Siemens AG · Schaltwerk Berlin-Siemensstadt (via FERCHAU)</p>
+        </div>
+      </div>
+      <div class="lifeline-axis"><span class="lifeline-year">2026 →</span></div>
+      <div class="lifeline-cell right"></div>
+    </div>
+
+    <!-- Mondiali (Persönlich, ohne festes Datum — gegen Ende) -->
+    <div class="lifeline-row" x-show="isShown('personal')" x-transition>
+      <div class="lifeline-cell left"></div>
+      <div class="lifeline-axis"><span class="lifeline-year">2026</span></div>
+      <div class="lifeline-cell right">
+        <div class="lifeline-card personal" @click="open = open === 'x2' ? '' : 'x2'">
+          <h4 data-i18n="lifeline_mondiali_h">Die Zwote &amp; Mondiali Antirazzisti</h4>
+          <p class="lifeline-sub" data-i18n="lifeline_mondiali_sub">Mein Team gewinnt das Mondiali Antirazzisti in meiner Abwesenheit.</p>
+          <div class="lifeline-detail" :class="{ open: open === 'x2' }">
+            <p data-i18n="lifeline_mondiali_detail">Ich bin auf jeden Menschen stolz, der das möglich gemacht hat. Ich denke gleichzeitig kritisch über die Rolle, die Alkohol bei dem Geld gespielt hat, das wir für wohltätige Zwecke gesammelt haben — manche Widersprüche dürfen offen bleiben.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="lifeline-deeper reveal">
+    <span data-i18n="lifeline_deeper">Mehr Tiefe zu den drei Reisen — Erzählung, Karten, Quellen — auf der</span>
+    <a href="/journeys/" data-i18n="lifeline_deeper_link">Reisen-Seite</a>.
+  </p>
 </section>
 
 <!-- Built With -->
@@ -1583,6 +2587,12 @@
 
   <div class="tools-grid reveal">
     <div class="tool-card">
+      <span class="tool-icon"><img src="icons/soundcloud.svg" alt="SoundCloud"></span>
+      <h3>SoundCloud <em style="font-style:italic;font-weight:400;color:var(--stone);font-size:0.78em;">aka Saundclaude</em></h3>
+      <p data-i18n="tool_soundcloud_p">Wo die ganze geile Berliner Scheiße liegt — und der Algorithmus, dem ich mehr traue als LinkedIn.</p>
+      <a href="https://soundcloud.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
+    <div class="tool-card">
       <span class="tool-icon"><img src="icons/claude.svg" alt="Claude Code"></span>
       <h3>Claude Code</h3>
       <p data-i18n="tool_claudecode_p">AI coding assistant by Anthropic</p>
@@ -1593,6 +2603,12 @@
       <h3>Firefox</h3>
       <p data-i18n="tool_firefox_p">The independent, privacy-first browser</p>
       <a href="https://foundation.mozilla.org/donate/" target="_blank" class="tool-link" data-i18n="tool_donate">Donate</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon"><img src="icons/duckduckgo.png" alt="DuckDuckGo"></span>
+      <h3>DuckDuckGo</h3>
+      <p data-i18n="tool_duckduckgo_p">Privacy-respecting search — no tracking, no profile, no ad targeting based on what you searched.</p>
+      <a href="https://duckduckgo.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
     </div>
     <div class="tool-card">
       <span class="tool-icon"><img src="icons/thunderbird.svg" alt="Thunderbird"></span>
@@ -1779,45 +2795,74 @@
     <a href="https://www.instagram.com/werrepiraten/" target="_blank" class="support-link">Instagram &#8594;</a>
   </div>
 
+  <div class="support-card support-card--cause reveal">
+    <h3>Hydra e.V.</h3>
+    <p data-i18n="support_hydra_p">Selbstorganisation von Sexarbeitenden in Berlin, gegründet 1980. Beratung, politische Arbeit, Lobbying gegen das Schwedenmodell, für Decriminalisation. Köpenicker Straße 187/188, Kreuzberg-Luisenstadt. Sexarbeit ist Arbeit — Hydra macht das seit über vier Jahrzehnten zur Sache derer, die sie machen.</p>
+    <a href="https://www.hydra-berlin.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    <a href="https://www.openstreetmap.org/way/317538634" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--cause reveal">
+    <h3>Schwules Museum</h3>
+    <p data-i18n="support_schwulesmuseum_p">Eines der ältesten Museen weltweit, das sich der Geschichte und Gegenwart queerer Lebensentwürfe widmet. Lützowstraße 73, Berlin-Tiergarten. Archiv, Ausstellungen, Veranstaltungen — eine Institution, die Erinnerung pflegt, ohne sie zu konservieren. Aufarbeitung als Praxis, nicht als Rückblick.</p>
+    <a href="https://www.schwulesmuseum.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    <a href="https://www.openstreetmap.org/node/2818117012" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
   <div class="support-subsection reveal">
     <h3 class="support-subsection-title" data-i18n="artists_h3">Artists I Support</h3>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>Greyscale</h3>
+    <h3>Eine DJ und Produzentin aus Bielefeld</h3>
     <p data-i18n="artist_greyscale_p">Bielefeld-based DJ and producer — driving, hypnotic techno with a gloomy edge and a touch of rebellion. Classical music background, electronic heart. We make music together.</p>
     <a href="https://soundcloud.com/greyscale" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>Sandra Frotscher</h3>
+    <h3>Eine Berliner Künstlerin und Fotografin</h3>
     <p data-i18n="artist_sandra_p">Berlin-based visual artist and photographer. She works with the body, with presence, with what gets left unsaid. Sharp observation, quiet intensity — the kind of work that stays.</p>
     <a href="https://www.sandrafrotscher.com" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>REYNEKE</h3>
+    <h3>Ein Berliner Produzent</h3>
     <p data-i18n="artist_reyneke_p">Berlin-based producer and live act — genrefluid electronic music with bounce, bass, and depth. Raised on classical guitar and reggae, rooted in the underground. Slower, darker, and more alive than most things on the dancefloor.</p>
     <a href="https://soundcloud.com/reyneke" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>S. Bass</h3>
-    <img src="docs/photo_2026-04-13_23-52-50.jpg" alt="S. Bass" style="width:100%;border-radius:6px;margin:0.6rem 0 0.8rem;display:block;">
+    <h3>Ein befreundeter Bass-Produzent</h3>
+    <div aria-hidden="true" style="width:100%;aspect-ratio:1/1;max-height:180px;border-radius:6px;margin:0.6rem 0 0.8rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--clay) 0%,var(--earth) 100%);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:4rem;color:var(--cream);letter-spacing:-0.02em;">B</div>
     <p><em data-i18n="artist_consent_pending">Waiting for consent.</em></p>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>ciao 3lla</h3>
-    <p data-i18n="artist_ciaoella_p">Habe ihr im YAAM Berlin<sup class="fn">23</sup> gesagt: du bist frei. Heute macht sie als ciao 3lla Karriere. Jede Person hat ihren eigenen Weg — wir sollten aufhören, einander dafür anzugreifen, und Authentizität anerkennen.</p>
+    <h3>Eine Berliner Künstlerin</h3>
+    <p data-i18n="artist_ciaoella_p">Habe ihr im YAAM Berlin<sup class="fn">23</sup> gesagt: du bist frei. Heute macht sie als Künstlerin Karriere. Jede Person hat ihren eigenen Weg — wir sollten aufhören, einander dafür anzugreifen, und Authentizität anerkennen.</p>
     <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0.8rem;line-height:1.5;" data-i18n="artist_ciaoella_quote">„Tut, was ihr wollt — aber steht dazu."</blockquote>
     <a href="https://soundcloud.com/ciaoella" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
   </div>
 
   <div class="support-card support-card--artist reveal">
-    <h3>Lÿn</h3>
-    <p data-i18n="artist_lyn_p">DJ und Produzentin in Berlin. Ich schätze ihre Arbeit — vor allem ihre Soundbank: die eigene Klangpalette, aus der sie schöpft, hat Charakter. Hier nur erwähnt; der Rest, sobald sie zustimmt.</p>
+    <h3>Eine DJ und Produzentin aus Berlin</h3>
+    <p data-i18n="artist_nyx_p">DJ und Produzentin in Berlin. Ich schätze ihre Arbeit — vor allem ihre Soundbank: die eigene Klangpalette, aus der sie schöpft, hat Charakter. Hier nur erwähnt; der Rest, sobald sie zustimmt.</p>
     <p><em data-i18n="artist_consent_pending">Warte auf Zustimmung.</em></p>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>Eine Berliner Künstlerin und DJ</h3>
+    <p data-i18n="artist_eberg_p">Berliner Künstlerin und DJ. Set-Architektur, die mehr will als Bewegung — Aufmerksamkeit, Pause, Wiederkehr. Hier verlinkt, weil ich ihre Arbeit ernst nehme.</p>
+    <a href="https://soundcloud.com/maria-theresia-von-eberg" target="_blank" class="support-link" data-i18n="support_listen">Listen &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--artist reveal">
+    <h3>Ein Kölner Musikkollektiv</h3>
+    <p data-i18n="artist_tiefgang_p">Kölner Musikkollektiv. Ihre TiefCast-Reihe ist für mich eines der ehrlichsten Set-Formate dieser Jahre — Tempo, Tiefe, Ruhe ohne Pose. Wenn ich höre, wie die Kölner Crew Berliner und internationale Acts zu sich einlädt — wie in TiefCast 7, mit Maria Theresia von Eberg, Odd und Low Milano —, dann lese ich darin einen Beleg für eine These, die ich für richtig halte: Der kulturelle Austausch zwischen Ost und West ist geglückt. Die Wiedervereinigung in der Musik, in der Kunst, im Sport ist gelebt. Was nachhängt, ist die Wirtschaft.</p>
+    <a href="https://soundcloud.com/tiefgang-cologne/tiefcast-7-maria-theresia-von-eberg-odd-low-milano" target="_blank" class="support-link" data-i18n="support_listen">TiefCast 7 &#8594;</a>
+    <a href="https://soundcloud.com/tiefgang-cologne" target="_blank" class="support-link">SoundCloud &#8594;</a>
+    <a href="https://www.instagram.com/kollektiv.tiefgang/" target="_blank" class="support-link">Instagram &#8594;</a>
+    <a href="https://www.iwh-halle.de/" target="_blank" class="support-link">IWH zur Konvergenz &#8594;</a>
   </div>
 
   <div class="support-subsection reveal">
@@ -1831,15 +2876,22 @@
   </div>
 
   <div class="support-card support-card--local reveal">
+    <h3>Orania.Berlin &mdash; X-Berg Duck</h3>
+    <p data-i18n="local_orania_p">Restaurant am Oranienplatz in Kreuzberg, Oranienstraße 40. Das Haus ist berühmt geworden durch die <em>X-Berg Duck</em> &mdash; eine Berliner Lesart der Pekingente, fünfgängig, vom Dashi bis zur Brust frisch aus dem Ofen, jeder Teil des Tieres verarbeitet. Daneben eine à la carte. Bis 21:30 Uhr Ente. Ich trage einen Pullover mit dem Merch &mdash; weil dort kluge Menschen nächtigen, die Pluralismus verstanden haben und Wissenschaft mögen.</p>
+    <a href="https://orania.berlin/restaurant/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    <a href="https://www.openstreetmap.org/node/5682506043" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
+  </div>
+
+  <div class="support-card support-card--local reveal">
     <h3 data-i18n="local_casacerto_h3">Casa Certo</h3>
-    <p data-i18n="local_casacerto_p">Italian restaurant in Zürich's Strassburgstrasse 5 — seasonal cuisine, 100+ wines, and the warmth of a proper Italian kitchen transplanted to the city. Run by my man Nikos Voutsas and Severin Hössli. Your mini-holiday in the middle of Zürich.</p>
+    <p data-i18n="local_casacerto_p">Italian restaurant in Zürich's Strassburgstrasse 5 — seasonal cuisine, 100+ wines, and the warmth of a proper Italian kitchen transplanted to the city. Run by two friends. Your mini-holiday in the middle of Zürich.</p>
     <a href="https://casa-certo.ch/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
-    <a href="https://soundcloud.com/nikosvoutsas" target="_blank" class="support-link" data-i18n="local_casacerto_nikos">Nikos on SoundCloud &#8594;</a>
+    <a href="https://soundcloud.com/nikosvoutsas" target="_blank" class="support-link" data-i18n="local_casacerto_nikos">SoundCloud &#8594;</a>
   </div>
 
   <div class="support-card support-card--local reveal">
     <h3 data-i18n="local_restlos_h3">Restlos e.V.</h3>
-    <p data-i18n="local_restlos_p">Food rescue collective in Bielefeld-Schildesche, founded by my man Furkan Karadag and Mustafa Budumlu.<sup class="fn">15</sup> Every day they save over 600 kg of food from the bin — bruised fruit, dented tins, approaching best-before dates — and sell it at their Rettermarkt on Johannisstraße 35 for whatever you can give. Saturday mornings they fire up a food truck outside: smoothies, Thai curry, coconut rice. All rescued. Non-profit, neighbourhood-rooted, no waste.</p>
+    <p data-i18n="local_restlos_p">Food rescue collective in Bielefeld-Schildesche, founded by two Bielefeld activists.<sup class="fn">15</sup> Every day they save over 600 kg of food from the bin — bruised fruit, dented tins, approaching best-before dates — and sell it at their Rettermarkt on Johannisstraße 35 for whatever you can give. Saturday mornings they fire up a food truck outside: smoothies, Thai curry, coconut rice. All rescued. Non-profit, neighbourhood-rooted, no waste.</p>
     <a href="https://restlos-ev.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
     <a href="https://www.instagram.com/restlos_bielefeld/" target="_blank" class="support-link">Instagram &#8594;</a>
   </div>
@@ -1875,12 +2927,6 @@
     <p data-i18n="local_mbzwo_p">Massivholzmöbel nach Maß aus dem Showroom in den Spreestudios an der Rummelsburger Bucht. Köpenicker Chaussee 4, Berlin. Echtes Holz, ehrliche Arbeit, kein IKEA-Kompromiss. Tische, die deine Enkel noch benutzen.</p>
     <a href="https://mb-zwo.de/" target="_blank" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
     <a href="https://www.openstreetmap.org/?mlat=52.4904&amp;mlon=13.4928#map=18/52.4904/13.4928" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
-  </div>
-
-  <div class="support-card support-card--local reveal">
-    <h3>Neneh's Imbiss</h3>
-    <p data-i18n="local_nenehs_p">Westafrikanische Küche an der Baerwaldstraße 48 in Kreuzberg. Empfohlen von meiner Wahlschwester — beim ersten Bissen umgehauen. Klein, ehrlich, ohne Schnickschnack. Mi–Fr ab 13:30, Sa/So nachmittags, Mo/Di Ruhetag.</p>
-    <a href="https://www.openstreetmap.org/node/12566015091" target="_blank" class="support-link">OpenStreetMap &#8594;</a>
   </div>
 
   <div class="support-card support-card--local reveal">
@@ -2069,10 +3115,10 @@
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#129309;</span>
-      <h3>Karina Buschsieweke</h3>
+      <h3>Eine Mitgründerin und Director of Product Strategy</h3>
       <p data-i18n="idol_buschsieweke_p">Mitgründerin von MBzwo (Massivholzmöbel, Berlin) und Lana Labs (Process Mining, von Appian übernommen). Heute Director of Product Strategy bei Appian. Hat mir gezeigt, dass eine Position mit jemand anderem zu teilen kein Kompromiss ist — sondern Integrität. Zwei Menschen, eine Rolle, doppelte Ehrlichkeit. Die Sorte, bei der das Team sich anfühlt wie ein Ort, an dem niemand allein ist mit seiner Arbeit.</p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">&bdquo;Geteilte Verantwortung ist doppelte Ehrlichkeit.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— im Geiste von Karina Buschsieweke</cite></blockquote>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">&bdquo;Geteilte Verantwortung ist doppelte Ehrlichkeit.&ldquo;<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— im Geiste von eine Freundin und Mitgründerin</cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -2082,6 +3128,67 @@
           <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--clay);letter-spacing:0.08em;text-align:center;padding:1rem;">[ VIDEO PLACEHOLDER — TODO ]</span>
         </div>
       </div>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129309;</span>
+      <h3>Eine Freundin aus Köln</h3>
+      <p data-i18n="idol_maxik_p">Große Frau mit großer Bürde. Wir haben uns in Köln kennengelernt — der Stadt, in der queer schon normal ist, lange bevor Berlin sich das auf die Fahnen schrieb. Was sie trägt, trägt sie ohne Aufhebens — die Sorte Mensch, deren Verlässlichkeit man erst bemerkt, wenn man sich umdreht und sie immer noch da ist.</p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#129309;</span>
+      <h3>Der Mensch hinter Stabielefeld</h3>
+      <p data-i18n="idol_michi_p">Großer Mann mit großer Bürde. Steht hinter Stabielefeld — der Initiative, die den Mythos „Bielefeld gibt es nicht" mit einem Augenzwinkern auf Stoffbeutel und Shirts trägt. Print-on-Demand, kein Lager, kein Verschnitt — die Haltung, die ich Bielefeld zutraue.</p>
+      <a href="https://stabielefeld.myspreadshop.de/" target="_blank" rel="noopener" style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--clay);text-decoration:none;">Stabielefeld Spreadshop &#8594;</a>
+    </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127979;</span>
+      <h3>Magnus Hirschfeld</h3>
+      <p data-i18n="idol_hirschfeld_p">Berliner Sexualwissenschaftler, 1868–1935. Gründer des Instituts für Sexualwissenschaft (1919, Tiergarten) — der ersten Forschungseinrichtung weltweit, die queere und trans Lebensentwürfe ohne pathologisierenden Blick erforschte. Engagiert für die Abschaffung von §175. Sein Institut wurde am 6. Mai 1933 von SA-Studenten geplündert, die Bibliothek verbrannt. Was Berlin in den 1920ern war — ein Ort, an dem queere Forschung möglich war — und was 1933 zerstört wurde, bleibt eine offene Wunde der Aufarbeitung.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Per scientiam ad justitiam — durch Wissenschaft zur Gerechtigkeit."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Magnus Hirschfeld, Wahlspruch des Wissenschaftlich-humanitären Komitees</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:1rem;">
+          <a href="https://de.wikipedia.org/wiki/Magnus_Hirschfeld" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Wikipedia (DE) &#8594;</a>
+          <a href="https://de.wikipedia.org/wiki/Institut_f%C3%BCr_Sexualwissenschaft" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;margin-right:1rem;">Institut für Sexualwissenschaft &#8594;</a>
+          <a href="https://magnus-hirschfeld.de/" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">Magnus-Hirschfeld-Gesellschaft &#8594;</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Great Minds ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_greatminds">Great Minds</h3>
+  </div>
+  <div class="values-grid reveal">
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#128397;&#65039;</span>
+      <h3>Ein norwegischer Künstler, Freund</h3>
+      <p data-i18n="idol_lasseoelen_p">Norwegischer Künstler, Freund. Wenn jemand aus meinem engsten Kreis schon vorher wusste, was kommt — dann er. Auf SoundCloud unter einem Künstlernamen.</p>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Fill with own imagination."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Norwegischer Künstler, Freund</cite></blockquote>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="margin-top:1rem;border-radius:6px;overflow:hidden;">
+          <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/katongo&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="SoundCloud-Embed" style="width:100%;border:0;display:block;"></iframe>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:0.8rem;">
+          <a href="https://soundcloud.com/katongo" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
+        </p>
+      </div>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#127940;</span>
+      <h3>Try &amp; Error</h3>
+      <p data-i18n="idol_tryanderror_p">Skimboarding-Projekt von zwei Mitbewohnern aus der für mich schönsten WG Bielefelds. Nie angemeldet, nie skaliert — T-Shirts, Stencils, eigene Hand. Ihr Try &amp; Error war kein Slogan, sondern Methode. Aus der Nähe zu sehen, wie zwei Menschen empirisch und risikobereit an einer Sache dranbleiben, hat mich auf meine eigene Reise geschickt. Ihre Namen lasse ich hier weg, bis sie sie freigeben.</p>
+      <!-- TODO: Foto vom Stencil-T-Shirt einbauen, sobald aus den Festplatten-Tiefen geborgen (MBzwo srcset-Pattern) -->
     </div>
   </div>
 
@@ -2216,9 +3323,11 @@
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127925;</span>
       <h3>Mobb Deep</h3>
-      <p data-i18n="idol_mobbdeep_p">Prodigy and Havoc from Queensbridge. The Infamous. They made music that sounded like the city at 3am — cold, precise, no exits. Shook Ones Pt. II is not just a song, it's a test. Either you pass it or you don't.</p>
+      <p data-i18n="idol_mobbdeep_p">Prodigy and Havoc from Queensbridge, New York. The Infamous. They made music that sounded like the city at 3am — cold, precise, no exits. Shook Ones Pt. II is not just a song, it's a test. Either you pass it or you don't. Für mich war ihr "first things first" immer eine Haltung gegen Unterdrückung — Klarheit zuerst, alles andere danach.</p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"There's a war going on outside, no man is safe from."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Mobb Deep, Survival of the Fittest (1995)</cite></blockquote>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"The Mobb comes equipped for warfare, beware."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Mobb Deep, Shook Ones Pt. II (Queensbridge, NYC, 1995)</cite></blockquote>
+
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--moss);padding:0.4rem 0 0.4rem 1.2rem;margin:0.8rem 0 0;line-height:1.5;">„Bissu dumm? Hast du nichts gelernt?"<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Bonez MC × Nate57 × Jugglerz, <em>Bissu dumm</em> (2024). Die deutsche Antwort auf Shook Ones — und für mich heute, ein Jahr später, eine Frage an die Politik. <a href="https://genius.com/Bonez-mc-nate57-and-jugglerz-bissu-dumm-lyrics" target="_blank" rel="noopener" style="color:var(--clay);">Lyrics →</a></cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -2293,32 +3402,22 @@
         </div>
       </div>
     </div>
-    <div class="value-card" x-data="{open:false}">
+    <div class="value-card">
       <span class="icon">&#127908;</span>
-      <h3>Sido — Paul Würdig</h3>
-      <p data-i18n="idol_sido_p">Berlin-Hellersdorf. Maske, Block, Klarheit. Einer der ehrlichsten Stimmen aus dem deutschen Rap — bevor Rap cool war. Er hat nie so getan als ob. Relax.</p>
+      <h3>Sido, Harris &amp; B-Tight — Aggro Berlin</h3>
+      <p data-i18n="idol_aggroberlin_p">Aggro Berlin in den Nullern. Drei Stimmen, ein Stadtteil, eine Phase. Was mich an ihnen geprägt hat ist nicht der einzelne Track, sondern wie sie sich verhalten haben — als Team, mit Höhen und Tiefen. Wenn einer von ihnen unten war, haben die anderen ihn aufgefangen. Das war mein erster Lehrgang in Loyalität in einem Geschäft, das jeden zum Solo-Act drängt.</p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich bin nicht weggelaufen, ich bin einfach hier geblieben."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sido, Relax (2006)</cite></blockquote>
-      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
-        <span x-text="open ? 'weniger' : '... mehr'"></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div x-collapse x-show="open">
-        <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich komm aus'm Block und bin auch noch stolz drauf / Ich schreib mein' Namen groß, steh dazu und halt ihn hoch."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Sido, Mein Block (2004)</cite></blockquote>
-        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:1rem;">
-          <a href="https://open.spotify.com/track/4m2APCSV3nzWoHrAPod0ZT" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">&#9654; Relax auf Spotify anhören</a>
-        </p>
-      </div>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Berlin kann hart und weich."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Steef</cite></blockquote>
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127908;</span>
-      <h3>Skinny Shef — der Friedensfürst</h3>
+      <h3>Ein Bielefelder Rapper, der Friedensfürst</h3>
       <p data-i18n="idol_skinnyshef_p">Bielefeld. Bad Taste, dann Pimpulsiv, dann Mitgründer von Trailerpark — und dann raus. Als das Label kommerzieller wurde, ist er einfach gegangen. Nicht laut, nicht dramatisch. Echter Mensch. Ich nenne ihn den Friedensfürst.</p>
       <p style="margin-top:0.6rem;font-size:0.85rem;">
         <a href="https://soundcloud.com/skinny-shef" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
       </p>
 
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich hab nur noch ein Projekt. Und das bin ich und mein Sohn. Und Rec and Play."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Skinny Shef<sup class="fn">19</sup></cite></blockquote>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"Ich hab nur noch ein Projekt. Und das bin ich und mein Sohn. Und Rec and Play."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Bielefelder Rapper<sup class="fn">19</sup></cite></blockquote>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -2376,7 +3475,7 @@
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127911;</span>
-      <h3>O/Y</h3>
+      <h3>Ein Berliner Produzent</h3>
       <p data-i18n="idol_oy_p">Berliner Produzent. Ein Set im Salon at Rummels Bucht endete mit einem letzten Stück, das mir geholfen hat, über einen großen Fehler hinwegzukommen — derselbe Klang, den ich nur bei der Tschaikowski-Oboe gehört hatte. Die Bucht ist 2021 geschlossen worden, das Kollektiv lebt weiter im <em>Bucht der Träumer</em>-Festival.<sup class="fn">21</sup></p>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
@@ -2394,7 +3493,7 @@
     </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#127925;</span>
-      <h3>Mira — Berlin DJ</h3>
+      <h3>Eine Berliner DJ</h3>
       <p data-i18n="idol_mira_p">For what she builds in a room at night. Aware, precise, present. The kind of artist who knows that context is everything.</p>
       <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
         <span x-text="open ? 'weniger' : '... mehr'"></span>
@@ -2483,6 +3582,29 @@
       </div>
     </div>
   </div>
+
+  <!-- ── Mannschaften ── -->
+  <div class="idols-subsection reveal">
+    <h3 class="idols-subsection-title" data-i18n="idols_sub_teams">Mannschaften</h3>
+  </div>
+  <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="icon">&#9917;</span>
+      <h3>Die Zwote</h3>
+      <p data-i18n="idol_zwote_p">Institution aus Enger-Steinbeck bei Bielefeld. Von 2003 bis ~2015 organisierten sie <em>Kicken für Afrika</em>, ein 32-Mannschaften-Turnier am Brillweg, mit Live-Musik und über die Jahre Zehntausende Euro für das Thuthuka-Projekt in Bulawayo, Simbabwe. Eine Mannschaft, die mehr war als ein Verein — Gemeinschaft, Fairplay, kollektive Identität.<sup class="fn">17</sup></p>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#9917;</span>
+      <h3>CFB Hasenheide</h3>
+      <p data-i18n="idol_cfbhasenheide_p">Berliner Fußballverein an der Hasenheide. Bezirksliga-Niveau, ehrliche Vereinsarbeit, der Kiez auf dem Platz. Nicht der Glanz der ersten Liga — der Kern, aus dem Berliner Fußball wirklich besteht.</p>
+      <a href="https://cfb-hasenheide.de" target="_blank" rel="noopener" class="support-link" data-i18n="support_visit">Visit &#8594;</a>
+    </div>
+    <div class="value-card">
+      <span class="icon">&#9917;</span>
+      <h3>Fabuland</h3>
+      <p data-i18n="idol_fabuland_p">Bolzplatz-Mannschaft aus Neukölln. Wir nannten uns die Reste — alle, die anderswo nicht reinpassten. Aus Resten wird ein Team, wenn man bleibt.</p>
+    </div>
+  </div>
 </section>
 
 <!-- Contact -->
@@ -2561,7 +3683,7 @@
     <li>DuckDNS is a free dynamic DNS service run by volunteers. It maps a subdomain (*.duckdns.org) to any IP address and updates automatically via a simple API call — widely used for home-server access. See <a href="https://www.duckdns.org" target="_blank">duckdns.org</a>.</li>
     <li>Ubuntu Server LTS releases are supported by Canonical for five years with security patches. The 24.04 LTS release (April 2024) is the current long-term support version. Source: <a href="https://ubuntu.com/server" target="_blank">ubuntu.com/server</a>.</li>
     <li>The Raspberry Pi 5 (launched October 2023) starts at $60 for the 4 GB model. The Raspberry Pi Foundation is a UK registered charity whose mission is to put computing education within reach of everyone. Source: <a href="https://www.raspberrypi.org" target="_blank">raspberrypi.org</a>.</li>
-    <li>Restlos e.V. was founded in 2019 by Furkan Karadag and Mustafa Budumlu, both Bielefeld natives who studied Pedagogy and Sociology at the University of Bielefeld. They opened their first Rettermarkt in Bielefeld-Schildesche in January 2020, rescuing food that cannot be sold through regular retail — bruised produce, damaged packaging, approaching best-before dates — and making it available at a self-determined price. Proceeds fund social projects. Website: <a href="https://restlos-ev.de/" target="_blank">restlos-ev.de</a>. Instagram: <a href="https://www.instagram.com/restlos_bielefeld/" target="_blank">@restlos_bielefeld</a>.</li>
+    <li>Restlos e.V. was founded in 2019 by two Bielefeld activists, both Bielefeld natives who studied Pedagogy and Sociology at the University of Bielefeld. They opened their first Rettermarkt in Bielefeld-Schildesche in January 2020, rescuing food that cannot be sold through regular retail — bruised produce, damaged packaging, approaching best-before dates — and making it available at a self-determined price. Proceeds fund social projects. Website: <a href="https://restlos-ev.de/" target="_blank">restlos-ev.de</a>. Instagram: <a href="https://www.instagram.com/restlos_bielefeld/" target="_blank">@restlos_bielefeld</a>.</li>
     <li>Werrepiraten e.V. was founded under its current name in 2014, growing out of a boat-sports programme established roughly 30 years earlier by teacher Bernhard Bunte at the Eickhofschule in Hiddenhausen-Schweicheln. The club works primarily with socially disadvantaged children and young adults. Their PEER project — "Wildwasser nachhaltig nutzen" — trains former Eickhofschule students as peer guides and mentors. In 2024 the project won the NRW state prize of the "Sterne des Sports" competition (organised by DOSB and the Volks- und Raiffeisenbanken); at the national final in Berlin on 20 January 2025 they were awarded the Großer Stern des Sports in Silver and 7,500 € by Federal President Frank-Walter Steinmeier. Website: <a href="https://werrepiraten.org/" target="_blank">werrepiraten.org</a>. Instagram: <a href="https://www.instagram.com/werrepiraten/" target="_blank">@werrepiraten</a>. Sources: <a href="https://hoch5.com/blog/view/werrepiraten-entern-berlin" target="_blank">HOCH5</a>; <a href="https://www.presseportal.de/pm/115684/5901507" target="_blank">Presseportal</a>.</li>
     <li><em>Die Zwote</em> is a legendary grassroots football institution based in Enger-Steinbeck (Kreis Herford, NRW) near Bielefeld — rooted in community values, fair-play culture, and a strong collective identity. From 2003 onwards, Die Zwote organized <em>Kicken für Afrika</em>, an annual 32-team football tournament at the Brillweg sports ground in Enger-Steinbeck, combining football with live music. Over its twelve-year run the event raised tens of thousands of euros — at least 18,000 € in a single year — channelled to the Thuthuka project in Bulawayo, Zimbabwe: a street children's centre supporting 40 young people with schooling and vocational training in furniture-making, car repair, and agriculture, run by Scripture Union Zimbabwe in partnership with terre des hommes. The event ended around 2015 when the original venue was developed into residential housing. Source: <a href="https://www.nw.de/lokal/kreis_herford/enger/20514953_Kicken-fuer-Afrika-faellt-dieses-Jahr-aus.html" target="_blank">Neue Westfälische</a>; <a href="https://www.tdh.de/mitmachen/aktiv-sein/testimonials-wir-machen-mit/meldungen/kicken-fuer-afrika-spendet-18000-euro/" target="_blank">terre des hommes</a>.</li>
     <li>Mesut Özil's story is documented in the Amazon Prime documentary <em>Mesut Özil: 10 Behind the Mask</em> (2022). After winning the 2014 World Cup with Germany, Özil was subjected to sustained racist abuse from German football officials, politicians, and the public — particularly following a photo with Turkish President Erdoğan in 2018. He retired from the German national team citing "racism and disrespect." His mother Gülizar held the family together through poverty, illness, and a hostile public environment. The DFB's handling of the affair was widely condemned. Sources: Özil's retirement statement (July 2018); Amazon documentary (2022); <em>Der Spiegel</em>, <em>The Guardian</em>.</li>
@@ -2574,9 +3696,12 @@
 </section>
 
 <footer>
-  &copy; 2026 Stefan-Olav Hüllinghorst &middot; Built with care
+  &copy; 2026 Bewegung „Der springende Punkt" &middot; Built with care
   &middot; <a href="invest.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Investors</a>
   &middot; <a href="impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Impressum</a>
+  &middot; <a href="open-letter.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Elon Musk</a>
+  &middot; <a href="open-letter-fernandes.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Collien Fernandes</a>
+  &middot; <a href="open-letter-watzke.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Watzke / BVB</a>
 </footer>
 
 <script src="i18n.js"></script>
@@ -2601,10 +3726,30 @@
   (function initRedFlag() {
     const hint = document.querySelector('.scroll-hint');
     const flag = hint && hint.querySelector('.red-flag');
+    const toggle = document.getElementById('flag-toggle');
     if (!hint || !flag) return;
 
-    // Hover counter: 0 = noch nie / nicht aktiv, 1 = erster Hover (ja),
-    // 2 = zweiter Hover (hm), 3+ = dritter Hover (eskalation, capped).
+    // Toggle: default on, persisted in localStorage. Mobile-friendly because
+    // it's a real button — kein Hover nötig.
+    const STORAGE_KEY = 'flag-easter-egg';
+    let enabled = true;
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'off') enabled = false;
+    } catch (_) { /* localStorage may be unavailable (private mode, etc.) */ }
+    const applyToggle = () => {
+      document.body.classList.toggle('flag-off', !enabled);
+      if (toggle) toggle.setAttribute('aria-pressed', String(enabled));
+    };
+    applyToggle();
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        enabled = !enabled;
+        try { localStorage.setItem(STORAGE_KEY, enabled ? 'on' : 'off'); } catch (_) {}
+        applyToggle();
+      });
+    }
+
     let hovers = 0;
     const stageOf = (n) => n <= 1 ? 1 : n === 2 ? 2 : 3;
     const apply = () => hint.setAttribute('data-flag-stage', String(stageOf(hovers)));
@@ -2616,14 +3761,43 @@
       flag.classList.add('flag-pulse');
     };
 
-    const onEnter = () => {
+    // Sprung-Physik: bei jedem Trigger springt die Flagge an eine zufällige
+    // Position. Sprungradius eskaliert mit Stage:
+    // Stage 1 → nahe Sprünge, Stage 2 → mittlere, Stage 3 → weite ("randomly weit").
+    // Trigger ist pointerdown — funktioniert auf Maus *und* Touch in einem
+    // Listener, kein Doppelfeuer auf Desktop. Auf Mobile (kein Hover) ist
+    // der Tap die Interaktion; auf Desktop ersetzt der Click den Hover-Trigger.
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const FLAG_HALF = 22;
+    const RADIUS_BY_STAGE = { 1: 140, 2: 280, 3: 520 };
+
+    const jump = () => {
+      if (reduce) return;
+      const rect = hint.getBoundingClientRect();
+      const anchorX = rect.left + rect.width / 2;
+      const anchorY = rect.top + rect.height / 2;
+      const r = RADIUS_BY_STAGE[stageOf(hovers)] || 140;
+      const minDist = r * 0.35;
+      const dist = minDist + Math.random() * (r - minDist);
+      const angle = Math.random() * Math.PI * 2;
+      let x = anchorX + Math.cos(angle) * dist;
+      let y = anchorY + Math.sin(angle) * dist;
+      x = Math.max(FLAG_HALF, Math.min(window.innerWidth  - FLAG_HALF, x));
+      y = Math.max(FLAG_HALF, Math.min(window.innerHeight - FLAG_HALF, y));
+      flag.style.setProperty('--jx', x + 'px');
+      flag.style.setProperty('--jy', y + 'px');
+    };
+
+    const onTrigger = () => {
+      if (!enabled) return;
       hovers += 1;
       apply();
+      jump();
       pulse();
     };
 
-    hint.addEventListener('mouseenter', onEnter);
-    hint.addEventListener('focus',      onEnter);
+    hint.addEventListener('pointerdown', onTrigger);
+    hint.addEventListener('focus',       onTrigger);
   })();
 
   // Language switcher toggle
@@ -2644,6 +3818,388 @@
       switcher.classList.remove('open');
     });
   });
+
+  // ── Sound on hover + Confetti on click ──────────────────────────────
+  // Hover-Sound: Web Audio API, synthetic tones, no file hosting.
+  // Confetti: pure DOM, ~26 pieces per click, falls with gravity-ish curve.
+  // Both respect prefers-reduced-motion: at reduce, sound is muted, confetti is single pulse.
+  // Sound starts muted; user opts in via #sound-toggle. Browser auto-play policy
+  // means first audio plays only after a user gesture anyway.
+  (function initEffects() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const soundBtn = document.getElementById('sound-toggle');
+    let soundOn = false;
+    let audioCtx = null;
+
+    function ensureCtx() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, duration, type) {
+      if (!soundOn || reduce) return;
+      const ctx = ensureCtx();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type || 'sine';
+      osc.frequency.value = freq;
+      gain.gain.value = 0;
+      gain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.01);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration / 1000);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration / 1000);
+    }
+
+    // ── Friedensglocken — Carillon-artige Synthesis ─────────────────
+    // Mehrere Sinus-Partials mit eigenem Decay, ergibt einen glocken-
+    // ähnlichen Klang. Force-flag erlaubt, beim Klick auf den Button
+    // auch ohne Sound-Toggle zu klingen — Friedensglocken müssen klingen.
+    function playBell(freq, force) {
+      if (!force && (!soundOn || reduce)) return;
+      if (reduce) return;
+      const ctx = ensureCtx();
+      if (!ctx) return;
+      // Resume context if suspended (Auto-Play-Policy)
+      if (ctx.state === 'suspended') ctx.resume();
+      const partials = [
+        { mult: 0.5,  gain: 0.20, decay: 2.4 },  // sub-octave hum
+        { mult: 1.0,  gain: 0.30, decay: 2.0 },  // fundamental (strike)
+        { mult: 2.0,  gain: 0.18, decay: 1.4 },  // octave
+        { mult: 2.4,  gain: 0.12, decay: 1.2 },  // minor third (typical bell partial)
+        { mult: 3.0,  gain: 0.08, decay: 0.9 },  // fifth
+        { mult: 4.2,  gain: 0.05, decay: 0.7 },  // upper partials
+      ];
+      partials.forEach(p => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq * p.mult;
+        gain.gain.value = 0;
+        gain.gain.linearRampToValueAtTime(p.gain, ctx.currentTime + 0.005);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + p.decay);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + p.decay);
+      });
+    }
+
+    // Kurze Glocken-Folge: drei Schläge wie Kirchenturm-Carillon
+    function ringBells(force) {
+      const base = 392;  // G4 — typisch für Kirchenglocken
+      playBell(base * 1.5, force);  // C5
+      setTimeout(() => playBell(base * 1.0, force), 700);   // G4 (lower)
+      setTimeout(() => playBell(base * 1.5, force), 1400);  // C5 again
+    }
+
+    // Friedens-Button — läutet immer, auch wenn Sound off ist
+    const peaceBtn = document.getElementById('peace-bells');
+    if (peaceBtn) {
+      peaceBtn.addEventListener('click', () => {
+        ringBells(true);
+        // Auto-Aktivierung des Sounds beim ersten Klick auf Friedensglocken
+        if (!soundOn) {
+          soundOn = true;
+          soundBtn.setAttribute('aria-pressed', 'true');
+          soundBtn.textContent = '\u{1F50A}';
+        }
+      });
+    }
+
+    soundBtn.addEventListener('click', () => {
+      soundOn = !soundOn;
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+      soundBtn.textContent = soundOn ? '\u{1F50A}' : '\u{1F507}';
+      if (soundOn) ensureCtx();
+    });
+
+    // Hover sounds: differentiate by element class
+    function hoverHandler(e) {
+      if (!soundOn || reduce) return;
+      const el = e.target.closest('[data-hover-sound], .value-card, .support-card, .tool-card, .lifeline-card');
+      if (!el || el._hoverPlayed) return;
+      el._hoverPlayed = true;
+      setTimeout(() => { el._hoverPlayed = false; }, 250);
+      if (el.classList.contains('value-card')) {
+        playTone(523, 90, 'sine');  // C5, idol — gentle
+      } else if (el.classList.contains('support-card')) {
+        playTone(440, 90, 'triangle');  // A4, support — warmer
+      } else if (el.classList.contains('tool-card')) {
+        playTone(659, 70, 'sine');  // E5, tool — bright
+      } else if (el.classList.contains('lifeline-card')) {
+        playTone(392, 100, 'triangle');  // G4, lifeline — grounded
+      } else {
+        playTone(494, 80, 'sine');  // B4, default
+      }
+    }
+    document.addEventListener('mouseover', hoverHandler);
+
+    // Confetti on click
+    const palette = ['#c9a96e', '#5a6e4a', '#7a9463', '#3d2b1f', '#8c7b6b', '#6b4f3a'];
+    const goldPalette = ['#d4af37', '#f4e2a0', '#ffd700', '#e6c158', '#fff3b0', '#b8860b'];
+    function confetti(x, y, useGold) {
+      if (reduce) {
+        // Reduced motion: simple pulse instead of confetti
+        const pulse = document.createElement('div');
+        pulse.style.cssText = `position:fixed;left:${x-12}px;top:${y-12}px;width:24px;height:24px;border-radius:50%;background:var(--clay);opacity:0.4;pointer-events:none;z-index:99999;transition:opacity 0.4s, transform 0.4s;`;
+        document.body.appendChild(pulse);
+        requestAnimationFrame(() => { pulse.style.opacity = '0'; pulse.style.transform = 'scale(2)'; });
+        setTimeout(() => pulse.remove(), 500);
+        return;
+      }
+      const count = useGold ? 36 : 26;
+      const pal = useGold ? goldPalette : palette;
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5);
+        const dist = 80 + Math.random() * 200;
+        const cx = Math.cos(angle) * dist;
+        const cy = Math.sin(angle) * dist + 200 + Math.random() * 300;
+        const cr = (Math.random() - 0.5) * 720;
+        piece.style.left = x + 'px';
+        piece.style.top = y + 'px';
+        piece.style.background = pal[Math.floor(Math.random() * pal.length)];
+        piece.style.setProperty('--cx', cx + 'px');
+        piece.style.setProperty('--cy', cy + 'px');
+        piece.style.setProperty('--cr', cr + 'deg');
+        piece.style.animationDelay = (Math.random() * 60) + 'ms';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 1600);
+      }
+      // Confetti hit also plays a soft chord if sound is on
+      if (soundOn && !reduce) {
+        playTone(523, 80, 'sine');
+        setTimeout(() => playTone(659, 80, 'sine'), 40);
+        setTimeout(() => playTone(784, 100, 'sine'), 80);
+      }
+    }
+
+    // Klick auf Sandra-Frotscher-Konfetti-Zitat → Glocken statt Akkord.
+    // Erkennung: blockquote.hero-citation, dessen <cite>-Inhalt Sandra
+    // Frotscher referenziert. Confetti läuft normal weiter, der Sound
+    // wird ersetzt.
+    function isFrotscherCitation(el) {
+      const bq = el && el.closest && el.closest('blockquote.hero-citation');
+      if (!bq) return false;
+      const cite = bq.querySelector('cite');
+      return cite && /Frotscher/i.test(cite.textContent);
+    }
+
+    document.addEventListener('click', (e) => {
+      // Don't confetti on form/link/button submit-style interactions that need focus
+      const skip = e.target.closest('input, textarea, select, .lang-option, .sound-toggle');
+      if (skip) return;
+      const isFrotscher = isFrotscherCitation(e.target);
+      const goldHost = e.target.closest && e.target.closest('[data-confetti-mode="gold"]');
+      if (isFrotscher) {
+        // Konfetti weiter, aber Glocken statt Akkord
+        const orig = soundOn;
+        soundOn = false;  // Akkord temporär ausschalten
+        confetti(e.clientX, e.clientY);
+        soundOn = orig;   // wiederherstellen
+        ringBells(true);  // Friedensglocken — auch wenn Sound off
+      } else if (goldHost) {
+        // Olympia-Block: Goldmedaillen-Konfetti
+        confetti(e.clientX, e.clientY, true);
+      } else {
+        confetti(e.clientX, e.clientY);
+      }
+    });
+
+    // ── Fancy Layer: Stardust + Aurora + Tilt + Goldstaub ──────────
+
+    // Stardust: 32 Glitzerpunkte, zufällige Positionen + Twinkle-Phase
+    if (!reduce) {
+      const stardust = document.createElement('div');
+      stardust.className = 'stardust';
+      stardust.setAttribute('aria-hidden', 'true');
+      for (let i = 0; i < 32; i++) {
+        const speck = document.createElement('div');
+        speck.className = 'speck';
+        speck.style.left = (Math.random() * 100) + 'vw';
+        speck.style.top = (Math.random() * 100) + 'vh';
+        speck.style.setProperty('--dur', (3 + Math.random() * 5) + 's');
+        speck.style.setProperty('--del', (Math.random() * 5) + 's');
+        speck.style.transform = `scale(${0.6 + Math.random() * 1.4})`;
+        stardust.appendChild(speck);
+      }
+      document.body.appendChild(stardust);
+    }
+
+    // Klick-Aurora: kurzer Lichtschein am Klickpunkt, vor Konfetti
+    function spawnAurora(x, y) {
+      if (reduce) return;
+      const aurora = document.createElement('div');
+      aurora.className = 'click-aurora';
+      aurora.style.left = x + 'px';
+      aurora.style.top = y + 'px';
+      document.body.appendChild(aurora);
+      setTimeout(() => aurora.remove(), 800);
+    }
+    // Hook into existing click handler
+    document.addEventListener('click', (e) => {
+      const skip = e.target.closest('input, textarea, select, .lang-option, .sound-toggle');
+      if (skip) return;
+      spawnAurora(e.clientX, e.clientY);
+    }, true);  // capture phase, runs before confetti handler
+
+    // Hover-Tilt für Karten (nur hover-fähige Devices, nicht reduce)
+    if (!reduce && window.matchMedia('(hover: hover)').matches) {
+      const tiltSelector = '.value-card, .support-card, .tool-card, .lifeline-card, .theorie-card, .olympia-card';
+      document.querySelectorAll(tiltSelector).forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / (rect.width / 2);
+          const dy = (e.clientY - cy) / (rect.height / 2);
+          const max = 4;  // max degrees
+          card.style.transform = `perspective(800px) rotateX(${-dy * max}deg) rotateY(${dx * max}deg) translateZ(2px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // Goldstaub-Reveal: einmaliger Schauer beim Scroll-Reveal jeder Section
+    if (!reduce) {
+      const sectionsRained = new WeakSet();
+      const goldObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !sectionsRained.has(entry.target)) {
+            sectionsRained.add(entry.target);
+            // Spawn 8 gold flakes drifting from above
+            const rect = entry.target.getBoundingClientRect();
+            const startY = rect.top;
+            for (let i = 0; i < 8; i++) {
+              const flake = document.createElement('div');
+              flake.className = 'gold-rain';
+              flake.style.left = (rect.left + Math.random() * rect.width) + 'px';
+              flake.style.top = startY + 'px';
+              flake.style.setProperty('--dx', ((Math.random() - 0.5) * 80) + 'px');
+              flake.style.setProperty('--dy', (60 + Math.random() * 100) + 'px');
+              flake.style.setProperty('--dr', ((Math.random() - 0.5) * 540) + 'deg');
+              flake.style.animationDelay = (Math.random() * 200) + 'ms';
+              document.body.appendChild(flake);
+              setTimeout(() => flake.remove(), 2200);
+            }
+          }
+        });
+      }, { threshold: 0.25 });
+      document.querySelectorAll('section').forEach(s => goldObserver.observe(s));
+    }
+
+    // ── Rosa Püschel — Tipping-Point der Seite ─────────────────────
+    // Folgt der Maus mit Damping (lazy lerp), dreht sich, wackelt zufällig.
+    // Bei schneller Mausbewegung regnet Konfetti-Spur aus ihm.
+    // Verzichtet sich selbst bei reduced-motion / no-hover / mobile (CSS).
+    if (!reduce && window.matchMedia('(hover: hover)').matches && window.innerWidth > 700) {
+      const puschel = document.createElement('div');
+      puschel.className = 'puschel';
+      puschel.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(puschel);
+
+      // Three ghost trail puschels
+      const ghosts = [];
+      for (let g = 0; g < 3; g++) {
+        const ghost = document.createElement('div');
+        ghost.className = 'puschel-ghost';
+        ghost.setAttribute('aria-hidden', 'true');
+        ghost.style.opacity = (0.45 - g * 0.13).toFixed(2);
+        ghost.style.transform = `translate(${window.innerWidth/2}px, ${window.innerHeight/2}px) translate(-50%, -50%)`;
+        document.body.appendChild(ghost);
+        ghosts.push({ el: ghost, x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      }
+
+      let mx = window.innerWidth / 2;
+      let my = window.innerHeight / 2;
+      let px = mx, py = my;       // Püschel-Position (gefedert)
+      let lastMx = mx, lastMy = my;
+      let vx = 0, vy = 0;         // velocity
+      let rotation = 0;
+      let wobblePhase = 0;
+      let lastTrailTime = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+
+      const trailPalette = ['#ffafd5', '#ff8fc1', '#ffd1e6', '#e85aa3', '#ffc8df'];
+      function trailConfetti(x, y, count) {
+        for (let i = 0; i < count; i++) {
+          const piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 40 + Math.random() * 80;
+          const cx = Math.cos(angle) * dist;
+          const cy = Math.sin(angle) * dist + 60 + Math.random() * 80;
+          const cr = (Math.random() - 0.5) * 540;
+          piece.style.left = x + 'px';
+          piece.style.top = y + 'px';
+          piece.style.background = trailPalette[Math.floor(Math.random() * trailPalette.length)];
+          piece.style.width = (4 + Math.random() * 4) + 'px';
+          piece.style.height = (6 + Math.random() * 6) + 'px';
+          piece.style.setProperty('--cx', cx + 'px');
+          piece.style.setProperty('--cy', cy + 'px');
+          piece.style.setProperty('--cr', cr + 'deg');
+          piece.style.animationDuration = '0.8s';
+          document.body.appendChild(piece);
+          setTimeout(() => piece.remove(), 900);
+        }
+      }
+
+      function tick(t) {
+        // Crazy physics: lerp toward cursor with velocity + damping + wobble
+        const lerpFactor = 0.16;
+        const targetX = mx + Math.sin(wobblePhase) * 6;
+        const targetY = my + Math.cos(wobblePhase * 1.3) * 5;
+        const dx = targetX - px;
+        const dy = targetY - py;
+        vx = vx * 0.78 + dx * lerpFactor;
+        vy = vy * 0.78 + dy * lerpFactor;
+        px += vx;
+        py += vy;
+
+        // Rotation based on velocity
+        rotation += (vx * 0.02 + vy * 0.015);
+        wobblePhase += 0.08;
+
+        // Apply transform
+        puschel.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%) rotate(${rotation}deg)`;
+
+        // Ghost trail: each ghost lerps toward the previous (puschel for first, prev ghost for others)
+        // with progressively higher inertia
+        let prevX = px, prevY = py;
+        ghosts.forEach((g, idx) => {
+          const damping = 0.18 - idx * 0.04;
+          g.x += (prevX - g.x) * damping;
+          g.y += (prevY - g.y) * damping;
+          g.el.style.transform = `translate(${g.x}px, ${g.y}px) translate(-50%, -50%) rotate(${rotation - idx * 18}deg)`;
+          prevX = g.x;
+          prevY = g.y;
+        });
+
+        // Cursor speed for trail
+        const speed = Math.hypot(mx - lastMx, my - lastMy);
+        lastMx = mx;
+        lastMy = my;
+        if (speed > 14 && (t - lastTrailTime) > 80) {
+          trailConfetti(px, py, Math.min(3, Math.floor(speed / 14)));
+          lastTrailTime = t;
+        }
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  })();
 
   // Burger menu
   const mainNav = document.getElementById('main-nav');

@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-05-02-version-1-0-und-zwei-algorithmen",
+    "date": "2026-05-02",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-05-02-version-1-0-und-zwei-algorithmen", "title": "Version 1.0 — und zwei Algorithmen, denen ich traue", "teaser": "Die Reisen-Seite ist als Version 1.0 gegangen — ohne Lektorat. Im Hintergrund liefen ein Podcast vom Kollektiv Blaue Stunde und ein Afro-House-Set. Plus: warum ich meinen Musik-Algorithmen mehr traue als LinkedIn oder Google. Und drei Notizen am Rand — ZenBusiness-Datenleck, Academy-KI-Beschluss, US-Truppenabzug."},
+      "en": {"slug": "2026-05-02-version-1-0-und-zwei-algorithmen-en", "title": "Version 1.0 — and two algorithms I trust", "teaser": "The Journeys page just shipped as version 1.0 — no editing pass. A Kollektiv Blaue Stunde podcast and an Afro-House set were playing in the background. Plus: why I trust my music algorithms more than LinkedIn or Google. And three notes from the edges — the ZenBusiness breach, the Academy's AI line, the US troop withdrawal."}
+    }
+  },
+  {
     "slug": "2026-04-29-tokens-und-tier2",
     "date": "2026-04-29",
     "translations": {
