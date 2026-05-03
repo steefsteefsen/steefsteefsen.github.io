@@ -33,6 +33,11 @@ docs/issues-pending.md
 # DM templates. Stays off both the deploy and the open repo.
 docs/einladungen-zu-versenden.md
 
+# Guided journeys — Files where Stefan walks people through using Claude on
+# his laptop to build their own topics. Personal walkthroughs, not for the
+# public repo. Naming: docs/journeys-guided/<who>-<topic>.md
+docs/journeys-guided/
+
 # Local-only drafts — anything in docs/ ending in -DRAFT.md stays off the web.
 # Useful for politically sensitive pieces that need to be written down for
 # alignment with Stefan but are not ready to ship.

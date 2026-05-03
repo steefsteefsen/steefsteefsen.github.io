@@ -263,9 +263,19 @@
     font-size: 0.78rem;
     color: var(--stone);
     letter-spacing: 0.04em;
-    margin: 0.2rem 0 1.4rem;
+    margin: 0.2rem 0 0.4rem;
     opacity: 0.85;
     font-weight: 300;
+  }
+  .hero-allgemeingut {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--moss);
+    margin: 0 0 1.4rem;
+    max-width: 580px;
+    line-height: 1.45;
+    opacity: 0.92;
   }
 
   .hero-nicknames {
@@ -2269,6 +2279,7 @@
     <span class="hero-creed" data-i18n="hero_creed">Kultur statt Unterschiede.</span>
   </h1>
   <p class="hero-aka" data-i18n="hero_aka">aka „Der extra Meter" — geprägt von Jojo (Johannes Lömke).</p>
+  <p class="hero-allgemeingut" data-i18n="hero_allgemeingut">„Der springende Punkt" ist Allgemeingut der deutschen Sprache — wie „Am Hintern wird die Ente fett" meiner Eltern. Niemand besitzt das, alle dürfen.</p>
   <div class="hero-nicknames">
     <div class="nickname-card" x-data="{open:false}">
       <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steef" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steef'">
