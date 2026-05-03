@@ -8,6 +8,7 @@ stages:
   - test
   - security
   - mirror
+  - pages
   - deploy-verify
 
 variables:
@@ -342,11 +343,14 @@ mobile-render-test:
   allow_failure: false
 
 # ── Mirror to GitHub (after pipeline passes) ───
+# Only runs when GITHUB_TOKEN is set (i.e. on the primary repo
+# steefsteefsen-github-io). On the open mirror at theopenhomepage,
+# this job is skipped because no token is configured there.
 mirror-to-github:
   stage: mirror
   image: alpine:latest
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $GITHUB_TOKEN'
       when: on_success
   script:
     - apk add --no-cache git
@@ -365,4 +369,32 @@ mirror-to-github:
     - git config credential.helper store
     - echo "https://steefsteefsen:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
     - git push github HEAD:main --force
+  allow_failure: false
+
+# ── GitLab Pages ───────────────────────────────
+# Static site deploy. Copies the repo into public/ and lets GitLab
+# serve it under https://<namespace>.gitlab.io/<project>/.
+# Skips test/, logs/, scripts/, docs/ — everything that's not user-facing.
+pages:
+  stage: pages
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - apk add --no-cache rsync
+    - mkdir public
+    - rsync -av
+        --exclude='public'
+        --exclude='tests'
+        --exclude='logs'
+        --exclude='scripts'
+        --exclude='docs'
+        --exclude='node_modules'
+        --exclude='.git*'
+        --exclude='.env'
+        --exclude='*.md'
+        ./ public/
+  artifacts:
+    paths:
+      - public
   allow_failure: false
