@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codeberg statt GitLab? — „Der springende Punkt"</title>
+<meta name="description" content="Falls jemand einen Anlass sieht, diese Seite auf Codeberg statt GitLab zu hosten, soll dieser jemand sich melden — über einen speziellen Link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .invite-box { background: var(--sand); border-left: 3px solid var(--clay); padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 0 8px 8px 0; }
+  .invite-box p { margin-bottom: 0.6rem; color: var(--bark); }
+  .invite-box p:last-child { margin-bottom: 0; }
+  .invite-box .cta { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--bark); font-weight: 600; }
+  .invite-box .cta a { color: var(--bark); border-bottom: 1px solid rgba(61, 43, 31, 0.4); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" title="Homepage von Steef">„Der springende Punkt"</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-03-codeberg-anlass.html" class="active">DE</a>
+      <a href="/blog/posts/2026-05-03-codeberg-anlass-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">3. Mai 2026 · Reflexion</div>
+  <h1>Codeberg statt GitLab? Schreib mir.</h1>
+
+  <div class="post-body">
+    <p>Diese Seite liegt aktuell auf <a href="https://gitlab.com/steefSteefsen/theopenhomepage" target="_blank" rel="noopener">GitLab</a>. GitLab ist ein börsennotiertes US-Unternehmen mit deutscher Wurzel — solide Infrastruktur, vernünftige CI, vernünftige SSH-Auth. Es funktioniert.</p>
+
+    <p>Aber es gibt <a href="https://codeberg.org/" target="_blank" rel="noopener">Codeberg</a>. Codeberg ist eine gemeinnützige Forge, betrieben vom Codeberg e.V. in Berlin, basiert auf <a href="https://about.gitea.com/" target="_blank" rel="noopener">Forgejo</a> (einem Gitea-Fork), und hat keine Aktionäre, keinen Investor-Druck, keinen Exit-Plan. Du bezahlst es nicht; du kannst es unterstützen, wenn du willst.</p>
+
+    <p>Ich habe mich für GitLab entschieden, weil ich es kannte, weil meine SSH-Keys dort schon liegen, weil die CI-Pipeline schon stand. Eine technische Bequemlichkeit, kein politischer Plan.</p>
+
+    <h2>Hier die Einladung</h2>
+
+    <div class="invite-box">
+      <p><strong>Falls du einen Anlass siehst, diese Seite auf Codeberg statt GitLab zu hosten</strong> — sei es politisch, infrastrukturell, ideologisch, oder weil du eine konkrete Sorge mit GitLab hast, die ich nicht auf dem Schirm habe — dann melde dich.</p>
+      <p class="cta"><a href="mailto:steef@huellinghorst.info?subject=Codeberg-Anlass">steef@huellinghorst.info → Codeberg-Anlass</a></p>
+      <p style="font-size:0.9rem;">Der Subject-String <code style="font-family:'Jost',monospace;background:rgba(201,169,110,0.15);padding:0.1rem 0.4rem;border-radius:3px;">Codeberg-Anlass</code> ist der spezielle Kanal. Wer das schreibt, kommt vor dem Inbox-Rauschen durch.</p>
+    </div>
+
+    <h2>Was ich nicht mache</h2>
+
+    <p>Ich migriere die Seite <strong>nicht aus eigener Initiative</strong>. Migrationen sind teuer — Webhooks, CI, alle internen Links, alle Mirror-Setups. Wenn ich es alleine mache, mache ich es aus Pflichtgefühl, und das wird nicht halten.</p>
+
+    <p>Wenn aber jemand kommt und sagt <em>„hier ist der Anlass, hier ist der Beitrag, den ich leiste, hier ist warum mir das wichtig ist"</em> — dann lohnt sich die Bewegung. Dann ist Codeberg nicht ein Default, sondern eine Geste.</p>
+
+    <h2>Worauf du achten kannst</h2>
+
+    <p>Wenn du dir einen Anlass überlegst, hilft mir am meisten:</p>
+
+    <p><strong>Konkrete Sorge</strong> — nicht „Codeberg ist besser", sondern <em>was an GitLab</em> dich stört. Eine Story aus deiner eigenen Praxis. Ein Vorfall. Eine policy-Entscheidung, die du verfolgst.</p>
+
+    <p><strong>Mit Hand</strong> — wenn du selbst beim Migrieren mit-anpackst, nicht nur einen Vorschlag wirfst. Codeberg-Account einrichten, CI mitdenken, Webhook-Setup mitschauen.</p>
+
+    <p><strong>Ohne Eile</strong> — ich werde nicht in einer Woche migrieren, weil jemand fünf Mails schreibt. Was kommt, kommt.</p>
+
+    <p>Codeberg-Repos können mit GitLab-Repos koexistieren als Mirror — das wäre ein erster Schritt, der niemandem wehtut. Dauerhaft umziehen ist die zweite Frage. Erst Schritt eins, dann Schritt zwei.</p>
+
+    <p style="margin-top:2rem;font-size:0.95rem;color:var(--earth);font-style:italic;">PS: Falls du beim Lesen bemerkst, dass dich diese Frage nervt, weil sie politisch klingt — frag dich, warum die Wahl der Forge politisch sein darf, aber die Wahl des Internet-Providers, der Bank, des Stromversorgers nicht. Es darf alles politisch sein. Du musst es nicht zur Politik machen, aber du darfst.</p>
+  </div>
+
+  <div class="post-nav" style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.2);">
+    <a href="/blog/" style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--moss);text-decoration:none;">← Zurück zum Blog</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/">Blog</a> &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>

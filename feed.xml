@@ -9,6 +9,14 @@
     <atom:link href="https://steefsteefsen.github.io/feed.xml" rel="self" type="application/rss+xml"/>
 
   <item>
+    <title>Codeberg statt GitLab? Schreib mir.</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-codeberg-anlass.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-codeberg-anlass.html</guid>
+    <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
+    <description>Diese Seite liegt auf GitLab — eine technische Bequemlichkeit, kein politischer Plan. Falls du einen Anlass siehst, sie auf Codeberg zu hosten, melde dich über einen speziellen Subject-String. Mit Hand, mit konkreter Sorge, ohne Eile.</description>
+    <author>Steef</author>
+  </item>
+  <item>
     <title>Bounty: Wer findet meine Nummer?</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-bounty-hunter-telefonnummer.html</link>
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-bounty-hunter-telefonnummer.html</guid>
