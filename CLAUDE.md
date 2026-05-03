@@ -475,6 +475,7 @@ don't leave orphans.
 | 21 | OY — Berlin duo + Salon at Rummels Bucht + Bucht der Träumer Festival |
 | 22 | "Strong minds discuss ideas…" — misattributed to Socrates, traces to H. T. Buckle |
 | 23 | YAAM Berlin (Young African Art Market, Schillingbrücke 3) — referenced from Ciao Ella card |
+| 24 | Robin Haemisch (FOB) — Mondiali-Antirazzisti-Daten 2006/2014/2015/2016, persönliches Gespräch 2026-05-03; ZEIT-Porträt URL pending |
 
 ## Writing your own tests
 
@@ -973,7 +974,12 @@ Johannes Lömke aka Jojo (Tier 1 on the basis of his public role as
 driving force behind Die Zwote and Werrepiraten — both of which are
 already cited on the site as named institutions; consent recorded
 2026-05-03 in chat: explicit full-name release plus the character
-material that frames the „Der extra Meter" attribution).
+material that frames the „Der extra Meter" attribution),
+Robin Haemisch aka FOB („Fürst von Kicken für Afrika", engagierter
+Lehrer, treibende Kraft der Zwoten; Tier 1 on the basis of his public
+role + recent ZEIT portrait; consent recorded 2026-05-03 in chat:
+Stefan spoke with him directly, Robin released the Mondiali-
+Antirazzisti year data 2006/2014/2015/2016 himself).
 
 ### Tier 2 — Private persons
 
