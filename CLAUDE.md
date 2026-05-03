@@ -901,6 +901,55 @@ without an attached link to where you got it. If a draft has facts without
 sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
 silently shipping unsourced text.
 
+## .env variable names (use the names, not the values)
+
+**Stefans Anweisung 2026-05-04 ~01:00**: *„DAHIN VERFICKT NOCHMAL AB
+IN DIE CLAUDE MD MIT DEN VARIABLEN NAMEN."*
+
+Hard rule: when Claude needs to reference a project-specific URL,
+path, or identifier in code, commit messages, or documentation, the
+**variable name** is the canonical handle, not the value.
+
+**Currently defined in `.env`** (gitignored, contents stay local):
+
+| Name | Purpose |
+|---|---|
+| `THEOPENHOMEPAGE_URL` | SSH remote of the open-source mirror on GitLab |
+| `THEOPENHOMEPAGE_HTTPS` | HTTPS-form for browser visitors / Pages link / blog post links |
+| `GITLAB_PRIMARY_URL` | SSH remote of the primary repo (`steefsteefsen-github-io`) |
+| `GITHUB_MIRROR_URL` | SSH remote of the GitHub mirror (`steefsteefsen.github.io`) |
+
+**How to reference correctly:**
+
+- In **commit messages**: refer to the variable name in prose (*„push
+  goes to `$THEOPENHOMEPAGE_URL`"*), don't paste the URL.
+- In **blog posts / page content**: link by the value if the link is
+  user-facing (visitors need a clickable URL), but use the variable
+  name in any meta-comment or HTML-comment.
+- In **CI / shell scripts**: source `.env` if available, then use
+  `${THEOPENHOMEPAGE_URL}` etc. Don't hardcode.
+- In **chat with Stefan**: Claude **uses the variable names** when
+  discussing where things go (*„push to `$THEOPENHOMEPAGE_URL`"*),
+  not the bare URLs. Stefan repeats the value himself when needed.
+
+**Why this rule**: URLs change. Repos get renamed, namespaces move,
+GitHub becomes Codeberg. If the value lives in `.env` and the rest of
+the system references the **name**, then a single edit in `.env`
+(by Stefan, never by Claude — see Hard Rule above) updates the whole
+project's connection to that resource.
+
+**Refactoring debt**: most of the existing site has hardcoded URLs
+(in HTML, in commit messages, in CI). They will be migrated to
+variable references **schrittweise rückwirkend** — when a file is
+touched for other reasons, hardcoded URLs in that file get replaced
+with `<!-- url: $VARNAME -->` comments + the value, so the variable
+binding is visible in the source.
+
+This is **not** a build-time substitution today (the site is static
+HTML, no template engine). It's a **convention for human + Claude
+readability**, so future migrations happen without grep-the-whole-
+repo gymnastics.
+
 ## Stefan's public-facing name: „Steef"
 
 **Auf der Site heißt Stefan ‚Steef'** — überall: Logo, Footer-Copyright,

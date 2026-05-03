@@ -387,6 +387,8 @@ mirror-to-github:
 create-pages:
   rules:
     - when: never
+  script:
+    - 'true'
 
 pages:
   stage: pages
