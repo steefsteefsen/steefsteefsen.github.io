@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Version 1.0 — und zwei Algorithmen, denen ich traue — Der springende Punkt</title>
+<meta name="description" content="Die Reisen-Seite ist gerade gegangen, Version 1.0, ohne Lektorat. Beim Bauen liefen ein Podcast und ein Afro-House-Set. Plus: warum ich meinem SoundCloud- und YouTube-Algorithmus mehr traue als meinem LinkedIn- oder Google-Feed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body .embed-wrap { margin: 1.4rem 0 2rem; border-radius: 6px; overflow: hidden; }
+  .post-body .yt-embed { position: relative; padding-bottom: 56.25%; height: 0; }
+  .post-body .yt-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .post-body .sc-embed iframe { width: 100%; height: 166px; border: 0; display: block; }
+  .post-body .embed-credit { font-size: 0.82rem; color: var(--stone); margin-top: 0.4rem; font-style: italic; }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Der springende Punkt</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen.html" class="active">DE</a>
+      <a href="/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">2. Mai 2026 · Reflexion</div>
+  <h1>Version 1.0 — und zwei Algorithmen, denen ich traue</h1>
+
+  <div class="post-body">
+    <p>Heute Mittag ist die <a href="/journeys/">Reisen-Seite</a> gegangen. Drei Reisen — USA mit meinem Vater, Karibik allein, Brüssel über die Seychellen nach Südafrika — plus ein Zeitstrahl, der Karriere und Reisen auf einer Achse zeigt. <strong>Version 1.0, ohne Lektorat.</strong></p>
+
+    <p>Ich denke über Lektorat in drei Stufen nach.</p>
+
+    <p><strong>Stufe 1 — ich selbst.</strong> Im Browser, mit Ruhe, ein paarmal durchgelesen. Diese Stufe ist Pflicht, aber sie steht oft zu nah am Text, um ihre eigenen Fehler noch zu sehen.</p>
+
+    <p><strong>Stufe 2 — die Personen, um die es geht.</strong> Wer im Text vorkommt, soll lesen, was über sie geschrieben wurde, bevor es jemand anders liest. Ich hole das nach. Bis dahin steht in der Reisen-Seite an zwei Stellen <em>"ihren Namen lasse ich hier weg, bis sie ihn freigibt"</em>. Das ist kein Verlegenheits-Trick, sondern jetzt der Standard auf dieser Site.</p>
+
+    <p><strong>Stufe 3 — die Schwarmintelligenz.</strong> Die Veröffentlichung selbst. Was zurückkommt, formt die Version 1.1. Ohne Stufe 3 bleibt jede Seite ein Monolog.</p>
+
+    <p>1.0 ist gerade durch Stufe 1 gegangen, hat Stufe 2 für die unkritischen Stellen passiert, und beginnt mit dem Veröffentlichen Stufe 3. Wer einen Fehler findet, kann mir schreiben.</p>
+
+    <h2>Während es entstand: zwei Inspirationsquellen</h2>
+
+    <p>Beim Bauen läuft bei mir immer Musik. Heute zwei Quellen.</p>
+
+    <p>Der Podcast vom <a href="https://soundcloud.com/kollektiv_blaue_stunde" target="_blank" rel="noopener">Kollektiv Blaue Stunde</a> — Folge <em>Zijn</em>. Reden, die nicht Pointen suchen.</p>
+
+    <div class="embed-wrap sc-embed">
+      <iframe allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kollektiv_blaue_stunde/kbs_podcast_zijn&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Kollektiv Blaue Stunde — KBS Podcast Zijn"></iframe>
+    </div>
+    <p class="embed-credit">Kollektiv Blaue Stunde — KBS Podcast <em>Zijn</em>. Inspirationsquelle, kein Auftrag.</p>
+
+    <p>Und ein Afro-House-Set, deep und melodisch — Musik aus dem Kontinent, aus dem dieses Genre eigentlich stammt. Ein Stück Erinnerung daran, dass die meisten Sounds, die in europäischen Clubs als <em>"Berlin"</em> verkauft werden, woanders erfunden wurden.</p>
+
+    <div class="embed-wrap yt-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/Et3fJk3Glls?controls=0" title="Afro House Deep Melodic Set" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="embed-credit">Afro House, Deep / Melodic — Inspirationsquelle. Den DJs und Künstler:innen, die hier zusammenkommen, danke ich für die Stunden.</p>
+
+    <h2>Warum diese zwei Algorithmen, und nicht die anderen</h2>
+
+    <p>Ich traue meinem SoundCloud- und meinem YouTube-Musik-Algorithmus mehr als dem Feed, den LinkedIn oder Google für mich kuratieren.</p>
+
+    <p>Der Unterschied ist nicht Reinheit — beide Seiten monetarisieren mein Hören, beide haben kommerzielle Interessen, beide sind nicht meine Freunde. Der Unterschied ist <strong>was sie optimieren</strong>. Musik-Empfehlungen optimieren auf eine sehr einfache Frage: <em>willst du das nochmal hören?</em> Wenn die Antwort ja ist, ist der Algorithmus zufrieden. Karriere- und Such-Feeds optimieren auf etwas anderes: <em>was bringt dich dazu, weiterzuscrollen, weiterzuklicken, zu reagieren?</em> Das ist nicht dasselbe wie <em>was hilft dir.</em></p>
+
+    <p>Konsequenz: Wenn ich ein Stück Software baue, das Wärme aufnehmen soll — eine Reisen-Seite, eine Idol-Seite, einen Blogpost — dann lasse ich Sound aus dem ersten System laufen, nicht aus dem zweiten. Was im Hintergrund läuft, prägt mit.</p>
+
+    <h2>Was draußen passiert ist, während es entstand</h2>
+
+    <p>Drei Notizen am Rand, weil sie mit dem Bauen interferiert haben — nicht als News-Roundup, sondern als Kontext.</p>
+
+    <p><strong>ZenBusiness, gehackt.</strong> Have I Been Pwned hat den <a href="https://haveibeenpwned.com/Breach/ZenBusiness" target="_blank" rel="noopener">ZenBusiness-Breach</a> dokumentiert: im März 2026 hat die Erpresser-Gruppe ShinyHunters Daten der US-Firmengründungs-Plattform exfiltriert; nachdem das Lösegeld nicht gezahlt wurde, im April öffentlich freigegeben. Etwa fünf Millionen E-Mail-Adressen, oft mit Namen und Telefonnummern. Pikant für mich als Data Engineer: die Hacker-Quellenkette führt durch Snowflake, Mixpanel und Salesforce — also genau die Plattformen, in denen wir bei Siemens Energy täglich arbeiten. Wer eine US-LLC über ZenBusiness gegründet hat, sollte seine Mailadresse <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">bei HIBP prüfen</a>.</p>
+
+    <p><strong>Die Academy zieht eine Linie.</strong> Diese Woche: ein Reflexionsstück bei Business Punk auf LinkedIn — <em><a href="https://www.linkedin.com/pulse/warum-das-ki-verbot-der-academy-die-rettung-des-kreativen-3mrke" target="_blank" rel="noopener">"Warum das KI-Verbot der Academy die Rettung des Kreativen ist"</a></em>. Der Tenor: Hollywood schließt KI-generierte Beiträge aus den kreativen Kategorien aus. Ich habe den Beschluss-Text der AMPAS nicht im Original verifiziert — aber wenn er so kommt wie das Stück ihn liest, ist es ein interessanter Gegenpol zu dem, was man als allgemeine "KI-Welle" wahrnimmt. Die Branche, deren Geschäft das <em>Erzählen</em> ist, verteidigt eine Grenze, die andere Branchen längst aufgegeben haben.</p>
+
+    <p><strong>5.000 Soldaten weniger in Deutschland.</strong> Reuters meldet am 1. Mai 2026: die USA ziehen unter Trump etwa 5.000 Soldaten aus Deutschland ab. Ich habe den Artikel gelesen, der Link liegt allerdings hinter Reuters' Paywall — wer ihn frei lesen will, muss anders suchen. Was es heißt, wenn der amerikanische Boden in Deutschland kleiner wird, ist nicht die Frage eines Mai-Vormittags. Es ist eine, die fünf, zehn Jahre arbeiten wird.</p>
+
+    <p>Drei sehr verschiedene Sachen — ein Datenleck, eine kreative Grenze, ein militärischer Rückzug. Was sie verbindet: in allen drei Fällen entscheidet jemand anders über etwas, von dem ich Teil bin. Daten, die ich eingegeben habe. Eine Branche, in der ich nicht arbeite, aber deren Werkzeuge ich kenne. Ein Land, in dem ich lebe. Vielleicht ist das auch ein Grund, warum ich beim Bauen lieber Musik höre als Nachrichten — Musik handelt nicht von mir, aber sie macht Platz.</p>
+
+    <h2>Was als nächstes passiert</h2>
+
+    <p>Die Reisen-Seite findet ihren Platz auf der Hauptseite, sobald ich die Architektur dafür gebaut habe — <em>Wofür ich stehe</em>, dann <em>Wie ich darauf gekommen bin</em> (= Reisen), dann <em>Lebenslauf</em>. Bis dahin lebt sie unter <a href="/journeys/">/journeys/</a>, direkt erreichbar, aber ohne Footer-Eintrag. Ein Stück Übergang.</p>
+
+    <p>Wer zuhört, hört zwei Quellen mit. Wer mitbaut, ist eingeladen.</p>
+
+    <div class="post-nav">
+      <a href="/blog/">← Zurück zum Blog</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/">Blog</a>
+</footer>
+
+</body>
+</html>

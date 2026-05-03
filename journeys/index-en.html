@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journeys — Steef</title>
+<meta name="description" content="Three trips that left something behind. The U.S. with my father, the Caribbean alone, Brussels via the Seychelles to South Africa. Travel as presence, not as conquest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--moss); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: var(--bark); margin-bottom: 1.5rem; line-height: 1.2; }
+  .lede { font-size: 1.15rem; color: var(--bark); margin-bottom: 2.5rem; font-style: italic; opacity: 0.8; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.6rem; color: var(--bark); margin-top: 3.5rem; margin-bottom: 0.4rem; }
+  .journey-meta { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--moss); margin-bottom: 1.4rem; }
+  h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--moss); margin-top: 2rem; margin-bottom: 0.4rem; }
+  p { font-size: 1rem; color: var(--stone); margin-bottom: 1rem; }
+  p strong { color: var(--bark); font-weight: 500; }
+  ol, ul { margin: 0.5rem 0 1.2rem 1.4rem; color: var(--stone); }
+  li { margin-bottom: 0.4rem; }
+  .divider { width: 60px; height: 1.5px; background: var(--clay); margin: 3rem 0; }
+  .one-line { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--bark); border-left: 3px solid var(--clay); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; line-height: 1.4; }
+  blockquote.inset { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--bark); border-left: 2px solid var(--clay); padding: 0.3rem 0 0.3rem 1.2rem; margin: 1.4rem 0; line-height: 1.55; }
+  a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  a:hover { border-color: var(--moss); }
+  footer { text-align: center; padding: 3rem 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.12); }
+
+  /* Career × Journeys timeline */
+  .vis-figure { margin: 2.5rem 0 1.5rem; }
+  .vis-axis { position: relative; max-width: 720px; margin: 0 auto; padding: 0; }
+  .vis-axis::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--clay); transform: translateX(-50%); }
+  .vis-row { position: relative; display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; min-height: 3.4rem; padding: 0.4rem 0; }
+  .vis-year { grid-column: 2; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--moss); letter-spacing: 0.06em; background: var(--cream); border: 1px solid rgba(201, 169, 110, 0.4); border-radius: 999px; padding: 0.15rem 0.4rem; min-width: 3.2rem; height: 1.6rem; align-self: center; z-index: 1; }
+  .vis-cell { padding: 0.2rem 0; }
+  .vis-cell.left { grid-column: 1; text-align: right; padding-right: 1.2rem; }
+  .vis-cell.right { grid-column: 3; text-align: left; padding-left: 1.2rem; }
+  .vis-cell h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1rem; color: var(--bark); margin: 0 0 0.15rem; line-height: 1.25; }
+  .vis-cell p { font-size: 0.82rem; color: var(--stone); margin: 0; line-height: 1.45; }
+  .vis-cell .vis-tag { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--moss); margin-top: 0.2rem; }
+  .vis-cell.gensor { background: rgba(201, 169, 110, 0.08); border-radius: 4px; padding: 0.5rem 1rem; border: 1px dashed rgba(201, 169, 110, 0.4); }
+  .vis-cell.patent { color: var(--moss); }
+  .vis-cell.patent h4 { color: var(--moss); font-style: italic; font-weight: 500; }
+  .vis-cell.travel h4 { color: var(--earth); }
+  .vis-cell.travel p { color: var(--stone); font-style: italic; }
+  .vis-sources { font-family: 'Jost', sans-serif; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.2); padding-top: 0.8rem; margin-top: 1.2rem; line-height: 1.55; }
+  .vis-sources strong { color: var(--bark); font-weight: 500; display: block; margin-bottom: 0.3rem; }
+  .vis-sources ol { margin: 0.2rem 0 0 1.4rem; }
+  .vis-sources li { margin-bottom: 0.25rem; font-size: 0.78rem; }
+  .vis-data { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; }
+    .vis-axis::before { left: 2.4rem; }
+    .vis-row { grid-template-columns: 4.8rem 1fr; gap: 0; }
+    .vis-year { grid-column: 1; justify-content: flex-start; padding-left: 0; min-width: 3.2rem; transform: translateX(0.4rem); }
+    .vis-cell.left, .vis-cell.right { grid-column: 2; text-align: left; padding-left: 1.4rem; padding-right: 0; }
+    .vis-cell.left { padding-bottom: 0.3rem; }
+    .vis-row { padding: 0.6rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Der springende Punkt</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/journeys/">DE</a>
+      <a href="/journeys/index-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="section-label">Journeys</div>
+  <h1>Three Journeys</h1>
+  <p class="lede">Three movements from three phases of life. They changed more in me than the places themselves would admit. What follows is observation — not a conquest narrative.</p>
+
+  <div class="divider"></div>
+
+  <h2>The U.S., with my father</h2>
+  <p class="journey-meta">A graduation gift</p>
+
+  <p>My father had spent years researching by hand: family trees, microfiches, letters, cemeteries. The trail led across the Atlantic, into Colorado. As a graduation gift he gave me the trip there — not as tourism, but as a joint resolution of what he had found.</p>
+
+  <h3>A Hullinghorst in the law books</h3>
+  <p>We met <a href="https://en.wikipedia.org/wiki/Dickey_Lee_Hullinghorst" target="_blank" rel="noopener">Dickey Lee Hullinghorst</a>, a Democrat, later Speaker of the Colorado House of Representatives, with roots in Boulder and Park County (the actual South Park, not the cartoon). A woman in the everyday political business of another country, carrying the same surname we did — a concrete branching in a family tree that my father, in his Westphalian way, had pursued doggedly enough to actually find.</p>
+
+  <h3>Mesa Verde instead of Las Vegas</h3>
+  <p>For one of the legs of the trip my father chose <a href="https://www.openstreetmap.org/relation/5749837" target="_blank" rel="noopener">Mesa Verde</a> over Las Vegas. The cliff dwellings built by ancestors of the Pueblo people in the 12th and 13th centuries, abandoned around 1300, mattered more to him than the casinos three states away. He never put that into a sentence. It was simply on the itinerary. I understood later that this was a form of upbringing.</p>
+
+  <h3>Silicon Valley, without reverence</h3>
+  <p>We also looked at Silicon Valley. My father was an engineer, not a tech pilgrim; the place interested him without impressing him. What stayed with me: that companies which now decide over the attention, the communication and the money of half the world were born in unspectacular office buildings on unspectacular suburban streets. Power rarely carries a sign.</p>
+
+  <blockquote class="inset">A father who drives his son to Mesa Verde instead of Las Vegas says more about values than any book.</blockquote>
+
+  <div class="divider"></div>
+
+  <h2>The Caribbean, alone</h2>
+  <p class="journey-meta">From my first own paycheck, during my time at Inpro</p>
+
+  <p>The second trip wasn't a gift. It was paid for from my first earned money — first permanent position, at Inpro. A flight, a Couchsurfing account, no Spanish. I wanted to see the Caribbean, not its resort fragment.</p>
+
+  <h3>A roof in Santo Domingo</h3>
+  <p>One of the first stations was with a Couchsurfing host — a woman who took me in without us knowing each other, without me speaking her language. She shared what she had and showed me the start of the island without leading me by the hand. Couchsurfing back then was still a trust business between people, not an algorithm. From her I learned what hospitality means when it isn't economic. I leave her name out here until she releases it.</p>
+
+  <h3>Alone on the guagua</h3>
+  <p>Dominican shared minibuses — guaguas. I took them because everyone takes them. A gringo without Spanish on a bus where everyone knows each other is first visible, then irrelevant, then eventually part of the ride. Politeness, eye contact, a small smile. That did more in the first two weeks than any language course could have.</p>
+
+  <h3>Whales, the first time</h3>
+  <p>Off the Samaná peninsula, in the right month, the humpback whales come close to the coast. My first time seeing whales. An experience for which there is no fitting comparison, so I'll leave the comparison out.</p>
+
+  <h3>A border that separates</h3>
+  <p>What I hadn't expected: how tangible the border between the Dominican Republic and Haiti becomes when you get close to it. Two countries on one island, divided by more than a line on the map. I made no statement about it. I only saw that borders separate — and that you can feel it.</p>
+
+  <blockquote class="inset">A border on a map is a line. A border under your feet is another country, lying right next to you.</blockquote>
+
+  <div class="divider"></div>
+
+  <h2>Brussels → Seychelles → South Africa</h2>
+  <p class="journey-meta">A trip in two acts</p>
+
+  <p>The third trip began in Brussels and ended on the Garden Route. In between were islands, a flight with two men from the water business, and a nighttime airport with no pickup.</p>
+
+  <h3>Seychelles — beaches, Russians, Rastafari</h3>
+  <p>On the Seychelles I stayed with Russian hotel staff — Couchsurfing inside an employees' quarters, far from what tourists see there. At <a href="https://www.openstreetmap.org/?mlat=-4.3597&amp;mlon=55.8275#map=15/-4.3597/55.8275" target="_blank" rel="noopener">Anse Source d'Argent</a> on La Digue I met the producer of a track I had brought with me from Berlin — the producer of <em>Ich lebe für Hiphop</em>. The beach was too small, the coincidence too large, to explain.</p>
+
+  <p>Next to that, a group of Rastafari who offered me sun-burned palms with a liquor inside whose name I never caught. Plus passion fruit, fresh, in a form I hadn't known. A love that has stayed.</p>
+
+  <h3>The flight to Johannesburg</h3>
+  <p>On the flight from Mahé to Johannesburg I sat next to two men who were discussing water rights and concessions at a volume and self-evidence that suggested the earth beneath them was a negotiating table and they were the only ones at it. They worked for Nestlé. I listened. I did not intervene. I'm not sure I could have. But I have thought about the word <em>water</em> differently since.</p>
+
+  <h3>South Africa — the spirit of Max Meis</h3>
+  <p>South Africa was on the map because <a href="/#idols">Max Meis</a> had made me curious — a school-time companion, a documentary filmmaker, who had lived in the Cape Flats for <em>The Dorp</em>. His spirit was South African before mine was.</p>
+
+  <p>I landed in Johannesburg at night. I wasn't picked up. What I took with me from that night: <strong>most situations can be settled with respect, politeness, and a wink.</strong> Not by force, not by language, not by money.</p>
+
+  <h3>Garden Route — penguins, monkeys, no safari theatre</h3>
+  <p>Instead of a Big-Five safari, the <a href="https://www.openstreetmap.org/relation/8369330" target="_blank" rel="noopener">Garden Route</a>: Wilderness, Knysna, Plettenberg Bay, Storms River. Penguins along the coast — Boulders Beach or Stony Point, I'd have to check my notes to not put one in for the other. Monkeys that look back at you. Forests where there was nothing to buy. A motel, a road, the Atlantic. Travel without staging.</p>
+
+  <blockquote class="inset">I learned that you don't conquer the world. You walk through it, and if you're lucky, you come out a little quieter.</blockquote>
+
+  <div class="divider"></div>
+
+  <h2>Why I believe this</h2>
+  <p>Travel taught me things my career couldn't teach me — and my career taught me things no journey could. The two have alternated. Who I am today doesn't follow from either track alone, but from the switching between them.</p>
+  <p>The U.S. with my father showed me that choosing Mesa Verde over Las Vegas is itself a choice, even when no one says it out loud. The Caribbean alone showed me how little language I need when I'm polite. The Seychelles and South Africa showed me that the world gets divided up without your permission — and that you walk through it anyway, with a wink.</p>
+  <p>On the career side I founded, built, shipped, and closed cleanly. Patents, algorithms, data structures, an insolvency without tricks. What the journeys did with that: they reminded me that no algorithm explains why a woman in Santo Domingo opens her door to a stranger. You build software in part because the world is more than what can be automated inside it.</p>
+
+  <div class="divider"></div>
+
+  <h2>A story I still carry</h2>
+  <p>Someone in Berlin once told me a story I never quite let go of. It was about people who sought shelter and didn't find it — children, women, queer people, sex workers, nuns, migrants. And it was about what institutions do with their perpetrators when they can choose between punishment and transfer.</p>
+  <p>Whoever told me belongs in another text. This here is a marker, not a report. If the story finds its ground, it will live in a post of its own. <a href="/blog/?lang=en">→ later on the blog</a></p>
+
+  <div class="divider"></div>
+
+  <h2>Career &amp; journeys, chronological</h2>
+  <p>Both tracks on one axis. Career on the left of the line. Journeys on the right. Where something is missing, it is missing on purpose.</p>
+
+  <figure class="vis-figure" aria-label="Timeline from 2006 to 2026: career stations on the left of the central axis, journeys on the right">
+    <div class="vis-axis">
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Abitur (high-school graduation)</h4>
+          <p>Bielefeld</p>
+        </div>
+        <span class="vis-year">2006</span>
+        <div class="vis-cell right travel">
+          <h4>U.S. with my father</h4>
+          <p>Genealogy, Mesa Verde, Silicon Valley.</p>
+          <span class="vis-tag">Journey 1</span>
+        </div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>B.A.Sc. Mechatronics product development</h4>
+          <p>FH Bielefeld</p>
+        </div>
+        <span class="vis-year">2006–2010</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>M.Sc. Automotive Systems</h4>
+          <p>TU Berlin · Thesis: FEM simulation of active thermography</p>
+        </div>
+        <span class="vis-year">2010–2013</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Project Engineer NDT</h4>
+          <p>inpro Innovationsgesellschaft, Berlin</p>
+        </div>
+        <span class="vis-year">2013–2015</span>
+        <div class="vis-cell right travel">
+          <h4>Caribbean alone</h4>
+          <p>Couchsurfing in Santo Domingo, guagua, whales, the border to Haiti.</p>
+          <span class="vis-tag">Journey 2 · ~2014</span>
+        </div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left patent">
+          <h4>Patent DE102016005822A1</h4>
+          <p>Non-destructive weld-penetration depth detection (with co-inventor, inpro)</p>
+        </div>
+        <span class="vis-year">2015</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>SME Thermography</h4>
+          <p>Volkswagen Group Services, Wolfsburg</p>
+        </div>
+        <span class="vis-year">2015–2017</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left patent">
+          <h4>Patent DE102017206261A1</h4>
+          <p>Edge-position detection for laser welding (with co-inventor, VW). Algorithm in production to this day.</p>
+        </div>
+        <span class="vis-year">2017</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left gensor">
+          <h4>GENSOR Production Validation Systems</h4>
+          <p>CEO &amp; Founder · Inline vision for automotive QA · two products to market · full P&amp;L</p>
+        </div>
+        <span class="vis-year">2017–2021</span>
+        <div class="vis-cell right travel">
+          <h4>Brussels → Seychelles → South Africa</h4>
+          <p>Beach, Rastafari, Nestlé managers on the flight, Garden Route. No pickup in Johannesburg.</p>
+          <span class="vis-tag">Journey 3 · ~2019</span>
+        </div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Insolvency, clean</h4>
+          <p>COVID kills VW pivot · orderly closure · €13k residual debt</p>
+        </div>
+        <span class="vis-year">2021</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Head of Technical Digitalisation</h4>
+          <p>Möbelwerkstätten Buschsieweke, Verl</p>
+        </div>
+        <span class="vis-year">2021–2022</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>CTO MBzwo GmbH</h4>
+          <p>Berlin · Industry 4.0 data flows · 3D configurator</p>
+        </div>
+        <span class="vis-year">2022–2023</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Independent Developer</h4>
+          <p>CRM/ERP for SMEs · Self-employed, Berlin</p>
+        </div>
+        <span class="vis-year">2023–2024</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Data Engineer Manufacturing Analytics</h4>
+          <p>Siemens Energy Gas Services (via FERCHAU) · €245k/yr business case · Mendix Rapid Developer cert</p>
+        </div>
+        <span class="vis-year">2024–2026</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+      <div class="vis-row">
+        <div class="vis-cell left">
+          <h4>Senior Fullstack Developer AI</h4>
+          <p>Siemens AG · Schaltwerk Berlin-Siemensstadt (via FERCHAU)</p>
+        </div>
+        <span class="vis-year">2026 →</span>
+        <div class="vis-cell right"></div>
+      </div>
+
+    </div>
+
+    <table class="vis-data" aria-label="Tabular representation of the timeline data">
+      <thead><tr><th>Year</th><th>Career</th><th>Journey</th></tr></thead>
+      <tbody>
+        <tr><td>2006</td><td>Abitur, Bielefeld</td><td>U.S. with my father</td></tr>
+        <tr><td>2006–2010</td><td>B.A.Sc. FH Bielefeld</td><td>—</td></tr>
+        <tr><td>2010–2013</td><td>M.Sc. TU Berlin</td><td>—</td></tr>
+        <tr><td>2013–2015</td><td>inpro Berlin (NDT)</td><td>Caribbean alone (~2014)</td></tr>
+        <tr><td>2015</td><td>Patent DE102016005822A1</td><td>—</td></tr>
+        <tr><td>2015–2017</td><td>VW Wolfsburg (Thermography)</td><td>—</td></tr>
+        <tr><td>2017</td><td>Patent DE102017206261A1</td><td>—</td></tr>
+        <tr><td>2017–2021</td><td>GENSOR (Founder/CEO)</td><td>Brussels→Seychelles→SA (~2019)</td></tr>
+        <tr><td>2021</td><td>GENSOR insolvency, clean</td><td>—</td></tr>
+        <tr><td>2021–2022</td><td>Buschsieweke (Head of Tech-Digi)</td><td>—</td></tr>
+        <tr><td>2022–2023</td><td>MBzwo (CTO)</td><td>—</td></tr>
+        <tr><td>2023–2024</td><td>Self-employed (CRM/ERP)</td><td>—</td></tr>
+        <tr><td>2024–2026</td><td>Siemens Energy (Data Eng.)</td><td>—</td></tr>
+        <tr><td>2026 →</td><td>Siemens Schaltwerk (Fullstack AI)</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <figcaption class="vis-sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>Career stations, patent numbers and algorithm status: <a href="/" target="_blank" rel="noopener">own CV</a> (primary source, attached to this site).</li>
+        <li>Patent <a href="https://patents.google.com/patent/DE102016005822A1" target="_blank" rel="noopener">DE102016005822A1</a> · patent <a href="https://patents.google.com/patent/DE102017206261A1" target="_blank" rel="noopener">DE102017206261A1</a> — permalinks via Google Patents; original register at the <a href="https://register.dpma.de/" target="_blank" rel="noopener">DPMA</a>.</li>
+        <li>Journey years 2006, ~2014, ~2019: biographical statement; rounded to phase. U.S. journey anchored to the Abitur year, Caribbean journey to the inpro tenure 2013–2015, Brussels→Seychelles→SA to the GENSOR phase 2017–2021. Corrections welcome.</li>
+      </ol>
+    </figcaption>
+  </figure>
+
+  <div class="divider"></div>
+
+  <h2>One line</h2>
+  <blockquote class="one-line">Travelling isn't the seeing. Travelling is what stays after you're back home and don't need it anymore.</blockquote>
+
+</main>
+
+<footer>
+  &copy; 2026 Bewegung "Der springende Punkt" &middot;
+  <a href="/" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Home</a> &middot;
+  <a href="/philosophy/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Philosophy</a> &middot;
+  <a href="/science/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Science</a> &middot;
+  <a href="/ethics/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Ethics</a> &middot;
+  <a href="/movement/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Movement</a> &middot;
+  <a href="/mentorship/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Mentorship</a> &middot;
+  <a href="/tribe/index-en.html" style="color:inherit;border-bottom:1px solid rgba(140,123,107,0.3);">Tribe</a>
+</footer>
+
+</body>
+</html>

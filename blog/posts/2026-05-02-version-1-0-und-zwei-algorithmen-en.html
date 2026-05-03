@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Version 1.0 — and two algorithms I trust — Der springende Punkt</title>
+<meta name="description" content="The Journeys page just shipped, version 1.0, no editing pass. While it was being built, a podcast and an Afro-House set were running in the background. Plus: why I trust my SoundCloud and YouTube algorithms more than my LinkedIn or Google feed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body blockquote { border-left: 2px solid var(--clay); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--earth); line-height: 1.6; }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); transition: color 0.25s, border-color 0.25s; }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body .embed-wrap { margin: 1.4rem 0 2rem; border-radius: 6px; overflow: hidden; }
+  .post-body .yt-embed { position: relative; padding-bottom: 56.25%; height: 0; }
+  .post-body .yt-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .post-body .sc-embed iframe { width: 100%; height: 166px; border: 0; display: block; }
+  .post-body .embed-credit { font-size: 0.82rem; color: var(--stone); margin-top: 0.4rem; font-style: italic; }
+  .post-nav { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.2); }
+  .post-nav a { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--moss); text-decoration: none; transition: color 0.3s; }
+  .post-nav a:hover { color: var(--bark); }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Der springende Punkt</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen.html">DE</a>
+      <a href="/blog/posts/2026-05-02-version-1-0-und-zwei-algorithmen-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">2 May 2026 · Reflection</div>
+  <h1>Version 1.0 — and two algorithms I trust</h1>
+
+  <div class="post-body">
+    <p>Earlier today the <a href="/journeys/index-en.html">Journeys page</a> shipped. Three trips — the U.S. with my father, the Caribbean alone, Brussels via the Seychelles to South Africa — plus a timeline that puts career and journeys on a single axis. <strong>Version 1.0, no editing pass.</strong></p>
+
+    <p>I think about editing in three stages.</p>
+
+    <p><strong>Stage 1 — myself.</strong> In the browser, with quiet, a few read-throughs. Mandatory, but it sits too close to the text to catch its own mistakes.</p>
+
+    <p><strong>Stage 2 — the people the text is about.</strong> Whoever appears in the text should read it before anyone else does. I'm catching that up. Until then the Journeys page says, in two places: <em>"I leave her name out here until she releases it."</em> Not a face-saving trick — it's the new standard on this site.</p>
+
+    <p><strong>Stage 3 — the swarm.</strong> Publication itself. What comes back shapes 1.1. Without stage 3, every page stays a monologue.</p>
+
+    <p>1.0 just passed stage 1, has stage 2 for the uncritical parts, and starts stage 3 by going public. If you find a mistake, write me.</p>
+
+    <h2>While it was being built: two sources of inspiration</h2>
+
+    <p>I always have music on while I build. Today, two sources.</p>
+
+    <p>The podcast by <a href="https://soundcloud.com/kollektiv_blaue_stunde" target="_blank" rel="noopener">Kollektiv Blaue Stunde</a> — episode <em>Zijn</em>. Conversation that isn't chasing punchlines.</p>
+
+    <div class="embed-wrap sc-embed">
+      <iframe allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kollektiv_blaue_stunde/kbs_podcast_zijn&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Kollektiv Blaue Stunde — KBS Podcast Zijn"></iframe>
+    </div>
+    <p class="embed-credit">Kollektiv Blaue Stunde — KBS Podcast <em>Zijn</em>. Source of inspiration, not a commission.</p>
+
+    <p>And an Afro-House set, deep and melodic — music from the continent the genre actually comes from. A reminder that most of the sounds sold in European clubs as <em>"Berlin"</em> were invented somewhere else.</p>
+
+    <div class="embed-wrap yt-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/Et3fJk3Glls?controls=0" title="Afro House Deep Melodic Set" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="embed-credit">Afro House, Deep / Melodic — source of inspiration. To the DJs and artists who come together here: thank you for the hours.</p>
+
+    <h2>Why these two algorithms, and not the others</h2>
+
+    <p>I trust my SoundCloud and my YouTube music algorithm more than the feed LinkedIn or Google curate for me.</p>
+
+    <p>The difference is not purity — both sides monetise my listening, both have commercial interests, neither is my friend. The difference is <strong>what they optimise for</strong>. Music recommendations optimise for a very simple question: <em>do you want to hear that again?</em> If the answer is yes, the algorithm is satisfied. Career and search feeds optimise for something else: <em>what makes you scroll on, click on, react?</em> That isn't the same as <em>what helps you.</em></p>
+
+    <p>Consequence: when I build a piece of software that's meant to carry warmth — a journeys page, an idols page, a blog post — I let sound from the first kind of system run, not the second. Whatever plays in the background prints on the work.</p>
+
+    <h2>What was happening outside while it was being built</h2>
+
+    <p>Three notes from the edges — not as a news roundup, just as context.</p>
+
+    <p><strong>ZenBusiness, hacked.</strong> Have I Been Pwned has documented the <a href="https://haveibeenpwned.com/Breach/ZenBusiness" target="_blank" rel="noopener">ZenBusiness breach</a>: in March 2026 the extortion group ShinyHunters exfiltrated data from the US business-formation platform; when the ransom went unpaid, they released it publicly in April. Roughly five million email addresses, often with names and phone numbers. Pertinent for me as a data engineer: the hackers' supply chain runs through Snowflake, Mixpanel and Salesforce — exactly the platforms we work with daily at Siemens Energy. Anyone who registered a US LLC via ZenBusiness should <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">check their email at HIBP</a>.</p>
+
+    <p><strong>The Academy draws a line.</strong> This week: a reflection piece by Business Punk on LinkedIn — <em><a href="https://www.linkedin.com/pulse/warum-das-ki-verbot-der-academy-die-rettung-des-kreativen-3mrke" target="_blank" rel="noopener">"Why the Academy's AI ban is the saving of the creative"</a></em> (in German). The gist: Hollywood is excluding AI-generated work from the creative categories. I haven't verified the AMPAS resolution text directly — but if it lands the way the piece reads it, it's a striking counter-pole to what one perceives as the general "AI wave". The industry whose business is <em>storytelling</em> defends a line that other industries have long since given up.</p>
+
+    <p><strong>5,000 fewer US soldiers in Germany.</strong> Reuters reported on 1 May 2026 that the US under Trump is withdrawing about 5,000 soldiers from Germany. I read the article; the link is behind Reuters' paywall — anyone who wants to read it openly will have to search elsewhere. What it means when the American footprint in Germany shrinks is not a question for a May morning. It's a question that will work for five, ten years.</p>
+
+    <p>Three very different things — a data breach, a creative boundary, a military withdrawal. What links them: in each, someone else is deciding about something I'm part of. Data I entered. An industry I don't work in but whose tools I know. A country I live in. Maybe that's also why, when I build, I'd rather listen to music than to the news — music isn't about me, but it makes room.</p>
+
+    <h2>What happens next</h2>
+
+    <p>The Journeys page will find its place on the homepage once I've built the architecture for it — <em>What I stand for</em>, then <em>How I got there</em> (= journeys), then <em>CV</em>. Until then it lives at <a href="/journeys/index-en.html">/journeys/</a>, directly reachable but not yet in the footer. A stretch of in-between.</p>
+
+    <p>Whoever listens, listens to two sources at once. Whoever wants to build, is invited.</p>
+
+    <div class="post-nav">
+      <a href="/blog/?lang=en">← Back to the blog</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/?lang=en">Blog</a>
+</footer>
+
+</body>
+</html>
