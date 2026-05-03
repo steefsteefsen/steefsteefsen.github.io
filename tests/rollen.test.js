@@ -144,10 +144,10 @@ describe('Metabolisierungs-Karte (JuJoVa) — DOM and JS wiring', () => {
     expect(cap.textContent.toLowerCase()).toMatch(/gedauert|nötig|verstanden/);
   });
 
-  test('JuJoVa attribution is present in the meta card', () => {
+  test('VaJoJuA attribution (Vale, Jojo, Julia, Ariane) is present in the meta card', () => {
     const card = document.querySelector('.rollen-card--meta');
     expect(card).not.toBeNull();
     const attr = card.querySelector('.rollen-attribution');
-    expect(attr.textContent).toMatch(/Julia.*Jojo.*Vale|JuJoVa/);
+    expect(attr.textContent).toMatch(/Vale.*Jojo.*Julia.*Ariane|VaJoJuA/);
   });
 });
