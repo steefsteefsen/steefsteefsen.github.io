@@ -392,8 +392,15 @@ pages:
         --exclude='node_modules'
         --exclude='.git*'
         --exclude='.env'
+        --exclude='.well-known'
         --exclude='*.md'
+        --exclude='generate-feed.js'
+        --exclude='package*.json'
         ./ public/
+    # .well-known Inhalte separat kopieren — GitLab Pages erlaubt es,
+    # aber rsync mit dotfile-glob ist tricky. Hier nur privacy.txt.
+    - mkdir -p public/.well-known
+    - cp .well-known/privacy.txt public/.well-known/ || true
   artifacts:
     paths:
       - public
