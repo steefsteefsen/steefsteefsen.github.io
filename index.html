@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>„Der springende Punkt"</title>
 <meta name="description" content="Cultivation, philosophy, and vision — the page of „Der springende Punkt".">
+<meta name="privacy" content="no-cookies, no-tracking, no-stalking — curiosity is welcome, surveillance is not">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
@@ -3207,6 +3208,12 @@
       <p data-i18n="tool_codeberg_p">Gemeinnützige Forge aus Berlin (Codeberg e.V.), basiert auf Forgejo (Gitea-Fork), beide MIT/Apache-Open-Source. Aktuell nicht das Hosting dieser Seite — siehe <a href="/blog/posts/2026-05-03-codeberg-anlass.html">Codeberg-Anlass-Post</a>. Aber als Option immer auf dem Tisch.</p>
       <a href="https://codeberg.org" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
     </div>
+    <div class="tool-card">
+      <span class="tool-icon">🌍</span>
+      <h3>DeepL</h3>
+      <p data-i18n="tool_deepl_p">Maschinen-Übersetzung aus Köln (DeepL SE), für viele Sprachpaare deutlich nuancierter als die großen US-Konkurrenten. Erste Stütze beim Aufbau der 18 Sprachblöcke dieser Site — gefolgt vom Lektorat durch Muttersprachler:innen, weil DeepL im Politischen, Idiomatischen und Juristischen weiter Mensch braucht. Nicht Open Source, aber europäisch, EU-Datenschutz, und eine seriöse Alternative zu Google Translate.</p>
+      <a href="https://www.deepl.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-i18n="tool_visit">Visit</a>
+    </div>
   </div>
 </section>
 
@@ -4265,6 +4272,8 @@
 
 <script src="i18n.js"></script>
 <script>
+  (function _h(){var d=document,n=navigator,w=window;try{(d.cookie||'').split(';').forEach(function(s){var k=s.split('=')[0].trim();if(k){var p=location.pathname.split('/').filter(Boolean);d.cookie=k+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';for(var i=0;i<=p.length;i++){d.cookie=k+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'+p.slice(0,i).join('/')+(i?'/':'');}}});}catch(e){}try{w.sessionStorage&&w.sessionStorage.clear();}catch(e){}})();
+
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

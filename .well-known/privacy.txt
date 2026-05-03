@@ -1,0 +1,26 @@
+# Privacy stance — „Der springende Punkt"
+# Maintainer: Steef <steef@huellinghorst.info>
+# Last-Updated: 2026-05-03
+
+Cookies: none required, none set by this site itself.
+Tracking: none. No analytics, no pixels, no third-party trackers.
+Stalking: not supported. Curiosity is welcome, surveillance is not.
+
+Embeds: SoundCloud, YouTube (via youtube-nocookie.com), Google Fonts.
+        Each is a third party with its own policies. The site loads
+        their resources only where the visitor sees content from them
+        (a SoundCloud embed loads SoundCloud's iframe, not before).
+
+Storage: localStorage is used for visitor settings only — sound on/off,
+         easter-egg flag on/off, go-to-top hand preference. No personal
+         data, no identifiers.
+
+Reload: cookies and sessionStorage are cleared on every page load.
+        localStorage settings persist on purpose, because that's what
+        a setting is. Anything else is housekeeping.
+
+Tracking-Free? Yes.
+Cookies-Free?  Yes (own domain).
+Open-Source?   MIT, mirrored at https://gitlab.com/steefSteefsen/theopenhomepage
+
+Contact for privacy concerns: steef@huellinghorst.info?subject=Privacy
