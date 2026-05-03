@@ -1299,6 +1299,41 @@ exclude. Wenn ein Log-File aus Versehen außerhalb `logs/` landet
 aber der Pre-Commit-Hook hätte es im Diff. Daher: Logs **immer**
 unter `logs/`, nicht im Repo-Root.
 
+### 10. Pipeline-Failures gehören in den CHANGELOG, Folgesession Prio 1
+
+**Stefan-Anweisung 2026-05-04 ~02:00**: *„immer alle failures in die
+changelogs geschrieben werden und in der folgesessions mit prio 1
+diese fehler behoben werden."*
+
+Jede Pipeline, die auf einem Push rot geht, hinterlässt zwei Spuren:
+
+1. **CHANGELOG.md** — neuer Block unter `## [Unreleased]`:
+   ```markdown
+   ### Pipeline-Failures (Folgesession Prio 1)
+   - `<job-name>` — `<failure-snippet>` — Pipeline #N (`<commit-sha>`)
+   ```
+   Auch wenn der Failure später in derselben Session noch gefixt wird,
+   bleibt der Eintrag stehen — als Lehre, nicht als Schande. Beim
+   Release zu V0.X wird die Liste in den Release-Notes konsolidiert
+   (mit Verweis auf den Fix-Commit).
+2. **`logs/pipeline-outcomes/YYYY-MM-DD.log`** — eine Zeile pro
+   Pipeline-Outcome (success/failed + URL + commit). Lokales Memory
+   für die Trendanalyse über Wochen.
+
+**Folgesession-Prio-1**: bei der nächsten Session-Init liest Claude
+zusätzlich zu git-log/status/diff die `## [Unreleased]`-Sektion des
+CHANGELOG. Wenn dort `### Pipeline-Failures` steht, sind diese
+**zuallererst** zu beheben — vor jeder neuen Card, jedem Blog-Post,
+jeder Erweiterung. Die Begründung steht in der heutigen
+*„Meta-Lesson aus den acht Vorfällen"*: rote Pipelines hinterlassen
+technische Schuld, die mit jedem Tag teurer wird.
+
+**Ausnahme (mit ausdrücklichem Stefan-OK)**: wenn ein Failure
+**externe Drift** ist (YouTube-Video weg-moderiert, Instagram-429,
+Wikipedia-URL umgezogen), kann er als „external" markiert und
+deferred werden. Aber auch dann steht er im CHANGELOG, nur eben mit
+Tag `external`.
+
 ## Failsafes against human-and-Claude error
 
 These are guardrails against the two failure modes that recur in

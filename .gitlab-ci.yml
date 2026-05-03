@@ -12,8 +12,13 @@ stages:
   - deploy-verify
 
 variables:
-  SITE_URL: "https://steefsteefsen.github.io"
-  SITE_HOST: "steefsteefsen.github.io"
+  # Site-URL für deploy-verify, accessibility-check, link-check, smoke-test.
+  # Default ist die Pages-URL des theopenhomepage-Projekts. Auf dem
+  # primary-Repo (steefsteefsen-github-io) wird das via GitLab Project
+  # Settings → CI/CD → Variables überschrieben mit
+  # SITE_URL=https://steefsteefsen.github.io.
+  SITE_URL: "https://theopenhomepage-485487.gitlab.io"
+  SITE_HOST: "theopenhomepage-485487.gitlab.io"
 
 # ── HTML Validation ────────────────────────────
 html-validate:
@@ -252,7 +257,9 @@ smoke-test-live:
 mobile-render-test:
   stage: deploy-verify
   image: node:20-bullseye-slim
-  needs: [smoke-test-live]
+  needs:
+    - job: smoke-test-live
+      optional: true
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: on_success
