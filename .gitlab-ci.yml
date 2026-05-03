@@ -161,7 +161,12 @@ jest-unit:
   script:
     - cd tests
     - npm ci
-    - npm run test:ci
+    # JEST_SKIP_NETWORK=1: skip network probes in CI ebenfalls.
+    # Network-Probes (YouTube oEmbed, Instagram, OSM) sind external-state-
+    # tests und drift-anfällig. Sie blockieren sonst den pages:-Job, wenn
+    # ein Video moderiert wurde oder Instagram 429 zurückwirft. Stage-1
+    # struktur-Tests laufen weiter strict.
+    - JEST_SKIP_NETWORK=1 npm run test:ci
   coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
   artifacts:
     when: always

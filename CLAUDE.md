@@ -1173,6 +1173,43 @@ the file. Stefan can either re-state the value, or paste a single
 line, or say *„yes, grep it"* — but the consent must come from him,
 not be assumed by Claude.
 
+**Hard rule extension (Stefan-Vorfall 2026-05-04 ~00:30): never WRITE
+to a secret-container without explicit Stefan-instruction either.**
+
+Same forbidden paths as for reading. The `Write` tool **overwrites
+the entire file** — there is no merge, no backup, no git restore (the
+file is gitignored). If Claude calls `Write` on `.env` to add a single
+key-value, **everything else in the file — including any token, any
+password, any API key — is permanently lost**. Stefan lost a token
+this way at ~21:36 today, and only realised at ~00:30 the next day
+when checking back.
+
+The exact same „but I just want to add one line" reflex that triggers
+the read-violation can trigger the write-violation, and the write
+version is far worse: read leaks the secret to the conversation log,
+write **destroys** the secret with no recovery path.
+
+**Forbidden write operations on the listed paths:**
+- `Write` tool (overwrites whole file)
+- `Edit` tool (only safe if Stefan explicitly asked Claude to work
+  with the file's content, AND Claude has read it first via
+  Stefan-consent)
+- shell redirects: `> .env`, `>> .env`, `tee .env`, `cat ... > .env`
+- in-place edits: `sed -i ... .env`, `python -c "open('.env','w')..."`,
+  `node -e "fs.writeFileSync('.env', ...)"`
+- editor-style writes via any other tool
+
+**The only legitimate path to populate or modify `.env`** is Stefan
+doing it himself in his editor. Claude can suggest values *in the
+chat* for Stefan to copy-paste in. Claude does not write to the file.
+
+**If a secret-container needs initialisation** (e.g. Claude is asked
+to set up a new project's `.env` template) — Claude writes the
+template **to a different file name** (`env.example`, `env.template`,
+`.env.sample`) that is **not** gitignored, and tells Stefan to
+rename/copy it into `.env` himself. The convention preserves: real
+`.env` is never written by Claude.
+
 **Why this rule is so strict**: secret-containers can drift in content
 without Claude knowing. Today an `.env` holds URLs; tomorrow Stefan
 adds an API token; next week Claude grep'd-out-of-habit and the
