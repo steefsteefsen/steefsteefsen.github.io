@@ -501,6 +501,51 @@
     100% { transform: translateX(0) rotate(0deg) scale(1); }
   }
 
+  /* ── Go-to-top — fast unsichtbar, händigkeits-bewusst ──
+     Default rechts; localStorage gototop-hand=left rückt es nach links.
+     Erscheint erst nach Scroll-Down (>500px), fadet sanft ein. */
+  .gototop {
+    position: fixed;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(61, 43, 31, 0.10);
+    border: 1px solid rgba(140, 123, 107, 0.25);
+    color: var(--bark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, background 0.2s, transform 0.2s;
+    z-index: 90;
+    backdrop-filter: blur(6px);
+  }
+  .gototop.visible {
+    opacity: 0.35;
+    pointer-events: auto;
+  }
+  .gototop:hover {
+    opacity: 0.85;
+    background: rgba(201, 169, 110, 0.25);
+    transform: translateY(-2px);
+  }
+  .gototop[data-hand="left"] {
+    right: auto;
+    left: 1.4rem;
+  }
+  .gototop svg {
+    width: 14px;
+    height: 14px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gototop { transition: opacity 0.2s ease; }
+    .gototop:hover { transform: none; }
+  }
+
   /* ── Rollen-Card: Held / Opfer / Täter — silberner Ball mit Physik ── */
   #rollen {
     padding: 5rem 2rem;
@@ -3954,6 +3999,10 @@
   &middot; <a href="open-letter-watzke.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,123,107,0.3);">Open Letter: Watzke / BVB</a>
 </footer>
 
+<button type="button" id="gototop" class="gototop" aria-label="Nach oben" title="Nach oben (Doppelklick: Hand wechseln)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
 <script src="i18n.js"></script>
 <script>
   // Scroll reveal
@@ -4143,6 +4192,40 @@
       resizeT = setTimeout(() => {
         if (activeZone >= 0) drop.style.left = zoneCenter(activeZone) + 'px';
       }, 100);
+    });
+  })();
+
+  // ── Go-to-top — fast unsichtbar, händigkeits-bewusst ──
+  // Default: rechts. Doppelklick wechselt links↔rechts, persistiert in
+  // localStorage unter `gototop-hand` (left|right). Erscheint erst nach
+  // Scroll-Down (>500px). Klick → smooth scroll nach oben.
+  (function initGotoTop() {
+    const btn = document.getElementById('gototop');
+    if (!btn) return;
+    const STORAGE_KEY = 'gototop-hand';
+    let hand = 'right';
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'left' || stored === 'right') hand = stored;
+    } catch (_) {}
+    btn.setAttribute('data-hand', hand);
+
+    function onScroll() {
+      const visible = window.scrollY > 500;
+      btn.classList.toggle('visible', visible);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    // Doppelklick wechselt die Seite
+    btn.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      hand = (hand === 'right') ? 'left' : 'right';
+      btn.setAttribute('data-hand', hand);
+      try { localStorage.setItem(STORAGE_KEY, hand); } catch (_) {}
     });
   })();
 
