@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal Germany. The rest goes to the tribe. — „Der springende Punkt"</title>
+<meta name="description" content="I take legal responsibility for the German content of this site. The other 17 languages need tribe sponsors — one per jurisdiction. Plus a Maxmarlon set and a Chappelle sketch about why keeping it real has a context.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body .embed-wrap { margin: 1.4rem 0 2rem; border-radius: 6px; overflow: hidden; }
+  .post-body .sc-embed iframe { width: 100%; height: 166px; border: 0; display: block; }
+  .post-body .embed-credit { font-size: 0.82rem; color: var(--stone); margin-top: 0.4rem; font-style: italic; }
+  .lang-table { background: var(--sand); border-left: 3px solid var(--clay); padding: 1.2rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; }
+  .lang-table h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--bark); margin-bottom: 0.7rem; }
+  .lang-table ul { list-style: none; margin: 0.6rem 0 0; padding: 0; columns: 2; column-gap: 1.5rem; }
+  .lang-table li { margin-bottom: 0.4rem; font-size: 0.92rem; color: var(--bark); break-inside: avoid; }
+  .lang-table .claimed { color: var(--moss); font-weight: 500; }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } .lang-table ul { columns: 1; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" title="Steef's homepage">„Der springende Punkt"</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-03-legal-germany.html">DE</a>
+      <a href="/blog/posts/2026-05-03-legal-germany-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">3 May 2026 · Reflection</div>
+  <h1>Legal Germany. The rest goes to the tribe.</h1>
+
+  <div class="post-body">
+    <p>This site speaks 18 languages. It says approximately the same thing in each — but „approximately" is exactly the problem under any one jurisdiction. What is harmless in Germany may look very different in Turkey, Russia, Iran, or China. What is opinion in Germany is, elsewhere, an indictment.</p>
+
+    <p>I built the site as if it speaks to all 18 language communities. But I cannot take legal responsibility for all 18 jurisdictions. I can barely do it for one.</p>
+
+    <h2>What I take on</h2>
+
+    <p><strong>Legal Germany.</strong> I live here, I publish here, the Impressum entry is in Berlin (Baerwaldstr. 46). If the German content violates NetzDG, the German Criminal Code §§ 130/166/185, GDPR, copyright — that's my mistake, I take the consequence.</p>
+
+    <p>Concretely: I read every DE-language piece at least three times with the legal lens, check sources, ask people who know more than I do. I will make mistakes. I will correct them.</p>
+
+    <h2>What I don't take on</h2>
+
+    <p>The <strong>17 other languages</strong>. Esperanto, English, Italian, French, Spanish, Portuguese, Danish, Ukrainian, Russian, Turkish, Hebrew, Arabic, Persian, Chinese, Japanese, Korean, Kurdish.</p>
+
+    <p>English I could just about manage, because UK/US/AU law is half-imaginable to me. But the others — no. If the Ukrainian translation is read in Russia, in a year where things tighten politically, I am not the right address for the consequences. People who read Russian know better what can happen. People who read Turkish know which words trigger. People who read Persian know the risk.</p>
+
+    <h2>The call</h2>
+
+    <div class="lang-table">
+      <h3>17 slots — one per language</h3>
+      <p>I'm looking for one <em>language sponsor</em> per language. Task: reject, adapt, or re-contextualise the DE content in your own language so that it is legally tenable <strong>in the country where the language is mainly read</strong>.</p>
+      <ul>
+        <li class="claimed">🇩🇪 German — Steef</li>
+        <li>🇬🇧 English — open</li>
+        <li>🇪🇴 Esperanto — open</li>
+        <li>🇮🇹 Italian — open</li>
+        <li>🇫🇷 French — open</li>
+        <li>🇪🇸 Spanish — open</li>
+        <li>🇵🇹 Portuguese — open</li>
+        <li>🇩🇰 Danish — open</li>
+        <li>🇺🇦 Ukrainian — open</li>
+        <li>🇷🇺 Russian — open</li>
+        <li>🇹🇷 Turkish — open</li>
+        <li>🇮🇱 Hebrew — open</li>
+        <li>🇸🇦 Arabic — open</li>
+        <li>🇮🇷 Persian — open</li>
+        <li>🇨🇳 Chinese — open</li>
+        <li>🇯🇵 Japanese — open</li>
+        <li>🇰🇷 Korean — open</li>
+        <li>🏳️ Kurdish — open</li>
+      </ul>
+    </div>
+
+    <p>If you want to take a slot, write me with subject <code style="font-family:'Jost',monospace;background:rgba(201,169,110,0.15);padding:0.1rem 0.4rem;border-radius:3px;">Sprach-Pate &lt;language&gt;</code> at <a href="mailto:steef@huellinghorst.info?subject=Sprach-Pate">steef@huellinghorst.info</a>. I'll reply with the current text in your language and a list of the known hot spots.</p>
+
+    <p>Compensation: same logic as the <a href="/blog/posts/2026-05-03-bounty-hunter-telefonnummer-en.html">bounty game</a> — a personalised homepage as my form of thanks, or a different form we work out together. I can't pay money right now, but I can build with you.</p>
+
+    <h2>While I write this</h2>
+
+    <p>In the background, <a href="https://soundcloud.com/maxmarlon/farewellendlos" target="_blank" rel="noopener">Maxmarlon — farewellendlos</a> is playing. A set that does exactly what its title says: farewell, endlessly. Handover as an ongoing process.</p>
+
+    <div class="embed-wrap sc-embed">
+      <iframe allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/maxmarlon/farewellendlos&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Maxmarlon — farewellendlos"></iframe>
+    </div>
+    <p class="embed-credit">Maxmarlon — <em>farewellendlos</em>. Soundtrack for handing over.</p>
+
+    <h2>And a sketch that shows the flip side</h2>
+
+    <p>Dave Chappelle had a series of sketches in the 2000s called <em>„When Keeping It Real Goes Wrong"</em>. The point: someone decides to be maximally authentic in a situation, holds onto the self, takes the straight path — and it ends, every time, in a disaster that would have been avoidable had the person chosen the indirect, polite, tactful route.</p>
+
+    <p>Exactly the same risk lives in the plan to publish every language with the same clarity. „Keeping it real" across 18 jurisdictions is the guarantee that it goes wrong somewhere. Hence this call — not because I'm giving up, but because <em>real</em> in 18 languages means 18 different things.</p>
+
+    <div class="embed-wrap" style="position:relative;padding-bottom:56.25%;height:0;">
+      <iframe src="https://www.youtube-nocookie.com/embed/pfz0tDQZhqs?controls=0" title="Chappelle's Show — When Keeping It Real Goes Wrong" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+    </div>
+    <p class="embed-credit">Dave Chappelle — <em>When Keeping It Real Goes Wrong</em>. The point isn't „don't be real". The point is: <em>being real has a context</em>, and whoever ignores it pays.</p>
+
+    <p style="margin-top:2rem;">Who knows: maybe this is also an invitation to watch the Chappelle sketch with me. Write me.</p>
+  </div>
+
+  <div class="post-nav" style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.2);">
+    <a href="/blog/?lang=en" style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--moss);text-decoration:none;">← Back to the Blog</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/?lang=en">Blog</a> &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>

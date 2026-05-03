@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-05-03-legal-germany",
+    "date": "2026-05-03",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-05-03-legal-germany", "title": "Legal Germany. Den Rest übernimmt der Tribe.", "teaser": "Diese Site spricht 18 Sprachen. Ich kann nur für eine Jurisdiktion juristisch geradestehen — Deutschland. Für die anderen 17 brauche ich Sprach-Pat:innen aus dem Tribe. Plus Maxmarlon-Set zum Übergeben und Chappelle-Sketch zur Erinnerung, dass real sein einen Kontext hat."},
+      "en": {"slug": "2026-05-03-legal-germany-en", "title": "Legal Germany. The rest goes to the tribe.", "teaser": "This site speaks 18 languages. I can only take legal responsibility for one jurisdiction — Germany. For the other 17 I need language sponsors from the tribe. Plus a Maxmarlon set for the handover and a Chappelle sketch reminding that being real has a context."}
+    }
+  },
+  {
     "slug": "2026-05-03-codeberg-anlass",
     "date": "2026-05-03",
     "type": "reflection",
