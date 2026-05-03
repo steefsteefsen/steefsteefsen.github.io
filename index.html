@@ -678,70 +678,48 @@
     font-style: italic;
     letter-spacing: 0.04em;
   }
-  /* Karte 2: Metabolisierung — langsam, Tropfen morpht statt rollt. */
+  /* Karte 2: Metabolisierung — Fibonacci-Spirale (Goldener Schnitt).
+     Die Spirale läuft von außen (roh, weit, ungeformt) ins Zentrum
+     (verstanden, dicht, klein). Tropfen wandert via SVG-CX/CY-Animation
+     entlang vorberechneter Marker-Positionen. */
   .rollen-card--meta { margin-top: 1.6rem; }
-  .meta-zones {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+  .meta-spiral-wrap {
     position: relative;
-    height: 96px;
+    margin: 0 auto 1rem;
+    max-width: 360px;
+  }
+  .meta-spiral-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  #meta-drop {
+    transition: cx 2.4s cubic-bezier(.42,0,.4,1), cy 2.4s cubic-bezier(.42,0,.4,1), r 2.4s ease;
+  }
+  .meta-zones {
+    display: flex;
+    justify-content: space-around;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
   }
   .meta-zone {
-    background: rgba(90, 110, 74, 0.08);
+    background: transparent;
     border: 1px solid rgba(90, 110, 74, 0.25);
-    border-radius: 6px;
+    border-radius: 999px;
     cursor: pointer;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 0.55rem;
+    padding: 0.35rem 0.85rem;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     color: var(--bark);
     transition: background 0.2s, border-color 0.2s;
     user-select: none;
   }
-  .meta-zone:hover { background: rgba(90, 110, 74, 0.16); border-color: var(--moss); }
+  .meta-zone:hover { background: rgba(90, 110, 74, 0.10); border-color: var(--moss); }
   .meta-zone.active { background: rgba(201, 169, 110, 0.16); border-color: var(--clay); }
-  .meta-drop {
-    position: absolute;
-    top: 14px;
-    left: 0;
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 35% 30%, #ffffff 0%, #d8d8d8 25%, #9a9a9a 60%, #5a5a5a 100%);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.35),
-      inset -1px -2px 3px rgba(0, 0, 0, 0.25),
-      inset 1px 1px 2px rgba(255, 255, 255, 0.6);
-    /* Roh = sehr unregelmäßig, viele "Knoten" — wir morphen über border-radius
-       von amorph (50% 20% 60% 30%/40% 60% 30% 50%) zu rund (50%). */
-    border-radius: 60% 30% 70% 40% / 50% 70% 40% 60%;
-    /* Lange Transition statt RAF-Loop — Verstehen braucht Zeit. */
-    transition: left 2.4s cubic-bezier(.42,0,.4,1), border-radius 2.4s ease, transform 2.4s ease;
-    transform: translateX(0) rotate(0deg);
-    will-change: left, border-radius, transform;
-  }
-  .meta-drop.phase-0 {
-    border-radius: 60% 30% 70% 40% / 50% 70% 40% 60%;
-    transform: translateX(0) rotate(-12deg) scale(1.05);
-  }
-  .meta-drop.phase-1 {
-    border-radius: 55% 45% 60% 40% / 55% 55% 45% 50%;
-    transform: translateX(0) rotate(0deg) scale(1.0);
-  }
-  .meta-drop.phase-2 {
-    border-radius: 50%;
-    transform: translateX(0) rotate(0deg) scale(1.02);
-  }
   @media (prefers-reduced-motion: reduce) {
-    .rollen-ball { transition: transform 0.25s ease; }
-    .meta-drop { transition: left 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; }
+    #meta-drop { transition: cx 0.3s ease, cy 0.3s ease, r 0.3s ease; }
   }
 
   /* ── Confetti + Sound-Toggle ── */
@@ -2612,18 +2590,68 @@
         </div>
       </div>
       <p class="rollen-caption" id="rollen-caption" aria-live="polite"></p>
-      <p class="rollen-attribution" data-i18n="rollen_card1_attr">— Steef</p>
+      <p class="rollen-attribution" data-i18n="rollen_card1_attr">— Alex &amp; Steef (Karpman-Dreieck via Albert Hofmann, geflüstert)</p>
     </div>
 
     <!-- Karte 2: Metabolisierung — langsam, Tropfen morpht -->
     <div class="rollen-card rollen-card--meta">
       <h3 class="rollen-card-h" data-i18n="rollen_card2_h">Gedanken müssen erst metabolisiert werden.</h3>
-      <p class="rollen-card-sub" data-i18n="rollen_card2_sub">Klick eine Phase — der Tropfen wandert langsam. Verstehen braucht Zeit. Das Gegenteil von schnapp-haft.</p>
-      <div class="meta-zones" id="meta-zones">
-        <div class="meta-zone" data-zone="0" data-i18n="meta_phase_roh">roh</div>
-        <div class="meta-zone" data-zone="1" data-i18n="meta_phase_metabolisiert">metabolisiert</div>
-        <div class="meta-zone" data-zone="2" data-i18n="meta_phase_verstanden">verstanden</div>
-        <div class="meta-drop" id="meta-drop" aria-hidden="true"></div>
+      <p class="rollen-card-sub" data-i18n="rollen_card2_sub">Klick eine Phase — der Tropfen wandert langsam entlang der Spirale, von außen nach innen. Verstehen wächst nicht linear, es wächst spiralförmig. Goldener Schnitt, von roh ins Zentrum.</p>
+      <!-- Fibonacci-Spirale (Goldener Schnitt). Ein zusammenhängender SVG-Path,
+           der von außen (roh) ins Zentrum (verstanden) führt. Die drei Phasen
+           sitzen als Marker auf der Spirale, der Tropfen wandert via JS
+           zwischen vorberechneten Path-Positionen. -->
+      <div class="meta-spiral-wrap" id="meta-spiral-wrap">
+        <svg class="meta-spiral-svg" id="meta-spiral-svg" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Goldener-Schnitt-Spirale, approximiert mit vier Quadrant-Bögen.
+               Konstruiert nach Fibonacci-Rechtecken; Verhältnis je 1:φ. -->
+          <path id="meta-spiral-path"
+                d="M 230 30
+                   A 90 90 0 0 1 140 120
+                   A 55 55 0 0 1 85 65
+                   A 34 34 0 0 1 119 99
+                   A 21 21 0 0 1 98 120
+                   A 13 13 0 0 1 111 133"
+                fill="none"
+                stroke="var(--clay)"
+                stroke-width="1.4"
+                stroke-linecap="round"/>
+          <!-- Drei Marker an Path-Positionen 0%, 50%, 100% (außen → innen) -->
+          <circle id="meta-marker-0" cx="230" cy="30"  r="5" fill="var(--moss)"/>
+          <circle id="meta-marker-1" cx="119" cy="99"  r="4" fill="var(--clay)"/>
+          <circle id="meta-marker-2" cx="111" cy="133" r="3.5" fill="var(--earth)"/>
+          <!-- Labels neben den Markern -->
+          <text x="230" y="20" text-anchor="middle"
+                font-family="Cormorant Garamond, serif"
+                font-size="12" font-style="italic"
+                fill="var(--bark)" data-i18n="meta_phase_roh">roh</text>
+          <text x="160" y="100" text-anchor="start"
+                font-family="Cormorant Garamond, serif"
+                font-size="11" font-style="italic"
+                fill="var(--bark)" data-i18n="meta_phase_metabolisiert">metabolisiert</text>
+          <text x="135" y="155" text-anchor="start"
+                font-family="Cormorant Garamond, serif"
+                font-size="11" font-style="italic"
+                fill="var(--bark)" data-i18n="meta_phase_verstanden">verstanden</text>
+          <!-- Silberner Tropfen, der sich entlang der Spirale bewegt -->
+          <circle id="meta-drop" cx="230" cy="30" r="6"
+                  fill="url(#meta-drop-grad)"
+                  filter="drop-shadow(0 1px 2px rgba(0,0,0,0.3))"/>
+          <defs>
+            <radialGradient id="meta-drop-grad" cx="35%" cy="30%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="25%" stop-color="#d8d8d8"/>
+              <stop offset="60%" stop-color="#9a9a9a"/>
+              <stop offset="100%" stop-color="#5a5a5a"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <!-- Klickbare Buttons, die die Marker-Positionen triggern -->
+        <div class="meta-zones" id="meta-zones">
+          <button type="button" class="meta-zone" data-zone="0" data-i18n="meta_phase_roh">roh</button>
+          <button type="button" class="meta-zone" data-zone="1" data-i18n="meta_phase_metabolisiert">metabolisiert</button>
+          <button type="button" class="meta-zone" data-zone="2" data-i18n="meta_phase_verstanden">verstanden</button>
+        </div>
       </div>
       <p class="rollen-caption" id="meta-caption" aria-live="polite"></p>
       <p class="rollen-attribution" data-i18n="rollen_card2_attr">— Vale, Jojo, Julia &amp; Ariane (VaJoJuA)</p>
@@ -3467,6 +3495,12 @@
     <h3 class="idols-subsection-title" data-i18n="idols_sub_philosophy">Philosophy &amp; Thought</h3>
   </div>
   <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="icon">&#129528;</span>
+      <h3>Albert Hofmann <em style="font-style:italic;font-weight:400;color:var(--stone);font-size:0.78em;">aka „LSD"</em></h3>
+      <p data-i18n="idol_hofmann_p">Schweizer Chemiker (1906–2008), entdeckte 1938 LSD bei Sandoz und 1943 dessen psychoaktive Wirkung — der berühmte Fahrradtag, 19. April 1943, Basel. Hat das Mittel sein Leben lang als „medicine for the soul" verteidigt, gegen Missbrauch und gegen Verbot. Wurde 102 Jahre alt. Ich habe ihn nicht persönlich gekannt; das Karpman-Dreieck der Rollen-Karte ist mir durch eine Idee von Alex zugewachsen, die er, sagt er, von Hofmann geflüstert bekommen hat — der Witz darf bleiben.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--bark);border-left:3px solid var(--clay);padding:0.4rem 0 0.4rem 1.2rem;margin:1rem 0 0;line-height:1.5;">"LSD ist eine Medizin für die Seele."<cite style="display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.06em;color:var(--stone);margin-top:0.4rem;">— Albert Hofmann</cite></blockquote>
+    </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#128218;</span>
       <h3>Sokrates</h3>
@@ -4203,10 +4237,11 @@
     });
   })();
 
-  // ── Metabolisierungs-Karte: Tropfen morpht langsam (Gegenteil von schnapp-haft)
-  // CSS-transition basiert, kein RAF — die Aussage ist: Verstehen braucht Zeit.
-  // Aussage: Julia, Jojo & Vale (JuJoVa) — Gedanken müssen erst metabolisiert
-  // werden, bevor sie richtig verstanden werden können.
+  // ── Metabolisierungs-Karte: Fibonacci-Spirale, Tropfen wandert
+  //    von außen (roh) ins Zentrum (verstanden), goldener Schnitt.
+  //    Aussage von Vale, Jojo, Julia & Ariane (VaJoJuA): Gedanken
+  //    müssen erst metabolisiert werden — und Verstehen wächst
+  //    spiralförmig, nicht linear.
   (function initMeta() {
     const zones = document.getElementById('meta-zones');
     const drop  = document.getElementById('meta-drop');
@@ -4214,52 +4249,41 @@
     if (!zones || !drop) return;
 
     const CAPTIONS = [
-      'roh — der Gedanke ist da, aber noch nicht da. Form ist amorph.',
-      'metabolisiert — der Körper hat ihn aufgenommen. Form klärt sich.',
-      'verstanden — jetzt rund. Hat gedauert. War nötig.',
+      'roh — der Gedanke ist da, aber noch nicht da. Außen auf der Spirale, weit, ungeformt.',
+      'metabolisiert — der Körper hat ihn aufgenommen. Auf halber Strecke. Verdichtet sich.',
+      'verstanden — im Zentrum. Klein, dicht, rund. Hat gedauert. War nötig.',
     ];
 
-    let activeZone = -1;
-
-    function zoneCenter(idx) {
-      const zonesRect = zones.getBoundingClientRect();
-      const zoneEl = zones.children[idx];
-      if (!zoneEl) return 0;
-      const r = zoneEl.getBoundingClientRect();
-      const dropHalf = drop.offsetWidth / 2;
-      return (r.left - zonesRect.left) + r.width / 2 - dropHalf;
-    }
+    // Marker-Positionen entsprechen den Anfangs- und Endpunkten der
+    // Spiralen-Bögen (siehe SVG-Path d="…" in der Karte).
+    // Index 0 = außen am Anfang, 1 = mittig, 2 = innen am Ende.
+    const POSITIONS = [
+      { cx: 230, cy: 30,  r: 6   },
+      { cx: 119, cy: 99,  r: 4.5 },
+      { cx: 111, cy: 133, r: 3.5 },
+    ];
 
     function setActive(idx) {
       Array.from(zones.querySelectorAll('.meta-zone')).forEach((el, i) => {
         el.classList.toggle('active', i === idx);
       });
-      drop.classList.remove('phase-0', 'phase-1', 'phase-2');
-      drop.classList.add('phase-' + idx);
-      drop.style.left = zoneCenter(idx) + 'px';
-      activeZone = idx;
+      const p = POSITIONS[idx];
+      if (p) {
+        drop.setAttribute('cx', p.cx);
+        drop.setAttribute('cy', p.cy);
+        drop.setAttribute('r',  p.r);
+      }
       if (cap) cap.textContent = CAPTIONS[idx] || '';
     }
 
-    function initialise() { setActive(0); }
-    if (document.readyState === 'complete') initialise();
-    else window.addEventListener('load', initialise);
+    setActive(0);
 
     Array.from(zones.querySelectorAll('.meta-zone')).forEach((el, i) => {
       el.addEventListener('pointerdown', () => setActive(i));
-      el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(i); }
       });
-    });
-
-    let resizeT;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeT);
-      resizeT = setTimeout(() => {
-        if (activeZone >= 0) drop.style.left = zoneCenter(activeZone) + 'px';
-      }, 100);
     });
   })();
 

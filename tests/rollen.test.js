@@ -97,40 +97,56 @@ describe('Rollen-Card — Emoji-Hover (Karte 1)', () => {
   });
 });
 
-describe('Metabolisierungs-Karte (JuJoVa) — DOM and JS wiring', () => {
-  test('three meta-zones present (roh / metabolisiert / verstanden)', () => {
+describe('Metabolisierungs-Karte (VaJoJuA) — Fibonacci-Spirale', () => {
+  test('three meta-zones present as buttons (roh / metabolisiert / verstanden)', () => {
     const zones = document.querySelectorAll('#meta-zones .meta-zone');
     expect(zones.length).toBe(3);
     const labels = Array.from(zones).map(z => z.textContent.trim());
     expect(labels).toEqual(['roh', 'metabolisiert', 'verstanden']);
+    zones.forEach(z => expect(z.tagName.toLowerCase()).toBe('button'));
   });
 
-  test('silberner drop element is present', () => {
-    expect(document.getElementById('meta-drop')).not.toBeNull();
+  test('silberner drop is an SVG circle with cx/cy/r attributes', () => {
+    const drop = document.getElementById('meta-drop');
+    expect(drop).not.toBeNull();
+    expect(drop.tagName.toLowerCase()).toBe('circle');
+    expect(drop.getAttribute('cx')).toBeTruthy();
+    expect(drop.getAttribute('cy')).toBeTruthy();
+  });
+
+  test('Fibonacci-spiral path exists in the SVG', () => {
+    const path = document.getElementById('meta-spiral-path');
+    expect(path).not.toBeNull();
+    const d = (path.getAttribute('d') || '').replace(/\s+/g, ' ');
+    // Must start with a Move command and contain at least 4 Arc segments
+    // (vier Quadrant-Bögen approximieren die Goldene-Schnitt-Spirale).
+    expect(d).toMatch(/^M\s/);
+    const arcs = (d.match(/A\s/g) || []).length;
+    expect(arcs).toBeGreaterThanOrEqual(4);
   });
 
   test('meta zones are keyboard-accessible', () => {
     const zones = document.querySelectorAll('#meta-zones .meta-zone');
     zones.forEach(z => {
-      expect(z.getAttribute('role')).toBe('button');
       expect(z.getAttribute('tabindex')).toBe('0');
     });
   });
 
-  test('pointerdown on meta-zone marks it active and applies phase class', () => {
+  test('pointerdown on a meta-zone marks it active and moves the drop', () => {
     const zones = document.querySelectorAll('#meta-zones .meta-zone');
     const drop = document.getElementById('meta-drop');
+    const cxBefore = drop.getAttribute('cx');
     zones[2].dispatchEvent(new Event('pointerdown'));
     expect(zones[2].classList.contains('active')).toBe(true);
-    expect(drop.classList.contains('phase-2')).toBe(true);
-    expect(drop.classList.contains('phase-0')).toBe(false);
+    // Drop muss seine cx/cy verändert haben (von außen nach innen).
+    expect(drop.getAttribute('cx')).not.toBe(cxBefore);
   });
 
   test('caption updates on click and verstanden-zone carries the time framing', () => {
     const zones = document.querySelectorAll('#meta-zones .meta-zone');
     const cap = document.getElementById('meta-caption');
     zones[2].dispatchEvent(new Event('pointerdown'));
-    expect(cap.textContent.toLowerCase()).toMatch(/gedauert|nötig|verstanden/);
+    expect(cap.textContent.toLowerCase()).toMatch(/gedauert|nötig|verstanden|zentrum/);
   });
 
   test('VaJoJuA attribution (Vale, Jojo, Julia, Ariane) is present in the meta card', () => {
