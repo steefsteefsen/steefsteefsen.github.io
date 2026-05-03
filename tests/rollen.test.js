@@ -26,6 +26,15 @@ beforeEach(() => {
     .replace(/^[\s\S]*?<body\b[^>]*>/i, '')
     .replace(/<\/body>[\s\S]*$/i, '');
 
+  // Karte 1 (rosa Ball) ist Firefox-only via 'MozAppearance' in
+  // documentElement.style. jsdom hat keine Vendor-Prefixes — wir setzen
+  // die Eigenschaft manuell, damit der Init-Code als "in Firefox" durchläuft.
+  if (!('MozAppearance' in document.documentElement.style)) {
+    Object.defineProperty(document.documentElement.style, 'MozAppearance', {
+      value: '', writable: true, configurable: true,
+    });
+  }
+
   // Pull out only the initRollen IIFE — running the full inline JS in
   // jsdom triggers IntersectionObserver, AudioContext etc. that we
   // don't need for this test.
@@ -105,6 +114,14 @@ describe('Rollen-Card — DOM and JS wiring', () => {
     const ball  = document.getElementById('rollen-ball');
     zones[0].dispatchEvent(new Event('pointerdown'));
     expect(ball.classList.contains('refuse')).toBe(true);
+  });
+});
+
+describe('Rollen-Card — Firefox-only gate', () => {
+  test('rollen-card-1 markup carries display:none default (so non-Firefox stays hidden)', () => {
+    // Read raw HTML rather than the live DOM (since beforeEach faked Firefox
+    // detection, the live element will have its inline style cleared).
+    expect(html).toMatch(/<div class="rollen-card" id="rollen-card-1" style="display:none;"/);
   });
 });
 

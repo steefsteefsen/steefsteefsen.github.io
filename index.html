@@ -2514,11 +2514,13 @@
 <section id="rollen">
   <div class="reveal">
     <div class="section-label" data-i18n="rollen_label">Zwei Bewegungen</div>
-    <h2 data-i18n="rollen_h">Eine schnapp-haft. Eine langsam.</h2>
+    <h2 data-i18n="rollen_h">Eine Bewegung. Eine zweite, wenn dein Browser Firefox ist.</h2>
     <p class="rollen-intro" data-i18n="rollen_intro">Zwei kleine Karten. Klick rein — sie machen, was sie sagen.</p>
 
-    <!-- Karte 1: Rollen — schnapp-haft = Vorverurteilung -->
-    <div class="rollen-card">
+    <!-- Karte 1: Rollen — schnapp-haft = Vorverurteilung
+         Vorerst Firefox-only (Stefans Anweisung 2026-05-03):
+         display:none default, JS macht :block in Firefox. -->
+    <div class="rollen-card" id="rollen-card-1" style="display:none;">
       <h3 class="rollen-card-h" data-i18n="rollen_card1_h">Die Rolle ist nicht fest. Sie rollt.</h3>
       <p class="rollen-card-sub" data-i18n="rollen_card1_sub">Klick eine Zone — der Ball rollt schnapp-haft hin. Schnapp-haft heißt: vorverurteilt.</p>
       <div class="rollen-zones" id="rollen-zones">
@@ -4026,7 +4028,13 @@
     const zones = document.getElementById('rollen-zones');
     const ball  = document.getElementById('rollen-ball');
     const cap   = document.getElementById('rollen-caption');
-    if (!zones || !ball) return;
+    const card  = document.getElementById('rollen-card-1');
+    if (!zones || !ball || !card) return;
+    // Firefox-Gate: vorerst nur Firefox-Nutzer sehen Karte 1.
+    // Feature-Detection statt UA-Sniffing über Firefox-only -moz- prefix.
+    const isFirefox = 'MozAppearance' in document.documentElement.style;
+    if (!isFirefox) return; // Karte bleibt display:none; init wird übersprungen.
+    card.style.display = '';
     const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
     // Captions per landed zone — tragen die "schnapphaft = Vorverurteilung"-Pointe.
