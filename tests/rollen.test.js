@@ -32,10 +32,12 @@ beforeEach(() => {
   const inline = Array.from(document.querySelectorAll('script'))
     .map(s => s.textContent)
     .join('\n');
-  const m = inline.match(/\(function initRollen\(\)[\s\S]*?\}\)\(\);/);
-  if (!m) throw new Error('initRollen IIFE not found in index.html');
+  const mRollen = inline.match(/\(function initRollen\(\)[\s\S]*?\}\)\(\);/);
+  if (!mRollen) throw new Error('initRollen IIFE not found in index.html');
+  const mMeta = inline.match(/\(function initMeta\(\)[\s\S]*?\}\)\(\);/);
+  if (!mMeta) throw new Error('initMeta IIFE not found in index.html');
   const script = document.createElement('script');
-  script.textContent = m[0];
+  script.textContent = mRollen[0] + '\n' + mMeta[0];
   document.head.appendChild(script);
 });
 
@@ -63,26 +65,89 @@ describe('Rollen-Card — DOM and JS wiring', () => {
     });
   });
 
-  test('pointerdown on a zone marks it active', () => {
-    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    zones[2].dispatchEvent(new Event('pointerdown'));
-    expect(zones[2].classList.contains('active')).toBe(true);
-    expect(zones[0].classList.contains('active')).toBe(false);
-  });
-
-  test('caption updates on click and Täter-zone carries the Vorverurteilung framing', () => {
-    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    const cap = document.getElementById('rollen-caption');
-    zones[2].dispatchEvent(new Event('pointerdown'));
-    expect(cap.textContent.toLowerCase()).toMatch(/vorverurteil|schnapp/);
-  });
-
-  test('clicking another zone moves the active class', () => {
+  test('pointerdown on Opfer (idx 1) marks it active', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
     zones[1].dispatchEvent(new Event('pointerdown'));
     expect(zones[1].classList.contains('active')).toBe(true);
+  });
+
+  test('pointerdown on Täter (idx 2) marks it active and caption carries Vorverurteilung framing', () => {
+    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
+    const cap = document.getElementById('rollen-caption');
+    zones[2].dispatchEvent(new Event('pointerdown'));
+    expect(zones[2].classList.contains('active')).toBe(true);
+    expect(cap.textContent.toLowerCase()).toMatch(/vorverurteil|schnapp/);
+  });
+
+  test('Held (idx 0) refuses: no active class on Held, caption says "verdient"', () => {
+    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
+    const cap = document.getElementById('rollen-caption');
+    // Klick auf Held darf NIEMALS die active-Klasse setzen.
     zones[0].dispatchEvent(new Event('pointerdown'));
-    expect(zones[0].classList.contains('active')).toBe(true);
+    expect(zones[0].classList.contains('active')).toBe(false);
+    // Caption MUSS aber die Verweigerungs-Pointe zeigen.
+    expect(cap.textContent.toLowerCase()).toMatch(/verdient|nicht zuschnap/);
+  });
+
+  test('Held click after Opfer/Täter clears active without snapping', () => {
+    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
+    zones[2].dispatchEvent(new Event('pointerdown'));
+    expect(zones[2].classList.contains('active')).toBe(true);
+    zones[0].dispatchEvent(new Event('pointerdown'));
+    // Held klickt → kein neues active gesetzt, alte active geräumt.
+    expect(zones[0].classList.contains('active')).toBe(false);
     expect(zones[1].classList.contains('active')).toBe(false);
+    expect(zones[2].classList.contains('active')).toBe(false);
+  });
+
+  test('refuse class is added to ball on Held click (jsdom can verify class toggle)', () => {
+    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
+    const ball  = document.getElementById('rollen-ball');
+    zones[0].dispatchEvent(new Event('pointerdown'));
+    expect(ball.classList.contains('refuse')).toBe(true);
+  });
+});
+
+describe('Metabolisierungs-Karte (JuJoVa) — DOM and JS wiring', () => {
+  test('three meta-zones present (roh / metabolisiert / verstanden)', () => {
+    const zones = document.querySelectorAll('#meta-zones .meta-zone');
+    expect(zones.length).toBe(3);
+    const labels = Array.from(zones).map(z => z.textContent.trim());
+    expect(labels).toEqual(['roh', 'metabolisiert', 'verstanden']);
+  });
+
+  test('silberner drop element is present', () => {
+    expect(document.getElementById('meta-drop')).not.toBeNull();
+  });
+
+  test('meta zones are keyboard-accessible', () => {
+    const zones = document.querySelectorAll('#meta-zones .meta-zone');
+    zones.forEach(z => {
+      expect(z.getAttribute('role')).toBe('button');
+      expect(z.getAttribute('tabindex')).toBe('0');
+    });
+  });
+
+  test('pointerdown on meta-zone marks it active and applies phase class', () => {
+    const zones = document.querySelectorAll('#meta-zones .meta-zone');
+    const drop = document.getElementById('meta-drop');
+    zones[2].dispatchEvent(new Event('pointerdown'));
+    expect(zones[2].classList.contains('active')).toBe(true);
+    expect(drop.classList.contains('phase-2')).toBe(true);
+    expect(drop.classList.contains('phase-0')).toBe(false);
+  });
+
+  test('caption updates on click and verstanden-zone carries the time framing', () => {
+    const zones = document.querySelectorAll('#meta-zones .meta-zone');
+    const cap = document.getElementById('meta-caption');
+    zones[2].dispatchEvent(new Event('pointerdown'));
+    expect(cap.textContent.toLowerCase()).toMatch(/gedauert|nötig|verstanden/);
+  });
+
+  test('JuJoVa attribution is present in the meta card', () => {
+    const card = document.querySelector('.rollen-card--meta');
+    expect(card).not.toBeNull();
+    const attr = card.querySelector('.rollen-attribution');
+    expect(attr.textContent).toMatch(/Julia.*Jojo.*Vale|JuJoVa/);
   });
 });

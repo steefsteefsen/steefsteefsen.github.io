@@ -556,15 +556,26 @@
     height: 22px;
     border-radius: 50%;
     pointer-events: none;
-    /* Silber: radial gradient für 3D-Glanz, dunkler Rand für Plastizität. */
+    /* Rosa Ball — Empathie-Farbe. Der Ball schnappt in Opfer/Täter (Vorverurteilung),
+       aber nicht in Held: dort darf er nicht zuschnappen. Held muss verdient werden. */
     background:
-      radial-gradient(circle at 35% 30%, #ffffff 0%, #d8d8d8 25%, #9a9a9a 60%, #5a5a5a 100%);
+      radial-gradient(circle at 35% 30%, #ffffff 0%, #ffd4e0 25%, #ff8aa8 60%, #c44a72 100%);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.35),
-      inset -1px -2px 3px rgba(0, 0, 0, 0.25),
-      inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+      0 2px 4px rgba(120, 30, 60, 0.35),
+      inset -1px -2px 3px rgba(120, 30, 60, 0.25),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.7);
     transform: translateX(0);
     will-change: transform;
+  }
+  /* Held-Verweigerung: kurz wackeln, dann zurück. Ball bleibt wo er ist. */
+  .rollen-ball.refuse {
+    animation: rollenRefuse 0.45s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  @keyframes rollenRefuse {
+    10%, 90% { transform: translateX(calc(var(--ballx, 0px) - 2px)); }
+    20%, 80% { transform: translateX(calc(var(--ballx, 0px) + 4px)); }
+    30%, 50%, 70% { transform: translateX(calc(var(--ballx, 0px) - 6px)); }
+    40%, 60% { transform: translateX(calc(var(--ballx, 0px) + 6px)); }
   }
   .rollen-caption {
     margin-top: 0.9rem;
@@ -573,8 +584,92 @@
     font-style: italic;
     min-height: 1.2em;
   }
+  .rollen-card-h {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.3rem;
+    text-align: left;
+  }
+  .rollen-card-sub {
+    font-size: 0.85rem;
+    color: var(--stone);
+    margin-bottom: 0.9rem;
+    text-align: left;
+  }
+  .rollen-attribution {
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--moss);
+    text-align: right;
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+  /* Karte 2: Metabolisierung — langsam, Tropfen morpht statt rollt. */
+  .rollen-card--meta { margin-top: 1.6rem; }
+  .meta-zones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    position: relative;
+    height: 96px;
+  }
+  .meta-zone {
+    background: rgba(90, 110, 74, 0.08);
+    border: 1px solid rgba(90, 110, 74, 0.25);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.55rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    transition: background 0.2s, border-color 0.2s;
+    user-select: none;
+  }
+  .meta-zone:hover { background: rgba(90, 110, 74, 0.16); border-color: var(--moss); }
+  .meta-zone.active { background: rgba(201, 169, 110, 0.16); border-color: var(--clay); }
+  .meta-drop {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 35% 30%, #ffffff 0%, #d8d8d8 25%, #9a9a9a 60%, #5a5a5a 100%);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.35),
+      inset -1px -2px 3px rgba(0, 0, 0, 0.25),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+    /* Roh = sehr unregelmäßig, viele "Knoten" — wir morphen über border-radius
+       von amorph (50% 20% 60% 30%/40% 60% 30% 50%) zu rund (50%). */
+    border-radius: 60% 30% 70% 40% / 50% 70% 40% 60%;
+    /* Lange Transition statt RAF-Loop — Verstehen braucht Zeit. */
+    transition: left 2.4s cubic-bezier(.42,0,.4,1), border-radius 2.4s ease, transform 2.4s ease;
+    transform: translateX(0) rotate(0deg);
+    will-change: left, border-radius, transform;
+  }
+  .meta-drop.phase-0 {
+    border-radius: 60% 30% 70% 40% / 50% 70% 40% 60%;
+    transform: translateX(0) rotate(-12deg) scale(1.05);
+  }
+  .meta-drop.phase-1 {
+    border-radius: 55% 45% 60% 40% / 55% 55% 45% 50%;
+    transform: translateX(0) rotate(0deg) scale(1.0);
+  }
+  .meta-drop.phase-2 {
+    border-radius: 50%;
+    transform: translateX(0) rotate(0deg) scale(1.02);
+  }
   @media (prefers-reduced-motion: reduce) {
     .rollen-ball { transition: transform 0.25s ease; }
+    .meta-drop { transition: left 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; }
   }
 
   /* ── Confetti + Sound-Toggle ── */
@@ -2105,6 +2200,7 @@
     </button>
     <div class="hero-citations-row" x-show="open" x-collapse>
       <blockquote class="hero-citation">&bdquo;Mindset is key.&ldquo;<cite>— Familienerinnerung</cite></blockquote>
+      <blockquote class="hero-citation">&bdquo;Am Hintern wird die Ente fett.&ldquo;<cite>— S. &amp; R. H.</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Du bist Mutti.&ldquo;<cite>— B. Z.</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Jede Person ist die Summe ihrer Traumata.&ldquo;<cite>— S. W.</cite></blockquote>
       <blockquote class="hero-citation">&bdquo;Quer und bunt ist das neue Normal.&ldquo;<cite>— Steef</cite></blockquote>
@@ -2372,10 +2468,14 @@
      Aussage: die Rolle ist nicht fest, sie rollt. -->
 <section id="rollen">
   <div class="reveal">
-    <div class="section-label" data-i18n="rollen_label">Rollen</div>
-    <h2 data-i18n="rollen_h">Die Rolle ist nicht fest. Sie rollt.</h2>
-    <p class="rollen-intro" data-i18n="rollen_intro">Klick eine Zone — der Ball rollt hin. Heute Held, morgen Opfer, übermorgen Täter; oder umgekehrt. Niemand wohnt nur in einer.</p>
+    <div class="section-label" data-i18n="rollen_label">Zwei Bewegungen</div>
+    <h2 data-i18n="rollen_h">Eine schnapp-haft. Eine langsam.</h2>
+    <p class="rollen-intro" data-i18n="rollen_intro">Zwei kleine Karten. Klick rein — sie machen, was sie sagen.</p>
+
+    <!-- Karte 1: Rollen — schnapp-haft = Vorverurteilung -->
     <div class="rollen-card">
+      <h3 class="rollen-card-h" data-i18n="rollen_card1_h">Die Rolle ist nicht fest. Sie rollt.</h3>
+      <p class="rollen-card-sub" data-i18n="rollen_card1_sub">Klick eine Zone — der Ball rollt schnapp-haft hin. Schnapp-haft heißt: vorverurteilt.</p>
       <div class="rollen-zones" id="rollen-zones">
         <div class="rollen-zone" data-zone="0" data-i18n="rollen_held">Held</div>
         <div class="rollen-zone" data-zone="1" data-i18n="rollen_opfer">Opfer</div>
@@ -2383,6 +2483,21 @@
         <div class="rollen-ball" id="rollen-ball" aria-hidden="true"></div>
       </div>
       <p class="rollen-caption" id="rollen-caption" aria-live="polite"></p>
+      <p class="rollen-attribution" data-i18n="rollen_card1_attr">— Steef</p>
+    </div>
+
+    <!-- Karte 2: Metabolisierung — langsam, Tropfen morpht -->
+    <div class="rollen-card rollen-card--meta">
+      <h3 class="rollen-card-h" data-i18n="rollen_card2_h">Gedanken müssen erst metabolisiert werden.</h3>
+      <p class="rollen-card-sub" data-i18n="rollen_card2_sub">Klick eine Phase — der Tropfen wandert langsam. Verstehen braucht Zeit. Das Gegenteil von schnapp-haft.</p>
+      <div class="meta-zones" id="meta-zones">
+        <div class="meta-zone" data-zone="0" data-i18n="meta_phase_roh">roh</div>
+        <div class="meta-zone" data-zone="1" data-i18n="meta_phase_metabolisiert">metabolisiert</div>
+        <div class="meta-zone" data-zone="2" data-i18n="meta_phase_verstanden">verstanden</div>
+        <div class="meta-drop" id="meta-drop" aria-hidden="true"></div>
+      </div>
+      <p class="rollen-caption" id="meta-caption" aria-live="polite"></p>
+      <p class="rollen-attribution" data-i18n="rollen_card2_attr">— Julia, Jojo &amp; Vale (JuJoVa)</p>
     </div>
   </div>
 </section>
@@ -3842,8 +3957,9 @@
     const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
     // Captions per landed zone — tragen die "schnapphaft = Vorverurteilung"-Pointe.
+    // Held verweigert sich der schnellen Zuordnung — der Ball geht da nicht hin.
     const CAPTIONS = [
-      'Held — schnell zugewiesen, ist auch schnell ein Urteil.',
+      'Held — der Status lässt sich nicht zuschnappen. Er muss verdient werden.',
       'Opfer — die Rolle ist schnell vergeben. Das ist nicht dasselbe wie wahr.',
       'Täter — am schnellsten zugeschnappt. Schnapp-haft heißt: vorverurteilt.',
     ];
@@ -3890,7 +4006,23 @@
       rafId = requestAnimationFrame(step);
     }
 
+    function refuse() {
+      // Ball wackelt, bewegt sich nicht zur Zone. Held-Verweigerung.
+      ball.style.setProperty('--ballx', pos + 'px');
+      ball.classList.remove('refuse');
+      void ball.offsetWidth;
+      ball.classList.add('refuse');
+    }
+
     function rollTo(idx) {
+      // Held (idx 0) verweigert sich — Ball wackelt + Caption zeigt die Pointe.
+      if (idx === 0) {
+        // Caption setzen aber NICHT activeZone ändern, NICHT Ball bewegen.
+        Array.from(zones.querySelectorAll('.rollen-zone')).forEach(el => el.classList.remove('active'));
+        if (cap) cap.textContent = CAPTIONS[0];
+        if (!reduce) refuse();
+        return;
+      }
       target = zoneCenter(idx);
       setActive(idx);
       if (reduce) {
@@ -3900,9 +4032,12 @@
       if (!rafId) rafId = requestAnimationFrame(step);
     }
 
-    // Initialise ball at zone 0 once layout is ready.
+    // Initialise ball at zone 1 (Opfer) — neutral middle position.
+    // Started bei Held wäre die Verweigerungs-Pointe verschenkt.
+    // Caption beim Init: Hint, kein Urteil.
     function initialise() {
-      pos = zoneCenter(0); paint(); setActive(0);
+      pos = zoneCenter(1); paint();
+      if (cap) cap.textContent = 'Klick: Opfer oder Täter — der Ball schnappt. Klick: Held — der Ball verweigert.';
     }
     if (document.readyState === 'complete') initialise();
     else window.addEventListener('load', initialise);
@@ -3923,6 +4058,66 @@
       clearTimeout(resizeT);
       resizeT = setTimeout(() => {
         if (activeZone >= 0) { pos = zoneCenter(activeZone); paint(); }
+      }, 100);
+    });
+  })();
+
+  // ── Metabolisierungs-Karte: Tropfen morpht langsam (Gegenteil von schnapp-haft)
+  // CSS-transition basiert, kein RAF — die Aussage ist: Verstehen braucht Zeit.
+  // Aussage: Julia, Jojo & Vale (JuJoVa) — Gedanken müssen erst metabolisiert
+  // werden, bevor sie richtig verstanden werden können.
+  (function initMeta() {
+    const zones = document.getElementById('meta-zones');
+    const drop  = document.getElementById('meta-drop');
+    const cap   = document.getElementById('meta-caption');
+    if (!zones || !drop) return;
+
+    const CAPTIONS = [
+      'roh — der Gedanke ist da, aber noch nicht da. Form ist amorph.',
+      'metabolisiert — der Körper hat ihn aufgenommen. Form klärt sich.',
+      'verstanden — jetzt rund. Hat gedauert. War nötig.',
+    ];
+
+    let activeZone = -1;
+
+    function zoneCenter(idx) {
+      const zonesRect = zones.getBoundingClientRect();
+      const zoneEl = zones.children[idx];
+      if (!zoneEl) return 0;
+      const r = zoneEl.getBoundingClientRect();
+      const dropHalf = drop.offsetWidth / 2;
+      return (r.left - zonesRect.left) + r.width / 2 - dropHalf;
+    }
+
+    function setActive(idx) {
+      Array.from(zones.querySelectorAll('.meta-zone')).forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+      drop.classList.remove('phase-0', 'phase-1', 'phase-2');
+      drop.classList.add('phase-' + idx);
+      drop.style.left = zoneCenter(idx) + 'px';
+      activeZone = idx;
+      if (cap) cap.textContent = CAPTIONS[idx] || '';
+    }
+
+    function initialise() { setActive(0); }
+    if (document.readyState === 'complete') initialise();
+    else window.addEventListener('load', initialise);
+
+    Array.from(zones.querySelectorAll('.meta-zone')).forEach((el, i) => {
+      el.addEventListener('pointerdown', () => setActive(i));
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(i); }
+      });
+    });
+
+    let resizeT;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        if (activeZone >= 0) drop.style.left = zoneCenter(activeZone) + 'px';
       }, 100);
     });
   })();
