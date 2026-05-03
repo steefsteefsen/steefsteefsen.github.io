@@ -13,7 +13,7 @@
  *   when the test runs in @jest-environment node.
  *
  * Skip when offline:
- *   JEST_SKIP_NETWORK=1 npx jest local-resolve
+ *   JEST_SKIP_NETWORK=1 npx jest local-business-links
  *
  * What we check, per card:
  *   1. The card with the expected <h3> exists in index.html

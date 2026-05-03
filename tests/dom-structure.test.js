@@ -516,7 +516,7 @@ describe('public name discipline', () => {
   });
 });
 
-// Local-business card resolution tests live in tests/local-resolve.test.js
+// Local-business card resolution tests live in tests/local-business-links.test.js
 // (separate file so it can opt into @jest-environment node, where fetch is
 // natively available — jest-environment-jsdom does not expose fetch).
 

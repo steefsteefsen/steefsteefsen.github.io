@@ -54,7 +54,7 @@ SITE_URL=http://127.0.0.1:8080/ cd tests && npx jest red-flag-hover
 ```
 
 The puppeteer hover test needs the local server (above) running. The
-`local-resolve.test.js` suite issues real HTTP probes against every
+`local-business-links.test.js` suite issues real HTTP probes against every
 external link on every local-business / artist card; skip with
 `JEST_SKIP_NETWORK=1` when offline.
 

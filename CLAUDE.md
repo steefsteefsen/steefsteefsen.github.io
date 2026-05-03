@@ -176,7 +176,7 @@ Before Claude builds the card, Stefan must collect on-site (verbal OK to feature
 If any field is missing, Claude does not guess — Claude asks Stefan and waits.
 
 #### Resolution test (mechanical CI guard)
-`tests/local-resolve.test.js` runs against every local-business card and
+`tests/local-business-links.test.js` runs against every local-business card and
 verifies that:
 1. the card with the expected `<h3>` exists in `index.html`
 2. the card has at least one external link
@@ -221,7 +221,7 @@ support card, idol card, blog post or footnote:
    loads.
 5. **OSM links go through the OSM API** (`api.openstreetmap.org/api/0.6/<kind>/<id>`)
    so a deleted node fails even when the public page renders a generic
-   shell. The local-resolve test does this automatically.
+   shell. The local-business-links test does this automatically.
 
 Failure mode: prefer **fewer working links over more broken ones**. A
 card with one OSM link that resolves is shippable. A card with a
@@ -536,8 +536,8 @@ tests it.** The filename answers *"what is the subject?"*, never
   not the subject. Hover is one of several ways to test the flag;
   the subject is the flag.
 - ✅ `mobile-burger.test.js` — tests the mobile burger menu.
-- ✅ `local-resolve.test.js` — tests local-business link resolution.
-- ❌ `example.test.js` — tests *what*? Either rename to the actual
+- ✅ `local-business-links.test.js` — tests local-business link resolution.
+- ❌ `i18n-translations.test.js` — tests *what*? Either rename to the actual
   subject, or delete if it really is just a template.
 
 **If two test files would have the same name** because they cover
@@ -562,7 +562,7 @@ its own commit so the rename is reviewable.
 - `dom-structure.test.js` — structural DOM checks (sections, cards, Alpine wiring)
 - `i18n-functions.test.js` — i18n key coverage and language block integrity
 - `mobile-burger.test.js` — mobile burger menu behaviour
-- `local-resolve.test.js` — external-link resolution for local-business cards
+- `local-business-links.test.js` — external-link resolution for local-business cards
 - `video-consistency.test.js` — video embed conventions
 - `de-language-sensitivity.test.js` — DE inclusive-language sweep
 - `red-flag.test.js` — Explore Easter-Egg (rote Fahne, Pianosa-Eskalation)
@@ -1226,7 +1226,7 @@ just says *"y"* on a structural edit, Claude defaults to these.
   401 (paywall), 404 (gone), 410 (gone), 403 (blocked) → don't ship.
 - **OSM links go through `api.openstreetmap.org/api/0.6/<kind>/<id>`**
   for liveness, not just the page (the page renders a generic shell
-  for deleted nodes). The `tests/local-resolve.test.js` enforces
+  for deleted nodes). The `tests/local-business-links.test.js` enforces
   this for cards in `EXPECTED_LOCAL_CARDS`.
 - **YouTube embeds use `youtube-nocookie.com/embed/<id>?controls=0`**,
   not `youtube.com`. Reduces tracking, follows existing pattern.
@@ -1285,10 +1285,10 @@ of the consequence**, not the size of the prompt.
 ### Tests
 
 - **Run `dom-structure.test.js`, `i18n-functions.test.js`,
-  `example.test.js`** after every structural edit. Background-run is
+  `i18n-translations.test.js`** after every structural edit. Background-run is
   fine, but check the result before declaring "tests grün". Pattern:
   ```bash
-  cd tests && JEST_SKIP_NETWORK=1 npx jest dom-structure i18n-functions example
+  cd tests && JEST_SKIP_NETWORK=1 npx jest dom-structure i18n-functions i18n-translations
   ```
 - **Don't run the full puppeteer-hover suite** in routine edits —
   it requires `localhost:8080` and adds 6 minutes. Run on demand.
