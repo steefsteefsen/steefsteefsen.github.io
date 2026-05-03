@@ -1135,6 +1135,57 @@ Claude **names the Tier classification in plain words**:
 
 This makes Stefan's review one click instead of a guess.
 
+### Hard rule — never read or echo secret-containers
+
+**Stefan-Vorfall 2026-05-03 ~23:30**: Claude hat `grep -i theopenhomepage
+.env` ausgeführt, um eine URL gegen die Konversation zu verifizieren.
+Die in `.env` gefundenen URLs waren heute zufällig keine echten
+Secrets — aber das war **Glück, nicht Disziplin**. `.env` ist per
+Konvention der **Secret-Container** des Projekts, und Stefan hat
+**zu Recht** alarmiert reagiert.
+
+**Hard rule, ohne Ausnahmen:**
+
+- **`.env`, `.env.*`, `.envrc`, `.credentials`, `.aws/`, `.ssh/`,
+  `secrets/`, `*.pem`, `*.key`, `*.p12`, `id_rsa*`, `*token*`,
+  `*secret*`, anything in a `docs/_private/`-style folder** —
+  never `cat`, `head`, `tail`, `grep`, `less`, `more`, `awk`, `sed`
+  (without `-i`), `python -c "open(...)"`, `node -e "fs.readFile..."`
+  or any other read-into-stdout against those paths.
+- **No exceptions for "ich wollte nur kurz prüfen"**. The whole point
+  of the convention is that the file's existence and gitignored
+  status are the privacy guarantee. Reading it into stdout
+  invalidates that guarantee, even if the contents look harmless to
+  Claude in the moment.
+
+**Allowed without reading**:
+- `ls -la .env` (existence-check) — fine.
+- `git check-ignore .env` (verify it's gitignored) — fine.
+- `wc -l .env` (size-check) — fine, gives no content.
+- `chmod`, `mv`, `cp` of the file — fine.
+- Reading via `Read` tool when Stefan **explicitly** asks Claude to
+  show or work with the file's content. *Stefan asking is the only
+  consent for reading.*
+
+**If Claude needs to verify a value that lives in `.env`** (e.g. „matches
+the URL Stefan gave me?"), **the path is to ask Stefan**, not to grep
+the file. Stefan can either re-state the value, or paste a single
+line, or say *„yes, grep it"* — but the consent must come from him,
+not be assumed by Claude.
+
+**Why this rule is so strict**: secret-containers can drift in content
+without Claude knowing. Today an `.env` holds URLs; tomorrow Stefan
+adds an API token; next week Claude grep'd-out-of-habit and the
+token is in the conversation log forever. The discipline is *„never
+look",* not *„look only when safe"* — because *„safe"* is judged at
+read-time and the file changes between reads.
+
+**Mechanical enforcement**: this rule has no jest test. It lives in
+Claude's behaviour and in code review. If Claude is observed reading
+a secret-container, the read is logged in a session-summary
+*„regelbruch"*-block and the rule is re-emphasised in the next
+session-init.
+
 ### Stack discipline: don't pile work on uninspected work
 
 If more than three pieces of work are review-pending in the local

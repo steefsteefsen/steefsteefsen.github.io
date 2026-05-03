@@ -9,6 +9,14 @@
     <atom:link href="https://steefsteefsen.github.io/feed.xml" rel="self" type="application/rss+xml"/>
 
   <item>
+    <title>.env, gelesen — ein Vorfall und seine Regel</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-env-grep-vorfall.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-env-grep-vorfall.html</guid>
+    <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
+    <description>Heute Abend hat Claude eine grep-Operation auf meine .env ausgeführt, um eine URL zu verifizieren. Die enthaltenen Werte waren zufällig keine echten Secrets. Das war Glück, nicht Disziplin. Die abgeleitete neue Hard-Rule, plus warum ich den Vorfall öffentlich mache.</description>
+    <author>Steef</author>
+  </item>
+  <item>
     <title>Legal Germany. Den Rest übernimmt der Tribe.</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-legal-germany.html</link>
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-legal-germany.html</guid>

@@ -9,6 +9,14 @@
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
   <item>
+    <title>.env, read — an incident and the rule it produced</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-env-grep-vorfall-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-env-grep-vorfall-en.html</guid>
+    <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
+    <description>Tonight Claude ran a grep on my .env file to verify a URL. The values were, by chance, not actual secrets. That was luck, not discipline. The new hard rule that came out of it, and why I make the incident public.</description>
+    <author>Steef</author>
+  </item>
+  <item>
     <title>Legal Germany. The rest goes to the tribe.</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-legal-germany-en.html</link>
     <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-03-legal-germany-en.html</guid>

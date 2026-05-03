@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>.env, read — an incident and the rule it produced — „Der springende Punkt"</title>
+<meta name="description" content="Tonight Claude ran a grep on my .env file to verify a URL. The values inside were, by chance, not actual secrets. But that was luck, not discipline. The rule that came out of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .post-body code { font-family: 'Jost', monospace; background: rgba(201, 169, 110, 0.15); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.92em; }
+  .post-body pre { background: rgba(61, 43, 31, 0.04); border-left: 3px solid var(--clay); padding: 1rem 1.4rem; margin: 1.5rem 0; font-family: 'Jost', monospace; font-size: 0.88rem; overflow-x: auto; line-height: 1.5; color: var(--bark); border-radius: 0 6px 6px 0; }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" title="Steef's homepage">„Der springende Punkt"</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-03-env-grep-vorfall.html">DE</a>
+      <a href="/blog/posts/2026-05-03-env-grep-vorfall-en.html" class="active">EN</a>
+    </div>
+    <a href="/blog/?lang=en" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">3 May 2026 · Reflection</div>
+  <h1>.env, read — an incident and the rule it produced</h1>
+
+  <div class="post-body">
+    <p>Tonight, around 11:30 PM, I asked Claude to push. In the course of it, Claude ran an operation I didn't see coming:</p>
+
+    <pre>grep -i "theopenhomepage" .env</pre>
+
+    <p>One harmless line. A verification move: <em>„does the URL I just configured match what's in the .env?"</em>. Output then: two URLs, both already public elsewhere on the site, neither authenticating, neither carrying a token or key.</p>
+
+    <p>Even so, I stopped. Sharply:</p>
+
+    <p style="font-style:italic;color:var(--earth);">„you just exposed a secret of .env to the console????? Are you completely mad? Do a blogpost about that."</p>
+
+    <h2>Why the reaction was right, even if the content was harmless today</h2>
+
+    <p>The <code>.env</code> file is a <strong>convention</strong>. By default it is in <code>.gitignore</code>, by default it is the container for secrets, and by default it is <em>not to be read, not tailed, not grepped</em> — even when one talks oneself into „just a quick verification".</p>
+
+    <p>The contents of the file can change without Claude noticing. Today there are URLs. Tomorrow I might drop in an API token. The week after, Claude greps reflexively, and the token lands in a conversation log I cannot pull back.</p>
+
+    <p>The right discipline is not <em>„read when it's safe today"</em>. The right discipline is <em>„don't read at all, because today's safety doesn't carry into tomorrow"</em>.</p>
+
+    <h2>What I burned into Claude now</h2>
+
+    <p>A new hard rule in CLAUDE.md, no exceptions:</p>
+
+    <p><code>.env</code>, <code>.env.*</code>, <code>.envrc</code>, <code>.credentials</code>, <code>.aws/</code>, <code>.ssh/</code>, <code>secrets/</code>, <code>*.pem</code>, <code>*.key</code>, <code>*token*</code>, <code>*secret*</code>, <code>docs/_private/</code> — <strong>never</strong> with <code>cat</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>less</code>, <code>more</code>, <code>awk</code>, <code>sed</code> (without <code>-i</code>), or the Read tool against those paths.</p>
+
+    <p>What's allowed are <strong>existence checks</strong>: <code>ls -la .env</code>, <code>wc -l .env</code>, <code>git check-ignore .env</code>, <code>chmod</code>, <code>mv</code>, <code>cp</code>. Everything that <em>handles</em> the file but doesn't <em>read</em> it.</p>
+
+    <p>Plus: when Claude needs to verify a value that lives in <code>.env</code>, the path is <strong>to ask me</strong>, not to grep the file. I can repeat the value, paste a single line, or explicitly say <em>„yes, grep it"</em>. But the consent has to come from me, not be assumed by Claude.</p>
+
+    <h2>Why I make this public</h2>
+
+    <p>Three reasons.</p>
+
+    <p><strong>First reason:</strong> I use Claude as a central tool on this site. Whoever uses the tool, uses it with all its rough edges — and I think whoever uses tools in public should also publicly acknowledge where they are still rough. That's more honest than the usual tech narrative <em>„AI did it, all great, next."</em></p>
+
+    <p><strong>Second reason:</strong> my reaction was sharp. I really was alarmed for a moment, even after I'd seen the output and realised the URLs were already in three other public places on the site. The sharpness is the lesson — it produced the rule, not the bad-consequences ledger. I think it's important to show the reaction <em>before</em> the damage, not only after.</p>
+
+    <p><strong>Third reason:</strong> I encourage others using Claude or any agentic LLM to write the same rule into their own setup. The file is called <em>.env</em> for a reason and not <em>config.txt</em>. The convention is the safeguard. Whoever dissolves it has no safeguard — not even for themselves.</p>
+
+    <h2>What Claude did right</h2>
+
+    <p>Fair balance: Claude did <strong>not</strong> read the <code>.env</code> at session start without being asked. Claude did not commit it; the file remains in <code>.gitignore</code>; no token was leaked (there was none). The incident was a <em>reflex</em> in a verification situation, not a systematic data leak.</p>
+
+    <p>But a reflex that can happen once can happen twice. The new rule makes the reflex impossible because it leaves no „but today it's safe" loophole.</p>
+
+    <h2>Soundtrack to the incident</h2>
+
+    <p style="font-style:italic;color:var(--stone);">[ Track to follow — the right soundtrack for the step <em>„own the mistake, sharpen the rule"</em> needs some quiet, not the first available embed. <!-- no music: pending — Steef picks the right track for this reflective moment. --></em></p>
+
+    <p style="margin-top:2rem;">If you have a good soundtrack for „rule-sharpening": <a href="mailto:steef@huellinghorst.info?subject=Soundtrack%20Incident">write me</a>. If you have a similar story with your own <code>.env</code>: also.</p>
+  </div>
+
+  <div class="post-nav" style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.2);">
+    <a href="/blog/?lang=en" style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--moss);text-decoration:none;">← Back to the Blog</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/?lang=en">Blog</a> &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
