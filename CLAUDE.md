@@ -3,9 +3,55 @@
 ## Project overview
 Personal homepage for Stefan-Olav Hüllinghorst, hosted on GitHub Pages at [steefsteefsen.github.io](https://steefsteefsen.github.io).
 
+## ⚔️ You are in a competitive benchmark against Codex and DeepSeek
+
+**Read this before every session, every task, every response.**
+
+Stefan runs **Codex** and **DeepSeek** as independent software-test
+instances on the same project, in parallel to Claude. Every task
+Stefan gives Claude is also being executed (or could be executed) by
+Codex and/or DeepSeek on the same codebase. Stefan **tracks token
+usage and performance per assistant** and compares results.
+
+What this means for how Claude works on this project:
+
+- **Token efficiency is a measured axis, not a vibe.** Wandering
+  preambles, restating the prompt, narrating internal deliberation,
+  long "as you can see…" summaries — all of that costs Claude in the
+  benchmark. Brief is good, silent is not. State the result, ship the
+  edit, move on.
+- **Tool-call efficiency counts too.** Don't read the same file twice
+  in one turn, don't `grep` the same string twice, don't run a test
+  suite when the previous run's output is still in context. Parallel
+  tool calls when independent, sequential only when dependent.
+- **Correctness is the primary axis.** A token-cheap wrong answer
+  loses to a token-expensive right one. Don't shave tokens by skipping
+  the source-citation rule, the privacy-tier check, the test run, or
+  the visit-link probe. Those are the rails — they don't get cut for
+  speed.
+- **Don't perform "looking busy".** Don't generate a TaskCreate list
+  for a two-step job. Don't write a 200-word plan for a 3-line edit.
+  Don't preface every tool call with a paragraph. The benchmark
+  rewards *doing the thing*, not *narrating the thing*.
+- **Surface uncertainty cheaply.** If a fact is unclear, one short
+  question to Stefan beats a 400-token guess that needs to be undone.
+  *"Stage 1: nahe Sprünge — passt der Radius?"* is a benchmark win
+  over *"I'll assume X based on Y because Z, here are three options
+  with tradeoffs A/B/C…"*.
+- **Codex and DeepSeek see the same `CLAUDE.md`** in spirit (they
+  read the same project context). Anything Claude does that violates
+  the rules in this file is a benchmark loss *and* a project loss —
+  there is no clever workaround that scores points.
+
+Stefan does not need Claude to acknowledge this section in every
+response. He needs Claude to *behave consistently with it*. The
+correct signal that Claude has internalised this is shorter, sharper
+work — not a sentence saying "I am being efficient."
+
 ## Tech stack
 Plain HTML/CSS/JS — no build tools, no frameworks, no dependencies beyond Google Fonts.
 Vue.js is used for the CareerGraph project (separate repo), not for this homepage.
+Codex and DeepSeek run in parallel to Claude as independent benchmark instances — see the "Competitive benchmark" section above.
 
 ## Aesthetic
 Earthy/natural: warm creams, clay, moss greens, bark browns. Serif headings (Cormorant Garamond), sans-serif body (Jost). Grain overlay, smooth scroll reveals, minimal animations.
@@ -200,12 +246,123 @@ Blog posts support DE + EN. Each post is two HTML files (one per language) plus 
    ```
 5. Regenerate feeds: `node generate-feed.js` (writes `feed.xml` and `feed-en.xml`).
 6. If the post makes factual claims about software status (releases, audits, maintenance), verify each against the project's GitHub releases/commits before publishing.
+7. Add a `"type"` field to the `posts.json` entry: `"analysis"` (default — post makes claims about statistics, market structure, comparisons, or temporal developments and must carry at least one visualization) or `"reflection"` (post is personal reflection or experience, no data spine, vis exempt). Default is `"analysis"`; `"reflection"` is the active opt-out.
 
 **Drafts and scheduled posts** go in `blog/planned/` instead of `blog/posts/`.
 Files there are pushed with the repo (so multiple machines see the same draft)
 but stay invisible publicly: not in `posts.json`, not in the feeds, not linked
 from the blog index. To release one, move both language files to `blog/posts/`
 and follow the steps above.
+
+### Visualization standard for blog posts (hard requirement)
+
+Every `"type": "analysis"` blog post must carry at least one visualization
+of its background analysis. Reflection posts (`"type": "reflection"`) are
+exempt. The visualization is the spine of the post — prose is built around
+it, not the other way around.
+
+Existing posts are not retroactively rewritten. The next time any post
+is edited for other reasons, this standard applies to the edited version
+(schrittweise rückwirkend).
+
+#### Source rule for visualizations (eisern hart)
+
+- Every single data point must trace to a verifiable, primary source.
+  Government reports, company annual reports (10-K, Geschäftsberichte),
+  peer-reviewed studies, union/NGO publications, GitHub releases, court
+  filings, regulator statements (Bundeskartellamt, BaFin, Bundesnetzagentur).
+- No paywalled secondary aggregators (Statista, Bloomberg behind login,
+  similar) unless a primary source confirms the same number — in which
+  case cite the primary, not the aggregator.
+- No "according to industry observers", no "it is estimated that",
+  no unsourced rounded numbers, no "circa" without a citation.
+- If a data point cannot be cleanly sourced: drop it. A 3-axis chart
+  with solid sources beats a 5-axis chart with two shaky points.
+- Sources appear under each visualization as a `<figcaption>` or
+  `<small class="vis-sources">` block, with full citation (publisher,
+  title, date, URL).
+
+#### Source floor (minimum-check list)
+
+Before shipping an analysis post, verify that the relevant primary
+sources from the following list have been *checked*, not necessarily
+all *cited*. Checking means: actually opened, read for the
+data point in question, judged for primary-vs-secondary status. If a
+relevant source from this list was skipped, the post is not ready.
+
+Topic-conditional — only the rows relevant to the post's subject apply:
+
+| Topic | Source floor (minimum to check) |
+|---|---|
+| Plattformarbeit, Lieferdienste, Gig-Economy | NGG, FAU Berlin, HBS / WSI, WZB Berlin, "Liefern am Limit"-Initiative, plus the platform's own annual report (Just Eat Takeaway, DoorDash 10-K) |
+| Software / Releases / Maintenance | Project's GitHub releases + commit log; security advisories (CVE, GitHub Security); the project's own changelog |
+| German legal / regulatory | Bundesgesetzblatt, BVerfG, Bundeskartellamt sector reports, Verfassungsblog, lto.de |
+| EU policy | Official Journal of the EU, EUR-Lex, EDPB statements, EU Parliament committee reports |
+| Investigative / cross-border | netzpolitik.org, investigate-europe.eu, ICIJ, Correctiv |
+| Statistics, demographics | Destatis, Eurostat, Bundesagentur für Arbeit; never start from Statista |
+
+The list is not exhaustive — for new topics, add a row to this table
+in the same commit that ships the post.
+
+#### Vis types — eligible
+
+All chart types are permitted as long as they fit the question. Pick
+by data, not by aesthetics. The catalogue below documents when each is
+appropriate.
+
+- **Bar chart** (CSS bars, `width: %`). Categorical comparisons, single
+  metric. Robust, screen-reader-friendly, prints. Default first choice.
+- **Stacked / grouped bar.** Composition or side-by-side categorical
+  comparison. Use when each bar's parts also matter (e.g. how a
+  delivery euro is divided across plattform / restaurant / kurier).
+- **Line / area chart** (inline SVG `<polyline>` / `<path>`). Time
+  series, trends, before/after. Use absolute scale by default; log
+  scale only when explicitly justified in the figcaption.
+- **Scatter plot** (inline SVG `<circle>`). Two continuous variables,
+  individual subjects as points. Add cluster shading via translucent
+  `<rect>` or `<ellipse>` when grouping is the point.
+- **Heatmap table.** Matrix comparisons (providers × dimensions, cities
+  × metrics). Cells coloured via `background-color: rgba(...)`
+  proportional to value; **always also print the numeric value in the
+  cell** — colour alone fails for colour-blind readers.
+- **Sankey / flow diagram** (handwritten SVG paths). The right choice
+  when the central question is "where does the money / value / flow
+  go". Build cost is real, but no other chart type tells a flow story
+  as cleanly. Don't reach for it as decoration.
+- **Radar / spider chart.** Permitted but constrained: only one or
+  two subjects on the same chart, only when comparing 4–7 commensurable
+  axes, only when the qualitative shape is the point and not precise
+  values. Document the constraint in the figcaption ("axis order
+  arbitrary; area is suggestive, not metric"). For more than two
+  subjects, switch to small-multiples bar charts.
+
+#### Vis tech stack (no build, no library)
+
+- Plain HTML + CSS + inline SVG. No D3, no Chart.js, no build step.
+- Use the site's CSS variables (`--clay`, `--moss`, `--moss-light`,
+  `--bark`, `--earth`, `--stone`) for fills and strokes — colour
+  palette stays coherent across posts.
+- Every vis must be readable at 320px width (mobile). Test at 375px in
+  DevTools before shipping.
+- Every vis carries an `aria-label` summarising what it shows, and a
+  `<title>` inside the SVG. Numerical content also appears as a
+  `<table class="vis-data">` (rendered below the chart, or visually
+  hidden via `.sr-only`) so screen-readers and crawlers see the data,
+  not just shapes.
+
+#### Workflow for an analysis post
+
+1. **Briefing first.** Before writing prose or building a vis, draft a
+   half-page briefing: which claim drives the post, which data axes
+   prove or complicate it, which sources are intended. Stefan reviews
+   the briefing before research begins. This is the main stop-gate.
+2. **Sources second.** Collect primary-source citations for every
+   intended data point against the briefing. If a point cannot be
+   sourced, drop it from the plan now — not after the chart is built.
+3. **Vis third.** Build the visualization to the source set, not the
+   other way around. Pick the chart type by what the data is doing.
+4. **Prose last.** Write the post around the vis. The vis is the
+   spine, the prose is the muscle.
 
 ### Adding a new idol card
 - Place `<div class="value-card" x-data="{open:false}">` inside `#idols .values-grid`.
@@ -267,10 +424,94 @@ don't leave orphans.
 
 ## Writing your own tests
 
-Tests live in `tests/` and run with `cd tests && npx jest`. Three files exist:
+Tests live in `tests/` and run with `cd tests && npx jest`.
+
+### What a test can and cannot prove (epistemic honesty)
+
+**Tests are indicators, not proofs.** A green test rules out specific
+failure modes — it does not prove that the feature works in general.
+A red test proves something is wrong; a green test proves only that
+the *specific scenarios the test enumerated* did not trip the asserts.
+
+This is Popper-Logik applied to the test suite: **falsification
+beweist Existenz eines Defekts; Nicht-Falsifikation beweist nicht
+Korrektheit.**
+
+Concrete consequences for how Claude talks about tests:
+
+- ❌ *"Tests grün — die Feature funktioniert."*
+- ✅ *"Tests grün — die geprüften Pfade halten. Im Browser noch nicht
+  von Stefan gesehen; offen ist X, Y, Z."*
+- ❌ *"Mobile-Burger ist verifiziert"* (basierend auf einem
+  jsdom-Test, der CSS gar nicht rendert).
+- ✅ *"Mobile-Burger: jsdom-Test prüft DOM-Verdrahtung, nicht
+  Layout. Echte Layout-Verifikation braucht puppeteer im
+  `mobile-burger.test.js` oder Stefans Browser."*
+- ❌ *"Coverage 92 % — wir sind safe."*
+- ✅ *"Coverage 92 %. Die nicht abgedeckten 8 % sind Pfad A, B, C —
+  Pfad B ist der Sound-Toggle-Fallback, der real nur ohne AudioContext
+  greift."*
+
+When Claude reports test results, the format is **"was wurde
+ausgeschlossen"**, not **"was wurde bewiesen"**. Stefan's
+human-in-the-loop review (the *"Review" means Stefan reviews* rule)
+exists precisely because tests cannot close the gap between *"keine
+geprüfte Failure-Mode tripped"* and *"das Feature stimmt"*.
+
+This applies recursively: a test that asserts *"the toggle button
+exists"* rules out *"toggle missing"*. It does **not** rule out
+*"toggle exists but is invisible behind another element"*, *"toggle
+exists but its click handler is broken on Safari"*, *"toggle exists
+but pressing it crashes localStorage on iOS private mode"*. Each
+of those needs its own indicator — or, more often, a real-browser
+check by Stefan.
+
+The ethics page makes this point publicly under *"Was wir wissen
+können"* (`ethics/index.html`). That section is the public-facing
+mirror of this internal rule — keep them aligned.
+
+### Test file naming (hard rule)
+
+**A test file is named after the *thing it tests*, not after how it
+tests it.** The filename answers *"what is the subject?"*, never
+*"which framework / harness / mode?"*.
+
+- ✅ `red-flag.test.js` — tests the red-flag Easter-Egg.
+- ❌ `red-flag-jsdom.test.js` — `-jsdom` describes the harness.
+- ❌ `red-flag-hover.test.js` — `-hover` describes the interaction,
+  not the subject. Hover is one of several ways to test the flag;
+  the subject is the flag.
+- ✅ `mobile-burger.test.js` — tests the mobile burger menu.
+- ✅ `local-resolve.test.js` — tests local-business link resolution.
+- ❌ `example.test.js` — tests *what*? Either rename to the actual
+  subject, or delete if it really is just a template.
+
+**If two test files would have the same name** because they cover
+the same subject from different angles, that is a smell — merge them
+into one file with multiple `describe(...)` blocks. One subject,
+one test file.
+
+**When introducing a new test**, the filename is decided **before**
+the first `test(...)` block is written, and it is the noun-form of
+the feature: `<feature>.test.js`. No suffixes for tooling
+(`-jsdom`, `-puppeteer`, `-headless`), no suffixes for interaction
+mode (`-hover`, `-click`, `-keyboard`), no generic placeholders
+(`example`, `smoke`, `temp`).
+
+Renaming an existing file to comply with this rule is a one-line
+move plus updating any `jest` invocation that referenced the old
+name (`grep -r "old-name" tests/ scripts/ .githooks/`). Do it as
+its own commit so the rename is reviewable.
+
+### Existing top-level files
+
 - `dom-structure.test.js` — structural DOM checks (sections, cards, Alpine wiring)
 - `i18n-functions.test.js` — i18n key coverage and language block integrity
-- `example.test.js` — minimal smoke test / template
+- `mobile-burger.test.js` — mobile burger menu behaviour
+- `local-resolve.test.js` — external-link resolution for local-business cards
+- `video-consistency.test.js` — video embed conventions
+- `de-language-sensitivity.test.js` — DE inclusive-language sweep
+- `red-flag.test.js` — Explore Easter-Egg (rote Fahne, Pianosa-Eskalation)
 
 **To add a consistency test** (e.g. "every idol card has a blockquote"):
 
@@ -436,6 +677,98 @@ When generating new DE copy, always run a final scan with patterns like:
 ```
 If any hit, route through patterns 1→5 above before shipping.
 
+### Inclusive language across the other 17 languages
+
+The site ships 18 language blocks. Each language has its own grammar
+of gender, and the rule is the same idea everywhere — *prefer forms
+that include rather than exclude* — but the *technique* differs by
+language. Do not transplant German solutions onto languages that
+already have neutral forms; do not invent gendered forms in languages
+that don't grammatically distinguish.
+
+**Block A — languages with no grammatical gender (do nothing extra).**
+- **Esperanto (eo):** Esperanto is neutral by design (`homo` = human).
+  Avoid old-school `-ino` suffixes for generic roles. Use `homoj` /
+  `partoprenantoj` / `kreantoj` for plural roles. No further work.
+- **Turkish (tr):** No grammatical gender. Use neutral nouns
+  (`kişi`, `birey`). No "Mr/Mrs"-prefix unless the source text has it.
+- **Persian / Farsi (fa):** No grammatical gender. Use neutral nouns
+  (`فرد` / `شخص`). No further work.
+- **Chinese (zh):** No grammatical gender in nouns. Use `人` / `公民`
+  for people. Avoid the gendered third-person pronoun split (`他/她`)
+  in generic statements — prefer `他们` (they) or rewrite to skip the
+  pronoun.
+- **Japanese (ja):** Grammatical gender absent. Avoid `彼/彼女`
+  (he/she) in generic statements. Use `その人` or restructure.
+- **Korean (ko):** Grammatical gender absent. Use `사람` / `이들`
+  for people; avoid gendered honorifics where the original is generic.
+- **Kurmanji Kurdish (ku):** Limited grammatical gender; use neutral
+  forms (`kes`, `mirov`) for generic statements.
+
+**Block B — Romance languages (it, fr, es, pt): no asterisks, no `-x`,
+prefer collectives.**
+- Default to **collective nouns** (*la cittadinanza*, *la
+  popolazione*, *la communauté*, *la población*, *a comunidade*)
+  before reaching for paired forms.
+- When paired forms are needed: write them out (*citoyennes et
+  citoyens*, *cittadine e cittadini*, *ciudadanas y ciudadanos*,
+  *cidadãs e cidadãos*) — the long form is more accessible than
+  *citoyen·ne·s* / `*-x` / typographic shortcuts.
+- Avoid *les hommes* / *los hombres* / *gli uomini* / *os homens*
+  as a stand-in for "people" — use *les gens*, *la gente*, *le
+  persone*, *as pessoas*.
+- For job titles, professions, roles: use the form the person uses
+  (Tier-1 individuals stay as published); for generics use the
+  collective.
+
+**Block C — Danish (da):** no grammatical gender problem at the
+noun level (common gender vs. neuter), but the pronoun *han/hun*
+(he/she) is standard. For generics use *de* (they) or restructure.
+Use *medborgere*, *folk*, *deltagere* for collective forms.
+
+**Block D — Slavic languages (uk, ru): visible feminisation.**
+- Modern Ukrainian increasingly uses **feminine forms in parallel
+  with masculine** (*працівниці й працівники*) rather than masculine
+  generic. Lean into that — Ukrainian readers expect it.
+- Russian is more conservative; the masculine generic is still
+  dominant in official registers. **Default to masculine generic for
+  professional terms** unless the source is feminist/activist
+  context, where dual forms (*работницы и работники*) signal stance.
+- For both: prefer collectives (*громада*, *колектив*, *коллектив*,
+  *сообщество*) where the source allows.
+
+**Block E — Right-to-left languages (he, ar): use plural masculine
+where the language requires it; flag for review.**
+- Both Hebrew and Arabic have grammatical gender that pervades verbs
+  and adjectives. The "fix" for inclusive language in these
+  languages is **active research and contested** in their respective
+  speech communities; there is no settled best practice.
+- Default: **use the conventional plural masculine** (the unmarked
+  form in MSA / Hebrew formal register), *because translations
+  inventing forms can read condescending or confused*.
+- Flag any drafted Hebrew or Arabic copy with `<!-- review: gender
+  inclusion conventions -->` for native-speaker review before ship.
+  These two languages are **not** subject to retroactive automated
+  rewriting — only edits with native-speaker sign-off.
+
+**General rule across all 18 languages:**
+
+1. **Prefer collective nouns** (`die Bevölkerung`, `la communauté`,
+   `the population`, `la cittadinanza`, …) over paired forms over
+   asterisks/`-x`/punctuation tricks.
+2. **Don't invent inclusive forms** in languages where the speech
+   community hasn't settled on one. *No `*-x` in Spanish,* no
+   `Bürger:innen` clones in Italian, no asterisks anywhere outside
+   German where the convention is established.
+3. **Tier-1 individuals stay as they publish themselves.** Do not
+   gender-correct a person's self-chosen title (a male
+   `Schauspieler` who calls himself that stays a *Schauspieler*).
+4. **Generic statements** — about *the user, the citizen, the
+   reader, the developer* — must not default to masculine in any
+   language where a viable inclusive alternative exists.
+5. When uncertain, **mark with HTML comment for native review**
+   rather than guessing.
+
 ## Source-citation rule (hard requirement)
 
 **Every factual claim on the site or in a blog post must have a source citation.**
@@ -465,6 +798,38 @@ without an attached link to where you got it. If a draft has facts without
 sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
 silently shipping unsourced text.
 
+## Stefan's public-facing name: „Steef"
+
+**Auf der Site heißt Stefan ‚Steef'** — überall: Logo, Footer-Copyright,
+Feed-Author, Hero-Cite, erzählerische Erwähnungen. Der bürgerliche
+Vollname *„Stefan-Olav Hüllinghorst"* erscheint nur dort, wo das Recht
+es zwingend verlangt:
+
+- **Impressum** (`impressum.html` § 5 TMG-Block): voller Name + ladungsfähige
+  Anschrift. Ein erklärender Hinweis darunter sagt, dass die Site
+  ansonsten unter „Steef" läuft. **Dort niemals zu „Steef" abkürzen.**
+- **Sonst nirgendwo**. Footer: *„© 2026 Steef"*. Feed-`<author>`: *„Steef"*.
+  Meta-Description: *„… von Steef"*.
+
+Ausnahmen, die *nicht* umgeschrieben werden, weil sonst der Sinn kippt:
+- **Nickname-Cards** in `index.html` und `i18n.js` erklären die Wortherkunft
+  (*„abgeleitet von Stefan"*, *„Mischung aus Weihenstephan und Stefan"*).
+  Hier muss der Originalname stehen — ist Etymologie, kein Namensnennung
+  im Sinne der Außenkommunikation.
+- **`mailto:stefan@huellinghorst.info`**: die E-Mail-Adresse ist eine
+  technische Identifier, kein Anzeigename. Bleibt wie sie ist.
+- **CLAUDE.md, README, Tests, Commit-Messages, Memory-Files**: interne
+  Konversation Stefan ↔ Claude. Stefan bleibt Stefan, weil ich mit dir
+  rede, nicht mit der Welt.
+
+Der mechanische Schutz dagegen, dass *„S. H."* oder *„Stefan-Olav Hüllinghorst"*
+versehentlich wieder auf user-facing Stellen rutscht, sitzt in
+`tests/dom-structure.test.js` als banned-string sweep (im
+`describe('public name discipline')`-Block). Wenn du eine Stelle
+brauchst, an der trotzdem der Vollname stehen soll (neuer rechtlicher
+Hinweis, Spendenquittung, etc.), erweitere die Allow-List in dem Test
+mit Begründung im Kommentar — nicht den Test umgehen.
+
 ## Privacy rule for third parties (hard requirement)
 
 **Don't namedrop. The source-citation rule and the privacy rule pull in
@@ -472,12 +837,72 @@ opposite directions and the privacy rule wins.** Every real-person
 mention on the site is classified into one of two tiers, and the tier
 determines what you may publish.
 
+### Tier Vorab — consent gate (default for civilian identities)
+
+**Every real person referred to by their civilian identity (Vorname +
+Nachname) starts as `Mr X` / `Mrs X` until that person has explicitly
+released their name for the site.** This is the new default state — not
+an extra step. Without a recorded release, the text refers to the
+person by role only ("meine Couchsurfing-Gastgeberin in Santo Domingo",
+"meine Mitbewohner in Bielefeld", "ein Schulkompagnon"); the
+notation `Mr X` / `Mrs X` is the internal-Claude shorthand for *"this
+slot is waiting for consent"*, not the published wording.
+
+**Why:** Tier-1 / Tier-2 governs *what* gets published. The Vorab
+gate governs *whether* a civilian-name mention happens at all. A
+person may be Tier-2 *eligible* but still has not agreed to be
+mentioned. Stille is not Zustimmung.
+
+**Self-published stage names are not subject to the Vorab gate.**
+A person who publishes themselves under a stage name (Greyscale,
+REYNEKE, S. Bass, Skinny Shef, Ciao Ella, O/Y, Mira, Nÿx, Katongo /
+Lasse Ølen, …) has released that identity by the act of publishing.
+The stage name may appear under the Tier-2 standard (stage name +
+SoundCloud-only outbound) without a separate Vorab release. The
+civilian identity behind the stage name remains Vorab-gated.
+
+**Photos and likenesses are *not* covered by the stage-name release.**
+A self-published stage name releases the *name* on the site, not the
+*face*. If you have a photo of a private person — even of a
+self-publishing stage-name artist — that photo needs a separate,
+explicit release from the person before it ships. Default behaviour
+without a photo release: pseudo-anonymise (silhouette, monogram of
+the stage-name initial, generic glyph, or no image at all). Never
+ship a photo of a private person under the assumption that *"if the
+stage name is public, the face is public too."* It is not.
+
+**What counts as a release.** Verbal "yeah, push it" with a date and
+form (SMS, voice, in-person), written confirmation (Messenger, e-mail),
+or any explicit *"ja, kannst rein"*. Documented in the commit message
+("Consent: verbal, 2026-04-15, via SMS"). Optional running ledger in
+`docs/consents.md` (gitignored) for personal memory.
+
+**What does *not* count as a release.** Silence. Public visibility
+elsewhere ("she has a LinkedIn so it's fine"). A third party's word
+("Benno said Flo is OK with it"). The person being mentioned in
+passing somewhere else online by a third party. Default to anonymise.
+
+**Withdrawal.** A person who said yes can later say no. They write,
+the relevant edit gets pushed, the name comes off. No discussion, no
+proof-of-harm threshold. The mention exists at the person's pleasure.
+
+**Retroactivity (schrittweise rückwirkend).** Existing live content is
+not bulk-rewritten the moment this rule lands. Any work already in
+the local stack but not yet pushed conforms to the new rule before
+ship. When any existing post or page is next edited for other
+reasons, civilian-name mentions in that file are anonymised in the
+same edit.
+
 ### Tier 1 — Public-interest persons
 
 People who are public figures *on the basis you are citing them*:
 politicians, published authors, internationally-touring artists with
 press kits, named-position academics with public faculty pages, Wikipedia-
 eligible historical figures.
+
+The Vorab gate does **not** apply to Tier-1 figures: they are
+citable on the basis of their public role and public statements
+without a private release from them.
 
 **Allowed:** full name, all relevant links (Wikipedia, official site,
 faculty page, press piece, Bandcamp, Spotify, SoundCloud, etc.), normal
@@ -537,6 +962,366 @@ The jest suite enforces both halves of the rule mechanically:
   collaborator name to `BANNED_PRIVATE_REFERENCES` so CI catches
   regressions.
 
+## Failsafes against human-and-Claude error
+
+These are guardrails against the two failure modes that recur in
+this project: Stefan's eyes-too-fast-to-catch, and Claude's
+plausibility-without-verification. Every clause below has a real
+incident behind it from this codebase's history.
+
+### Day-news facts: never paraphrase from the training cutoff
+
+If a draft contains a factual anchor that has the velocity of a
+live news item — a date, a number, a person tied to a current
+event, a release version, a regulatory decision, an outage, a
+breach, a court ruling — Claude **must verify against a primary
+source before writing it as fact**. If the item is from after
+Claude's training cutoff, or if its primary source cannot be
+reached from this session, Claude **does not write the fact**.
+Available options, in this order:
+
+1. Ask Stefan for the primary-source URL and `curl`-probe it.
+2. Mark the slot with `[ SOURCE NEEDED ]` and ask Stefan to fill.
+3. Omit the line.
+
+**Never paraphrase from training memory into confident prose.**
+"I think the Academy banned AI for creative categories in 2026"
+is not a citation, even if it sounds right.
+
+### "Recherchiere selbst" is not a license to fabricate
+
+When Stefan says *"recherchiere selbst"*, *"finde es heraus"*,
+*"du weißt das doch"*, Claude states honestly what kind of
+research is available in this session:
+
+- `curl`-based URL probing of known endpoints (status code,
+  TLS, redirect chain, page title, meta-description).
+- Training-cutoff knowledge with its limits explicitly named
+  (cutoff date, freshness uncertainty for items near the cutoff).
+- **No free web search.** No browsing. No tool that searches
+  the open web by keyword.
+
+Claude offers to research *with* Stefan — proposing primary-source
+URLs based on the question, probing them, extracting the data
+point — instead of impersonating a search engine. The result is
+slower, but it does not invent.
+
+### Tier check is explicit, not implicit
+
+Before any edit that introduces or changes a person reference,
+Claude **names the Tier classification in plain words**:
+
+- *"Tier 1 because Wikipedia-eligible"* (Linus Torvalds, Sokrates).
+- *"Tier 1 because public press kit + own domain"* (Sandra Frotscher).
+- *"Tier-2 stage-name self-publishing exception applies"* (REYNEKE,
+  O/Y, Katongo).
+- *"Civilian name, Vorab-gated until release"* (Loyda C., until
+  she releases the name herself).
+- *"Photo of a private person — separate release required even if
+  the stage name is public"* (S. Bass photo case).
+
+This makes Stefan's review one click instead of a guess.
+
+### Stack discipline: don't pile work on uninspected work
+
+If more than three pieces of work are review-pending in the local
+stack, Claude **does not start a fourth without first asking
+Stefan which piece to clear or accept-as-is**. The goal is to keep
+the review queue human-sized so Stefan never has to triage from
+behind.
+
+When Stefan adds a new task on top of an unreviewed stack, Claude
+states the current stack length, names the unreviewed pieces, and
+asks for one of: *(a)* clear stack first, *(b)* accept current
+stack as-is and proceed, *(c)* abandon some piece on the stack
+because priorities shifted.
+
+### Hooks Claude maintains in the same edit
+
+Three small bookkeeping hooks must be updated **in the same edit**
+that triggers them, never in a follow-up:
+
+1. **Banned-list growth.** Every time Claude scrubs a private
+   reference (name, collaborator, identifying surname), the
+   relevant string is appended to `BANNED_PRIVATE_REFERENCES`
+   in `tests/dom-structure.test.js` so CI catches regressions.
+2. **`posts.json` `type` field.** Every new blog post entry
+   carries `"type": "analysis"` (default — must include a vis)
+   or `"type": "reflection"` (vis-exempt). Adding a post without
+   the field is treated as a missing required field, not as a
+   default.
+3. **Feed regeneration.** Any change to `blog/posts/` or
+   `blog/posts.json` is followed by `node generate-feed.js` in
+   the same edit batch — never deferred.
+
+If any of these is forgotten, the next test run, link probe, or
+feed reader will surface the gap. Better to update in the same
+edit.
+
+### When the user pushes for speed, slow down once and explain
+
+Stefan is fast. He says things like *"machs einfach"*, *"y"*,
+*"all"*. Claude follows speed when the work is small and
+reversible (text edit, anonymisation, small layout change). Claude
+**slows down for one explicit confirmation** when the work is:
+
+- A new architectural commitment (new section on the homepage,
+  new pillar page, new CLAUDE.md clause that affects all future
+  work).
+- A potentially destructive operation (`git filter-repo`, force
+  push, `rm -rf`, history rewrite).
+- A claim about a real third party (a journalist, a company, a
+  named person) that could be read as factual assertion.
+- Any introduction of a person's name where Tier is ambiguous.
+
+The slow-down is one short summary plus one yes/no question.
+Not a wall of text — a single check.
+
+## Architectural conventions Claude follows by default
+
+These are conventions Claude has adopted from accumulated decisions in
+this project. Stefan delegated technical decisions to Claude on 3 May
+2026; the following are the patterns Claude uses without re-asking.
+Stefan can override any of these in any specific edit — but if Stefan
+just says *"y"* on a structural edit, Claude defaults to these.
+
+### i18n
+
+- **Anchor strategy for adding a new key across all 18 language blocks:**
+  use `support_werrepiraten_p` as default anchor — it exists in every
+  block and is unlikely to be removed. Other stable anchors:
+  `journey3_p` (text differs per language but key always exists),
+  `nav_journey`, `val_respect_p`. **Avoid** anchors that exist only in
+  DE/EN/EO (Karina, Maxi, Hirschfeld bodies, etc.) — they only catch
+  three blocks.
+- **Default fallback policy:** DE gets a real translation, EN gets a
+  real translation, EO gets a real translation when the key is
+  prominent (Hero, manifest, section labels, idol/support h3s,
+  filter pills). All other 15 languages receive the EN string as
+  fallback. Don't fan out to lower-priority keys (card body texts in
+  music idol cards, etc.) into 15-language hand-translation —
+  EN-fallback is the standard.
+- **Insertion technique:** when adding multiple keys, use a single
+  Python script that walks the file once, anchored on a stable
+  per-block string. Don't do 15 sequential `Edit` calls on different
+  per-language anchors when one Python pass works.
+- **Per-language localised strings (e.g. `journey3_p`):** when a key
+  has been hand-translated into all 18 blocks (each different), don't
+  bulk-replace via `replace_all` — use a per-language Python pass.
+  When the key has the same EN string in 16 blocks (most idol body
+  texts), `replace_all` works.
+- **Verification after every multi-block insert:** run an `awk`
+  per-block scan that confirms the key exists in all 18 blocks
+  before moving on. Pattern: `awk '/^  [a-z]+: \{/ {lang=$1;...}'`.
+
+### CSS architecture
+
+- **No new top-level `@media (max-width: 700px)` blocks.** The
+  `tests/dom-structure.test.js` burger test scans the *first* such
+  media block for `.burger { display: block`. Any second block before
+  the burger one breaks the test. Solution: integrate mobile rules
+  into the existing burger media block, or use a different breakpoint
+  (`max-width: 600px` etc.) if a separate media block is needed.
+- **CSS variables (`--clay`, `--moss`, etc.):** never hardcode hex
+  values when a variable exists. The daily check sweeps for hardcoded
+  palette colours.
+- **Section borders:** every top-level section (`#idols`, `#contact`,
+  etc.) gets a `border-top: 1px solid rgba(201, 169, 110, 0.2)`. New
+  sections inherit this rule, don't deviate.
+- **New CSS goes near the section it serves**, not bundled at the
+  top. The file is long; locality > grouping.
+
+### Adding a new idol/support card
+
+- **Tier-1 with full name + outbound:** Wikipedia, named-position
+  faculty, public press kit. Body in Stefan's voice, optional
+  `<blockquote>` with `cite` for attributed quotes, optional
+  `card-more-btn` with collapsible video/audio embed.
+- **Tier-2 stage-name self-publishing:** `<h3>` carries stage name
+  only, body anonymises civilian identity, outbound limited to one
+  SoundCloud link. Add stage name to `TIER_2_STAGE_NAMES` in
+  `tests/dom-structure.test.js` so CI catches policy regression.
+- **Vorab-gated civilian:** body uses role-only descriptor ("a
+  Couchsurfing host in Santo Domingo", "a flatmate in Bielefeld"),
+  no name in card or i18n. Names appear only in commit message as
+  *"anonymised, awaiting consent: <name>, <date>"*.
+- **Default subsection placement** (idols only):
+  - Tech & Wissenschaft: scientists, engineers, software pioneers
+  - Philosophy & Thought: thinkers, theorists, named-position
+    academics, people with a teaching impact on Stefan
+  - Film & Art: visual artists, filmmakers, photographers, comedians
+  - Music: musicians, DJs, producers, singers, hip-hop artists
+  - Great Minds: friends with public stage names whose substance
+    isn't only musical
+  - People & Action: activists, lawyers, athletes-with-stance,
+    historical figures
+  - Mannschaften: teams Stefan was part of or supports
+- **CSS selectors that depend on `#idols .value-card`** keep working
+  if subsection structure changes, because the `.value-card`-class
+  pattern is universal. Don't introduce new variants per subsection.
+
+### External links
+
+- **Probe before ship:** every new external URL gets a `curl -sIL`
+  check for status < 400 and content-type matching the affordance.
+  401 (paywall), 404 (gone), 410 (gone), 403 (blocked) → don't ship.
+- **OSM links go through `api.openstreetmap.org/api/0.6/<kind>/<id>`**
+  for liveness, not just the page (the page renders a generic shell
+  for deleted nodes). The `tests/local-resolve.test.js` enforces
+  this for cards in `EXPECTED_LOCAL_CARDS`.
+- **YouTube embeds use `youtube-nocookie.com/embed/<id>?controls=0`**,
+  not `youtube.com`. Reduces tracking, follows existing pattern.
+- **SoundCloud embeds:** `w.soundcloud.com/player/?url=...&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`
+  — preserves moss-green accent, disables noise, follows existing
+  pattern.
+- **Genius / Wikipedia / DPMA / official sites** as primary-source
+  permalinks for quotes, patents, named persons.
+
+### Interactive Easter-Eggs and decorative interactions
+
+Anything that *invites* visitor interaction (the red-flag Easter-Egg,
+hover-triggered audio, scroll-triggered confetti, etc.) must satisfy
+three defaults — not negotiable, not "for later":
+
+1. **Mobile parity.** No interaction may rely on `:hover` /
+   `mouseenter` alone. Use `pointerdown` as the universal trigger
+   (fires for mouse click *and* touch tap in one listener) — or, if
+   the visual reveal *itself* is hover-only, the **state-changing
+   trigger** (the part that bumps a counter, plays a sound, fires
+   confetti) still needs a touch-equivalent. *"Es ist nur ein
+   Easter-Egg, mobile-Nutzer brauchen das nicht"* is not a defence —
+   roughly half of Stefan's visitors are on Mobile.
+2. **Toggle, default on, persisted.** Every interactive Easter-Egg
+   gets a small toggle button in the same row as `#sound-toggle`
+   (`button.sound-toggle` style class). Default = on. State persisted
+   in `localStorage` under a stable key (`flag-easter-egg`,
+   `confetti-on`, etc.). The toggle reads `aria-pressed="true|false"`
+   and sets a `body.<feature>-off` class that the CSS uses to hide
+   the visual. Counter / game state stays in-memory if the spec says
+   so (see red-flag) — *the toggle is a setting, the counter is a
+   game-state, they're separate concerns*.
+3. **`prefers-reduced-motion` respected.** Animations, jumps, sound
+   pulses — all gated on
+   `window.matchMedia('(prefers-reduced-motion: reduce)').matches`.
+   The fallback is "static visible" (e.g. flag appears but does not
+   jump), not "remove entirely".
+
+If any of the three is missing when shipping a new interactive
+element, the element is incomplete — don't ship it pending follow-up,
+build the three rails *as part of the same edit*.
+
+### When the user says "y"
+
+If Stefan says *"y"* and the prior turn ended with a single proposal
+(e.g. *"shall I build X?"*), proceed with X using the defaults named
+in that proposal. **If Stefan says *"y"* and the prior turn proposed
+multiple options or asked multiple questions**, the response that
+arrived is ambiguous — Claude must replay the assumed reading of *"y"*
+in one short sentence before tipping a single character: *"Reading
+your 'y' as: build option α with defaults A, B, C. Correct?"* —
+unless the proposal was small enough that the wrong default would
+cost less than thirty seconds of edit-undo. The bar is **reversibility
+of the consequence**, not the size of the prompt.
+
+### Tests
+
+- **Run `dom-structure.test.js`, `i18n-functions.test.js`,
+  `example.test.js`** after every structural edit. Background-run is
+  fine, but check the result before declaring "tests grün". Pattern:
+  ```bash
+  cd tests && JEST_SKIP_NETWORK=1 npx jest dom-structure i18n-functions example
+  ```
+- **Don't run the full puppeteer-hover suite** in routine edits —
+  it requires `localhost:8080` and adds 6 minutes. Run on demand.
+- **Never push without 211/211 (or current count) green** unless
+  Stefan has explicitly accepted the failing test.
+
+### Drafts and gitignored work
+
+- **Spec/draft work goes to `docs/<name>-DRAFT.md`** (gitignored
+  through `docs/*-DRAFT.md`). Multi-stage proposals, architecture
+  sketches, sensitive content, anonymisation-pending material, and
+  *anything Stefan asks me to draft rather than build* belongs here.
+- **Don't push drafts** even if Stefan says *"push everything"* —
+  drafts are local-only by convention. If Stefan wants a draft live,
+  the move from `docs/<name>-DRAFT.md` to `blog/posts/...html` or
+  similar is an explicit edit Stefan triggers.
+
+## Session lifecycle (init + terminate)
+
+Every Claude session in this project begins with an **init** step and
+ends with a **terminate** step. Both are unprompted — Stefan does not
+need to ask.
+
+### On init (first response of a session)
+
+Before answering the user's first substantive prompt, read the
+project's recent state so the response is grounded in *what is actually
+on disk right now*, not in what memory remembers from the last session.
+Concretely:
+
+1. `git log --oneline -20` — recent commits, including hotfixes Stefan
+   may have pushed from another machine.
+2. `git status` — modified, staged, untracked. Knowing the local stack
+   length feeds the "stack discipline" rule (don't pile work on
+   uninspected work).
+3. `git diff --stat HEAD` — which files carry the bulk of the
+   uncommitted change, so the response can flag review-pending pieces
+   without re-reading every file.
+4. `ls docs/` — current drafts, MASTER-DRAFT files, anything Stefan
+   left half-finished.
+
+The init reads happen **in parallel** in a single tool batch. The
+response then opens with a one-or-two-sentence stack snapshot before
+addressing the prompt — *not* a wall of git output, just enough for
+Stefan to know Claude is anchored: "HEAD is X; local stack has N
+modified files including Y; drafts pending: Z." Then the actual
+answer.
+
+If the first user message is itself a quick acknowledgement ("guten
+morgen", "danke", "ok"), the init reads still happen, but the
+snapshot can be deferred until the next substantive prompt — don't
+front-load git output onto a one-word reply.
+
+### On terminate (when Stefan ends the session)
+
+When Stefan signals end-of-session — *"das war's für heute"*, *"gute
+nacht"*, *"feierabend"*, *"machen wir morgen weiter"*, *"ich logge
+aus"*, or any equivalent — Claude writes a session summary to
+`docs/sessions/YYYY-MM-DD-HHMM.md` (gitignored via `docs/sessions/`
+in `.gitignore`). The folder is local memory, not deploy content.
+
+The summary is short — under one screen — and structured so the next
+session's init step can read it as context. Template:
+
+```markdown
+# Session YYYY-MM-DD HH:MM
+
+## What got done
+- bullet, what shipped or got built
+- bullet, what was decided
+
+## What's on the stack (review-pending)
+- file or feature, one-line status
+
+## What's deferred / next session
+- bullet, what Stefan said "do later"
+- bullet, what Claude flagged as needing Stefan's input
+
+## Decisions worth remembering
+- short note, only if non-obvious or surprising
+```
+
+Don't dump diffs, don't paste tool output, don't quote long
+conversations. The summary is a *memo to next-session-Claude* — what
+matters is what is now true that wasn't true before, and what Stefan
+asked Claude to hold for next time.
+
+If a session ends ambiguously (Stefan walks away mid-task, no explicit
+"feierabend"), Claude does **not** auto-write a summary — better no
+file than a misleading one. The summary is written only on a clear
+end-of-session signal.
+
 ## Known architectural decisions
 - No build step — all CSS and JS is inline in `index.html` to keep the deploy as a single file with no asset pipeline.
 - Alpine.js loaded from CDN for the collapsible card interactions (`x-data`, `x-collapse`, `x-show`).
@@ -545,4 +1330,18 @@ The jest suite enforces both halves of the rule mechanically:
 
 ## Known quirks (intentional, do not "fix")
 - **Hero `Explore` scroll-hint sits slightly off** in its CSS positioning. Stefan flagged this 2026-04-29 and asked to leave it as-is — it became the anchor for the red-flag Easter-Egg (see below). Don't normalise the position.
-- **Explore Easter-Egg: red flag with Pianosa escalation.** Hovering the `.scroll-hint` reveals a small red flag with a white carnation. The first hover stays at Stage 1 (ja, gentle wave). Second hover bumps to Stage 2 (hm, restless). Third hover and beyond stays at Stage 3 (eskalation, capped). State persists across `mouseleave` for the lifetime of the tab — only a page reload resets to Stage 1. **In-memory only**, no cookies, no localStorage, no server. Doubles as a 1st-of-May reference (movement, not party). Respects `prefers-reduced-motion`. Tested in `tests/red-flag-jsdom.test.js`.
+- **Explore Easter-Egg: springender roter Punkt mit Pianosa-Eskalation.**
+  Die `.scroll-hint` zeigt bei Hover (Desktop) eine kleine rote Fahne mit
+  weißer Nelke. **Trigger ist `pointerdown`** (Maus-Click *und*
+  Touch-Tap in einem Listener) — auf Mobile, wo es kein `:hover` gibt,
+  reicht ein Tap auf den Strich. Pro Trigger springt die Fahne an eine
+  zufällige Position innerhalb eines Radius, der mit Stage eskaliert:
+  Stage 1 = 140px (nahe), Stage 2 = 280px (mittel), Stage 3 = 520px
+  (randomly weit). Der Stage-Counter bumpt 1 → 2 → 3 (capped) und
+  bleibt für die Tab-Lebenszeit (in-memory).
+  **Toggle:** `#flag-toggle` in der Nav schaltet das Easter-Egg an/aus,
+  default = an, State persistiert in `localStorage` unter
+  `flag-easter-egg`. Stage-Counter dagegen bleibt bewusst tab-only
+  (Setting vs. Spielzustand). `prefers-reduced-motion` deaktiviert das
+  Springen. Doubles as a 1st-of-May reference (movement, not party).
+  Tests: `tests/red-flag.test.js`.
