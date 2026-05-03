@@ -325,6 +325,30 @@ Blog posts support DE + EN. Each post is two HTML files (one per language) plus 
 5. Regenerate feeds: `node generate-feed.js` (writes `feed.xml` and `feed-en.xml`).
 6. If the post makes factual claims about software status (releases, audits, maintenance), verify each against the project's GitHub releases/commits before publishing.
 7. Add a `"type"` field to the `posts.json` entry: `"analysis"` (default — post makes claims about statistics, market structure, comparisons, or temporal developments and must carry at least one visualization) or `"reflection"` (post is personal reflection or experience, no data spine, vis exempt). Default is `"analysis"`; `"reflection"` is the active opt-out.
+8. **Music-link rule (Stefans Anweisung 2026-05-03):** every new blog
+   post **carries a music link that emphasises the message** —
+   typically a SoundCloud-Embed (`w.soundcloud.com/player/?url=...&color=%235a6e4a&...`)
+   or YouTube-nocookie-Embed (`youtube-nocookie.com/embed/<id>?controls=0`)
+   inline in the post body, with a short `<p class="embed-credit">`
+   below explaining who the artist is and *why this track here*.
+   - **Hard rule for new posts**: if the post is shippable, it carries
+     music or it carries an explicit `<!-- no music: <reason> -->`
+     HTML comment justifying the absence.
+   - **Serious-topic exception**: posts about Genozid, Übergriff,
+     Verlust, Tod, Trauma carry music **only** if the music itself
+     traurig/respectful/silent is — never as „Vibes-Soundtrack".
+     A trauerlied or no music is the right call for grief-toned posts.
+   - **Existing posts without music** (audit 2026-05-03): bounty-hunter,
+     codeberg-anlass, tokens-und-tier2, dinge-beim-namen-nennen,
+     genozid-beim-namen-nennen, bsi-signal-empfehlungen, github-spiegel,
+     authenticator-matrix, ice-541. Stefan fills these in personally
+     when the right track surfaces — Claude does **not** auto-pick
+     music for an existing post (that's Stefans voice, not mine).
+   - **Why this rule exists**: the music links are the third channel
+     besides prose and visualization. They place the post in the
+     emotional and cultural weather it was written under, and they
+     credit the artists at the same time. It's not decoration — it's
+     attribution to the soundscape.
 
 **Drafts and scheduled posts** go in `blog/planned/` instead of `blog/posts/`.
 Files there are pushed with the repo (so multiple machines see the same draft)
