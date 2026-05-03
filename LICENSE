@@ -19,3 +19,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+================================================================
+ADDITIONAL TERMS — Code of Conduct compliance
+================================================================
+
+The use, distribution, modification, or sublicensing of this Software
+is conditional upon adherence to the project's Code of Conduct, set
+out in CODE_OF_CONDUCT.md in this repository.
+
+In plain language:
+
+- The MIT permissions above grant you the right to use, copy, modify,
+  publish, distribute, and sublicense the Software, on the standard
+  MIT terms.
+- You are also expected to behave according to the Code of Conduct
+  in any context that involves this Software, the project, its
+  contributors, or the people named or referenced in the codebase.
+
+Violations of the Code of Conduct — including but not limited to:
+doxxing or harassing contributors or third parties named in the
+codebase, removing the privacy-tier classifications without consent,
+introducing real names of Tier-2 individuals, performative or
+abusive conduct in issues / merge requests, or knowingly publishing
+content that the Code of Conduct forbids — will be pursued by all
+appropriate legal means available under German law (the maintainer's
+jurisdiction, see Impressum) and the jurisdiction in which the
+violation occurred.
+
+This Additional Terms section does not narrow the MIT permissions
+above for any lawful, conduct-respecting use. It applies only when
+conduct itself crosses into legally actionable territory
+(harassment, defamation, doxxing, unlawful processing of personal
+data, etc.).
+
+If you fork this Software and remove the Code of Conduct, you also
+remove this Additional Terms clause — but you remain bound by the
+laws of your own jurisdiction, which in most cases cover the same
+behaviours independently.
