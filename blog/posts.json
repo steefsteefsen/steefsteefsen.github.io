@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-05-03-bounty-hunter-telefonnummer",
+    "date": "2026-05-03",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-05-03-bounty-hunter-telefonnummer", "title": "Bounty: Wer findet meine Nummer?", "teaser": "Ein Tribe-Spiel statt Brute-Force: wer meine Telefonnummer rausfindet und mich von dem Telefon eines Freundes anruft, der sie hat, dem baue ich diese Homepage personalisiert. Die Bedingung steht in der Regel selbst."},
+      "en": {"slug": "2026-05-03-bounty-hunter-telefonnummer-en", "title": "Bounty: Who finds my number?", "teaser": "A tribe game, not a brute-force game: whoever finds my number and calls me from a friend's phone who already has it gets this homepage built personalised. The condition is in the rule itself."}
+    }
+  },
+  {
     "slug": "2026-05-02-version-1-0-und-zwei-algorithmen",
     "date": "2026-05-02",
     "type": "reflection",

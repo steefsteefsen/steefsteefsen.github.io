@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bounty: Wer findet meine Nummer? — „Der springende Punkt"</title>
+<meta name="description" content="Ein Tribe-Spiel statt Brute-Force: wer meine Telefonnummer findet und mich von dem Telefon eines Freundes anruft, der sie hat, dem baue ich diese Homepage personalisiert.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 247, 242, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 169, 110, 0.15); }
+  nav .logo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  nav .back-link { font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  nav .back-link:hover { color: var(--bark); }
+  nav .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; overflow: hidden; }
+  .lang-toggle a { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lang-toggle a:hover { color: var(--bark); }
+  .lang-toggle a.active { background: var(--clay); color: var(--cream); }
+  main { max-width: 680px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+  .post-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--moss); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .post-meta::before { content: ''; width: 28px; height: 1px; background: var(--moss); flex-shrink: 0; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; color: var(--bark); margin-bottom: 2.5rem; }
+  .post-body { font-size: 1.05rem; color: var(--stone); line-height: 1.9; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--bark); margin: 2.75rem 0 1rem; }
+  .post-body strong { color: var(--earth); font-weight: 500; }
+  .post-body em { color: var(--earth); }
+  .post-body a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90, 110, 74, 0.3); }
+  .post-body a:hover { color: var(--bark); border-color: var(--bark); }
+  .bounty-box { background: var(--sand); border-left: 3px solid var(--clay); padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 0 8px 8px 0; }
+  .bounty-box p { margin-bottom: 0.6rem; color: var(--bark); }
+  .bounty-box p:last-child { margin-bottom: 0; }
+  .bounty-box .reward { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--bark); font-weight: 600; }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--stone); border-top: 1px solid rgba(201, 169, 110, 0.15); margin-top: 4rem; }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(140,123,107,0.3); }
+  @media (max-width: 700px) { nav { padding: 1rem 1.5rem; } main { padding: 7rem 1.5rem 4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" title="Homepage von Steef">„Der springende Punkt"</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+      <a href="/blog/posts/2026-05-03-bounty-hunter-telefonnummer.html" class="active">DE</a>
+      <a href="/blog/posts/2026-05-03-bounty-hunter-telefonnummer-en.html">EN</a>
+    </div>
+    <a href="/blog/" class="back-link">← Blog</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-meta">3. Mai 2026 · Reflexion</div>
+  <h1>Bounty: Wer findet meine Nummer?</h1>
+
+  <div class="post-body">
+    <p>Hier ist ein kleines Spiel.</p>
+
+    <div class="bounty-box">
+      <p><strong>Wer meine Telefonnummer rausfindet</strong> und mich von dem Telefon eines Freundes anruft, der meinen Kontakt hat, der bekommt von mir eine Belohnung.</p>
+      <p class="reward">Die gleiche Homepage. Personalisiert auf dich zugeschnitten.</p>
+    </div>
+
+    <p>Bedingung steht in der Regel selbst. <strong>Du musst jemanden im Tribe kennen.</strong> Nicht mich — sondern jemanden, der mich kennt und meinen Kontakt hat. Du musst von <em>dessen</em> Telefon anrufen. Nicht von einem fremden, nicht von einem geleakten, nicht von einem ausgegrabenen alten Adressbuch.</p>
+
+    <p>Das ist <strong>kein Brute-Force-Spiel</strong>. Es ist ein <strong>Tribe-Pull-Spiel</strong>. Der Wert liegt nicht darin, eine Nummer zu finden — der Wert liegt darin, dass du eine Verbindung baust, die jemand anderes für dich verbürgt. Genau das ist die Logik des Tribes „direkt &amp; heimlich": <em>direkt</em>, weil du es dir nicht erschleichen sollst; <em>heimlich</em>, weil sich nur die Personen melden, die wirklich Lust haben.</p>
+
+    <h2>Was du dafür bekommst</h2>
+
+    <p>Die gleiche Site-Architektur wie meine: Hero, Pillar-Pages, Blog, Footnotes, i18n in 18 Sprachen, Privacy-Tier-System, Tests, MIT-Lizenz. Alles offen unter <a href="https://gitlab.com/steefSteefsen/theopenhomepage" target="_blank" rel="noopener">theopenhomepage</a>. <strong>Aber zugeschnitten auf dich.</strong> Deine Themen, dein Tribe, deine Idole, deine Aussprüche — wir bauen eine Session.</p>
+
+    <p>Ich rechne dafür kein Geld. Was ich dafür bekomme, ist die Geschichte: dass jemand das Spiel verstanden hat. Die Personalisierung ist die Form des Dankes.</p>
+
+    <h2>Warum das?</h2>
+
+    <p>Weil ich beobachte, wie der Web-Default geworden ist, alles über Suchmaschinen und Plattformen zu finden. Nummer eingeben, fertig. Das ist effizient, und es ist auch arm.</p>
+
+    <p>Das Gegenteil ist nicht Geheimhaltung. Das Gegenteil ist <strong>Verbindung</strong>. Ich bin findbar — über die Wege, die schon da sind. Wer die Wege nutzt, kommt an. Wer die Wege nicht hat, baut sie auf.</p>
+
+    <p>Das hier ist eine Einladung, sie zu bauen.</p>
+
+    <p style="margin-top:2rem;font-size:0.9rem;"><em>Wenn du anrufst — sag, dass du den Bounty-Post gelesen hast. Sonst denke ich, du willst nur quatschen. (Was auch okay ist, aber dann bekommst du keine Homepage, sondern ein Gespräch.)</em></p>
+  </div>
+
+  <div class="post-nav" style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.2);">
+    <a href="/blog/" style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--moss);text-decoration:none;">← Zurück zum Blog</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Steef &middot;
+  <a href="/">Home</a> &middot;
+  <a href="/blog/">Blog</a> &middot;
+  <a href="/impressum.html">Impressum</a>
+</footer>
+
+</body>
+</html>
