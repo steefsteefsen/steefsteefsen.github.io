@@ -28,7 +28,8 @@
     "coverageDirectory": "logs/coverage",
     "coverageReporters": [
       "text",
-      "cobertura"
+      "cobertura",
+      "json-summary"
     ],
     "coverageThreshold": {
       "global": {

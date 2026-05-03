@@ -1253,6 +1253,52 @@ gehören durch Hard-Rules ausgeschaltet, nicht durch *„denk diesmal
 dran"*. Jede Regel oben ist so geschrieben, dass sie *kein
 Bewertungs-Spielraum* mehr lässt.
 
+### 9. Coverage + Test-Stats lokal in `logs/` festhalten — nie pushen
+
+**Stefan-Anweisung 2026-05-04 ~01:30**: *„dokumentiere immer die
+code coverage etc in den logs, die nicht gepushed werden."*
+
+Test-Coverage, Test-Stats, Pipeline-Outcomes sind **Telemetrie**,
+nicht Code. Sie gehören:
+- in `logs/test-runs/YYYY-MM-DD-HHMM.log` (timestamped jest output)
+- in `logs/coverage-history/YYYY-MM-DD-HHMM.json` (coverage summary
+  snapshot, klein, gut diffbar über Zeit)
+- in `logs/coverage/` (jest's eigene cobertura-XML + json-summary +
+  HTML-Report — wird bei jedem Lauf überschrieben)
+
+`logs/` ist im `.gitignore`. Diese Dateien sind **lokale Memory** für
+Stefan und Claude, nicht Deploy-Inhalt, nicht Push-Material.
+
+**Helper script**: `scripts/log-test-run.sh` macht den Test-Run +
+Snapshot in einem Schritt. Default-Aufruf:
+```bash
+./scripts/log-test-run.sh
+```
+Output: timestamped log + coverage-summary-Snapshot in `logs/`.
+
+**Was Claude proaktiv loggt:**
+- Nach jedem Test-Lauf in einer Session (auch wenn Stefan ihn nicht
+  explizit angefordert hat): coverage % notieren in der Session-
+  Summary unter *„Coverage am Session-Ende"*.
+- Bei Pipeline-Outcomes (rot): Pipeline-URL + Job-Name + Failure-
+  Snippet in einen Log-Eintrag schreiben (nicht in CLAUDE.md, nicht
+  in Commits — nur in `logs/pipeline-outcomes/YYYY-MM-DD.log`).
+- Bei coverage-Drop (>1% gegen Vortag): explizit melden, nicht stumm
+  durchgehen lassen.
+
+**Gegenrichtung — was NICHT in `logs/`:**
+- Keine Konversations-Transkripte (die landen in der Anthropic-
+  Konversations-Historie, nicht im Repo)
+- Keine `.env`-Inhalte (siehe Hard-Rule oben)
+- Keine Tier-2-Klarnamen (Privacy-Rule gilt auch für Logs)
+- Keine API-Tokens, Secrets, Passwörter
+
+**Mechanische Sicherung**: `logs/` steht im `.gitignore` als blanket-
+exclude. Wenn ein Log-File aus Versehen außerhalb `logs/` landet
+(z.B. `coverage.json` im Repo-Root), greift die `*.log`-Regel nicht,
+aber der Pre-Commit-Hook hätte es im Diff. Daher: Logs **immer**
+unter `logs/`, nicht im Repo-Root.
+
 ## Failsafes against human-and-Claude error
 
 These are guardrails against the two failure modes that recur in
