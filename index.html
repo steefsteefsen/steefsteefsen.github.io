@@ -722,6 +722,57 @@
     #meta-drop { transition: cx 0.3s ease, cy 0.3s ease, r 0.3s ease; }
   }
 
+  /* Karte 3: Flowbenou — Methode statt Slogan.
+     Zwei Pills mit Loop-Button dazwischen; Klick rotiert das Icon
+     und tauscht die Pill-Texte aus. Pointe: Versuch und Korrektur
+     sind dasselbe, nur die Methode trennt sie. */
+  .rollen-card--flow { margin-top: 1.6rem; }
+  .flow-loop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0 0.8rem;
+  }
+  .flow-pill {
+    display: inline-block;
+    background: rgba(201, 169, 110, 0.12);
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    border-radius: 999px;
+    padding: 0.45rem 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--bark);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    user-select: none;
+    min-width: 110px;
+    text-align: center;
+  }
+  .flow-pill.swapping { opacity: 0; transform: translateY(-3px); }
+  .flow-button {
+    background: transparent;
+    border: 1px solid rgba(90, 110, 74, 0.3);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--moss);
+    transition: background 0.2s, border-color 0.2s, transform 0.5s ease;
+  }
+  .flow-button:hover { background: rgba(90, 110, 74, 0.10); border-color: var(--moss); }
+  .flow-button.spin { transform: rotate(360deg); }
+  .flow-button svg { width: 18px; height: 18px; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow-pill { transition: opacity 0.15s ease; transform: none; }
+    .flow-pill.swapping { transform: none; }
+    .flow-button { transition: background 0.2s; }
+    .flow-button.spin { transform: none; }
+  }
+
   /* ── Confetti + Sound-Toggle ── */
   .confetti-piece {
     position: fixed;
@@ -2656,6 +2707,29 @@
       <p class="rollen-caption" id="meta-caption" aria-live="polite"></p>
       <p class="rollen-attribution" data-i18n="rollen_card2_attr">— Vale, Jojo, Julia &amp; Ariane (VaJoJuA)</p>
     </div>
+
+    <!-- Karte 3: Flowbenou-Theorie — Methode statt Slogan.
+         Klick auf das Loop-Icon tauscht die Pills (Versuch ↔ Korrektur);
+         die Pointe: die zwei sind dasselbe, nur die Methode trennt sie.
+         Aussage von Flo & Benou — die Bielefelder Try-&-Error-Mitbewohner. -->
+    <div class="rollen-card rollen-card--flow">
+      <h3 class="rollen-card-h" data-i18n="rollen_card3_h">Methode statt Slogan.</h3>
+      <p class="rollen-card-sub" data-i18n="rollen_card3_sub">Klick die Schleife — die zwei Wörter tauschen die Plätze. Versuch und Korrektur sind dasselbe; nur die Methode hält sie getrennt.</p>
+      <div class="flow-loop" id="flow-loop">
+        <span class="flow-pill" id="flow-pill-left" data-i18n="flow_versuch">Versuch</span>
+        <button type="button" class="flow-button" id="flow-button" aria-label="tauschen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+            <polyline points="21 3 21 8 16 8"/>
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+            <polyline points="3 21 3 16 8 16"/>
+          </svg>
+        </button>
+        <span class="flow-pill" id="flow-pill-right" data-i18n="flow_korrektur">Korrektur</span>
+      </div>
+      <p class="rollen-caption" id="flow-caption" aria-live="polite"></p>
+      <p class="rollen-attribution" data-i18n="rollen_card3_attr">— Flo &amp; Benou (Flowbenou-Theorie)</p>
+    </div>
   </div>
 </section>
 
@@ -4318,6 +4392,46 @@
       hand = (hand === 'right') ? 'left' : 'right';
       btn.setAttribute('data-hand', hand);
       try { localStorage.setItem(STORAGE_KEY, hand); } catch (_) {}
+    });
+  })();
+
+  // ── Flowbenou-Theorie: Methode statt Slogan
+  //    Klick auf das Loop-Icon tauscht Versuch ↔ Korrektur.
+  //    Caption rotiert durch drei Pointen, mit jedem Klick eine andere.
+  //    Aussage von Flo & Benou (Bielefelder Try-&-Error-Mitbewohner).
+  (function initFlow() {
+    const button = document.getElementById('flow-button');
+    const left   = document.getElementById('flow-pill-left');
+    const right  = document.getElementById('flow-pill-right');
+    const cap    = document.getElementById('flow-caption');
+    if (!button || !left || !right) return;
+
+    const CAPTIONS = [
+      'Versuch und Korrektur sind dasselbe Wort. Nur die Methode trennt sie.',
+      'Slogan macht aus Methode eine Pose. Pose macht aus Methode nichts.',
+      'Empirisch dranbleiben heißt: das Etikett darf wechseln, die Praxis bleibt.',
+    ];
+    let captionIdx = 0;
+
+    button.addEventListener('click', () => {
+      // Pill-Texte tauschen mit kleinem Fade
+      left.classList.add('swapping');
+      right.classList.add('swapping');
+      button.classList.remove('spin');
+      void button.offsetWidth;
+      button.classList.add('spin');
+      setTimeout(() => {
+        const tmp = left.textContent;
+        left.textContent = right.textContent;
+        right.textContent = tmp;
+        left.classList.remove('swapping');
+        right.classList.remove('swapping');
+      }, 200);
+      // Caption rotieren
+      if (cap) {
+        cap.textContent = CAPTIONS[captionIdx];
+        captionIdx = (captionIdx + 1) % CAPTIONS.length;
+      }
     });
   })();
 

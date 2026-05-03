@@ -1470,11 +1470,18 @@ end-of-session signal.
   default `display:none`, JS macht sie nur in Firefox sichtbar. Andere
   Browser sehen nur Karte 2. Section-Title spiegelt das wider:
   *„Eine Bewegung. Eine zweite, wenn dein Browser Firefox ist."*
-  *Karte 2 (JuJoVa-These)*: silberner Tropfen morpht langsam
-  (~2.4s) durch drei Phasen *roh / metabolisiert / verstanden*.
+  *Karte 2 (VaJoJuA-These)*: Inline-SVG Fibonacci-Spirale. Silberner
+  Tropfen wandert via `cx`/`cy`-Animation entlang der Spirale, von
+  außen (roh) ins Zentrum (verstanden), Goldener Schnitt approximiert
+  durch vier Quadrant-Bögen.
   Aussage: *„Gedanken müssen erst metabolisiert werden, bevor sie
   richtig verstanden werden können."* — geprägt von Vale, Jojo, Julia
-  und Ariane (VaJoJuA-Akronym). Gegenteil von schnapp-haft: Verstehen
-  braucht Zeit. Karte 2 ist browser-unabhängig sichtbar.
-  Tests: `tests/rollen.test.js` (16 tests, jsdom faked Firefox via
-  Object.defineProperty auf MozAppearance).
+  und Ariane (VaJoJuA-Akronym). Verstehen wächst spiralförmig, nicht
+  linear.
+  *Karte 3 (Flowbenou-Theorie)*: Zwei Pills *„Versuch"* / *„Korrektur"*
+  mit `↻`-Loop-Button dazwischen. Klick rotiert das Icon und tauscht
+  die Pill-Texte. Pointe: die zwei sind dasselbe Wort, nur die Methode
+  trennt sie. Aussage von Flo & Benou (Tier-2 Vorname-only, die
+  Bielefelder Try-&-Error-Mitbewohner — passt zur existierenden
+  „Try & Error"-Idol-Card).
+  Tests: `tests/rollen.test.js` (20 tests).

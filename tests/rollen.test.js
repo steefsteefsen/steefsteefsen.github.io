@@ -30,8 +30,10 @@ beforeEach(() => {
   if (!mRollen) throw new Error('initRollen IIFE not found in index.html');
   const mMeta = inline.match(/\(function initMeta\(\)[\s\S]*?\}\)\(\);/);
   if (!mMeta) throw new Error('initMeta IIFE not found in index.html');
+  const mFlow = inline.match(/\(function initFlow\(\)[\s\S]*?\}\)\(\);/);
+  if (!mFlow) throw new Error('initFlow IIFE not found in index.html');
   const script = document.createElement('script');
-  script.textContent = mRollen[0] + '\n' + mMeta[0];
+  script.textContent = mRollen[0] + '\n' + mMeta[0] + '\n' + mFlow[0];
   document.head.appendChild(script);
 });
 
@@ -154,5 +156,33 @@ describe('Metabolisierungs-Karte (VaJoJuA) — Fibonacci-Spirale', () => {
     expect(card).not.toBeNull();
     const attr = card.querySelector('.rollen-attribution');
     expect(attr.textContent).toMatch(/Vale.*Jojo.*Julia.*Ariane|VaJoJuA/);
+  });
+});
+
+describe('Flowbenou-Karte (Flo & Benou) — Methode statt Slogan', () => {
+  test('flow-loop with two pills + button is present', () => {
+    expect(document.getElementById('flow-loop')).not.toBeNull();
+    expect(document.getElementById('flow-pill-left')).not.toBeNull();
+    expect(document.getElementById('flow-pill-right')).not.toBeNull();
+    expect(document.getElementById('flow-button')).not.toBeNull();
+  });
+
+  test('initial pill texts are Versuch and Korrektur', () => {
+    expect(document.getElementById('flow-pill-left').textContent.trim()).toBe('Versuch');
+    expect(document.getElementById('flow-pill-right').textContent.trim()).toBe('Korrektur');
+  });
+
+  test('clicking the loop button sets caption with Methode framing', () => {
+    const button = document.getElementById('flow-button');
+    const cap = document.getElementById('flow-caption');
+    button.click();
+    expect(cap.textContent.toLowerCase()).toMatch(/methode|slogan|empirisch|versuch|korrektur/);
+  });
+
+  test('Flowbenou attribution (Flo & Benou) is present in the flow card', () => {
+    const card = document.querySelector('.rollen-card--flow');
+    expect(card).not.toBeNull();
+    const attr = card.querySelector('.rollen-attribution');
+    expect(attr.textContent).toMatch(/Flo.*Benou|Flowbenou/);
   });
 });
