@@ -501,6 +501,82 @@
     100% { transform: translateX(0) rotate(0deg) scale(1); }
   }
 
+  /* ── Rollen-Card: Held / Opfer / Täter — silberner Ball mit Physik ── */
+  #rollen {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  #rollen .rollen-intro {
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    color: var(--stone);
+    font-size: 1rem;
+  }
+  .rollen-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    border-radius: 10px;
+    padding: 1.4rem 1.4rem 0.6rem;
+    box-shadow: 0 6px 20px -8px rgba(61, 43, 31, 0.18);
+    position: relative;
+  }
+  .rollen-zones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    position: relative;
+    height: 96px;
+  }
+  .rollen-zone {
+    background: rgba(201, 169, 110, 0.10);
+    border: 1px solid rgba(201, 169, 110, 0.30);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.55rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    transition: background 0.2s, border-color 0.2s;
+    user-select: none;
+  }
+  .rollen-zone:hover { background: rgba(201, 169, 110, 0.18); border-color: var(--clay); }
+  .rollen-zone.active { background: rgba(90, 110, 74, 0.14); border-color: var(--moss); }
+  .rollen-ball {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    pointer-events: none;
+    /* Silber: radial gradient für 3D-Glanz, dunkler Rand für Plastizität. */
+    background:
+      radial-gradient(circle at 35% 30%, #ffffff 0%, #d8d8d8 25%, #9a9a9a 60%, #5a5a5a 100%);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.35),
+      inset -1px -2px 3px rgba(0, 0, 0, 0.25),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+    transform: translateX(0);
+    will-change: transform;
+  }
+  .rollen-caption {
+    margin-top: 0.9rem;
+    font-size: 0.78rem;
+    color: var(--stone);
+    font-style: italic;
+    min-height: 1.2em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rollen-ball { transition: transform 0.25s ease; }
+  }
+
   /* ── Confetti + Sound-Toggle ── */
   .confetti-piece {
     position: fixed;
@@ -2292,6 +2368,25 @@
   </div>
 </section>
 
+<!-- Rollen-Card: Held / Opfer / Täter — silberner Ball mit Physik
+     Aussage: die Rolle ist nicht fest, sie rollt. -->
+<section id="rollen">
+  <div class="reveal">
+    <div class="section-label" data-i18n="rollen_label">Rollen</div>
+    <h2 data-i18n="rollen_h">Die Rolle ist nicht fest. Sie rollt.</h2>
+    <p class="rollen-intro" data-i18n="rollen_intro">Klick eine Zone — der Ball rollt hin. Heute Held, morgen Opfer, übermorgen Täter; oder umgekehrt. Niemand wohnt nur in einer.</p>
+    <div class="rollen-card">
+      <div class="rollen-zones" id="rollen-zones">
+        <div class="rollen-zone" data-zone="0" data-i18n="rollen_held">Held</div>
+        <div class="rollen-zone" data-zone="1" data-i18n="rollen_opfer">Opfer</div>
+        <div class="rollen-zone" data-zone="2" data-i18n="rollen_taeter">Täter</div>
+        <div class="rollen-ball" id="rollen-ball" aria-hidden="true"></div>
+      </div>
+      <p class="rollen-caption" id="rollen-caption" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <!-- Projects -->
 <section id="projects">
   <div class="reveal">
@@ -3732,6 +3827,105 @@
   }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Rollen-Card: silberner Ball mit Physik (Held / Opfer / Täter) ──
+  // Der Ball rollt schnapp-haft in die geklickte Zone — und genau das
+  // ist die Pointe: schnapphaft = Vorverurteilung. Der Caption-Text
+  // macht das nach jeder Bewegung explizit.
+  // Physik: einfache Velocity+Friction-Simulation in requestAnimationFrame.
+  // Reduced-motion: Ball teleportiert mit CSS transition statt JS-Loop.
+  (function initRollen() {
+    const zones = document.getElementById('rollen-zones');
+    const ball  = document.getElementById('rollen-ball');
+    const cap   = document.getElementById('rollen-caption');
+    if (!zones || !ball) return;
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    // Captions per landed zone — tragen die "schnapphaft = Vorverurteilung"-Pointe.
+    const CAPTIONS = [
+      'Held — schnell zugewiesen, ist auch schnell ein Urteil.',
+      'Opfer — die Rolle ist schnell vergeben. Das ist nicht dasselbe wie wahr.',
+      'Täter — am schnellsten zugeschnappt. Schnapp-haft heißt: vorverurteilt.',
+    ];
+
+    let pos = 0;       // current x in px relative to zones container
+    let vel = 0;
+    let target = 0;
+    let rafId = 0;
+    let activeZone = -1;
+
+    function zoneCenter(idx) {
+      const zonesRect = zones.getBoundingClientRect();
+      const zoneEl = zones.children[idx];
+      if (!zoneEl) return 0;
+      const r = zoneEl.getBoundingClientRect();
+      const ballHalf = ball.offsetWidth / 2;
+      return (r.left - zonesRect.left) + r.width / 2 - ballHalf;
+    }
+
+    function setActive(idx) {
+      Array.from(zones.querySelectorAll('.rollen-zone')).forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+      activeZone = idx;
+      if (cap) cap.textContent = CAPTIONS[idx] || '';
+    }
+
+    function paint() {
+      ball.style.transform = 'translateX(' + pos + 'px)';
+    }
+
+    function step() {
+      // Spring + damping: schnapp-haft, leicht überschießend, settled in ~0.5–0.8s.
+      const dx = target - pos;
+      const accel = dx * 0.28;     // spring stiffness
+      vel = (vel + accel) * 0.72;  // friction
+      pos += vel;
+      paint();
+      if (Math.abs(dx) < 0.4 && Math.abs(vel) < 0.25) {
+        pos = target; vel = 0; paint();
+        rafId = 0;
+        return;
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function rollTo(idx) {
+      target = zoneCenter(idx);
+      setActive(idx);
+      if (reduce) {
+        pos = target; paint();
+        return;
+      }
+      if (!rafId) rafId = requestAnimationFrame(step);
+    }
+
+    // Initialise ball at zone 0 once layout is ready.
+    function initialise() {
+      pos = zoneCenter(0); paint(); setActive(0);
+    }
+    if (document.readyState === 'complete') initialise();
+    else window.addEventListener('load', initialise);
+
+    // pointerdown handles mouse + touch in one listener (Mobile-Parity-Regel).
+    Array.from(zones.querySelectorAll('.rollen-zone')).forEach((el, i) => {
+      el.addEventListener('pointerdown', () => rollTo(i));
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); rollTo(i); }
+      });
+    });
+
+    // Re-position on resize so the ball stays under its zone.
+    let resizeT;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        if (activeZone >= 0) { pos = zoneCenter(activeZone); paint(); }
+      }, 100);
+    });
+  })();
 
   // ── Explore Easter-Egg: red flag, Pianosa escalation ──────────────
   // In-memory only. No cookies, no localStorage, no server. Each

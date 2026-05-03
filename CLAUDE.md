@@ -1404,3 +1404,13 @@ end-of-session signal.
   (Setting vs. Spielzustand). `prefers-reduced-motion` deaktiviert das
   Springen. Doubles as a 1st-of-May reference (movement, not party).
   Tests: `tests/red-flag.test.js`.
+- **Rollen-Card: silberner Ball mit Physik (`#rollen`).** Drei Zonen
+  *Held / Opfer / Täter*. Klick (oder Tap) auf eine Zone → der Ball
+  rollt mit Spring-Physik (stiffness 0.28, friction 0.72) hinein,
+  schnapp-haft, leicht überschießend, settled in ~0.5–0.8s.
+  **Aussage**: *„Die Rolle ist nicht fest. Sie rollt."* — und die
+  Schnapp-Haftigkeit selbst ist die Pointe: schnapp-haft = Vorverurteilung.
+  Der Caption-Text macht das nach jedem Roll explizit (besonders auf
+  der Täter-Zone). Reduced-motion: Ball teleportiert mit CSS-transition
+  statt JS-Loop. Mobile: pointerdown wie beim Easter-Egg.
+  Tests: `tests/rollen.test.js`.
