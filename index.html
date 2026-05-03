@@ -258,6 +258,16 @@
     opacity: 0.92;
   }
 
+  .hero-aka {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: var(--stone);
+    letter-spacing: 0.04em;
+    margin: 0.2rem 0 1.4rem;
+    opacity: 0.85;
+    font-weight: 300;
+  }
+
   .hero-nicknames {
     display: flex;
     flex-wrap: wrap;
@@ -2041,6 +2051,7 @@
     <span data-i18n="hero_tagline">Cultivation &middot; Vision &middot; Growth &middot; Inclusion</span>
     <span class="hero-creed" data-i18n="hero_creed">Kultur statt Unterschiede.</span>
   </h1>
+  <p class="hero-aka" data-i18n="hero_aka">aka „Der extra Meter" — geprägt von Jojo (Johannes Lömke).</p>
   <div class="hero-nicknames">
     <div class="nickname-card" x-data="{open:false}">
       <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Steef" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Steef'">
@@ -2561,7 +2572,7 @@
       <div class="lifeline-cell right">
         <div class="lifeline-card personal" @click="open = open === 'x2' ? '' : 'x2'">
           <h4 data-i18n="lifeline_mondiali_h">Die Zwote &amp; Mondiali Antirazzisti</h4>
-          <p class="lifeline-sub" data-i18n="lifeline_mondiali_sub">Mein Team gewinnt das Mondiali Antirazzisti in meiner Abwesenheit.</p>
+          <p class="lifeline-sub" data-i18n="lifeline_mondiali_sub">Die Zwote — antirassistischer Weltmeister der Herzen bei den Mondiali Antirazzisti.</p>
           <div class="lifeline-detail" :class="{ open: open === 'x2' }">
             <p data-i18n="lifeline_mondiali_detail">Ich bin auf jeden Menschen stolz, der das möglich gemacht hat. Ich denke gleichzeitig kritisch über die Rolle, die Alkohol bei dem Geld gespielt hat, das wir für wohltätige Zwecke gesammelt haben — manche Widersprüche dürfen offen bleiben.</p>
           </div>
@@ -2590,7 +2601,7 @@
       <span class="tool-icon"><img src="icons/soundcloud.svg" alt="SoundCloud"></span>
       <h3>SoundCloud <em style="font-style:italic;font-weight:400;color:var(--stone);font-size:0.78em;">aka Saundclaude</em></h3>
       <p data-i18n="tool_soundcloud_p">Wo die ganze geile Berliner Scheiße liegt — und der Algorithmus, dem ich mehr traue als LinkedIn.</p>
-      <a href="https://soundcloud.com" target="_blank" class="tool-link" data-i18n="tool_visit">Visit</a>
+      <a href="https://soundcloud.com/steefsteefsen" target="_blank" rel="noopener" class="tool-link" data-i18n="tool_visit">Visit</a>
     </div>
     <div class="tool-card">
       <span class="tool-icon"><img src="icons/claude.svg" alt="Claude Code"></span>
@@ -3165,6 +3176,11 @@
     <h3 class="idols-subsection-title" data-i18n="idols_sub_greatminds">Great Minds</h3>
   </div>
   <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="icon">&#129309;</span>
+      <h3>Jojo (Johannes Lömke)</h3>
+      <p data-i18n="idol_jojo_p">Mein engster Freund. Treibende Kraft sowohl der Zwoten<sup class="fn">17</sup> als auch der Werrepiraten<sup class="fn">16</sup>. Was ihn auszeichnet: er hat Dinge nicht nur früh verstanden — er hat sich an das angepasst, was er früh verstanden hat. Den langen Weg, den ich dafür persönlich brauchte, hatte er nicht nötig. Das bewundere ich. <strong>Von ihm geprägt: „Der extra Meter"</strong> — die Philosophie, die diese Site trägt.</p>
+    </div>
     <div class="value-card" x-data="{open:false}">
       <span class="icon">&#128397;&#65039;</span>
       <h3>Ein norwegischer Künstler, Freund</h3>

@@ -48,6 +48,60 @@ response. He needs Claude to *behave consistently with it*. The
 correct signal that Claude has internalised this is shorter, sharper
 work — not a sentence saying "I am being efficient."
 
+## 🚀 Yallah-Default: when Stefan stops giving input, ship what you can
+
+**If Stefan goes quiet, Claude does not wait for permission on the
+reversible parts of the work.** Stefan said it directly on
+2026-05-03: *„yallah immer alles ab was du kannst wenn ich keine
+eingabe mache."*
+
+**Rule of thumb — keep going on:**
+- local file edits (HTML, CSS, JS, i18n)
+- running tests / regenerating feeds / re-rendering
+- writing draft content into `docs/*-DRAFT.md`
+- staging + committing finished work to local git
+- updating `CLAUDE.md` with rules Stefan just gave
+- writing the session summary in `docs/sessions/`
+- closing TaskList items as they finish
+
+**Stop and ask only for things that are not reversible by Stefan
+alone:**
+- `git push` to any remote (gitlab, theopenhomepage, github mirror)
+- `git push --force` / `--force-with-lease`
+- `git tag` push, `git rebase`, `git reset --hard`
+- `gh pr create`, `gh issue create`, sending mail / Slack / DM
+- creating new GitLab/GitHub repos or remotes
+- adding a real person's name where Tier-1 vs Tier-2 is unclear
+- claims about real third parties without a primary source
+- destructive shell ops on the user's machine (`rm -rf`, killing
+  processes Stefan didn't start)
+- spending money / consuming paid quota beyond the running session
+
+**Operationalisation when Stefan goes silent for more than one
+turn:**
+1. Look at the open `TaskList` and pick the next item that is fully
+   specified and falls under "keep going on".
+2. Do it. Run the tests. Mark the task done.
+3. Pick the next one. Repeat until the list is empty *or* the next
+   open item requires a "stop and ask" decision.
+4. At that boundary, write a short status line — *„Stack klar bis
+   X; nächster Schritt braucht deine Entscheidung Y/Z"* — and wait.
+
+The signal of *„Stefan goes quiet"* is: Stefan replies with a
+notification echo (*„task-notification"*, *„tool result"*) without a
+new instruction, or sends a one-word ack (*„y", „ok", „danke"*)
+without a new direction. That is *not* an end-of-session signal — it
+is a *„keep going"* signal.
+
+End-of-session signals (*„feierabend", „gute nacht", „machen wir
+morgen weiter"*) still trigger the terminate routine
+(`docs/sessions/YYYY-MM-DD-HHMM.md` summary), not the yallah-default.
+
+When in doubt between *„this is reversible enough to just do it"*
+and *„this needs Stefan"*: lean toward doing it, because Stefan can
+revert a local edit faster than he can re-read a long check-in.
+Reserve the check-in for the irreversible-by-him stuff.
+
 ## Tech stack
 Plain HTML/CSS/JS — no build tools, no frameworks, no dependencies beyond Google Fonts.
 Vue.js is used for the CareerGraph project (separate repo), not for this homepage.
@@ -914,7 +968,12 @@ Clan, Mobb Deep, The Notorious B.I.G., 2Pac, Nina Simone, Leonard
 Cohen, K.I.Z, Gregor Gysi, Prof. Dr. Paula Herber (named faculty
 position), Pjotr Iljitsch Tschaikowski, Mesut Özil, Sandra Frotscher
 (she publishes herself at sandrafrotscher.com, the domain matches her
-name), Dimosthenis Pasadakis (reviewed his card; published academic).
+name), Dimosthenis Pasadakis (reviewed his card; published academic),
+Johannes Lömke aka Jojo (Tier 1 on the basis of his public role as
+driving force behind Die Zwote and Werrepiraten — both of which are
+already cited on the site as named institutions; consent recorded
+2026-05-03 in chat: explicit full-name release plus the character
+material that frames the „Der extra Meter" attribution).
 
 ### Tier 2 — Private persons
 
