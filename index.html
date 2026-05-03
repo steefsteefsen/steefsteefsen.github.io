@@ -593,34 +593,34 @@
   }
   .rollen-zone:hover { background: rgba(201, 169, 110, 0.18); border-color: var(--clay); }
   .rollen-zone.active { background: rgba(90, 110, 74, 0.14); border-color: var(--moss); }
-  .rollen-ball {
-    position: absolute;
-    top: 14px;
-    left: 0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    pointer-events: none;
-    /* Rosa Ball — Empathie-Farbe. Der Ball schnappt in Opfer/Täter (Vorverurteilung),
-       aber nicht in Held: dort darf er nicht zuschnappen. Held muss verdient werden. */
-    background:
-      radial-gradient(circle at 35% 30%, #ffffff 0%, #ffd4e0 25%, #ff8aa8 60%, #c44a72 100%);
-    box-shadow:
-      0 2px 4px rgba(120, 30, 60, 0.35),
-      inset -1px -2px 3px rgba(120, 30, 60, 0.25),
-      inset 1px 1px 2px rgba(255, 255, 255, 0.7);
-    transform: translateX(0);
-    will-change: transform;
+  .rollen-zone { flex-direction: column; gap: 0.3rem; padding-bottom: 0.4rem; }
+  .rollen-emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+    opacity: 0;
+    transform: scale(0.6) translateY(6px);
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(.36,1.55,.64,1);
+    user-select: none;
   }
-  /* Held-Verweigerung: kurz wackeln, dann zurück. Ball bleibt wo er ist. */
-  .rollen-ball.refuse {
-    animation: rollenRefuse 0.45s cubic-bezier(.36,.07,.19,.97) both;
+  .rollen-zone:hover .rollen-emoji,
+  .rollen-zone:focus-visible .rollen-emoji {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
-  @keyframes rollenRefuse {
-    10%, 90% { transform: translateX(calc(var(--ballx, 0px) - 2px)); }
-    20%, 80% { transform: translateX(calc(var(--ballx, 0px) + 4px)); }
-    30%, 50%, 70% { transform: translateX(calc(var(--ballx, 0px) - 6px)); }
-    40%, 60% { transform: translateX(calc(var(--ballx, 0px) + 6px)); }
+  .rollen-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+  }
+  /* Held: das Emoji-Span bleibt leer — keine Antwort, Held lässt sich
+     nicht in eine Geste zuteilen. Visueller Hint: Cursor bleibt default. */
+  .rollen-zone[data-emoji=""] { cursor: default; }
+  .rollen-zone[data-emoji=""]:hover { background: rgba(201, 169, 110, 0.10); border-color: rgba(201, 169, 110, 0.30); }
+  @media (prefers-reduced-motion: reduce) {
+    .rollen-emoji { transition: opacity 0.15s ease; transform: none; }
+    .rollen-zone:hover .rollen-emoji { transform: none; }
   }
   .rollen-caption {
     margin-top: 0.9rem;
@@ -2514,20 +2514,29 @@
 <section id="rollen">
   <div class="reveal">
     <div class="section-label" data-i18n="rollen_label">Zwei Bewegungen</div>
-    <h2 data-i18n="rollen_h">Eine Bewegung. Eine zweite, wenn dein Browser Firefox ist.</h2>
-    <p class="rollen-intro" data-i18n="rollen_intro">Zwei kleine Karten. Klick rein — sie machen, was sie sagen.</p>
+    <h2 data-i18n="rollen_h">Eine Bewegung. Eine zweite, langsam.</h2>
+    <p class="rollen-intro" data-i18n="rollen_intro">Zwei kleine Karten. Hover rein — sie zeigen dir, was passiert.</p>
 
-    <!-- Karte 1: Rollen — schnapp-haft = Vorverurteilung
-         Vorerst Firefox-only (Stefans Anweisung 2026-05-03):
-         display:none default, JS macht :block in Firefox. -->
-    <div class="rollen-card" id="rollen-card-1" style="display:none;">
-      <h3 class="rollen-card-h" data-i18n="rollen_card1_h">Die Rolle ist nicht fest. Sie rollt.</h3>
-      <p class="rollen-card-sub" data-i18n="rollen_card1_sub">Klick eine Zone — der Ball rollt schnapp-haft hin. Schnapp-haft heißt: vorverurteilt.</p>
+    <!-- Karte 1: Rollen — Hover zeigt die Antwort der Rolle.
+         Hover Täter → 🙏 (sorry); Hover Opfer → 🖕 (Mittelfinger,
+         "ich bin nicht zuschnappbar, geh weg mit deiner Vorverurteilung");
+         Hover Held → keine Antwort, Held lässt sich nicht zuteilen. -->
+    <div class="rollen-card" id="rollen-card-1">
+      <h3 class="rollen-card-h" data-i18n="rollen_card1_h">Die Rolle hat eine Antwort.</h3>
+      <p class="rollen-card-sub" data-i18n="rollen_card1_sub">Hover über eine Zone. Was du bekommst, ist nicht das Etikett — es ist die Antwort der Person hinter dem Etikett.</p>
       <div class="rollen-zones" id="rollen-zones">
-        <div class="rollen-zone" data-zone="0" data-i18n="rollen_held">Held</div>
-        <div class="rollen-zone" data-zone="1" data-i18n="rollen_opfer">Opfer</div>
-        <div class="rollen-zone" data-zone="2" data-i18n="rollen_taeter">Täter</div>
-        <div class="rollen-ball" id="rollen-ball" aria-hidden="true"></div>
+        <div class="rollen-zone" data-zone="0" data-emoji="" data-i18n="rollen_held">
+          <span class="rollen-emoji" aria-hidden="true"></span>
+          <span class="rollen-label">Held</span>
+        </div>
+        <div class="rollen-zone" data-zone="1" data-emoji="🖕" data-i18n="rollen_opfer">
+          <span class="rollen-emoji" aria-hidden="true">🖕</span>
+          <span class="rollen-label">Opfer</span>
+        </div>
+        <div class="rollen-zone" data-zone="2" data-emoji="🙏" data-i18n="rollen_taeter">
+          <span class="rollen-emoji" aria-hidden="true">🙏</span>
+          <span class="rollen-label">Täter</span>
+        </div>
       </div>
       <p class="rollen-caption" id="rollen-caption" aria-live="polite"></p>
       <p class="rollen-attribution" data-i18n="rollen_card1_attr">— Steef</p>
@@ -4032,120 +4041,30 @@
   // Reduced-motion: Ball teleportiert mit CSS transition statt JS-Loop.
   (function initRollen() {
     const zones = document.getElementById('rollen-zones');
-    const ball  = document.getElementById('rollen-ball');
     const cap   = document.getElementById('rollen-caption');
-    const card  = document.getElementById('rollen-card-1');
-    if (!zones || !ball || !card) return;
-    // Firefox-Gate: vorerst nur Firefox-Nutzer sehen Karte 1.
-    // Feature-Detection statt UA-Sniffing über Firefox-only -moz- prefix.
-    const isFirefox = 'MozAppearance' in document.documentElement.style;
-    if (!isFirefox) return; // Karte bleibt display:none; init wird übersprungen.
-    card.style.display = '';
+    if (!zones) return;
     const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    // Captions per landed zone — tragen die "schnapphaft = Vorverurteilung"-Pointe.
-    // Held verweigert sich der schnellen Zuordnung — der Ball geht da nicht hin.
+    // Captions pro Zone — werden bei Hover/Focus gesetzt (a11y).
+    // Hover Täter → 🙏: die Antwort der Person hinter dem Etikett ist
+    // Entschuldigung, nicht Verteidigung. Hover Opfer → 🖕: das Etikett
+    // ist eine Vorverurteilung, die Person hinter dem Etikett zeigt
+    // dir den Mittelfinger und behält ihre Würde. Held → leer:
+    // Held lässt sich nicht in eine Geste zuteilen.
     const CAPTIONS = [
-      'Held — der Status lässt sich nicht zuschnappen. Er muss verdient werden.',
-      'Opfer — die Rolle ist schnell vergeben. Das ist nicht dasselbe wie wahr.',
-      'Täter — am schnellsten zugeschnappt. Schnapp-haft heißt: vorverurteilt.',
+      'Held — keine Antwort. Held lässt sich nicht in eine Geste zuteilen. Muss verdient werden, nicht zugewiesen.',
+      'Opfer — Mittelfinger. Das Etikett ist eine Vorverurteilung; die Person dahinter behält ihre Würde.',
+      'Täter — Hände falten, sorry. Die ehrliche Antwort nach der Tat ist Entschuldigung, nicht Verteidigung.',
     ];
 
-    let pos = 0;       // current x in px relative to zones container
-    let vel = 0;
-    let target = 0;
-    let rafId = 0;
-    let activeZone = -1;
-
-    function zoneCenter(idx) {
-      const zonesRect = zones.getBoundingClientRect();
-      const zoneEl = zones.children[idx];
-      if (!zoneEl) return 0;
-      const r = zoneEl.getBoundingClientRect();
-      const ballHalf = ball.offsetWidth / 2;
-      return (r.left - zonesRect.left) + r.width / 2 - ballHalf;
-    }
-
-    function setActive(idx) {
-      Array.from(zones.querySelectorAll('.rollen-zone')).forEach((el, i) => {
-        el.classList.toggle('active', i === idx);
-      });
-      activeZone = idx;
-      if (cap) cap.textContent = CAPTIONS[idx] || '';
-    }
-
-    function paint() {
-      ball.style.transform = 'translateX(' + pos + 'px)';
-    }
-
-    function step() {
-      // Spring + damping: schnapp-haft, leicht überschießend, settled in ~0.5–0.8s.
-      const dx = target - pos;
-      const accel = dx * 0.28;     // spring stiffness
-      vel = (vel + accel) * 0.72;  // friction
-      pos += vel;
-      paint();
-      if (Math.abs(dx) < 0.4 && Math.abs(vel) < 0.25) {
-        pos = target; vel = 0; paint();
-        rafId = 0;
-        return;
-      }
-      rafId = requestAnimationFrame(step);
-    }
-
-    function refuse() {
-      // Ball wackelt, bewegt sich nicht zur Zone. Held-Verweigerung.
-      ball.style.setProperty('--ballx', pos + 'px');
-      ball.classList.remove('refuse');
-      void ball.offsetWidth;
-      ball.classList.add('refuse');
-    }
-
-    function rollTo(idx) {
-      // Held (idx 0) verweigert sich — Ball wackelt + Caption zeigt die Pointe.
-      if (idx === 0) {
-        // Caption setzen aber NICHT activeZone ändern, NICHT Ball bewegen.
-        Array.from(zones.querySelectorAll('.rollen-zone')).forEach(el => el.classList.remove('active'));
-        if (cap) cap.textContent = CAPTIONS[0];
-        if (!reduce) refuse();
-        return;
-      }
-      target = zoneCenter(idx);
-      setActive(idx);
-      if (reduce) {
-        pos = target; paint();
-        return;
-      }
-      if (!rafId) rafId = requestAnimationFrame(step);
-    }
-
-    // Initialise ball at zone 1 (Opfer) — neutral middle position.
-    // Started bei Held wäre die Verweigerungs-Pointe verschenkt.
-    // Caption beim Init: Hint, kein Urteil.
-    function initialise() {
-      pos = zoneCenter(1); paint();
-      if (cap) cap.textContent = 'Klick: Opfer oder Täter — der Ball schnappt. Klick: Held — der Ball verweigert.';
-    }
-    if (document.readyState === 'complete') initialise();
-    else window.addEventListener('load', initialise);
-
-    // pointerdown handles mouse + touch in one listener (Mobile-Parity-Regel).
     Array.from(zones.querySelectorAll('.rollen-zone')).forEach((el, i) => {
-      el.addEventListener('pointerdown', () => rollTo(i));
-      el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); rollTo(i); }
-      });
-    });
-
-    // Re-position on resize so the ball stays under its zone.
-    let resizeT;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeT);
-      resizeT = setTimeout(() => {
-        if (activeZone >= 0) { pos = zoneCenter(activeZone); paint(); }
-      }, 100);
+      const showCaption = () => { if (cap) cap.textContent = CAPTIONS[i] || ''; };
+      const hideCaption = () => { if (cap) cap.textContent = ''; };
+      el.addEventListener('mouseenter', showCaption);
+      el.addEventListener('mouseleave', hideCaption);
+      el.addEventListener('focus',  showCaption);
+      el.addEventListener('blur',   hideCaption);
     });
   })();
 

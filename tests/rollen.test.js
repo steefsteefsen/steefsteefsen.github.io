@@ -3,17 +3,14 @@
  *
  * Rollen-Card structural test — runs in jsdom.
  *
- * jsdom doesn't render layout (so we can't test the physics simulation
- * itself — that would need puppeteer), but it WILL run the inline
- * <script> wiring, which lets us assert:
- *   - the section, three zones, and ball are present
- *   - each zone is keyboard-accessible (role=button, tabindex)
- *   - clicking a zone marks it active and updates the caption
- *   - the caption text carries the "schnapp-haft = Vorverurteilung"
- *     framing on the perpetrator zone
+ * Karte 1 (Held / Opfer / Täter): hover-based emoji reveal.
+ *   - Hover Täter → 🙏 (sorry)
+ *   - Hover Opfer → 🖕 (Mittelfinger — Würde, nicht Vorverurteilung)
+ *   - Hover Held → kein Emoji (Held lässt sich nicht zuteilen)
+ *   - Caption updatet bei Hover/Focus für a11y.
  *
- * Layout-dependent assertions (ball at correct x position) live for
- * a future puppeteer test — see tests/wip/ pattern.
+ * Karte 2 (JuJoVa = Vale, Jojo, Julia, Ariane): Tropfen morpht durch
+ * drei Phasen roh / metabolisiert / verstanden.
  */
 
 const fs = require('fs');
@@ -26,18 +23,6 @@ beforeEach(() => {
     .replace(/^[\s\S]*?<body\b[^>]*>/i, '')
     .replace(/<\/body>[\s\S]*$/i, '');
 
-  // Karte 1 (rosa Ball) ist Firefox-only via 'MozAppearance' in
-  // documentElement.style. jsdom hat keine Vendor-Prefixes — wir setzen
-  // die Eigenschaft manuell, damit der Init-Code als "in Firefox" durchläuft.
-  if (!('MozAppearance' in document.documentElement.style)) {
-    Object.defineProperty(document.documentElement.style, 'MozAppearance', {
-      value: '', writable: true, configurable: true,
-    });
-  }
-
-  // Pull out only the initRollen IIFE — running the full inline JS in
-  // jsdom triggers IntersectionObserver, AudioContext etc. that we
-  // don't need for this test.
   const inline = Array.from(document.querySelectorAll('script'))
     .map(s => s.textContent)
     .join('\n');
@@ -50,78 +35,65 @@ beforeEach(() => {
   document.head.appendChild(script);
 });
 
-describe('Rollen-Card — DOM and JS wiring', () => {
+describe('Rollen-Card — Emoji-Hover (Karte 1)', () => {
   test('#rollen section exists', () => {
     expect(document.querySelector('#rollen')).not.toBeNull();
   });
 
   test('exactly three zones present (Held / Opfer / Täter)', () => {
-    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    expect(zones.length).toBe(3);
-    const labels = Array.from(zones).map(z => z.textContent.trim());
+    const labels = Array.from(document.querySelectorAll('#rollen-zones .rollen-zone .rollen-label'))
+      .map(el => el.textContent.trim());
     expect(labels).toEqual(['Held', 'Opfer', 'Täter']);
   });
 
-  test('silberner ball element is present', () => {
-    expect(document.getElementById('rollen-ball')).not.toBeNull();
+  test('Held zone carries no emoji (data-emoji=""); Opfer = 🖕; Täter = 🙏', () => {
+    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
+    expect(zones[0].getAttribute('data-emoji')).toBe('');
+    expect(zones[1].getAttribute('data-emoji')).toBe('🖕');
+    expect(zones[2].getAttribute('data-emoji')).toBe('🙏');
   });
 
-  test('each zone is keyboard-accessible (role=button, tabindex=0)', () => {
+  test('emoji <span> is empty for Held, non-empty for Opfer + Täter', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    zones.forEach(z => {
-      expect(z.getAttribute('role')).toBe('button');
+    expect(zones[0].querySelector('.rollen-emoji').textContent.trim()).toBe('');
+    expect(zones[1].querySelector('.rollen-emoji').textContent.trim()).toBe('🖕');
+    expect(zones[2].querySelector('.rollen-emoji').textContent.trim()).toBe('🙏');
+  });
+
+  test('each zone is keyboard-focusable (tabindex=0)', () => {
+    document.querySelectorAll('#rollen-zones .rollen-zone').forEach(z => {
       expect(z.getAttribute('tabindex')).toBe('0');
     });
   });
 
-  test('pointerdown on Opfer (idx 1) marks it active', () => {
-    const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    zones[1].dispatchEvent(new Event('pointerdown'));
-    expect(zones[1].classList.contains('active')).toBe(true);
-  });
-
-  test('pointerdown on Täter (idx 2) marks it active and caption carries Vorverurteilung framing', () => {
+  test('mouseenter on Täter sets caption with sorry/Entschuldigung framing', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
     const cap = document.getElementById('rollen-caption');
-    zones[2].dispatchEvent(new Event('pointerdown'));
-    expect(zones[2].classList.contains('active')).toBe(true);
-    expect(cap.textContent.toLowerCase()).toMatch(/vorverurteil|schnapp/);
+    zones[2].dispatchEvent(new Event('mouseenter'));
+    expect(cap.textContent.toLowerCase()).toMatch(/sorry|entschuldigung|hände/);
   });
 
-  test('Held (idx 0) refuses: no active class on Held, caption says "verdient"', () => {
+  test('mouseenter on Opfer sets caption with Würde/Mittelfinger framing', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
     const cap = document.getElementById('rollen-caption');
-    // Klick auf Held darf NIEMALS die active-Klasse setzen.
-    zones[0].dispatchEvent(new Event('pointerdown'));
-    expect(zones[0].classList.contains('active')).toBe(false);
-    // Caption MUSS aber die Verweigerungs-Pointe zeigen.
-    expect(cap.textContent.toLowerCase()).toMatch(/verdient|nicht zuschnap/);
+    zones[1].dispatchEvent(new Event('mouseenter'));
+    expect(cap.textContent.toLowerCase()).toMatch(/würde|mittelfinger|vorverurteil/);
   });
 
-  test('Held click after Opfer/Täter clears active without snapping', () => {
+  test('mouseenter on Held sets caption with verdient/zuteilen framing', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    zones[2].dispatchEvent(new Event('pointerdown'));
-    expect(zones[2].classList.contains('active')).toBe(true);
-    zones[0].dispatchEvent(new Event('pointerdown'));
-    // Held klickt → kein neues active gesetzt, alte active geräumt.
-    expect(zones[0].classList.contains('active')).toBe(false);
-    expect(zones[1].classList.contains('active')).toBe(false);
-    expect(zones[2].classList.contains('active')).toBe(false);
+    const cap = document.getElementById('rollen-caption');
+    zones[0].dispatchEvent(new Event('mouseenter'));
+    expect(cap.textContent.toLowerCase()).toMatch(/verdient|zuteilen|keine antwort/);
   });
 
-  test('refuse class is added to ball on Held click (jsdom can verify class toggle)', () => {
+  test('mouseleave clears the caption', () => {
     const zones = document.querySelectorAll('#rollen-zones .rollen-zone');
-    const ball  = document.getElementById('rollen-ball');
-    zones[0].dispatchEvent(new Event('pointerdown'));
-    expect(ball.classList.contains('refuse')).toBe(true);
-  });
-});
-
-describe('Rollen-Card — Firefox-only gate', () => {
-  test('rollen-card-1 markup carries display:none default (so non-Firefox stays hidden)', () => {
-    // Read raw HTML rather than the live DOM (since beforeEach faked Firefox
-    // detection, the live element will have its inline style cleared).
-    expect(html).toMatch(/<div class="rollen-card" id="rollen-card-1" style="display:none;"/);
+    const cap = document.getElementById('rollen-caption');
+    zones[2].dispatchEvent(new Event('mouseenter'));
+    expect(cap.textContent.length).toBeGreaterThan(0);
+    zones[2].dispatchEvent(new Event('mouseleave'));
+    expect(cap.textContent).toBe('');
   });
 });
 
