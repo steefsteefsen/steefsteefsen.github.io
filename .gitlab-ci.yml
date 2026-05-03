@@ -380,6 +380,14 @@ mirror-to-github:
 # Static site deploy. Copies the repo into public/ and lets GitLab
 # serve it under https://<namespace>.gitlab.io/<project>/.
 # Skips test/, logs/, scripts/, docs/ — everything that's not user-facing.
+# Disable GitLab Auto-DevOps "create-pages" template, das sonst parallel
+# zu unserem eigenen `pages:`-Job einen kaputten npm-ci-Lauf startet
+# (npm ci ohne cd tests, plus tippfehler "npm cd"). Unser eigener
+# pages:-Job (siehe unten) baut die Site sauber.
+create-pages:
+  rules:
+    - when: never
+
 pages:
   stage: pages
   image: alpine:latest
