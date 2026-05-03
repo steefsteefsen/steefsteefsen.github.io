@@ -390,6 +390,7 @@ describe('tier-2 privacy rule', () => {
     'O/Y',
     'Skinny Shef',
     'Mira',
+    'Beate Uwe',
   ];
 
   function findCardByH3(stageName) {

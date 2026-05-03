@@ -3754,6 +3754,23 @@
         </div>
       </div>
     </div>
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127925;</span>
+      <h3>Beate Uwe</h3>
+      <p data-i18n="idol_beateuwe_p">Crew aus Berlin. Wenn du nüchtern feiern willst, müde bist Consumer zu sein und wachsen willst, um Creator zu werden — geh dahin und passe dein Verhalten an. Beate Uwe ist die Adresse für meinen eigenen Versuch, das auf Distanz zu bringen, was ich gerade „Diedoris ist das Gift" nenne — ein Projekt, das noch in Form findet.</p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="margin-top:1rem;border-radius:6px;overflow:hidden;">
+          <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/beateuwe&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Beate Uwe on SoundCloud" style="width:100%;border:0;display:block;"></iframe>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:0.8rem;">
+          <a href="https://soundcloud.com/beateuwe" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- ── People & Action ── -->
