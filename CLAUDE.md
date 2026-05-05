@@ -901,6 +901,102 @@ without an attached link to where you got it. If a draft has facts without
 sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
 silently shipping unsourced text.
 
+## Unrecherchierte Aussagen — keine, nicht im Post, nicht im Draft (hard rule)
+
+**Stefans Anweisung 2026-05-05** nach dem Blog-Briefing zum
+Netzausfall: *„unrecherchierte Aussagen raus, rein in die CLAUDE.md
+als Regel und Testfall erstellen."*
+
+Diese Regel verschärft die Source-Citation-Regel um drei spezifische
+Lücken, die heute aufgeschlagen sind:
+
+### Was diese Regel verbietet
+
+1. **Hypothesen über Vorfall-Verantwortliche** ohne primary source.
+   *„Möglicherweise Anschlag"*, *„könnte ein Hack sein"*, *„russische
+   Akteure"*, *„chinesische Hand"* — alles raus, solange keine
+   benennbare primary source (Bundesnetzagentur, BSI, Provider-
+   Statement, Court-Filing, peer-reviewed Forschung) das aussagt.
+   **Auch dann nicht**, wenn Stefan es selbst geäußert hat — Stefan-
+   Bauchgefühl ist Briefing-Material, nicht Live-Post-Material.
+
+2. **Dritte-Personen-Thesen als Frame-Quelle** (*„X sagt Y"*) ohne
+   benennbares X. *„Ein Politik-Historiker meint, der nächste Krieg
+   in Europa werde ein Bürgerkrieg Stadt vs. Land"* — geht **nicht**
+   in den Post, solange der Historiker nicht namentlich + mit
+   konkretem Werk + verifiziertem URL zitiert werden kann. Die
+   Versuchung, *„ich kenne die Person, weiß aber gerade den Namen
+   nicht"* als Lücke offen zu lassen, ist genau die Lücke, durch die
+   Fehlinformation ins Live-Format kommt.
+
+3. **„Pending source"-Notizen im Briefing**, die später vergessen
+   werden. Wenn Stefan im Chat sagt *„diese Aussage stammt aus
+   Quelle X, Name folgt"*, schreibt Claude die Aussage **nicht** in
+   den Post-Skelett mit *„[ SOURCE PENDING ]"*-Marker und im
+   Briefing als *„offen"* — sondern lässt sie **ganz** raus, bis
+   Stefan den Namen + Werk geliefert hat. Sonst entsteht ein Pfad
+   *„Briefing → Skelett mit Marker → versehentlich gepushed mit
+   Marker drin → live"*, der heute Abend genau die Versuchung war.
+
+### Was diese Regel erlaubt
+
+- **Stefans direkte Beobachtung in Echtzeit** (*„ich sehe gerade auf
+  meiner Maschine X"*) — als Stefan-Voice-Erstpersonen-Aussage, mit
+  Zeitstempel, ohne Kausalitäts-Zuschreibung.
+- **Mehr-Hypothesen-Listen ohne Verantwortlichen-Zuschreibung**
+  (*„BGP-Drift, DNS-Welle, IXP-Bug, Stromnetz-Hänger — wir wissen
+  es nicht"*). Eine Liste technischer Möglichkeiten ohne benannten
+  Akteur ist okay.
+- **Die Stille selbst zitieren** (*„Bundesnetzagentur sagt nichts,
+  BSI sagt nichts, Tagesschau sagt nichts"*) — das **ist** eine
+  belegbare Beobachtung mit primary-source-Verlinkbarkeit (Link auf
+  die jeweilige Pressemitteilungs-Seite, die nichts dazu enthält).
+
+### Mechanischer Schutz
+
+`tests/no-unsourced-claims.test.js` (siehe Test-Datei) sweept
+`index.html`, `i18n.js`, `blog/posts/`, alle Pillar-Pages, alle
+Open-Letter-HTMLs auf folgende Marker und Phrasen-Patterns:
+
+- Marker, die nicht in Live-Content gehören:
+  `[ SOURCE NEEDED ]`, `[ SOURCE PENDING ]`, `[ NAME PENDING ]`,
+  `[ TODO source ]`, `<!-- SOURCE`, `<!-- TODO Stefan: Track-Titel`
+  (existierender legitimer TODO-Kommentar in der Sven-Dose-Card,
+  als Allow-list-Eintrag).
+- Vermutungs-Patterns ohne Beleg in Card-/Body-Text:
+  `möglicherweise`, `könnte ein`, `vermutlich`, `wohl ein` —
+  **nur dort**, wo der Satz keinen `<sup class="fn">` und keinen
+  `<a href>`-Link in unmittelbarer Nachbarschaft hat. Ein
+  Vermutungs-Wort mit angehängtem Beleg ist legitim
+  („möglicherweise — siehe X<sup>1</sup>").
+- Akteur-Zuschreibungs-Patterns ohne Beleg:
+  `Anschlag`, `Hack`, `Sabotage`, `koordiniert` — gefolgt von
+  Akteursnennung ohne Quelle in 200 Zeichen Umkreis.
+
+Test ist `allow_failure: false`. Wenn er rot wird, fängt CI das vor
+Live-Gang.
+
+### Die Lücke, die diese Regel füllt
+
+Die existierende Source-Citation-Regel sagt: *„Every factual claim
+… must have a source citation."* Das ist eine **Aussagen-Regel** —
+sie gilt, sobald eine Aussage im Post steht. Was sie nicht regelt:
+
+- den **Pfad** zum Post (Briefing → Skelett → Live-HTML), in dem
+  Marker entstehen und vergessen werden,
+- den Unterschied zwischen *„keine Quelle"* (Source-Citation greift)
+  und *„Stefan hat eine Quelle in einem Podcast gehört, weiß aber
+  nicht welcher"* (heutiger Fall — die Aussage hat eine **gefühlte**
+  Quelle, aber keine **benennbare**),
+- die **Vermutungs-Linguistik** im Live-Text (*„möglicherweise"*,
+  *„vermutlich"*, *„könnte"*) ohne angehängten Beleg.
+
+Diese Regel zieht die Linie früher: *„nicht recherchiert"* heißt
+*„nicht im Live-Pfad"*, gar nicht. Im Briefing kann eine offene
+Frage stehen — aber die wandert nicht ins Skelett mit *„[ pending ]"*-
+Marker, sondern bleibt in der Briefing-Section *„Open issues"*. Erst
+wenn die Antwort da ist, wandert die Aussage ins Skelett.
+
 ## AI-formulierte Inhalte sichtbar markieren (hard rule)
 
 **Stefans Anweisung 2026-05-05**: nicht handgeschriebene Inhalte
