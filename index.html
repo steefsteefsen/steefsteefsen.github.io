@@ -2149,6 +2149,27 @@
     margin-top: 5rem;
   }
 
+  /* ── Provenance-Marker: AI-formulierte und Übersetzungs-Fallback-Inhalte ──
+     Hover zeigt Tooltip via title="…". Visueller Cue: dotted underline 1px in
+     --stone, niedrige Opazität, deutlicher beim Hover. Stefan-getippte Inhalte
+     tragen keinen Marker — Default ist Stefan. Spec in CLAUDE.md unter
+     „AI-formulierte Inhalte sichtbar markieren". */
+  .ai-formulated,
+  .translation-fallback {
+    text-decoration: underline dotted 1px var(--stone);
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 0.3em;
+    text-decoration-color: rgba(140, 123, 107, 0.35);
+    cursor: help;
+    transition: text-decoration-color 0.2s ease;
+  }
+  .ai-formulated:hover,
+  .ai-formulated:focus-visible,
+  .translation-fallback:hover,
+  .translation-fallback:focus-visible {
+    text-decoration-color: var(--stone);
+  }
+
   /* ── RTL support ── */
   [dir="rtl"] .section-label::before { display: none; }
   [dir="rtl"] .section-label::after {
@@ -2391,6 +2412,24 @@
         <p data-i18n="nickname_nicklas_p">Vergeben von William am Wochenende des friedlichen 1. Mai 2026 in Berlin, in einer Off-Location bei der Humor Olympiade. Der Name kam in einem Moment, in dem die Form spielt und niemand performt — die Art von Spitzname, der nicht erklärt, sondern bleibt.</p>
       </div>
     </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname SSUE" :aria-label="open ? 'weniger anzeigen' : 'Spitzname SSUE'">
+        SSUE
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p class="ai-formulated" title="Formulierung: Claude. Inhalt freigegeben durch Steef." data-i18n="nickname_ssue_p">Künstler-Alter-Ego, in Respekt vor <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> und <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Mehr ist dazu nicht zu sagen.</p>
+      </div>
+    </div>
+    <div class="nickname-card" x-data="{open:false}">
+      <button type="button" class="nickname-pill" @click="open=!open" :class="{open}" aria-label="Spitzname Stee" :aria-label="open ? 'weniger anzeigen' : 'Spitzname Stee'">
+        Stee
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open" class="nickname-detail">
+        <p class="ai-formulated" title="Formulierung: Claude. Inhalt freigegeben durch Steef." data-i18n="nickname_stee_p">Künstler-Alter-Ego, in Respekt vor <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, der es trotz Geld real gehalten hat. Mein erstes Album war 2001 das <em>2001</em>-Album von Dr. Dre mit <em>Still D.R.E.</em> drauf, Snoop am Mic. Snoop war der konstanteste von diesen Rappern.</p>
+      </div>
+    </div>
   </div>
   <div class="hero-line"></div>
   <p data-i18n="hero_text">Growing ideas from the ground up — building with patience, purpose, and a long-term perspective. Welcome to my personal space.</p>
@@ -2624,6 +2663,22 @@
                 font-family="Cormorant Garamond, serif"
                 font-size="13" font-style="italic"
                 fill="var(--bark)">Täter</text>
+          <!-- Silberner Ball, rollt zwischen den Ecken. Startposition: Schwerpunkt
+               des Dreiecks. Klick auf Opfer/Täter rollt ihn zur Ecke; Klick auf
+               Held lässt ihn wackeln (Held lässt sich nicht zuteilen). Inspiriert
+               vom Closing-Set Sven Doses bei der Nation of Gondwana — die Kugel
+               rollt langsam, nicht schnapp-haft. -->
+          <circle id="rollen-ball" cx="120" cy="124" r="7"
+                  fill="url(#rollen-ball-grad)"
+                  filter="drop-shadow(0 1px 2px rgba(0,0,0,0.3))"/>
+          <defs>
+            <radialGradient id="rollen-ball-grad" cx="35%" cy="30%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="25%" stop-color="#d8d8d8"/>
+              <stop offset="60%" stop-color="#9a9a9a"/>
+              <stop offset="100%" stop-color="#5a5a5a"/>
+            </radialGradient>
+          </defs>
         </svg>
         <figcaption data-i18n="rollen_triangle_caption">Karpman-Dreieck. Die drei Rollen sind kein Spektrum — sie sind ein Dreieck. Du kannst von jeder Ecke zu jeder anderen rutschen.</figcaption>
       </figure>
@@ -4089,6 +4144,28 @@
         </p>
       </div>
     </div>
+    <!-- Sven Dose — DJ/Producer. Tier 1 (publishing artist mit eigener
+         SoundCloud-Marke). Closing-Sets der Nation of Gondwana sind die
+         Erfahrung, die das Roll-Bild der Rollen-Karte 1 inspiriert. Track-
+         Titel + Jahr werden nachgereicht; bis dahin nur das Closing-Motiv
+         allgemein, ohne unbelegten Track-Anker. -->
+    <div class="value-card" x-data="{open:false}">
+      <span class="icon">&#127911;</span>
+      <h3>Sven Dose</h3>
+      <p class="ai-formulated" title="Formulierung: Claude. Inhalt freigegeben durch Steef." data-i18n="idol_svendose_p">DJ und Producer aus Berlin. Beim Closing der <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a> hat ein Set von ihm ein Bild hinterlassen, an das ich seitdem zurückdenke: eine Kugel, die langsam ins Rollen kommt, schwer und ohne Hektik, bis sie ihre Bahn gefunden hat. Das ist die Bewegung, die diese Site weiter oben in der Rollen-Karte zu treffen versucht — Rollen rollen, sie schnappen nicht.<!-- TODO Stefan: Track-Titel + Jahr nachreichen, sobald greifbar --></p>
+      <button type="button" class="card-more-btn" :class="{open}" @click="open=!open" aria-label="mehr anzeigen" :aria-label="open ? 'weniger anzeigen' : 'mehr anzeigen'">
+        <span x-text="open ? 'weniger' : '... mehr'"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div x-collapse x-show="open">
+        <div style="margin-top:1rem;border-radius:6px;overflow:hidden;">
+          <iframe height="166" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sven-dose&color=%235a6e4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false" title="Sven Dose on SoundCloud" style="width:100%;border:0;display:block;"></iframe>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--stone);margin-top:0.8rem;">
+          <a href="https://soundcloud.com/sven-dose" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;">SoundCloud &#8594;</a>
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- ── People & Action ── -->
@@ -4298,29 +4375,108 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Rollen-Card: silberner Ball mit Physik (Held / Opfer / Täter) ──
-  // Der Ball rollt schnapp-haft in die geklickte Zone — und genau das
-  // ist die Pointe: schnapphaft = Vorverurteilung. Der Caption-Text
-  // macht das nach jeder Bewegung explizit.
-  // Physik: einfache Velocity+Friction-Simulation in requestAnimationFrame.
-  // Reduced-motion: Ball teleportiert mit CSS transition statt JS-Loop.
+  // ── Rollen-Card: silberner Ball mit Roll-Physik (Held / Opfer / Täter) ──
+  // Inspiriert vom Closing-Set Sven Doses bei der Nation of Gondwana — die
+  // Kugel rollt langsam, schwer, ohne Hektik, statt schnapp-haft zu schnappen.
+  // Klick auf Opfer/Täter → der Ball beschleunigt zur Ecke, schießt leicht
+  // über, schwingt 1–2× zurück, kommt zur Ruhe. Klick auf Held → keine Roll,
+  // nur kurzes Wackeln an Position; Held lässt sich nicht zuteilen.
+  // Physik: 2D-Velocity mit gerichteter Beschleunigung Richtung Ziel,
+  // Reibung und Restitution-Dämpfung am Ziel. Läuft in requestAnimationFrame.
+  // prefers-reduced-motion: Ball teleportiert per CSS transition statt rAF.
   (function initRollen() {
     const zones = document.getElementById('rollen-zones');
     const cap   = document.getElementById('rollen-caption');
+    const ball  = document.getElementById('rollen-ball');
     if (!zones) return;
     const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    // Captions pro Zone — werden bei Hover/Focus gesetzt (a11y).
-    // Hover Täter → 🙏: die Antwort der Person hinter dem Etikett ist
-    // Entschuldigung, nicht Verteidigung. Hover Opfer → 🖕: das Etikett
-    // ist eine Vorverurteilung, die Person hinter dem Etikett zeigt
-    // dir den Mittelfinger und behält ihre Würde. Held → leer:
-    // Held lässt sich nicht in eine Geste zuteilen.
     const CAPTIONS = [
       'Held — keine Antwort. Held lässt sich nicht in eine Geste zuteilen. Muss verdient werden, nicht zugewiesen.',
       'Opfer — Mittelfinger. Das Etikett ist eine Vorverurteilung; die Person dahinter behält ihre Würde.',
       'Täter — Hände falten, sorry. Die ehrliche Antwort nach der Tat ist Entschuldigung, nicht Verteidigung.',
     ];
+
+    // Ziel-Positionen im SVG-Koordinatensystem (viewBox 240×200). Etwas
+    // nach innen versetzt, damit der Ball innerhalb des Dreiecks zur Ruhe
+    // kommt, nicht auf der Spitze. Held: oben (verweigert, Ball geht
+    // nicht hin). Opfer: unten links. Täter: unten rechts.
+    const TARGETS = [
+      { x: 120, y: 60  }, // Held — unbenutzt für Roll, nur als Anker
+      { x: 60,  y: 156 }, // Opfer
+      { x: 180, y: 156 }, // Täter
+    ];
+    const HOME = { x: 120, y: 124 }; // Schwerpunkt des Dreiecks
+
+    // Ball-State (in SVG-Koordinaten).
+    let bx = HOME.x, by = HOME.y;
+    let vx = 0, vy = 0;
+    let target = null; // {x,y} oder null wenn idle
+    let rafId = null;
+
+    function setBallPos(x, y) {
+      bx = x; by = y;
+      if (ball) { ball.setAttribute('cx', x); ball.setAttribute('cy', y); }
+    }
+
+    function step() {
+      if (!target) { rafId = null; return; }
+      // Beschleunigung Richtung Ziel, gedämpft mit Distanz.
+      const dx = target.x - bx;
+      const dy = target.y - by;
+      const dist = Math.hypot(dx, dy);
+      // Federkonstante k bestimmt Beschleunigung; Reibung c bremst.
+      // k=0.045 + c=0.86 ergibt ein langsames, schweres Einrollen mit
+      // einem leichten Overshoot und 1–2 sichtbaren Schwingungen.
+      const k = 0.045;
+      const c = 0.86;
+      vx = (vx + dx * k) * c;
+      vy = (vy + dy * k) * c;
+      bx += vx;
+      by += vy;
+      if (ball) { ball.setAttribute('cx', bx); ball.setAttribute('cy', by); }
+      // Settling-Test: wenn Distanz < 0.4 und Geschwindigkeit klein, snap.
+      if (dist < 0.4 && Math.hypot(vx, vy) < 0.1) {
+        setBallPos(target.x, target.y);
+        vx = 0; vy = 0;
+        target = null;
+        rafId = null;
+        return;
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function rollTo(idx) {
+      if (idx === 0) return; // Held verweigert — kein Roll.
+      const t = TARGETS[idx];
+      if (!t) return;
+      target = t;
+      if (reduce) {
+        // Direkter Sprung statt Animation.
+        setBallPos(t.x, t.y);
+        target = null;
+        return;
+      }
+      if (rafId === null) rafId = requestAnimationFrame(step);
+    }
+
+    // Held-Klick: kurzes Wackeln an aktueller Position, kein Roll.
+    function shake() {
+      if (reduce || !ball) return;
+      const ox = bx, oy = by;
+      const start = performance.now();
+      const DUR = 280;
+      function tick(now) {
+        const t = (now - start) / DUR;
+        if (t >= 1) { setBallPos(ox, oy); return; }
+        const amp = 2.4 * (1 - t);
+        const dx = Math.sin(t * 40) * amp;
+        ball.setAttribute('cx', ox + dx);
+        ball.setAttribute('cy', oy);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
 
     Array.from(zones.querySelectorAll('.rollen-zone')).forEach((el, i) => {
       el.setAttribute('tabindex', '0');
@@ -4330,6 +4486,20 @@
       el.addEventListener('mouseleave', hideCaption);
       el.addEventListener('focus',  showCaption);
       el.addEventListener('blur',   hideCaption);
+      // pointerdown deckt Maus-Click und Touch-Tap ab — Mobile-Parität.
+      el.addEventListener('pointerdown', () => {
+        showCaption();
+        if (i === 0) shake();
+        else rollTo(i);
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showCaption();
+          if (i === 0) shake();
+          else rollTo(i);
+        }
+      });
     });
   })();
 

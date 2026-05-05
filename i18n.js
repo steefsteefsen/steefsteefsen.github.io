@@ -191,6 +191,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'Ein Kajak-Verein aus Hiddenhausen-Schweicheln (Kreis Herford), der seit 30 Jahren sozial benachteiligten Kindern und Jugendlichen den Zugang zum Fluss — und zu sich selbst — ermöglicht. Ihr PEER-Projekt bildet ehemalige Schüler der Eickhofschule als Begleiter für die nächste Generation aus. Im Januar 2025 nahmen sie den Großen Stern des Sports in Silber von Bundespräsident Frank-Walter Steinmeier in Berlin entgegen — und übernachteten dabei bei mir.',
+    idol_svendose_p: 'DJ und Producer aus Berlin. Beim Closing der <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a> hat ein Set von ihm ein Bild hinterlassen, an das ich seitdem zurückdenke: eine Kugel, die langsam ins Rollen kommt, schwer und ohne Hektik, bis sie ihre Bahn gefunden hat. Das ist die Bewegung, die diese Site weiter oben in der Rollen-Karte zu treffen versucht — Rollen rollen, sie schnappen nicht.',
     lifeline_zivi_h: 'Zivildienst — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Betreuung erwachsener Menschen mit Behinderung',
     tool_deepl_p: 'Maschinen-Übersetzung aus Köln (DeepL SE), für viele Sprachpaare deutlich nuancierter als die großen US-Konkurrenten. Erste Stütze beim Aufbau der 18 Sprachblöcke dieser Site — gefolgt vom Lektorat durch Muttersprachler:innen, weil DeepL im Politischen, Idiomatischen und Juristischen weiter Mensch braucht. Nicht Open Source, aber europäisch, EU-Datenschutz, und eine seriöse Alternative zu Google Translate.',
@@ -201,6 +202,8 @@ const translations = {
     flow_korrektur: 'Korrektur',
     idol_hofmann_p: 'Schweizer Chemiker (1906–2008), entdeckte 1938 LSD bei Sandoz und 1943 dessen psychoaktive Wirkung — der berühmte Fahrradtag, 19. April 1943, Basel. Hat das Mittel sein Leben lang als „medicine for the soul" verteidigt, gegen Missbrauch und gegen Verbot. Wurde 102 Jahre alt. Ich habe ihn nicht persönlich gekannt; das Karpman-Dreieck der Rollen-Karte ist mir durch eine Idee von Alex zugewachsen, die er, sagt er, von Hofmann geflüstert bekommen hat — der Witz darf bleiben.',
     nickname_nicklas_p: 'Vergeben von William am Wochenende des friedlichen 1. Mai 2026 in Berlin, in einer Off-Location bei der Humor Olympiade. Der Name kam in einem Moment, in dem die Form spielt und niemand performt — die Art von Spitzname, der nicht erklärt, sondern bleibt.',
+    nickname_ssue_p: 'Künstler-Alter-Ego, in Respekt vor <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> und <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Mehr ist dazu nicht zu sagen.',
+    nickname_stee_p: 'Künstler-Alter-Ego: S T double L — in Respekt vor <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, der es trotz Geld real gehalten hat. Mein erstes Album war 2001 das <em>2001</em>-Album von Dr. Dre mit <em>Still D.R.E.</em> drauf, Snoop am Mic. Snoop war der konstanteste von diesen Rappern.',
     local_fatimah_badge: 'Card im Aufbau · Try & Error',
     local_fatimah_p: 'Imbiss, dessen Name ich am Schild verifiziert habe — vorher hatte ich ihn falsch in Erinnerung. Pre-Flight-Daten (Adresse, Kategorie, OSM, Konsens, ein Satz warum ich ihn pushe) kommen mit dem nächsten Edit. Bis dahin: die Anerkennung steht, das Detail folgt.',
     local_madhat_badge: 'Card im Aufbau · Try & Error',
@@ -546,6 +549,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civila servo — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Subteno de plenkreskaj homoj kun handikapo',
     tool_deepl_p: 'Maŝin-traduko el Kolonjo (DeepL SE), por multaj lingvo-paroj signife pli nuancita ol la grandaj US-konkurentoj. Unua subteno por la 18 lingvo-blokoj de ĉi tiu retejo — sekvata de revizio de denaskaj parolantoj, ĉar DeepL en politikaj, idiomaj kaj juraj kuntekstoj ankoraŭ bezonas homon. Ne Malferma Fonto, sed eŭropa, EU-datumprotekto, kaj serioza alternativo al Google Translate.',
@@ -556,6 +560,8 @@ const translations = {
     flow_korrektur: 'Korekto',
     idol_hofmann_p: 'Svisa kemiisto (1906–2008), malkovris LSD ĉe Sandoz en 1938 kaj ĝian psikoaktivan efikon en 1943 — la fama bicikla tago, 19-a de aprilo 1943, Bazelo. Defendis la substancon sian tutan vivon kiel „medicamento por la animo", kontraŭ misuzo kaj kontraŭ malpermeso. Vivis 102 jarojn. La Karpman-triangulo de la Rolen-karto venis al mi tra ideo de Alex, kiun li, li diras, ricevis flustritan de Hofmann — la ŝerco rajtas resti.',
     nickname_nicklas_p: 'Donita de William dum la semajnfino de la paca 1-a de Majo 2026 en Berlino, en ekster-loko ĉe la Humura Olimpiko. La nomo venis en momento, kiam la formo ludas kaj neniu prezentas — la speco de kromnomo, kiu ne klarigas, sed restas.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Karto en konstruado · Provu kaj eraru',
     local_fatimah_p: 'Manĝejo, kies nomon mi kontrolis ĉe la ŝildo — antaŭe mi memoris ĝin malĝuste. Antaŭflugaj datumoj sekvos. Ĝis tiam: la rekono staras, la detalo venos.',
     local_madhat_badge: 'Karto en konstruado · Provu kaj eraru',
@@ -904,6 +910,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -914,6 +921,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -1225,6 +1234,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -1235,6 +1245,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -1531,6 +1543,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -1541,6 +1554,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -1837,6 +1852,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -1847,6 +1863,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -2143,6 +2161,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -2153,6 +2172,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -2449,6 +2470,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -2459,6 +2481,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -2755,6 +2779,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -2765,6 +2790,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -3061,6 +3088,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -3071,6 +3099,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -3367,6 +3397,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -3377,6 +3408,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -3673,6 +3706,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -3683,6 +3717,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -3979,6 +4015,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -3989,6 +4026,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -4285,6 +4324,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -4295,6 +4335,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -4591,6 +4633,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -4601,6 +4644,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -4897,6 +4942,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -4907,6 +4953,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -5203,6 +5251,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -5213,6 +5262,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -5533,6 +5584,7 @@ const translations = {
     support_ivory_h3: 'Ivory Therapy',
     support_werrepiraten_h3: 'Werrepiraten e.V.',
     support_werrepiraten_p: 'A kayak club from Hiddenhausen-Schweicheln (Kreis Herford) that has spent 30 years giving socially disadvantaged kids and young adults access to the river — and to themselves. Their PEER project trains former students of the Eickhofschule as guides for the next generation. In January 2025 they picked up the Großer Stern des Sports in Silver from Federal President Frank-Walter Steinmeier in Berlin — and slept at mine on the way.',
+    idol_svendose_p: 'DJ and producer from Berlin. At the closing of <a href="https://nation-of-gondwana.de/" rel="noopener" target="_blank">Nation of Gondwana</a>, one of his sets left an image with me I have come back to since: a sphere that slowly starts to roll, heavy and unhurried, until it finds its path. That is the motion this site, further up on the Rollen card, is trying to catch — roles roll, they don\'t snap.',
     lifeline_zivi_h: 'Civilian service — Karl-Schubert-Werkstätten',
     lifeline_zivi_sub: 'Filderstadt · Supporting adults with disabilities',
     tool_deepl_p: 'Machine translation from Cologne (DeepL SE), considerably more nuanced than the big US competitors for many language pairs. First scaffold for the 18 language blocks of this site — followed by editing from native speakers, because DeepL still needs a human in political, idiomatic, and legal contexts. Not open source, but European, EU data protection, and a serious alternative to Google Translate.',
@@ -5543,6 +5595,8 @@ const translations = {
     flow_korrektur: 'Correction',
     idol_hofmann_p: 'Swiss chemist (1906–2008), discovered LSD at Sandoz in 1938 and its psychoactive effect in 1943 — the famous bicycle day, 19 April 1943, Basel. Defended the substance his whole life as „medicine for the soul", against abuse and against prohibition. Lived to 102. I never knew him personally; the Karpman triangle on the Rollen card came to me through an idea from Alex, which he says was whispered to him by Hofmann — the joke is allowed to stay.',
     nickname_nicklas_p: 'Given by William on the weekend of the peaceful 1st of May 2026 in Berlin, at an off-location during the Humor Olympics. The name came in a moment where form plays and nobody performs — the kind of nickname that doesn\'t explain itself, it just stays.',
+    nickname_ssue_p: 'Artist alter ego, in respect of <a href="https://de.wikipedia.org/wiki/SSIO" rel="noopener" target="_blank">SSIO</a> and <a href="https://de.wikipedia.org/wiki/Sido_(Rapper)" rel="noopener" target="_blank">Sido</a>. Nothing more to say.',
+    nickname_stee_p: 'Artist alter ego: S T double L — in respect of <a href="https://de.wikipedia.org/wiki/Snoop_Dogg" rel="noopener" target="_blank">Snoop Dogg</a>, who kept it real despite the money. My first album was, in 2001, Dr. Dre\'s <em>2001</em> with <em>Still D.R.E.</em> on it, Snoop on the mic. Snoop was the most consistent of those rappers.',
     local_fatimah_badge: 'Card in formation · Try & Error',
     local_fatimah_p: 'A small eatery whose name I verified on the sign — I had remembered it wrong before. Pre-flight data (address, category, OSM link, consent, one line on why I push them) comes with the next edit. Until then: the acknowledgement stands, the detail follows.',
     local_madhat_badge: 'Card in formation · Try & Error',
@@ -5689,6 +5743,37 @@ function applyLanguage(code) {
   document.documentElement.lang = t.lang;
   document.documentElement.dir = t.dir;
 
+  const en = translations.en || {};
+  // Mark a key/element as a translation fallback when the current-language
+  // string is byte-identical to the EN string AND the current language is
+  // not EN itself. The marker is the .translation-fallback class plus a
+  // static EN tooltip — see CLAUDE.md „AI-formulierte Inhalte sichtbar
+  // markieren". DO NOT touch elements that already carry .ai-formulated;
+  // their tooltip is hand-authored at the HTML level.
+  const isFallback = (key) =>
+    code !== 'en' && t[key] !== undefined && en[key] !== undefined && t[key] === en[key];
+  const FALLBACK_TITLE = 'Translation pending. Source: EN.';
+  const markFallback = (el, key) => {
+    if (el.classList.contains('ai-formulated')) return;
+    if (isFallback(key)) {
+      el.classList.add('translation-fallback');
+      if (!el.hasAttribute('data-fallback-orig-title')) {
+        el.setAttribute('data-fallback-orig-title', el.getAttribute('title') || '');
+      }
+      el.setAttribute('title', FALLBACK_TITLE);
+    } else {
+      if (el.classList.contains('translation-fallback')) {
+        el.classList.remove('translation-fallback');
+        const orig = el.getAttribute('data-fallback-orig-title');
+        if (orig !== null) {
+          if (orig === '') el.removeAttribute('title');
+          else el.setAttribute('title', orig);
+          el.removeAttribute('data-fallback-orig-title');
+        }
+      }
+    }
+  };
+
   // Apply all data-i18n keys
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -5701,6 +5786,7 @@ function applyLanguage(code) {
         el.textContent = t[key];
       }
     }
+    markFallback(el, key);
   });
 
   // Apply all data-i18n-html keys (allows HTML content like links)
@@ -5709,6 +5795,7 @@ function applyLanguage(code) {
     if (t[key] !== undefined) {
       el.innerHTML = t[key];
     }
+    markFallback(el, key);
   });
 
   // AI notice banner

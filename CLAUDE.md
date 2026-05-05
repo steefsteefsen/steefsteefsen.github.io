@@ -901,6 +901,108 @@ without an attached link to where you got it. If a draft has facts without
 sources, mark them with `[ SOURCE NEEDED ]` and ask Stefan, rather than
 silently shipping unsourced text.
 
+## AI-formulierte Inhalte sichtbar markieren (hard rule)
+
+**Stefans Anweisung 2026-05-05**: nicht handgeschriebene Inhalte
+müssen beim Hover als solche erkennbar sein. Visitors sollen
+unterscheiden können, was Stefan selbst getippt hat und was Claude /
+LLM formuliert hat (auch wenn Stefan es freigegeben hat), und welche
+Sprachblöcke EN-Fallback statt echter Übersetzung sind.
+
+### Granularität
+
+Pro **Card / Block / Absatz**, nicht pro Sentence. Eine Card ist
+entweder *Stefan-getippt* (Default, kein Marker) oder *Claude-
+formuliert* (`.ai-formulated`) oder *Übersetzungs-Fallback*
+(`.translation-fallback`). Mischformen — Stefan diktiert die
+Stoßrichtung, Claude wählt die Worte — gelten als
+`.ai-formulated`, weil der finale Wortlaut durch Claude gegangen
+ist.
+
+### Marker-Mechanik
+
+Zwei Klassen, beide mit visuellem Cue + Tooltip:
+
+```html
+<p class="ai-formulated"
+   title="Formulierung: Claude. Inhalt freigegeben durch Steef.">
+  …Card-Body…
+</p>
+
+<p class="translation-fallback"
+   title="Translation pending. Source: EN.">
+  …EN-Fallback in einem Nicht-EN-Sprachblock…
+</p>
+```
+
+CSS-Cue: dotted-underline 1px in `--stone`, niedrige Opazität, nur
+bei Hover deutlich sichtbar. Spec im `:root`-CSS unter
+`.ai-formulated, .translation-fallback`.
+
+Der Tooltip-Text ist auf DE für `.ai-formulated` (zielt auf
+deutschsprachige Visitors als Default-Audience) und auf EN für
+`.translation-fallback` (weil der Block selbst EN ist). Wer einen
+DE-Tooltip auf einer EN-Site oder umgekehrt will, kann das pro Edit
+überschreiben — Default sind die zwei oben.
+
+### Stefan-getippte Inhalte tragen keinen Marker
+
+Default ist Stefan. Nur Claude-/LLM-Output bekommt einen Marker.
+Wenn Stefan eine Claude-Formulierung am Ende durch eine eigene
+ersetzt, fällt der Marker weg — der finale Wortlaut entscheidet,
+nicht der Entstehungspfad.
+
+### Übersetzungs-Fallback
+
+Die 16 Nicht-DE/EN-Sprachblöcke in `i18n.js` enthalten heute fast
+ausschließlich EN-Strings als Fallback (CLAUDE.md-Regel
+*„all others: use the EN text as fallback unless a native
+translation is available"*). Jeder solche EN-Fallback-String trägt
+am `data-i18n`-Element die Klasse `.translation-fallback`. Sobald
+ein Sprachblock eine handgeschriebene Übersetzung bekommt, fällt
+die Klasse für diesen Key in dieser Sprache weg.
+
+### Schrittweise rückwirkend
+
+Die Regel gilt **ab sofort** für alle neuen Edits. Bestehende
+Inhalte werden nicht in einem Audit-Sprint markiert; sie kriegen
+ihre Klassifikation, sobald sie aus anderen Gründen berührt
+werden. Das ist das gleiche Pattern wie die *„URLs durch Variablen
+ersetzen"*-Migration: kein Big-Bang, sondern Drift-Korrektur on-touch.
+
+### Was Claude beim Edit tun muss
+
+1. Beim Anlegen oder Editieren eines Card-Bodys: prüfen, ob der
+   Text final aus Claudes Feder ist. Wenn ja → `class="ai-formulated"`
+   plus `title="Formulierung: Claude. Inhalt freigegeben durch
+   Steef."` auf den Wrapper.
+2. Beim Anlegen eines i18n-Keys mit EN-Fallback in einem
+   Nicht-EN-Block: das ist Telemetrie für Stefan, kein DOM-Eingriff
+   nötig. Die `.translation-fallback`-Klasse wird **nicht** im
+   `i18n.js`-String selbst gesetzt — sondern am DOM-Element mit
+   `data-i18n`, durch eine kleine JS-Helper-Funktion, die beim
+   Sprachwechsel checkt: *„enthält der Wert für diesen Key in der
+   aktuellen Sprache den exakten EN-String?"*. Wenn ja, Klasse
+   setzen, sonst entfernen.
+3. Bei einer Mischform (Stefan diktiert Idee, Claude formuliert):
+   `.ai-formulated`. Bei einer reinen Stefan-Anweisung, die Claude
+   nur ins DOM kopiert (z.B. Stefan tippt einen kompletten Body in
+   den Chat, Claude pasted ihn unverändert): kein Marker.
+4. Bei Stage-Names, Eigennamen, Zitaten in Anführungszeichen, URLs:
+   nicht markiert. Marker gilt für **Stefan-Voice**-Texte
+   (Card-Bodies, Absätze, Footnotes), nicht für strukturelle
+   Identifier.
+
+### Warum diese Regel existiert
+
+Die Site hat zwei Glaubwürdigkeits-Anker: *„Stefan steht zu jedem
+Wort"* und *„Claude/LLM ist Werkzeug, nicht Stimme"*. Wenn beide
+ununterscheidbar wirken, kollabiert der erste in den zweiten. Die
+Hover-Markierung ist die kleinste mögliche Geste, die das
+verhindert — kein Disclaimer-Overhead, kein Footer-Banner, kein
+Tracking. Nur ein dezenter Hinweis: *„hier hat ein anderer Mund
+formuliert, Stefan hat zugestimmt"*.
+
 ## .env variable names (use the names, not the values)
 
 **Stefans Anweisung 2026-05-04 ~01:00**: *„DAHIN VERFICKT NOCHMAL AB
