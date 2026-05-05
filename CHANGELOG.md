@@ -10,7 +10,37 @@ adapted for a personal homepage rather than a software library.
 
 ## [Unreleased]
 
-### Added
+### Added (Session 2026-05-05/06)
+
+- Hero spitznamen **SSUE** (Respekt SSIO + Sido) und **Stee**
+  (Respekt Snoop Dogg, Still-D.R.E.-Anker), beide als
+  Künstler-Alter-Ego (self-published-stage-name).
+- Idol-Card **Sven Dose** (Music-Subsection, Tier 1, SoundCloud-
+  Outbound). Body deutet das Closing-der-Nation-of-Gondwana-
+  Roll-Bild an.
+- Karpman-Dreieck (Rollen-Karte 1) bekam einen silbernen Ball
+  mit Roll-Physik. Klick auf Opfer/Täter → rollt zur Ecke,
+  Klick auf Held → wackelt (verweigert by design).
+- CLAUDE.md neue Hard-Rule **„AI-formulierte Inhalte sichtbar
+  markieren"**. Klassen `.ai-formulated` + `.translation-fallback`,
+  dotted underline, Tooltip via `title=`. JS-Helper in
+  `applyLanguage` setzt `.translation-fallback` automatisch.
+- CLAUDE.md neue Hard-Rule **„Unrecherchierte Aussagen — keine,
+  nicht im Post, nicht im Draft"**. Verbietet Hypothesen über
+  Verantwortliche, Dritte-Personen-Thesen ohne benennbares X,
+  „pending source"-Notizen.
+- `tests/language-purity.test.js` — 2 Tests + 4 Falsifiability-
+  Self-Tests gegen Sprach-Mismatch (DE-Wörter im EN-Modus, EN
+  im DE-Modus).
+- `tests/no-unsourced-claims.test.js` — 151 Tests gegen forbidden
+  draft markers, speculation ohne Beleg, actor-attribution ohne
+  Source. Allow-list für legitime Asset-TODOs und Zitiermarker.
+- ARD-Mediathek-Link (`F*ck Deepfakes`-Film, BR) als fn5 in
+  Open Letter Fernandes.
+- Theorie-Karte `alexislukasfluide` ist `<a href="#rollen">`
+  (smooth-scroll zur Rollen-Karte). Goto-Top default unten links.
+- madhat Frankfurt: Wordmark-Lowercase, Konsens-Notiz B.B. (069).
+
 - Logging routine: `scripts/log-test-run.sh` + `logs/coverage-history/`
   for timestamped jest+coverage snapshots. Telemetry stays local
   (gitignored), never pushed.
@@ -21,6 +51,19 @@ adapted for a personal homepage rather than a software library.
 - CHANGELOG.md (this file).
 - Wiki task #42 deferred to next session (needs UI-enable first).
 - CD task #40 deferred to next session.
+
+### Fixed (Session 2026-05-05/06)
+
+- 3 hardcoded `<h3>`-Elemente ohne `data-i18n` (Greyscale, Nÿx,
+  Jungs-vom-36) — fielen im EN-Modus auf DE zurück. Mit Keys in
+  18 Sprachblöcken versehen. Vom `language-purity`-Test im
+  ersten Lauf gefangen.
+- HTML-Kommentar mit Klarnamen + Tier-Pending-Marker in
+  `open-letter.html` (DE+EN). Visitors hätten das im View-Source
+  gesehen. Vom `no-unsourced-claims`-Test im ersten Lauf gefangen.
+- Merge-Konflikt mit gitlab/main (10 alte April-Commits, 14 Files)
+  resolved. Lokale Linie als Basis, weil aktuell deployt + alle
+  späteren Privacy-Hotfixes + Steef-Naming-Disziplin.
 
 ### Fixed
 - `create-pages` Auto-DevOps job now carries `script: - 'true'`
