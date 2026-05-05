@@ -1264,13 +1264,25 @@
     letter-spacing: 0.02em;
   }
 
-  /* alexislukasfluide Theorie — Dreieck Opfer / Täter / Held */
+  /* alexislukasfluide Theorie — Dreieck Opfer / Täter / Held.
+     Card ist ein <a href="#rollen"> für native Klick + Tab + Back-Mechanik. */
   .theorie-card {
+    display: block;
     margin: 1.8rem 0;
     padding: 1.4rem 1.6rem 1.6rem;
     background: rgba(201, 169, 110, 0.06);
     border: 1px dashed rgba(201, 169, 110, 0.4);
     border-radius: 6px;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .theorie-card:hover,
+  .theorie-card:focus-visible {
+    background: rgba(201, 169, 110, 0.10);
+    border-color: rgba(201, 169, 110, 0.7);
+    outline: none;
   }
   .theorie-card h3 {
     font-family: 'Cormorant Garamond', serif;
@@ -2476,7 +2488,7 @@
 
     <p class="mindset-key" data-i18n="mindset_key"><strong>Mindset is key.</strong> Werkzeuge wechseln, Märkte drehen sich, Code veraltet. Was bleibt, ist die Haltung, mit der ich am Morgen in den Tag gehe — neugierig, verbindlich, beweglich genug, um Umstände nicht als Feinde zu lesen, sondern als Material.</p>
 
-    <div class="theorie-card">
+    <a class="theorie-card" id="theorie-alf-card" href="#rollen" aria-label="alexislukasfluide Theorie — zur interaktiven Karte scrollen" title="Klick — scrollt zur interaktiven Karte unten">
       <h3>alexislukasfluide Theorie</h3>
       <p class="theorie-author" data-i18n="theorie_alf_author">Eine Theorie aus dem Tribe — geprägt für Konflikte ohne Ausweg.</p>
       <div class="theorie-grid">
@@ -2497,7 +2509,7 @@
           <text x="170" y="175" text-anchor="middle">Täter</text>
         </svg>
       </div>
-    </div>
+    </a>
 
     <div class="olympia-card" data-confetti-mode="gold">
       <h3 data-i18n="olympia_h3">Energy Channeling Olympia</h3>
@@ -4553,15 +4565,33 @@
     });
   })();
 
+  // ── Theorie-Card → scroll zur interaktiven Rollen-Karte ──
+  // Card ist ein <a href="#rollen">; nativer Click reicht aus. JS überschreibt
+  // nur, um smooth-scroll statt Hard-Jump zu erzwingen (sofern nicht reduced-
+  // motion). prefers-reduced-motion bekommt den nativen Hard-Jump zurück.
+  (function initTheorieScroll() {
+    const card = document.getElementById('theorie-alf-card');
+    const target = document.getElementById('rollen');
+    if (!card || !target) return;
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (reduce) return; // native Hash-Jump übernimmt
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', '#rollen');
+    });
+  })();
+
   // ── Go-to-top — fast unsichtbar, händigkeits-bewusst ──
-  // Default: rechts. Doppelklick wechselt links↔rechts, persistiert in
-  // localStorage unter `gototop-hand` (left|right). Erscheint erst nach
-  // Scroll-Down (>500px). Klick → smooth scroll nach oben.
+  // Default: links (Stefan-Anweisung 2026-05-05). Doppelklick wechselt
+  // links↔rechts, persistiert in localStorage unter `gototop-hand`
+  // (left|right). Erscheint erst nach Scroll-Down (>500px). Klick →
+  // smooth scroll nach oben.
   (function initGotoTop() {
     const btn = document.getElementById('gototop');
     if (!btn) return;
     const STORAGE_KEY = 'gototop-hand';
-    let hand = 'right';
+    let hand = 'left';
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored === 'left' || stored === 'right') hand = stored;
