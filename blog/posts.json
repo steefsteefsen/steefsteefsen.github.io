@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-05-06-transparenz-drei-lagen",
+    "date": "2026-05-06",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-05-06-transparenz-drei-lagen", "title": "Transparenz in drei Lagen", "teaser": "Spitznamen-Sektion, AI-Marker und der Karpman-Ball — drei Änderungen auf der Site, die mehr miteinander zu tun haben als es aussieht."},
+      "en": {"slug": "2026-05-06-transparenz-drei-lagen-en", "title": "Transparency in three layers", "teaser": "Nicknames section, AI marker, and the Karpman ball — three changes on the site that are more connected than they look."}
+    }
+  },
+  {
     "slug": "2026-05-03-env-grep-vorfall",
     "date": "2026-05-03",
     "type": "reflection",

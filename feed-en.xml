@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 03 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>Transparency in three layers</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-06-transparenz-drei-lagen-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-06-transparenz-drei-lagen-en.html</guid>
+    <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
+    <description>Nicknames section, AI marker, and the Karpman ball — three changes on the site that are more connected than they look.</description>
+    <author>Steef</author>
+  </item>
   <item>
     <title>.env, read — an incident and the rule it produced</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-03-env-grep-vorfall-en.html</link>
