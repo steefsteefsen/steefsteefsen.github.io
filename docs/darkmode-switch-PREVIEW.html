@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview: Darkmode-Schalter — Hi-Fi vs. Telefon</title>
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark);
+    background: var(--cream); line-height: 1.6; padding: 3rem 2rem;
+    transition: background 0.6s ease, color 0.6s ease;
+  }
+  body.dark { background: #1a1814; color: #e8dfd0; }
+  body.dark p, body.dark .label-small { color: #b5a890; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.6rem; max-width: 900px; margin: 0 auto 0.5rem; text-align: center; }
+  .lede { max-width: 720px; margin: 0 auto 3rem; text-align: center; font-size: 0.95rem; color: var(--stone); font-style: italic; }
+  .grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+  .demo {
+    background: rgba(245, 240, 232, 0.4);
+    border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: background 0.6s ease, border-color 0.6s ease;
+  }
+  body.dark .demo { background: rgba(40,36,30,0.6); border-color: rgba(201,169,110,0.15); }
+  .demo h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .label-small { font-size: 0.78rem; color: var(--stone); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2rem; }
+
+  /* ───── HI-FI KNOB ───── */
+  .hifi-wrap {
+    position: relative;
+    width: 140px; height: 140px;
+    margin: 0 auto 1rem;
+  }
+  .hifi-scale {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.05), transparent 60%);
+  }
+  /* Tick marks around the dial */
+  .hifi-scale::before {
+    content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    background:
+      conic-gradient(from -135deg,
+        var(--stone) 0deg 1deg, transparent 1deg 30deg,
+        var(--stone) 30deg 31deg, transparent 31deg 60deg,
+        var(--stone) 60deg 61deg, transparent 61deg 90deg,
+        var(--stone) 90deg 91deg, transparent 91deg 120deg,
+        var(--stone) 120deg 121deg, transparent 121deg 150deg,
+        var(--stone) 150deg 151deg, transparent 151deg 180deg,
+        var(--stone) 180deg 181deg, transparent 181deg 210deg,
+        var(--stone) 210deg 211deg, transparent 211deg 270deg);
+    -webkit-mask: radial-gradient(circle, transparent 65px, black 66px, black 72px, transparent 73px);
+            mask: radial-gradient(circle, transparent 65px, black 66px, black 72px, transparent 73px);
+    opacity: 0.6;
+  }
+  .hifi-knob {
+    position: absolute; inset: 12px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #5a4636, #2d1f15 70%);
+    box-shadow:
+      inset 0 -8px 14px rgba(0,0,0,0.5),
+      inset 0 6px 12px rgba(255,220,180,0.15),
+      0 6px 16px rgba(0,0,0,0.4),
+      0 0 0 2px rgba(201,169,110,0.3);
+    cursor: pointer;
+    transform: rotate(-45deg);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+  }
+  /* Knurled rim using repeating gradient */
+  .hifi-knob::before {
+    content: ''; position: absolute; inset: 6px; border-radius: 50%;
+    background:
+      repeating-conic-gradient(
+        from 0deg,
+        rgba(255,255,255,0.08) 0deg 4deg,
+        rgba(0,0,0,0.15) 4deg 8deg
+      );
+    -webkit-mask: radial-gradient(circle, transparent 50px, black 51px);
+            mask: radial-gradient(circle, transparent 50px, black 51px);
+  }
+  /* Indicator line + LED */
+  .hifi-knob::after {
+    content: ''; position: absolute;
+    top: 8px; left: 50%; width: 4px; height: 28px;
+    background: linear-gradient(to bottom, #c9a96e, #8c7b4b);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 4px rgba(201,169,110,0.5);
+  }
+  .hifi-led {
+    position: absolute;
+    top: -14px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3a2f24;
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.6);
+    transition: all 0.5s ease;
+  }
+  body.dark .hifi-led {
+    background: #9aff3c;
+    box-shadow:
+      0 0 8px rgba(154, 255, 60, 0.9),
+      0 0 16px rgba(154, 255, 60, 0.6),
+      0 0 28px rgba(154, 255, 60, 0.35);
+  }
+  body.dark .hifi-knob {
+    transform: rotate(45deg);
+    box-shadow:
+      inset 0 -8px 14px rgba(0,0,0,0.7),
+      inset 0 6px 12px rgba(255,220,180,0.05),
+      0 6px 20px rgba(0,0,0,0.6),
+      0 0 0 2px rgba(154,255,60,0.4),
+      0 0 24px rgba(154,255,60,0.25);
+  }
+
+  .knob-labels {
+    display: flex; justify-content: space-between;
+    max-width: 160px; margin: 0 auto;
+    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--stone);
+    text-transform: uppercase;
+  }
+
+  /* ───── PHONE DIAL ───── */
+  .phone-wrap {
+    position: relative;
+    width: 180px; height: 180px;
+    margin: 0 auto 1rem;
+    cursor: pointer;
+  }
+  .phone-base {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 35%, #4a3326, #2a1c12 80%);
+    box-shadow:
+      inset 0 -10px 20px rgba(0,0,0,0.5),
+      inset 0 8px 14px rgba(255,220,180,0.1),
+      0 8px 20px rgba(0,0,0,0.45);
+  }
+  .phone-dial {
+    position: absolute; inset: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, #8c7b6b, #5a4636 80%);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4), inset 0 4px 8px rgba(255,255,255,0.08);
+    transform: rotate(0deg);
+    transition: transform 0.9s cubic-bezier(0.6, 0.05, 0.3, 1);
+  }
+  body.dark .phone-dial { transform: rotate(280deg); }
+  /* Finger holes — 10 around the dial */
+  .phone-dial .hole {
+    position: absolute;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1108, #2d1f15);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.7);
+    top: 50%; left: 50%;
+    margin: -11px 0 0 -11px;
+    transition: box-shadow 0.5s ease;
+  }
+  body.dark .phone-dial .hole {
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.8),
+      0 0 6px rgba(154,255,60,0.4);
+  }
+  /* Position holes via per-hole transform */
+  .phone-dial .hole:nth-child(1) { transform: rotate(0deg)   translateY(-58px); }
+  .phone-dial .hole:nth-child(2) { transform: rotate(36deg)  translateY(-58px); }
+  .phone-dial .hole:nth-child(3) { transform: rotate(72deg)  translateY(-58px); }
+  .phone-dial .hole:nth-child(4) { transform: rotate(108deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(5) { transform: rotate(144deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(6) { transform: rotate(180deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(7) { transform: rotate(216deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(8) { transform: rotate(252deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(9) { transform: rotate(288deg) translateY(-58px); }
+  .phone-dial .hole:nth-child(10){ transform: rotate(324deg) translateY(-58px); }
+  /* Finger-stop */
+  .phone-stop {
+    position: absolute;
+    right: 16px; top: 50%;
+    width: 14px; height: 36px;
+    background: linear-gradient(to right, #c9a96e, #8c7b4b);
+    border-radius: 4px;
+    transform: translateY(-50%) rotate(20deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+  /* Center cap */
+  .phone-cap {
+    position: absolute;
+    width: 52px; height: 52px;
+    top: 50%; left: 50%;
+    margin: -26px 0 0 -26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 30%, #3d2b1f, #1a1108);
+    box-shadow:
+      inset 0 -2px 4px rgba(0,0,0,0.6),
+      inset 0 2px 4px rgba(255,220,180,0.1),
+      0 0 8px rgba(0,0,0,0.5);
+  }
+  body.dark .phone-cap {
+    background: radial-gradient(circle at 40% 30%, #2d3a1d, #0d1308);
+    box-shadow:
+      inset 0 -2px 4px rgba(0,0,0,0.8),
+      inset 0 2px 4px rgba(154,255,60,0.2),
+      0 0 16px rgba(154,255,60,0.4),
+      0 0 32px rgba(154,255,60,0.2);
+  }
+
+  /* Light ripple on toggle */
+  .ripple {
+    position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+    opacity: 0;
+  }
+  .ripple.fire {
+    animation: rippleFire 1s ease-out;
+  }
+  @keyframes rippleFire {
+    0%   { opacity: 0; background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(154,255,60,0.5) 0%, transparent 0%); }
+    30%  { opacity: 1; background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(154,255,60,0.4) 0%, transparent 30%); }
+    100% { opacity: 0; background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(154,255,60,0.0) 0%, transparent 100%); }
+  }
+
+  .preview-note {
+    max-width: 720px; margin: 3rem auto 0;
+    padding: 1rem 1.4rem;
+    background: rgba(201,169,110,0.08);
+    border-left: 3px solid var(--clay);
+    font-size: 0.85rem; color: var(--stone);
+    border-radius: 0 4px 4px 0;
+  }
+  body.dark .preview-note { background: rgba(201,169,110,0.06); color: #b5a890; }
+  .preview-note strong { color: var(--bark); }
+  body.dark .preview-note strong { color: #e8dfd0; }
+</style>
+</head>
+<body>
+
+<h1>Darkmode-Schalter — zwei Varianten</h1>
+<p class="lede">Klick auf den Knopf / die Wählscheibe schaltet um. Lichtwelle ausgehend vom Schalter.</p>
+
+<div class="grid">
+
+  <div class="demo">
+    <h2>A) Hi-Fi-Knopf</h2>
+    <p class="label-small">60er/70er Verstärker-Style · LED leuchtet uran-grün</p>
+    <div class="hifi-wrap" id="hifiWrap">
+      <div class="hifi-scale"></div>
+      <div class="hifi-knob" id="hifiKnob"></div>
+      <div class="hifi-led"></div>
+    </div>
+    <div class="knob-labels"><span>Light</span><span>Dark</span></div>
+  </div>
+
+  <div class="demo">
+    <h2>B) Telefon-Wählscheibe</h2>
+    <p class="label-small">Bakelit + Bing 1956 · 280° Drehung beim Toggle</p>
+    <div class="phone-wrap" id="phoneWrap">
+      <div class="phone-base"></div>
+      <div class="phone-dial">
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        <div class="hole"></div>
+      </div>
+      <div class="phone-stop"></div>
+      <div class="phone-cap"></div>
+    </div>
+    <div class="knob-labels"><span>Tag</span><span>Nacht</span></div>
+  </div>
+
+</div>
+
+<div class="ripple" id="ripple"></div>
+
+<div class="preview-note">
+  <strong>Was du gerade siehst:</strong> reine Schalter-Mechanik + Licht-Effekt.
+  Body wechselt zwischen Light- und Dark-Hintergrund (kein vollständiger
+  Darkmode für die ganze Site — das kommt, wenn du die Variante gewählt hast).
+  LED / Center-Cap leuchten uran-grün im Darkmode (<code>#9aff3c</code>).
+  Beim Toggle: kurze Lichtwelle vom Schalter ausgehend.
+</div>
+
+<script>
+  function toggle(triggerEl) {
+    document.body.classList.toggle('dark');
+    const r = triggerEl.getBoundingClientRect();
+    const ripple = document.getElementById('ripple');
+    ripple.style.setProperty('--rx', (r.left + r.width/2) + 'px');
+    ripple.style.setProperty('--ry', (r.top + r.height/2) + 'px');
+    ripple.classList.remove('fire');
+    void ripple.offsetWidth;
+    ripple.classList.add('fire');
+  }
+  document.getElementById('hifiKnob').addEventListener('pointerdown', e => toggle(e.currentTarget));
+  document.getElementById('phoneWrap').addEventListener('pointerdown', e => toggle(e.currentTarget));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview: Fußball-Cards (Babylon, Matthäus Passion)</title>
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--bark); background: var(--cream); line-height: 1.75; padding: 3rem 2rem; }
+  .preview-note { max-width: 720px; margin: 0 auto 2rem; padding: 1rem 1.4rem; background: var(--sand); border-left: 3px solid var(--clay); font-size: 0.9rem; color: var(--stone); border-radius: 0 4px 4px 0; }
+  .preview-note strong { color: var(--bark); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.6rem; color: var(--bark); max-width: 720px; margin: 0 auto 1.5rem; }
+  .values-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 1.5rem; }
+  .value-card { background: var(--cream); border: 1px solid rgba(201,169,110,0.2); border-radius: 8px; padding: 1.6rem 1.4rem; box-shadow: 0 2px 12px var(--shadow); }
+  .value-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+  .value-card h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.3rem; color: var(--bark); margin-bottom: 0.2rem; }
+  .card-sub { font-size: 0.78rem; color: var(--stone); font-style: italic; margin-bottom: 0.9rem; letter-spacing: 0.04em; }
+  .value-card p { font-size: 0.95rem; color: var(--stone); margin-bottom: 0; }
+  .value-card p em { color: var(--bark); font-style: italic; }
+  sup.fn { color: var(--clay); font-weight: 500; font-size: 0.75rem; }
+  .ai-formulated { border-bottom: 1px dotted rgba(140,123,107,0.4); cursor: help; }
+  .ai-formulated:hover { border-bottom-color: var(--stone); }
+  .footnote-block { max-width: 720px; margin: 3rem auto 0; padding: 1.2rem 1.4rem; background: var(--sand); border-radius: 4px; font-size: 0.85rem; color: var(--stone); }
+  .footnote-block ol { margin-left: 1.4rem; }
+  .footnote-block a { color: var(--moss); text-decoration: none; border-bottom: 1px solid rgba(90,110,74,0.3); }
+</style>
+</head>
+<body>
+
+<div class="preview-note">
+  <strong>Preview-Vorschau</strong> — drei neue Mannschaft-Cards, isoliert auf dieser Seite.
+  Echtes Embedding in <code>index.html</code> erfolgt heute Abend nach Stefan-Review.
+  Datei ist gitignored (<code>docs/*-PREVIEW.html</code>), nicht im Deploy.
+</div>
+
+<h1>Mannschaften — Reihenfolge wie geplant</h1>
+
+<div class="values-grid">
+
+  <div class="value-card">
+    <div class="value-icon">⚽</div>
+    <h3>Babylon</h3>
+    <p class="card-sub">Wilde Liga Bielefeld<sup class="fn">25</sup> · Schwesterverein</p>
+    <p class="ai-formulated" title="Formulierung: Claude. Inhalt freigegeben durch Steef.">
+      Mit 17 hier reingewachsen. Babylon war nicht meine Mannschaft, sondern
+      der Schwesterverein in der Wilden Liga — aber dort habe ich Menschen
+      kennengelernt, die heute noch tragen. Allen voran T.G.M., erfolgreichster
+      Stürmer der Babylon-Geschichte und Ursprung des Satzes, mit dem hier
+      alles anfängt: <em>„Sky is the limit."</em>
+    </p>
+  </div>
+
+  <div class="value-card">
+    <div class="value-icon">⚽</div>
+    <h3>Matthäus Passion</h3>
+    <p class="card-sub">Wilde Liga Bielefeld<sup class="fn">25</sup> · Nr. 33</p>
+    <p class="ai-formulated" title="Formulierung: Claude. Inhalt freigegeben durch Steef.">
+      Meine Mannschaft. Mit dem Apotheker, dem Zoll und Meyer auf dem Platz —
+      Berufsbiografien als Spitznamen, weil in der Wilden Liga sowieso jeder
+      weiß, was der andere macht. <em>Die Wahrheit ist aufm Platz.</em>
+    </p>
+  </div>
+
+  <div class="value-card">
+    <div class="value-icon">⚽</div>
+    <h3>Die Zwote</h3>
+    <p class="card-sub">Enger-Steinbeck · Nr. 23 oder 10 (FOB als 6er)</p>
+    <p>
+      Institution aus Enger-Steinbeck bei Bielefeld. Von 2003 bis ~2015 organisierten sie
+      <em>Kicken für Afrika</em>, ein 32-Mannschaften-Turnier am Brillweg, mit Live-Musik
+      und über die Jahre Zehntausende Euro für das Thuthuka-Projekt in Bulawayo, Simbabwe.
+      Eine Mannschaft, die mehr war als ein Verein — Gemeinschaft, Fairplay,
+      kollektive Identität.<sup class="fn">17</sup>
+    </p>
+  </div>
+
+</div>
+
+<div class="footnote-block">
+  <strong>Neue Footnote 25</strong> (gemeinsam für Babylon + Matthäus Passion):
+  <ol start="25">
+    <li>
+      Wilde Liga Bielefeld — Freizeit-/Hobby-Fußball-Liga in Bielefeld, besteht
+      seit 1976. Teil der bundesweiten Tradition der „Bunten Ligen" / „Wilden
+      Ligen" seit den 1970er Jahren — vereins- und verbandsunabhängig
+      organisierter Fußball mit politisch-alternativer Färbung. Im
+      Dokumentarfilm <em>Die Würde des Balles – oder Fußball gegen die Ordnung</em>
+      (2017) wird der Bielefelder Fall porträtiert. Sources:
+      <a href="https://de.wikipedia.org/wiki/Freizeitfu%C3%9Fball" target="_blank">Wikipedia: Freizeitfußball</a>.
+    </li>
+  </ol>
+</div>
+
+</body>
+</html>

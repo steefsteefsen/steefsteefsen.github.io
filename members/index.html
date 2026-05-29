@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  /* Soft gate, not security. See /login.html for the threat-model note. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+  .wrap { max-width: 36rem; margin: 0 auto; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .sub { font-size: 0.9rem; color: var(--stone); margin-bottom: 3rem; }
+  .group-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    border: 1px solid rgba(90, 110, 74, 0.4);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+  ul.member-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  ul.member-links a {
+    display: block;
+    padding: 1.2rem 1.4rem;
+    background: rgba(201, 169, 110, 0.08);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 2px;
+    color: var(--bark);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  ul.member-links a:hover {
+    background: rgba(201, 169, 110, 0.15);
+    border-color: rgba(201, 169, 110, 0.4);
+  }
+  ul.member-links a .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    display: block;
+  }
+  ul.member-links a .desc {
+    font-size: 0.85rem;
+    color: var(--stone);
+    display: block;
+    margin-top: 0.2rem;
+  }
+  button.logout {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.2rem;
+    background: transparent;
+    color: var(--stone);
+    border: 1px solid rgba(140, 123, 107, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  button.logout:hover {
+    color: var(--bark);
+    border-color: var(--bark);
+  }
+</style>
+</head>
+<body>
+  <script src="/members/auth.js"></script>
+  <script>if (!requireGroup(1)) { /* redirected */ }</script>
+
+  <div class="wrap">
+    <h1>Members</h1>
+    <p class="sub">Willkommen zurück.</p>
+    <span class="group-label" id="group-label">…</span>
+
+    <ul class="member-links" id="links"></ul>
+
+    <button type="button" class="logout" id="logout-btn">Logout</button>
+  </div>
+
+  <script>
+    const group = getMemberGroup();
+    const labels = { 1: 'Extended', 2: 'Tribe', 3: 'Kollektiv' };
+    document.getElementById('group-label').textContent = labels[group] || '';
+
+    const linkSpecs = [
+      { minGroup: 1, href: '/members/extended/index.html', title: 'Extended',
+        desc: 'Erweiterte Inhalte für den engeren Kreis.' },
+      { minGroup: 2, href: '/members/tribe/index.html', title: 'Tribe Forum',
+        desc: 'Forum für die Tribe.' },
+      { minGroup: 3, href: '/members/kollektiv/index.html', title: 'Kollektiv',
+        desc: 'Bethel-Kollektiv-interne Inhalte.' }
+    ];
+
+    const ul = document.getElementById('links');
+    linkSpecs.filter(s => group >= s.minGroup).forEach(s => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = s.href;
+      a.innerHTML = '<span class="title"></span><span class="desc"></span>';
+      a.querySelector('.title').textContent = s.title;
+      a.querySelector('.desc').textContent = s.desc;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      clearMemberGroup();
+      window.location.assign('/login.html');
+    });
+  </script>
+</body>
+</html>

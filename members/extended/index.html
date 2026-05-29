@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extended — Members</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  /* Soft gate, not security. See /login.html for the threat-model note. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+  .wrap { max-width: 36rem; margin: 0 auto; text-align: center; }
+  .back {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    margin-bottom: 3rem;
+  }
+  .back:hover { color: var(--bark); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+  }
+  .wip {
+    font-size: 0.85rem;
+    color: var(--stone);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <script src="/members/auth.js"></script>
+  <script>if (!requireGroup(1)) { /* redirected */ }</script>
+
+  <div class="wrap">
+    <a href="/members/index.html" class="back">← Members</a>
+    <h1>Extended</h1>
+    <p class="wip">Work in progress</p>
+  </div>
+</body>
+</html>

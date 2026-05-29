@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members — Login</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  /*
+   * Soft gate, not security. Password hashes ship in /members/auth.js
+   * and are reverse-engineerable. Do not put anything behind this gate
+   * that you would not be comfortable seeing in an indexed crawl.
+   */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--bark);
+    background: var(--cream);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 24rem;
+    text-align: center;
+  }
+  .login-card .back {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+  .login-card .back:hover { color: var(--bark); }
+  .login-card h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 2rem;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+  .login-card .sub {
+    font-size: 0.85rem;
+    color: var(--stone);
+    margin-bottom: 2.4rem;
+  }
+  form { display: flex; flex-direction: column; gap: 1rem; }
+  input[type="password"] {
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+    background: transparent;
+    color: var(--bark);
+    border: 1px solid rgba(140, 123, 107, 0.4);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="password"]:focus { border-color: var(--clay); }
+  button {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.9rem 1rem;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button:hover { background: var(--earth); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .error {
+    min-height: 1.2rem;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: #C0392B;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .error.show { opacity: 1; }
+</style>
+</head>
+<body>
+  <div class="login-card">
+    <a href="/" class="back">← Zurück</a>
+    <h1>Members</h1>
+    <p class="sub">Soft gate. Wer rein soll, kennt das Wort.</p>
+    <form id="login-form" autocomplete="off">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Passwort"
+        autocomplete="current-password"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        required
+        autofocus>
+      <button type="submit" id="submit-btn">Eintreten</button>
+      <div class="error" id="error" role="alert" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <script src="/members/auth.js"></script>
+  <script>
+    const form = document.getElementById('login-form');
+    const input = document.getElementById('password');
+    const errorBox = document.getElementById('error');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.classList.add('show');
+    }
+    function clearError() {
+      errorBox.classList.remove('show');
+    }
+
+    input.addEventListener('input', clearError);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+      const pw = input.value;
+      if (!pw) return;
+      submitBtn.disabled = true;
+      try {
+        const hash = await sha256Hex(pw);
+        const group = GROUP_HASHES[hash];
+        if (group) {
+          setMemberGroup(group);
+          window.location.assign('/members/index.html');
+        } else {
+          showError('Passwort stimmt nicht.');
+          input.value = '';
+          input.focus();
+        }
+      } catch (err) {
+        showError('Browser kann nicht prüfen (Web Crypto fehlt).');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
