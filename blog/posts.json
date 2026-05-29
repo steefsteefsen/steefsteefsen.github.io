@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-05-29-members-velvet-rope",
+    "date": "2026-05-29",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-05-29-members-velvet-rope", "title": "Members-Login: kein Security-Theater", "teaser": "Seit heute gibt es einen geschlossenen Mitgliederbereich auf der Site — drei Stufen, clientseitige SHA-256-Prüfung, und die ehrlichste Zeile im Quelltext: 'Soft gate, not security.'"},
+      "en": {"slug": "2026-05-29-members-velvet-rope-en", "title": "members login: no security theater", "teaser": "The site now has a closed members area — three tiers, client-side SHA-256 checks, and the most honest line in the source: \"Soft gate, not security.\""}
+    }
+  },
+  {
     "slug": "2026-05-06-transparenz-drei-lagen",
     "date": "2026-05-06",
     "type": "reflection",

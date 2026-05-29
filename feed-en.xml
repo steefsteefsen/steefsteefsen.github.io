@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 06 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>members login: no security theater</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-29-members-velvet-rope-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-29-members-velvet-rope-en.html</guid>
+    <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+    <description>The site now has a closed members area — three tiers, client-side SHA-256 checks, and the most honest line in the source: &quot;Soft gate, not security.&quot;</description>
+    <author>Steef</author>
+  </item>
   <item>
     <title>Transparency in three layers</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-06-transparenz-drei-lagen-en.html</link>
