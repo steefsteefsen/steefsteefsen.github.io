@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>shiplog: members area live</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-05-30-shiplog-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-05-30-shiplog-en.html</guid>
+    <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
+    <description>Status note: the members area went live yesterday — three tiers, no server, a velvet rope rather than a steel door.</description>
+    <author>Steef</author>
+  </item>
   <item>
     <title>members login: no security theater</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-29-members-velvet-rope-en.html</link>
