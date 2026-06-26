@@ -1,5 +1,14 @@
 [
   {
+    "slug": "2026-06-26-i18n-aufraeum",
+    "date": "2026-06-26",
+    "type": "reflection",
+    "translations": {
+      "de": {"slug": "2026-06-26-i18n-aufraeum", "title": "i18n: aufräumen im sprachkeller", "teaser": "260 Schlüssel, 17 Sprachen, 12 Leichen — und ein Testfile, das seit Wochen auf veralteten Daten lief."},
+      "en": {"slug": "2026-06-26-i18n-aufraeum-en", "title": "i18n: cleaning out the language basement", "teaser": "260 keys, 17 language blocks, 12 orphaned entries — and a test file that had been running against stale data for weeks."}
+    }
+  },
+  {
     "slug": "2026-05-30-shiplog",
     "date": "2026-05-30",
     "type": "reflection",

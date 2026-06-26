@@ -5,9 +5,17 @@
     <link>https://steefsteefsen.github.io/blog/</link>
     <description>Thoughts from everyday life.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 30 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://steefsteefsen.github.io/feed-en.xml" rel="self" type="application/rss+xml"/>
 
+  <item>
+    <title>i18n: cleaning out the language basement</title>
+    <link>https://steefsteefsen.github.io/blog/posts/2026-06-26-i18n-aufraeum-en.html</link>
+    <guid isPermaLink="true">https://steefsteefsen.github.io/blog/posts/2026-06-26-i18n-aufraeum-en.html</guid>
+    <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+    <description>260 keys, 17 language blocks, 12 orphaned entries — and a test file that had been running against stale data for weeks.</description>
+    <author>Steef</author>
+  </item>
   <item>
     <title>shiplog: members area live</title>
     <link>https://steefsteefsen.github.io/blog/posts/2026-05-30-shiplog-en.html</link>
